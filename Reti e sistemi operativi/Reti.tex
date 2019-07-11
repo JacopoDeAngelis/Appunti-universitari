@@ -1,0 +1,878 @@
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[italian]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{imakeidx}
+\usepackage{amsmath}
+\makeindex[intoc]
+\usepackage[hyperfootnotes=false, colorlinks=true, linkcolor=black]{hyperref}
+
+
+\begin{document}
+\title{Reti e sistemi operativi - Reti}
+\author{Jacopo De Angelis}
+\maketitle
+\tableofcontents
+\pagebreak
+
+\begin{LARGE}
+Programma esteso
+\end{LARGE}
+\begin{itemize}
+\item {Introduzione e cenni al livello fisico} \textit{cap. 1.1 - 1.5 (no 1.3.2)} 
+\item Livello di trasporto \textit{cap. 3 (no 3.6.2 e 3.7.2)}:
+	\begin{itemize}
+		\item funzioni del livello di trasporto
+		\item trasporto UDP
+		\item trasporto TCP
+		\item controllo della congestione
+	\end{itemize}
+\item Livello di rete \textit{cap. 4.1, 4.3 (no 4.3.5), 5.2, 5.6}:
+	\begin{itemize}
+		\item funzioni del livello di rete
+		\item indirizzamento IP
+		\item algoritmi di instradamento
+	\end{itemize}
+\item LAN, Wireless LAN, Elementi di livello fisico \textit{cap. 6.1, 6.2, 6.3 (no 6.3.4), 6.4, 7.1, 7.2 (no 7.2.1), 7.3 (no 7.3.6)} :
+	\begin{itemize}
+		\item funzioni del livello di collegamento
+		\item CSMA/CD e LAN Ethernet
+	\end{itemize}
+\end{itemize}
+
+\pagebreak
+\section{Reti di calcolatori e internet}
+\subsection{Che cos'è internet?}
+\subsubsection{Una descrizione pratica}
+Internet è una rete pubblica di calcolatori sparsi in tutto il mondo. I terminali sono collegatri tra di loro attraverso link di comunicazione, diversi link possono trasmettere i dati a differenti velocità. Questa velocità è chiamata “larghezza di banda” e di solito si misura in bit/secondo. \\
+Solitamente i terminali sono collegati indirettamente attraverso dispositivi di comunicazione detti router. Un router preleva le informazioni che arrivano tramite uno di questi link in ingresso e lo reindirizza a un link in uscita. Queste informazioni sono chiamate “pacchetti”. Il tragitto del pacchetto da è detto route o path. Internet usa una tecnica conosciuta come “commutazione di pacchetto” (packet switching) che permette a più terminali di condividere un cammino o anche solo parte di questo.
+I terminali accedono a internet attraverso gli ISP (Internet Service Providers). Ogni ISP è una serie di router e di link di comunicazione. \\
+I terminali eseguono protocolli di comunicazione che controllano l’invio e la ricezione di informazioni all’interno di internet. Due dei più importanti sono il TCP (Transmission Control Protocol) e l’IP (Internet Protocol). Il protocollo IP specifica il formato dei pacchetti che sono scambiati fra router e fra terminali.
+
+\subsubsection{Descrizione del servizio}
+Internet permette la distribuzione delle applicazioni che girano sui suoi terminali per scambiare dati fra le diverse unità.
+Internet fornisce due servizi per le applicazioni da esso distribuite: un servizio orientato alla connesione e un servizio senza connessione. Il primo garantisce che i dati trasmessi saranno consegnati al destinatario nella loro integrità, il secondo invece risulta inaffidabile.
+
+\subsubsection{Che cos'è un protocollo?}
+Un protocollo definisce il formato e l’ordine dei messaggi scambiati tra due o più entità comunicanti, così come le azioni che hanno luogo a seguito della trasmissione e/o ricezione di un messaggio o di altri eventi.
+
+\subsection{La sezione di accesso alla rete}
+\subsubsection{Terminali, client e server}
+I computer colelgati a internet sono spesso chiamati host o end-system (“terminali”). Ci si riferisce a essi come terminali perché sono collocati nella sezione di accesso a internet. Il termine host (ospite) deriva dal fatto che ospitano (eseguono) programmi di livello applicativo come i browser o simili. \\
+Gli host, a volte, sono suddivisi in due categorie:
+\begin{itemize}
+	\item Client
+	\item Server
+\end{itemize}
+Un programma client è un programma che gira su un terminale che richiedere e riceve un servizio da un programma server che gira su un altro terminale.
+Poiché, tipicamente, un client gira su un calcolatore mentre il server gira su un altro, le applicazioni client/server in internet sono, per definizione, applicazioni distribuite.
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.6]{img/001.png}
+	\end{center}
+\end{figure}
+A questo livello di astrazione i router, i link e altri “componenti” di internet servono come “scatola nera” che trasferisce messaggi tra i diversi componenti per la comunicazione in internet.
+
+\subsubsection{Servizio senza connessione e servizio orientato alla connessione}
+Le reti TCP/IP, e in particolare internet, forniscono due tipi di servizio per le sue applicazioni:
+\begin{itemize}
+	\item Un servizio senza connessione
+	\item Un servizio orientato alla connessione
+\end{itemize}
+Chi crea un’applicazione internet deve programmare l’applicazione per l’impiego di uno di questi due servizi.
+\paragraph{Servizio orientato alla connessione}
+\textbf{Il client e il server (residenti in due diversi terminali) si scambiano pacchetti di controllo prima di spedire i pacchetti contenenti i dati reali.} Queste procedure di “stretta di mano” (handshaking procedure), allertano client e server, permettendo loro di prepararsi per l’arrivo massiccio dei pacchetti. Una volta terminata questa procedura la connessione tra i due terminali è instaurata. \\
+Perché si utilizza la terminologia “servizio ORIENTATO alla connessione” e non semplicemente “servizio di connessione”? Questo perché solo i due terminali sono coscienti della connessione, all’interno della rete i commutatori sono ignari della connessione e non mantengono informazioni sullo stato della connessione.
+Il servizio orientato alla connessione di internet è raggruppato con molti altri servizi:
+\begin{itemize}
+	\item \textbf{Trasferimento di dati affidabile}: un’applicazione può affidarsi a una connessione per consegnare tutti i suoi dati senza errori o nell’ordine appropriato. Questa affidabilità deriva dall’impiego di segnali di riscontro e ritrasmissioni.
+	\item \textbf{Controllo di flusso}: assicura che nessuna delle due estremità saturi l’altra con l’invio a velocità eccessiva di troppi pacchetti.
+	\item \textbf{Controllo della congestione}: previene che internet entri nello stato di blocco incrociato (gridlock), ovvero quando un router è congestionato e rischia di perdere pacchetti. In questa circostanza, se le velocità di comunicazione continuano a riempire la rete troppo velocemente, i pacchetti saranno persi per la maggior parte. Internet evita questo problema costringendo i terminali a ridurre la velocità di invio durante i periodi di congestione, riscontrata grazie alla mancanza dei messaggi di riscontro.
+\end{itemize}
+\textbf{Il servizio orientato alla connessione di internet ha un nome: TCP (Transmission Control protocol).}
+\paragraph{Servizio senza connessione}
+\textbf{Non esiste handshake.} Quando un’estremità di un’applicazione vuole inviare pacchetti a un’altra, semplicemente, li invia. Poiché manca l’handshake l’invio sarà più veloce ma non esisterà un messaggio di riscontro dell’avvenuta ricezione.
+\textbf{Il servizio di internet senza connessione è l’UDP (User Datagram Protocol).}
+
+\subsection{La sezione interna della rete}
+\subsubsection{Commutazione di circuito e commutazione di pacchetto}
+Esistono due principali tipi di approccio per la costruzione della sezione interna di una rete:
+\begin{itemize}
+	\item l\textbf{a commutazione di circuito} (circuit switching): le risorse necessarie lungo un percorso per fornire la comunicazione fra due terminali sono riservate per la durata della sessione.
+	\item \textbf{la commutazione di pacchetto} (packet switching): le risorse non sono riservate, i messaggi della sessione utilizzano le risorse a richiesta e, di conseguenza, devono aspettare per accedere al link di comunicazione.
+\end{itemize}
+Le reti telefoniche sono un esempio di rete a commutazione di circuito. Internet, invece, è un esempio di rete a commutazione di pacchetto. Le reti non sono per forza o di un tipo o dell’altro.
+
+\subsubsection{Commutazione di circuito}
+Nell’immagine qua accanto i quattro commutatori di circuito sono collegati da due link. Ognuno di questi link è costitutito da n circuiti, in modo che ciascun link possa mantenere n connessioni simultanee.
+I terminali sono collegati direttamente a uno dei commutatori. Alcuni degli host hanno un accesso analogico ai commutatori, mentre altri hanno un accesso numerico diretto. Per l’accesso analogico è necessario un modem. Quando due host desiderano comunicare, la rete stabilisce un circuito dedicato end-to-end fra essi. In questo caso viene prenotato un circuito su ciascuno dei due link.
+\begin{figure}
+	\includegraphics[scale=0.6]{img/002.png}
+	\caption{Una semplice rete a commutazione di circuito, che consiste di quattro commutatori di circuito collegati da quattro link}
+\end{figure}
+\paragraph{Multiplazione (multiplexing) nelle reti a commutazione di circuito)}
+Un circuito in un link è realizzato mediante la multiplazione a divisione di frequenza (FDM) o la multiplazione a divisione di tempo (TDM).
+Con l’FDM, lo spettro di frequenza di un link è diviso fra le connessioni stabilite sul link, dedicando così una banda di frequenza. \\
+Per il TDM il dominio temporale è suddiviso tra quattro circuiti con quattro time slot in ciascun frame; a ciuacun circuito è assegnato lo stesso slot nei frame TDM che si succedono. La velocità di trasmissione di ciascun circuito è uguale a:
+\begin{center}
+	\textit{velocità del frame * numero di bit in uno slot}
+	\begin{figure}
+		\includegraphics[scale=0.6]{img/003.png}
+		\caption{Con L?FDM ciascun circuito occupa continuamente una frazione della larghezza di banda. Con il TDM ciascun circuito occupa periodicamente tutta la larghezza di banda durante brevi intervalli di tempo (durante gli slot)}
+	\end{figure}		
+\end{center}
+per esempio, se il link trasmette 8000 frame al secondo e ogni slot è costituito da 8 bit, la velocità di trasmissione è 64 Kb/s. \\
+i fautori della commutazione di pacchetto hanno sempre sostenuto che la commutazione di circuito porta a sprechi, perché i circuiti dedicati sono inattivi durante i periodi silenti (ad esempio quando la linea telefonica non viene usata).
+\paragraph{Commutazione di pacchetto}
+\textbf{Nelle moderne reti di calcolatori, la sorgente suddivide i messaggi lunghi in pezzi più piccoli di dati conosciuti come paccehtti.} \\
+Fra sorgente e destinazione ciascuno di questi pacchetti viaggia lungo link di comunicazione e commutatori di pacchetto (router). I pacchetti sono trasferiti sulla linea con velocità massima rispetto a quella del link. \\
+Molti router utilizzano la \textbf{trasmissione “store and forward”} all’ingresso dei link, ovvero che il router deve ricevere l’intero pacchetto prima di poter cominciare a trasmettere il primo bit sul link in uscita. Quindi i router store and forward introducono un ritardo store and forward all’ingresso di ciascun link. Questo ritardo è proporzionale alla lunghezza in bit del pacchetto, in particolare un pacchetto di L bit inoltrato su di un link in uscita a R bit/s ci metterà un ritardo di L/R secondi.
+Ogni router è collegato a molti link. Per ciascun link cui è collegato il router ha un buffer di uscita che immagazzina pacchetti che il router si appresta a spedire su quel determinato link. Nel caso un pacchetto in uscita trovi il link occupato, dovrà attendere che il pacchetto precedente venga spedito, aggiungendo così un ulteriore ritardo chiamato “ritardo di coda”. L’entità di questo ritardo è variabile ed è dipendente dalla congestione della rete. In certi casi si può anche perdere pacchetti, sia in arrivo che in uscita. \\
+La commutazione di pacchetto impiega la multiplazione statistica, in netto contrasto con la multiplazione a divisione di tempo. In questo caso, infatti, i pacchetti vengono spediti in ordine di arrivo.
+Ora proviamo a calcolare il tempo che occorre ad inviare un pacchetto di L bit da un host all’altro attraverso una rete a commutazione di pacchetto. Supponiamo che esistano Q link fra i due host, ciascuno con velocità R bit/s. assumiamo ritardi dovuti a coda e propagazione end-to-end trascurabili e che non sia stabilita alcuna connessione (niente handshake). Il pacchetto dovrà passare per Q-1 link, quindi dovrà essere trasmesso Q-1 volte. Essendo il tempo richiesto dallo store and forward L/R, il tempo totale sarà \textbf{Q(L/R)}.
+\paragraph{Frammentazione del messaggio}
+In una moderna rete a commutazione di pacchetto, la sorgente frammenta i lunghi messaggi dello strato di applicazione in pacchetti più piccoli e invia questi ultimi nella rete. Sebbene la frammentazione complichi la vita di sorgente e destinatario, si è concluso che i vantaggi compensano grandemente gli svantaggi.
+Diciamo che una rete a commutazione di pacchetto effettua una commutazione di messaggio se le sorgenti non frammentano i messaggi.
+Quando invece un messaggio viene segmentato in pacchetti, si dice che la rete effettua in pipeline la trasmissione dei messaggi, cioè parti del messaggio vengono trasmesse in parallelo dalla sorgente e dai commutatori di pacchetto.
+Un vantaggio della commutazione di pacchetto con segmentazione è che il ritardo della connessione end-to-end è molto ridotto. Con le immagini accanto si può capire perché i tempi siano più rapidi, è infatti il vantaggio della pipeline. \\
+Per fare un esempio, consideriamo un messaggio lungo $7,5 * 10^{6}$ bit. Supponiamo che tra i due host ci siano due commutatori di pacchetto e tre link, ciascun link abbia una velocità di trasmissione di 1,5 Mbit/s ($1,5 * 10^{6} bit$). Assumendo che la rete non sia in congestione, quanto tempo è richiesto per trasferire il messaggio con la \textbf{commutazione di messaggio}? Alla sorgente occorrono 5 secondi ($7,5 * 10^{6} bit / 1,5 * 10^{6} bit/s$) per portare il messaggio al primo commutatore. Poichè i commutatori sono di tipo store-and-forward, il primo commutatore deve aspettare tutta la ricezione del pacchetto. Quindi questa procedura si ripete anche tra i commutatori, quindi abbiamo $(7,5 * 10^{6} bit / 1,5 * 10^{6} bit/s)*3 link$. \\
+Ora frammentiamo il messaggio in 5000 pacchetti da 1500 bit l'uno. Assumendo che non ci sia congestione, quanto ci metteremo con la \textbf{commutazione di pacchetto}? Occorre 1 ms per spostare il primo pacchetto al primo commutatore ($1,5 * 10^{3} bit / 1,5 * 10^{6} bit/s$), poi 1 ms per ogni link, quindi il primo pacchetto arriverà dopo 3 ms a destinazione. Ora, l'ultimo pacchetto quanto ci metterà? Consideriamo che il secondo pacchetto viene spedito in contemporanea mentre il primo è sul secondo link. Secondo questa logica, l'ultimo pacchetto arriva al primo commutatore dopo $5000 * 1 ms = 5000 ms = 5 s$, quindi dovrà attraversare gli altri due link. Il tempo finale sarà, quindi 5002 ms = 5,002 secondi contro i 15 precedenti. \\
+Quindi, la formula è:
+\begin{center}
+	$d = \dfrac{dim\_pacchetto}{vel\_trasferimento}$
+\end{center}	 
+\begin{center}	
+	$tempo = d * tot\_pacchetti + (link - 1) * d$
+\end{center}
+Questo miglioramento deriva dal fatto che la commutazione di pacchetto agisce in parallelo.
+\begin{figure}
+	\includegraphics[scale=0.6]{img/004.png}
+	\caption{Tempi per il trasferimento del messaggio senza frammentazione dello stesso}
+	\includegraphics[scale=0.6]{img/005.png}
+	\caption{Tempi per il trasferimento del messaggio quando lo stesso è frammentato in 5000 pacchetti}
+\end{figure}
+Il vantaggio della segmentazione è anche che nel caso ci sia un errore di bit su di un pacchetto, è il singolo pacchetto a poter essere scartato e non l’intero messaggio.
+La frammentazione non è priva di svantaggi, infatti al pacchetto devono essere aggiunte informazioni nell’\textbf{intestazione (header)} e queste possono comprendere l’identità di sorgente e destinatario. In più l’header richiede altri byte di spazio.
+
+\subsection{Accesso alla rete e mezzi trasmissivi}
+\subsubsection{Accesso alla rete}
+L’accesso può essere classificato in tre categorie:
+\begin{itemize}
+	\item Accesso domestico
+	\item Accesso aziendale
+	\item Accesso per terminali mobili
+\end{itemize}
+Queste categorie, però, non sono rigide e vincolanti.
+
+\subsubsection{Mezzi fisici}
+Si dividono in due categorie:
+\begin{itemize}
+	\item Guidati: guidati attraverso un mezzo solido
+	\item Non guidati: si propagano nell’atmosfera
+\end{itemize}
+
+\subsection{Gli ISP e la rete dorsale di internet}
+\begin{figure}
+	\includegraphics[scale=0.6]{img/006.png}
+	\caption{Interconnessione degli ISP}
+\end{figure}
+Le reti di accesso situate nella sezione esterna di internet sono connesse al resto di internet attraverso una gerarchia a livelli di fornitori di servizi (ISP):
+\begin{itemize}
+	\item Livello 1: Rete dorsale di internet
+	\item Livello 2: Copertura tipicamente regionale o nazionale, connesso a pochi ISP di livello 1.
+\end{itemize}
+Gli ISP sono in rapporto di utente-fornitore.
+Quando due ISP sono collegati direttamente tra di loro sono detti “pari” tra loro.
+I punti di collegamento tra i vari ISP sono detti “punti di presenza” (POP).
+Gli ISP spesso si connettono in Network Access Point (NAP).
+
+\subsection{Ritardi e perdite nelle reti a commutazione di pacchetto}
+\begin{figure}
+	\includegraphics[scale=0.6]{img/007.png}
+	\caption{Ritardo al nodo e nel router A}
+\end{figure}
+\subsubsection{Tipi di ritardo}
+\paragraph{Ritardo di elaborazione}
+Tempo richiesto per esaminare l’intestazione del pacchetto e per determinare dove instradarlo.
+Può comprendere altri fattori come il tempo per il controllo degli errori.
+Dopo quest’elaborazione, il router invia il pacchetto alla coda che precede il link diretto al router B.
+\paragraph{Ritardo in coda}
+È il tempo di attesa prima dell’instradamento verso B. \textbf{Dipende dal numero di pacchetti già in coda}.
+\paragraph{Ritardo di trasmissione}
+Sia la lunghezza del pacchetto L bit e la velocità di trasmissione tra i router A e B R bit/s. Il ritardo di trasmissione (detto anche \emph{ritardo store-and-forward}) è L/R, ovvero l'ammontare del tempo richiesto per trasmettere tutti i bit del pacchetto nel link.
+Il ritardo di trasmissione è tipicamente dell'ordine dei microsecondi ai millisecondi.
+\paragraph{Ritardo di propagazione}
+Il tempo richiesto per arrivare dall'inizio del link al router B è il ritardo di propagazione, \textbf{dipende dalla velocità di propagazione del link}.
+Si calcola come la \textbf{distanza fra due router diviso la velocità di propagazione del mezzo}, ovvero il ritardo di propagazione è $d/s$, dove d è la distanza fra i router A e B e s è la velocità di propagazione del link.
+\paragraph{Confronto tra ritardo di trasmissione e ritardo di propagazione}
+Il \textbf{ritardo di trasmissione} è il tempo richiesto dal router per spingere all'esterno il pacchetto; \textbf{è funzione della lunghezza del pacchetto e della velocità di trasmissione del link}, ma non ha nulla a che fare con la distanza fra due router.\\
+Il \textbf{ritardo di propagazione} è il tempo che impiega un bit a propagarsi da un router al successivo; \textbf{è funzione della distanza fra due router}, ma non ha nulla a che vedere con la lunghezza del pacchetto o la velocità di trasmissione del link. \\
+Se indichiamo con $d_{elab}, d_{coda}, d_{trans}, d_{prop}$ i ritardi di elaborazione, di coda, di trasmissione e di propagazione, il ritardo totale del nodo è dato da:
+\begin{center}
+	$d_{elab} = d_{elab} + d_{coda} + d_{trans} + d_{prop}$
+\end{center}
+\subsubsection{Ritardo di coda e perdita di pacchetti}
+La più complicata e importante componente del ritardo totale del nodo è il ritardo di coda. A differenza degli altri ritardi, il ritardo di coda può variare da pacchetto a pacchetto. Se ci sono 10 pacchetti, il primo non avrà ritardo di coda, l'ultimo invece avrà un ritardo relativamente grande. \\
+Quand'è consistente e quando insignificante il ritardo di coda? Dipende molto da altri fattori come velocità del link, congestione e distribuzione del traffico.
+Indichiamo con a la velocità media di arrivo dei pacchetti (l'unità è pacchetti/s), R è la velocità di trasmissione (bit/s) e i pacchetti sono costituiti da L bit. Perciò, la velocità media a cui i bit arrivano ad accordarsi è $La bit/s$
+Il rapporto \textbf{La/R, detto intensità di traffico}, ha un ruolo per la stima del ritardo di coda:
+\begin{itemize}
+	\item $>$1: arrivano più velocemente di quanto se ne vadano, in questo caso la coda continua ad aumentare
+	\item $\leq$1: la natura del traffico in arrivo influenza il ritardo di coda, ovvero se arrivano 	periodicamente, allora la coda non farà in tempo ad accumularsi. Se invece arrivassero a raffiche, ma periodicamente, la media del ritardo sarà significativa.
+\end{itemize}
+\paragraph{Perdita di un pacchetto}
+Quando un pacchetto arriva su una coda piena, il pacchetto è scartato e perso. In questo caso può essere ritrasmesso dal nodo precedente, dal terminale o essere perso definitivamente.
+
+\subsection{Strati protocollari}
+\subsubsection{Architettura stratificata}
+Per ridurre la complessità progettuale, i progettisti della rete organizzano i protocolli a strati (layer) o livelli. \\
+Con un'architettura a strati dei protocolli, ciascun controllo appartiene a uno degli strati. Ciascun protocollo appartiene a uno degli strati, quindi il protocollo nello strato specifico è condiviso tra tutte le entità della rete che condividono quel protocollo. Queste entità comunicano tra di loro scambiandosi i messaggi dello strato n. Questi messaggi sono chiamati \textbf{n-PDU (layer-n Protocol Data Units)}. Il formato di una n-PDU è definito dal protocollo dello strato n. Quando presi nel loro insieme, i protocolli dei bari strati sono chiamati \textbf{pila protocollare}.\\
+Un concetto chiave è quello di \textbf{modello di servizio} di uno strato: si dice che lo strato $$n - 1$$ offre servizi allo strato n.
+\paragraph{Funzione degli strati}
+Ciascuno strato può eseguire uno o più di questi compiti:
+\begin{itemize}
+	\item Controllo dell’errore
+	\item Controllo del flusso
+	\item Frammentazione e riassemblaggio
+	\item Multiplexing
+	\item Instaurazione della connessione
+\end{itemize}
+\subsubsection{La pila protocollare di internet}
+È costituita da cinque strati
+
+\begin{figure}
+	\includegraphics[scale=0.6]{img/008.png}
+	\caption{Protocollo a strati, livello = PDU} 
+\end{figure}
+
+\paragraph{Strato di applicazione}
+È responsabile del supporto delle applicazioni della rete, comprende molti protocolli tra i quali http, SMTP e FTP.
+\paragraph{Strato di trasporto}
+Vi risiedono i due protocolli, TCP e UDP:
+\begin{itemize}
+	\item TCP è un servizio orientato alla connessione con garanzia di consegna e un controllo di flusso (ovvero di adattamento tra la velocità del mittente e del destinatario)
+	\item UDP fornisce un servizio senza connessione per applicazioni che possono accettare una perdita di pacchetti (ad esempio uno stream video)
+\end{itemize}
+\paragraph{Strato di rete}
+È responsabile dell'instradamento dei datagram da un host all'altro. Contiene il protocollo IP, utilizzato da tutti i componenti di internet che hanno uno strato di rete. \\
+I protocolli dello strato di trasporto (TCP e UDP) in un host sorgente passano un segmento dello strato di trasporto e un indirizzo di destinazione allo strato IP.
+\paragraph{Strato di collegamento}
+Per muovere un pacchetto da un nodo al successivo sul percorso, lo strato di rete deve delegare il servizio allo strato di collegamento. In particolare, a ciascun nodo IP passa il datagram allo strato di collegamento, che lo invia al nodo successivo lungo il percorso.
+\paragraph{Strato fisico}
+Il suo compito è quello di muovere singoli bit all'interno della rete da un nodo all'altro.
+\pagebreak
+
+\section{Strato di trasporto}
+\subsection{Introduzione e servizio dello strato di trasporto}
+Un protocollo dello strato di trasporto fornisce una commutazione logica fra i processi applicativi che funzionano su host differenti. Per comunicazione logica intendiamo che dal punto di vista dell'applicazione, è come se i terminali su cui girano i processi fossero direttamente connessi. I processi applicativi usano la comunicazione logica fornita dallo strato di trasporto per scambiarsi messaggi, senza doversi occupare dei dettagli dell'infrastruttura fisica usata per trasportarli.\\ \\
+\textbf{Attenzione}: i protocolli dello strato di trasporto sono implementati nei terminali ma non nei router della rete. \\ \\
+\begin{figure}
+	\includegraphics[scale=0.6]{img/009.png}
+	\caption{Lo strato di trasporto fornisce una comunicazione logica piuttosto che fisica tra le applicazioni}
+\end{figure}
+\subsubsection{Relazione fra gli strati di trasporto e di rete}
+Mentre un protocollo dello strato di trasporto fornisce una \emph{comunicazione logica tra i processi} che funzionano su differenti host, un protocollo dello strato di rete fornisce la \emph{comunicazione logica fra gli host}.
+\subsubsection{Panoramica dello strato di trasporto in internet}
+Per semplificare la terminologia, nel contesto di internet, ci riferiamo alla 4-PDU come a un segmento. \\ \\
+\textbf{Attenzione}: nella letteratura ci si riferisce alla PDU per TCP come a un segmento, al PDU per UDP come a un datagram. In questo testo, però, si utilizzerà solo la notazione "segmento".\\ \\
+Il protocollo dello strato di rete ha un nome: \textbf{IP} (Internet Protocol). L'IP fornisce la comunicazione logica fra gli host. Il modello di servizio di IP è un \textbf{servizio best effort}, ovvero che "fa del suo meglio" per consegnare i segmenti fra i due host ma senza garanzie; per questo motivo IP è un \textbf{servizio inaffidabile}. Ricordiamo che \textbf{ciascun host ha un unico indirizzo IP}.\\
+La maggior responsabilità di UDP e TCP è di estendere il servizio di spedizione di IP tra due terminali al servizio di spedizione fra due processi che funzionano sui terminali. L'estensione della spedizione da host a host alla spedizione da processo a processo è detta \textbf{multiplexing} e \textbf{demultiplexing} dello strato di trasporto. UDP e TCP forniscono anche un controllo dell'integrità inserendo campi di rilevamento di errori nelle loro intestazioni. \\
+Questi due servizi, \textbf{spedizioni di dati da processo a processo} e \textbf{verifica degli errori} sono i due soli servizi forniti da UDP, infatti UDP è un servizio inaffidabile.\\
+TCP offre molti servizi addizionali; prima di tutto un \textbf{trasferimento affidabile dei dati} usando controllo del flusso, numeri di sequenza, riscontri (acknowledgment) e timer, in questo modo TCP si assicura che i dati siano spediti da un processo mittente al destinatario correttamente e in ordine. TCP converte perciò il servizio inaffidabile IP in un servizio affidabile. \\*
+TCP usa anche il controllo di congestione, ovvero previene la saturazione da parte di qualsiasi connessione TCP della rete suddividendo equamente la banda di un link congestionato tra le connessioni TCP che lo attraversano. I campi dei numeri di porta sorgente e destinazione in un segmento dello strato di trasportosano. Il traffico UDP, invece, non è regolabile.
+\subsection{Multiplexing e demultiplexing}
+Per l'host destinatario, lo strato di trasporto riceve i segmenti (le PDU dello strato di trasporto) allo strato di rete posto subito sotto di esso. Lo strato di trasporto ha la responsabilità di inviare i dati di questi segmenti all'appropriato processo applicativo che funziona sull'host.
+Per comprendere come funzioni ricordiamoci prima di tutto che un processo ha un \textbf{socket}, che è una porta attraverso la quale i dati passano dalla rete al processo, e attraverso la quale i dati passano dal processo alla rete. Lo strato di trasporto nel terminale ricevente non consegna effettivamente i dati direttamente a un processo, \textbf{ma li consegna invece a un socket intermediario}. Possono esserci più socket e tutte hanno un identificatore unico. L'identificatore dipende dal fatto che il socket sia UDP o TCP.\\
+Ogni segmento dello strato di trasporto ha un insieme di campi dedicati all'identificazione del socket; lo strato di trasporto esamina questi capi per determinare il socket ricevente e indirizzargli i segmenti.
+Il lavoro di recapitare i dati in un segmento allo strato di trasporto corretto socket è chiamato \textbf{demultiplexing}. Il lavoro di ottenere i dati dall'host sorgente dai diversi socket, completare i dati con le informazioni di intestazione (usate durante il demultiplexing) per creare segmenti, e di passare i segmenti allo strato di rete è detto \textbf{multiplexing}.
+\begin{figure}
+	\includegraphics[scale=0.6]{img/010.png}
+	\caption{Multiplexing e demultiplexing dello strato di trasporto}
+\end{figure}
+Ogni segmento ha dei campi speciali che indicano il socket al quale il segmento deve essere consegnato. Questi campi speciali sono \textbf{il campo numero di porta sorgente}	e \textbf{il campo numero di porta di destinazione}. Ciascun numero di prota è a \textbf{16 bit (0-65535}. I numeri di porta che vanno da 0 a 1023 sono chiamati \textbf{numeri di porta ben conosciuti} e sono riservati, il che significa che sono dedicati per l'uso con protocolli applicativi noti come HTTP (80), FTP (21). L'elenco dei numeri di porta ben conosciuti è fornito nella RFC 1700.\\
+Quando progettiamo una nuova applicazione dobbiamo assegnare un numero di porta. \\
+Questo è il funzionamento di UDP, mentre TCP sfrutta sistemi più raffinati. \\
+Un socket UDP è univocamente determinato da una coppia formata da un indirizzo IP di destinazione e un numero di porta di destinazione.
+
+
+\begin{figure}
+	\includegraphics[scale=0.6]{img/011.png}
+	\caption{I campi dei numeri di porta sorgente e destinazione in un segmento dello strato di trasporto} 
+	\includegraphics[scale=0.6]{img/012.png}
+	\caption{L'inversione dei numeri di porta sorgente e destinazione}
+\end{figure}
+
+
+\subsubsection{Multiplazione e demultiplazione orientate alla connesione}
+Una sottile differenza tra un socket TCP e un socket UDP è che un socket TCP è identificato da una 4-upla:
+\begin{itemize}
+	\item indirizzo IP di sorgente
+	\item numero di porta sorgente
+	\item indirizzo IP di destinazione
+	\item numero di porta di destinazione
+\end{itemize}
+In particolare, e al contrario di UDP, due segmenti TCP entranti che recano indirizzi IP di sorgente diversi o numeri di porta sorgente diversi saranno diretti verso due diversi socket. \\
+
+\subsection{Trasporto senza connessione: UDP}
+L'UDP, definito nella RFC 768, esegue il minimo che un protocollo di trasporto può fare. Tranne che per la funzione di multiplexing/demultiplexing e qualche piccola verifica degli errori, esso aggiunge poco all'IP. Semplicemente aggiunge i numeri di porta di origine e destinazione, poi lo strato di rete incapsula i segmenti in un datagram IP e quindi poi li invia all'host di destinazione in modalità best effort. \\ \\
+\textbf{Attenzione}: con l'UDP, prima della spedizione del segmento, \textbf{non c'è handshake} fra le entità dello strato di trasporto che spediscono e ricevono. Per questo si dice che l'UDP è senza connessione. \\ \\
+Il DNS è un esempio di un protocollo dello strato di applicazione che usa l'UDP: quando l'applicazione DNS in un host vuole fare una richiesta, essa costruisce un messaggio di richiesta DNS e passa il messaggio a UDP. Infatti, se non riceve risposta, essa tenta ancora di inviare la richiesta a un altro server dei nomi, o informa l'applicazione che ha fatto la richiesta che gli è impossibile ottenere una risposta. \\
+Perchè scegliere UDP? Per i seguenti motivi:
+\begin{itemize}
+	\item \textbf{non viene creata alcuna connessione}: UDP non introduce alcun ritardo dovuto alla fase di impostazione della connessione (handshake)
+	\item \textbf{nessuno stato della connessione}: l'UDP non mantiene lo stato della connessione e non ha traccia dei parametri di controllo della congestione e dei numeri di sequenza e riscontro, per questo un server può supportare molti più client attivi quando l'applicazione funziona su UDP invece che su TCP
+	\item \textbf{Poco sovraccarico \textit{(overhead)} dovuto all'intestazione del pacchetto}: il segmento TCP ha overhead di 20 byte per segmento, UDP solo 8
+	\item \textbf{Controllo di livello applicativo più fine su quali dati vengono mandati e quando}: UDP, appena un processo applicativo manda dati a UDP, li impacchetta all'interno di un segmento e passa immediatamente il segmento allo strato di rete. TCP, invece, "strozza" il mittente quando uno o più link tra i terminali di sorgente e destinazione diventano eccessivamente congestionati. Inoltre TCP continua a rimandare un segmento fino a che non riceve l'acknowledgment, rallentando quindi la comunicazione
+\end{itemize}
+\begin{figure}
+	\includegraphics[scale=0.6]{img/014.png}
+	\caption{Applicazioni diffuse in internet e protocolli che adottano}
+\end{figure}
+\textbf{Attenzione}: UDP può essere usato per generare un servizio affidabile, semplicemente i controlli di riscontro e ritrasmissione devono essere inseriti nell'applicazione stessa, cosa tediosa ma molto vantaggiosa per velocità di comunicazione e funzionalità. Molte applicazioni streaming sfruttano questo sistema. \\
+\subsubsection{Struttura del segmento UDP}
+
+\begin{figure}
+	\includegraphics[scale=0.6]{img/015.png}
+	\caption{Struttura del segmento UDP}
+\end{figure}
+
+La \textbf{checksum} \textit{(somma di controllo)} è usata dall'host ricevente per controllare se sono stati introdotti errori nel segmento.
+\subsubsection{Checksum di UDP}
+La checksum di UDP effettua il rilevamento degli errori, ovvero se i bit del segmento sono stati alterati nel loro percorso. \\
+\begin{itemize}
+	\item \textbf{Lato mittente}: si effettua il complemento a 1\footnote{Si ottiene convertendo tutti gli 0 in 1 e tutti gli 1 in 0} della somma di tutte le parole a 16 bit del segmento, scartando ogni overflow. Il risultato è inserito nel campo checksum del segmento UDP.
+	\item \textbf{Lato ricevente}: riceve tutte le parole a 16 bit, inclusa la checksum. se nel pacchetto non sono stati introdotti errori, la somma al ricevente deve essere 1111111111111111. \\
+\end{itemize}
+Alcune implementazioni dell'UDP scartano semplicemente il segmento danneggiato, altri lo passano all'applicazione con l'aggiunta di un'avvertenza.
+
+\subsection{Principi di un trasferimento affidabile dei dati}
+\begin{figure}
+	\includegraphics[scale=0.6]{img/016.png}
+	\caption{Astrazione di un servizio affidabile. rdt = reliable data trasfer, udt = unreliable data trasfer}
+\end{figure}
+È compito del protocollo di \textbf{trasferimento affidabile dei dati} l'implementazione di quest'astrazione del servizio. La difficoltà di questo compito deriva dal fatto che lo strato sottostante il protocollo di trasferimento affidabile dei dati può essere inaffidabile. Ad esempio, TCP è un protocollo di trasferimento affidabile che è implementato sopra uno strato di rete (IP) inaffidabile da terminale a terminale. \\
+Per questa trattazione assumeremo che lo strato di rete sia inaffidabile. Tratteremo, inoltre, solo il caso di trasferimento unidirezionale dei dati. Il caso bidirezionale \textit{(full duplex} dei dati non è più complicato ma è più noioso da spiegare. \\
+\subsubsection{Costruzione di un protocollo per il trasferimento affidabile dei dati}
+Ora analizzeremo una serie di protocolli di complessità crescente fino ad un perfetto protocollo di trasferimento affidabile dei dati.
+\paragraph{Trasferimento affidabile dei dati su un canale completamente affidabile: rdt1.0}
+\begin{figure}
+	\includegraphics[scale=0.6]{img/017.png}
+	\caption{Macchine a stati finiti \textit{rdt1.0: un protocollo per un canale completamente affidabile (FSM - Finite State Machine}}
+\end{figure}
+Consideriamo il caso in cui il canale sottostante sia completamente affidabile.
+Le frecce delle due FSM\footnote{Per comprendere completamente il funzionamento di una FSM leggere gli appunti di Linguaggi e computabilità} indicano il passaggio del protocollo da uno stato all'altro. Gli eventi che causano la transizione sono illustrati sopra la linea orizzontale e l'azione/i intraprese sono illustrate sotto la linea. Quando non si verifica alcun evento o non si effettua un'azione si usa il simbolo $\lambda$ (lambda). Lo stato iniziale è simboleggiato dalla freccia tratteggiata. \\
+\begin{itemize}
+	\item \textbf{Lato mittente}: quando si ricevono i dati vengono inseriti in un pacchetto e viene spedito
+	\item \textbf{Lato ricevente}: quando viene ricevuto un pacchetto vengono estratti i dati e vengono inviati allo strato superiore
+\end{itemize}
+Con un canale completamente affidabile non serve alcun feedback da inviare al mittente.
+\paragraph{Trasferimento affidabile dei dati su un canale con errori sui bit: rdt2.0}
+\begin{figure}
+	\includegraphics[scale=0.6]{img/018.png}
+	\caption{rdt2.0: un protocollo per un canale con errori sui bit}
+\end{figure}
+Ora inseriamo la possibilità che i pacchetti possano essere alterati. Per ora assumiamo che tutti i pacchetti siano ricevuti.\\
+I protocolli per il trasferimento affidabile dei dati che si basano sulle ritrasmissioni sono conosciuti come \textbf{protocolli ARQ (Automatic Repeat reQuest}. Fondamentalmente, in questi protocolli sono richieste tre funzionalità addizionali:
+\begin{itemize}
+	\item \textbf{Rilevamento degli errori}
+	\item \textbf{Feedback dal ricevente}: il ricevente invia un feedback esplicito al mittente,  riscontri positivi \textbf{(ACK, positive acknowledgement)} e riscontri negativi \textbf{(NAK, Negative acknowledgement)}
+	\item \textbf{Ritrasmissione}: un pacchetto che arriva con errori al ricevente sarà ritrasmesso dal mittente
+\end{itemize}
+Ora, vedendo la figura, notiamo che il mittente ha due stati, ovvero dopo aver spedito il pacchetto attende di ricevere l'ACK o il NAK. Se viene restituito un ACK, il mittente sa che il pacchetto più recente è stato ricevuto e allora il protocollo ritorna nello stato di attesa dei dati dallo strato superiore. Se riceve un NAK, allora ritrasmette l'ultimo pacchetto e attende un altro ACK o un NAK. \\
+È importante notare che quando il mittente è nello stato di attesa di ACK o NAK non può accettare altri dati dallo strato superiore. Questo tipo di protocollo è conosciuto come \textbf{protocollo stop-and-wait \textit{(fermati e aspetta)}}. \\
+Il lato ricevente ha ancora un singolo stato, semplicemente invierà un ACK o un NAK in base allo stato del pacchetto. \\
+Ora, rimane un problema: i pacchetti ACK e NAK potrebbero essere alterati a loro volta. Come risolvere? Ci sono due possibilità:
+\begin{itemize}
+	\item Aggiungere un numero di bit alla checksum sufficiente a permettere al ricevente non solo di rilevare, ma anche di correggere, eventuali errori dei bit.
+	\item Il mittente può semplicemente reinviare i pacchetti quando riceve un pacchetto ACK o NAK difettoso. Questo modo introduce duplicati dei pacchetti. Il problema è che se il ricevente non sa se l'ACK o il NAK che ha inviato per ultimo è stato ricevuto correttamente dal mittente. Quindi non sa a priori se il pacchetto è nuovo o è una ritrasmissione.
+\end{itemize}
+Una semplice soluzione a questo problema è aggiungere un nuovo campo ai pacchetti dati: \textbf{un numero di sequenza} che il ricevente può semplicemente controllare per determinare se il pacchetto è nuovo o ritrasmesso. \\
+Poichè abbiamo assunto che il canale non possa perdere pacchetti, i pacchetti non hanno bisogno di indicare a loro volta il numero di sequenza. Ora le FSM di mittente e ricevente hanno numero doppio degli stati rispetto a prima, questo perchè lo stato del protocollo deve adesso tenere in conto se il pacchetto attualmente in fase di spedizione o di ricezione dovrà avere numero di sequenza 0 o 1. \pagebreak
+
+\begin{figure}
+		\includegraphics[scale=0.6]{img/019.png}
+		\caption{Sender e reciver 2.0}
+\end{figure}
+\pagebreak
+
+\begin{figure}
+		\includegraphics[scale=0.6]{img/020.png}
+		\caption{Sender 2.2}
+\end{figure}
+Il protocollo rdt2.1 usa ACK e NAK dal ricevente al mittente. Quando riceve un pacchetto fuori sequenza o alterato inviai un NAK. Possiamo ottenere lo stesso effetto di un NAK se viene inviato ogni volta un ACK col numero dell'ultimo pacchetto ricevuto correttamente. Un mittente che riceve due ACK con lo stesso numero di sequenza (ovvero \textbf{duplicati dell'ACK}) capisce che l'ultimo pacchetto non è andato a buon fine. \\
+rdt2.2 introduce questa modifica, eliminando il NAK.
+\paragraph{Traferimento affidabile dei dati su un canale con perdite e con errori sui bit: rdt3.0}
+\begin{figure}
+	\includegraphics[scale=0.6]{img/021.png}
+	\caption{Sender rdt3.0}
+\end{figure}
+Supponiamo ora che il canale possa anche perdere i pacchetti, evento non raro. In questo caso ci sono due nuovi problemi:
+\begin{itemize}
+	\item rilevare la perdita dei pacchetti
+	\item cosa fare quando si perdono i pacchetti
+\end{itemize}
+L'uso di checksum, numeri di sequenza, pacchetti ACK e ritrasmissione ci permettono di risolvere l'ultima difficoltà, per la prima invece dobbiamo sviluppare nuovi sistemi. \\
+Supponiamo che il mittente trasmetta un pacchetto di dati o che il ricevente invii un pacchetto o un riscontro e questi vengano persi. In entrambi i casi il mittente non riceve mai un riscontro. Se è disposto ad attendere abbastanza per essere sicuro che il pacchetto sia stato perso, allora può rispedirlo. La domanda ora è: per quanto deve attendere? \\
+Il primo fattore è includere almeno un tempo equivalente al ritardo per un percorso circolare tra mittente e destinatario (che potrebbe comprendere il buffering ai router intermedi o ai gateway), più un certo ammontare di tempo richiesto dall'elaborazione di un pacchetto dal lato ricevente. La difficoltà nel definire questo ritardo porta l'eventualità della presenza di duplicati di pacchetti dati nel canale di comunicazione. rdt2.2 ha già introdotto sufficienti strumenti per la gestione dei duplicati. \\
+Per implementare un meccanismo di ritrasmissione basato sul tempo, è necessario un \textbf{meccanismo di conto alla rovescia \textit{(countdown timer)}} che possa interrompere il mittente dopo che è trascorso un certo tempo. Quindi, il mittente dovrà:
+\begin{itemize}
+	\item avviare il timer ogni volta che un pacchetto viene spedito
+	\item rispondere alle interruzioni del timer
+	\item arrestare il timer
+\end{itemize}
+Ora, come può il mittente capire se l'ACK ricevuto riguarda l'ultimo pacchetto o un altro? Introducendo nel pacchetto di ACK un \textbf{campo di riscontro \textit{acknowledgement field)}} che conterrà il numero di sequenza del pacchetto dati al quale corrisponde l'ACK.
+Come illustrato nella figura, poiché i numeri di sequenza si alternano tra 0 e 1, il protocollo edt3.0 qualche volta è detto \textbf{protocollo a bit alternati \textit{(alternating-bit protocol)}}. \\ \\
+Abbiamo assemblato un protocollo di trasferimento dei dati: checksum, numeri di sequenza, timer, ACK e NAK. Abbiamo ora un protocollo per il trasferimento affidabile dei dati che funziona!
+\begin{figure}
+	\includegraphics[scale=0.6]{img/022.png}
+	\caption{Operazioni dell'rdt3.0, il protocollo a bit alternati}
+\end{figure}
+\subsubsection{Protocolli pipeline per il trasferimento affidabile dei dati}
+Il problema principale di rdt3.0 è il fatto che è un protocollo stop-and-wait. Infatti, in un protocollo stop-and-wait il mittente è spesso in attesa (idle) poichè deve aspettare una risposta dal ricevente. Un modo per risolvere le attese troppo lunghe è permettere al mittente di inviare più pacchetti senza aspettare i riscontri. Questa tecnica è detta \textbf{pipelining}. Il pipelining ha molte conseguenze per i protocolli con trasferimento affidabile dei dati:
+\begin{itemize}
+	\item La gamma dei numeri di sequenza deve essere aumentata per evitare ripetizioni
+	\item i due host devono poter memorizzare più di un pacchetto.
+\end{itemize}
+la gamma di numeri di sequenza richiesti e i requisiti di buffering dipendono dal modo in cui il protocollo di trasferimento dei dati risponde alle perdite, all'alterazione e all'eccessivo ritardo dei pacchetti.
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.6]{img/023.png}
+		\caption{Confronto fra protocolli stop-and-wait e pipeline}
+		\includegraphics[scale=0.6]{img/024.png}
+		\caption{Spedizione stop-and-wait e pipeline}
+	\end{center}
+\end{figure}
+Si possono identificare due approcci alla riparazione degli errori:
+\begin{itemize}
+	\item Go-Back-n
+	\item ripetizione selettiva
+\end{itemize}
+\subsubsection{Go-Back-N (GBN)}
+Il mittente può trasmettere pacchetti multipli senza aspettare il riscontro, ma è costretto ad avere non più di un certo numero massimo consentito di pacchetti non riscontrati, N, nella pipeline.
+\begin{figure}
+	\includegraphics[scale=0.6]{img/025.png}
+	\caption{Il punto di vista del sender sui numeri di sequenza nel GBN}
+\end{figure}
+Se definiamo come \emph{base} il numero di sequenza del paccehtto più vecchio senza riscontro e come \emph{nextseqnum} il più piccolo numero di sequenza inutilizzato, allora nella gamma dei numeri di sequenza si possono identificare quattro intervalli:
+\begin{itemize}
+	\item \emph{[0, base-1]}: pacchetti già trasmessi
+	\item \emph{[base, nextseqnum-1]}: pacchetti che sono stati spediti e ancora senza riscontro
+	\item \emph{[nextseqnum, base+N-1]}: questi numeri di sequenza nell'intervallo possono essere usati per i pacchetti che possono essere spediti immediatamente
+	\item \emph{>base+N}: non possono essere usati finchè un pacchetto non riscontrato viene riscontrato
+\end{itemize}
+N è noto come \textbf{dimensione della finestra} e il protocollo GBN come \textbf{protocollo a finestra scorrevole}.
+\begin{figure}
+	\includegraphics[scale=0.6]{img/026.png}
+	\caption{Descrizione dell'FSM estesa del sender GBN}
+\end{figure}
+Il sender GBN deve affrontare tre tipi di eventi:
+\begin{itemize}
+	\item Chiamata da sopra: quando $rdt_send()$ è chiamata da sopra, il mittente prima controlla per valutare se la finestra è satura (N pacchetti in circolazione non riscontrati) e decide se spedire il nuovo pacchetto o se ritornare i dati allo strato superiore.
+	\item ricezione di un ACK: un riscontro con numero di sequenza n sarà interpretato come un riscontro cumulativo che indica che tutti i pacchetti con un numero di sequenza fino a n, n compreso, sono stati correttamente ricevuti
+	\item un evento timeout: se interviene un timeout, il mittente rispedisce \emph{tutti} i pacchetti che sono già stati spediti ma che non hanno ricevuto riscontro
+\end{itemize}
+\begin{figure}
+	\includegraphics[scale=0.6]{img/027.png}
+	\caption{Descrizione dell'FSM estesa del receiver GBN}
+\end{figure}
+Le azioni del ricevente sono anch'esse semplici. Se un pacchetto con un numero di sequenza n è ricevuto correttamente ed è in ordine (ovvero se l'ultimo pacchetto inoltrato allo strato superiore è l'n*1) il ricevente invia un ACK per il pacchetto n. Negli altri casi il pacchetto viene scartato e rispedisce un ACK per l'ultimo pacchetto in ordine. In questo protocollo GBN, il ricevente scarta i pacchetti non in ordine, questo permette di non dover mantenere in memoria alcun pacchetto fuori ordine. Ovviamente lo svantaggio è la richiesta di più ritrasmissioni eventuali.
+\subsubsection{Ripetizione selettiva (SR}
+Esistono casi nei quali GBN può avere problemi di prestazioni, ad esempio quando la dimensione della finestra e il prodotto ritardo-larghezza di banda sono entrambi grandi, nelle pipeline possono trovarsi molti pacchetti. Un singolo errore può costringere GBN a ritrasmettere un grande numero di pacchetti, magari non tutti necessari. In più queste ritrasmissioni possono saturare la pipeline. \\
+I protocolli a ripetizione selettiva evitano le ritrasmissioni non necessarie grazie alla rispedizione di quei soli pacchetti che si sospetta siano giunti al ricevente con errori. Una finestra di dimensioni N dovrà ancora essere usata per limitare il numero di pacchetti da evadere, non riscontrati, nella pipeline.
+\begin{figure}
+	\includegraphics[scale=0.6]{img/028.png}
+	\caption{SR: viste degli intervalli dei numeri di sequenza dal sender e dal receiver}
+	\includegraphics[scale=0.6]{img/029.png}
+	\caption{Operazioni del SR}
+\end{figure}
+Il problema è identificare la dimensione necessaria della finestra affinché non ci siano errori.
+\pagebreak
+
+\subsection{Trasporto orientato alla connessione: TCP}
+\subsubsection{La connessione TCP}
+Si dice che TCP è \textbf{orientato alla connessione} perché prima che un processo applicativo possa cominciare a spedire dati, i due processi devono scambiarsi un \textbf{handshake} \textit{(stretta di mano)}, ovvero devono prima inviarsi alcuni segmenti preliminari per stabilire i parametri del successivo trasferimento di dati.
+TCP funziona solo nei terminali e non negli elementi intermedi della rete, questi elementi non mantengono lo stato della connessione TCP. Infatti, i router intermedi dimenticano completamente la connessione TCP, vedono solo i datagram, non le connessioni. \\
+Una connessione TCP fornisce un trasferimento dei dati \textbf{full duplex}, cioè consente ai dati di viaggiare contemporaneamente nelle due direzioni. Una connessione TCP è anche \textbf{point-to-point}, cioè fra un singolo sender e un singolo receiver. Con TCP il cosiddetto \emph{"multicasting"} (il trasferimento da un mittente a più riceventi contemporaneamente) è impossibile. \\
+\textbf{Handshake a tre vie}:
+\begin{itemize}
+	\item il client invia uno speciale segmento TCP
+	\item il server risponde con un secondo segmento speciale TCP
+	\item il client risponde con un terzo segmento speciale
+\end{itemize}
+I primi due non contengono "carico utile" (payload), il terzo può trasportarne. \\
+TCP indirizza i dati al \textbf{buffer di spedizione} (send buffer) della connessione, che è uno dei buffer che viene riservato durante l'iniziale handshake a tre vie.
+\begin{figure}
+	\includegraphics[scale=0.6]{img/030.png}
+	\caption{Buffer di spedizione e ricezione del TCP}
+\end{figure}
+La quantità massima di dati che può essere prelevata e inserita in segmenti è limitata dalla \textbf{dimensione massima del segmento} (\textbf{MSS}, \textit{Maximum Segment Size}). Il valore di MSS dipende dall'implementazione del TCP (determinata dal sistema operativo) e spesso può essere configurato. \\
+TCP unisce a ciascun pezzo dei dati del client un'intestazione TCP, formando così i segmenti TCP. \\
+Quando il ricevente riceve i segmenti, questi sono posti nel buffer di ricezione della connessione TCP,
+\subsubsection{Struttura del segmento TCP}
+\begin{figure}
+	\includegraphics[scale=0.6]{img/031.png}
+	\caption{Struttura del segmento TCP}
+\end{figure}
+L'intestazione TCP è tipicamente di 20 byte. Come per UDP, l'intestazione comprende \textbf{numeri di porta sorgente e di destinazione e checksum}. Inoltre, l'intestazione TCP contiene anche:
+\begin{itemize}
+	\item \textbf{numero di sequenza e numero di riscontro}: 32 bit
+	\item \textbf{dimensione finestra}: 16 bit
+	\item \textbf{lunghezza intestazione}: 4 bit, specifica la lunghezza dell'intestazione del TCP in parole a 32 bit
+	\item \textbf{opzioni}: è a lunghezza variabile, è usato quando un sender e un receiver negoziano la massima dimensione del segmento MSS o come fattore di scala della finestra per l'uso nelle reti ad alta velocità
+	\item \textbf{campo flag}: 6 bit
+		\begin{itemize}
+			\item \textbf{ACK}
+			\item \textbf{RST}
+			\item \textbf{SYN}
+			\item \textbf{FIN}
+			\item \textbf{PSH}: indica che il receiver dovrebbe passare immediatamente i dati allo strato superiore
+			\item \textbf{URG}: indica che in questo segmento ci sono dati che lo strato superiore ha definito come "urgenti". La dislocazione dell'ultimo byte di questi dati urgenti è indicata dal \textbf{campo puntatore a dati urgenti} a 16 bit
+		\end{itemize}
+\end{itemize}
+\paragraph{Numeri di sequenza e numeri di riscontro}
+Il \textbf{numero di sequenza per un segmento} è il numero del primo byte del segmento. \\
+Supponiamo di avere una serie di segmenti, tutti da 1000 byte. Per ogni segmento il numero di sequenza sarà il numero del primo byte, quindi 0, 1000, 2000, ecc.\\
+Il \textbf{numero di riscontro} che l'host A inserisce nel suo segmento è il numero di sequenza del prossimo byte che l'host A aspetta dall'host B. Immaginando di aver ricevuto riscontro per i byte 0-535 e 900-1000, il numero di riscontro inviato sarà 536, ovvero il numero del primo byte non riscontrato. TCP riscontra solo i byte fino al primo mancante, si dice quindi che ha \textbf{riscontri cumulativi}. \\
+\paragraph{Impostazione e gestione dell'intervallo di timeout per le ritrasmissioni (con integrazioni per mancanza di pagine del libro}
+Il \textbf{Round Trip Time} \textit{(RTT)} nelle telecomunicazioni è il tempo che intercorre tra l'invio di un segnale più il tempo necessario per la ricezione della conferma di quel segnale. \\
+Nelle reti, l'RTT è il tempo che passa da quando il segmento TCP viene inviato (ossia passa al livello di rete) a quando ritorna l'ACK del segmento stesso. Trascurando il tempo di trasmissione dell'ACK, viene calcolato come:
+\begin{center}
+	$RTT = T_{tx} + 2_T{p}$
+\end{center}
+dove $T_{tx}$ è il tempo di trasmissione\footnote{Rapporto tra la dimensione del segmento e la velocità di trasmissione} e $T_{p}$ è il tempo di propagazione\footnote{È il tempo necessario al segnale fisico per propagarsi lungo la linea di trasmissione fino al nodo successivo e da qui alla destinazione finale}. \\
+All'atto dell'invio di un pacchetto, il mittente registra il valore corrente del tempo locale, e quando riceve l'ACK registra nuovamente il valore temporale. Effettuando la sottrazione tra i due valori si ottiene una stima singola del RTT. Più stime possono essere combinate insieme per calcolare il RTT medio. \\
+Nel protocollo TCP viene stimato analizzando gli RTT dei segmenti non ritrasmessi secondo la seguente formula:
+\begin{center}
+	$EstimatedRTT = (1-\alpha )EstimatedRTT_{precedente} + \alpha SampleRTT$\footnote{EstimatedRTT: RTT stimato, SampleRTT: RTT campionato}
+\end{center}
+dove $\alpha$ è posto a $\dfrac{1}{8}$ in modo da modellare il valore degli RTT in base ai pacchetti più recenti, dando loro un peso esponenzialmente decrescente. \\
+In realtà questo modo di calcolare l'RTT non tiene conto della varianza dei campioni di RTT. Un nuovo modo di calcolarlo è il seguente:
+\begin{center}
+	$DIFF = EstimatedRTT + SampleRTT$
+	$EstimatedRTT = EstimatedRTT - (\delta*DIFF), 0 < \delta < 1$
+\end{center}
+\begin{figure}
+	\includegraphics[scale=0.6]{img/032.png}
+	\caption{RTT campionati e RTT stimati}
+\end{figure}
+Dati i valori \emph{EstimatedRTT} e \emph{DevRTT}, che valore dovrebbe essere usato per l'intervallo di timeout di TCP? Chiaramente l'intervallo dovrebbe essere maggiore o uguale a EstimatedRTT ma non troppo maggiore. È consigliabile impostare il timeout pari a EstimatedRTT pià un margine che dovrebbe essere grande quando ci sono fluttuazioni ampie nei valori di SampleRTT, piccolo in caso contrario. Il valore di DevRTT dovrebbe entrare in gioco qui.
+\begin{center}
+	$DevRTT = (1 - \beta)*DevRTT_{precedente} + \beta*|SampleRTT - EstimatedRTT|$
+	$TimeoutInterval = EstimatedRTT + 4 * DevRTT$
+\end{center}
+\subsubsection{Trasferimento affidabile dei dati}
+Ricordiamo che il servizio IP è inaffidabile.\\
+Il TCP crea un \textbf{servizio di trasferimento affidabile dei dati} sopra al servizio inaffidabile best effort fornito da IP. Vediamo che ci sono tre principali eventi legati alla trasmissione e ritrasmissione dei dati nel mittente TCP:
+\begin{itemize}
+	\item ricezione di dati dall'applicazione sovrastante
+	\item timeout del timer: il timer viene avviato quando il segmento viene passato a IP e viene associato al più vecchio segmento non riscontrato. L'intervallo di scadenza per questo timer è il \emph{TimeoutInterval}
+	\item ricezione di un ACK
+\end{itemize}
+\begin{figure}
+	\includegraphics[scale=0.6]{img/033.png}
+	\caption{Il segmento 100 non è ritrasmesso}
+\end{figure}
+\paragraph{Raddoppio dell'intervallo di timeout}
+In questa modifica, quando si verifica un timeout, il TCP ritrasmette il segmento non ancora riscontrato con il più piccolo numero di sequenza ma, ogni volta che il TCP ritrasmette, esso imposta il prossimo intervallo di timeout al doppio del valore precedente. Quindi gli intervalli crescono esponenzialmente dopo ogni ritrasmissione. Comunque, ogni volta che il timer viene riavviato dopo uno dei due altri eventi, il \emph{TimeoutInterval} viene nuovamente derivato da \emph{EstimatedRTT} e \emph{DevRTT}. \\
+Questa modifica fornisce una forma limitata di controllo della congestione.
+\paragraph{Ritrasmissione veloce}
+\begin{figure}
+	\includegraphics[scale=0.6]{img/034.png}
+	\caption{Raccomandazioni per la generazione di ACK del TCP}
+\end{figure}
+Quando il mittente TCP riceve tre duplicati ACK per gli stessi dati, prende questa informazione come conferma che il segmento successivo a quello riscontrato tre volte è andato perso. In questo caso, TCP esegue una \textbf{ritrasmissione veloce}, ritrasmettendo il segmento mancante prima che il timer di quel segmento scada.
+\paragraph{Go-Back-N o ripetizione selettiva?}
+Ricordiamo che i riscontri TCP sono cumulativi e che i segmenti ricevuti correttamente ma guori sequenza non sono riscontrati individualmente dal ricevente. Quindi, TCP deve ricordare solo il più piccolo numero di sequenza di un byte trasmesso ma non riscontrato. In questo senso \textbf{TCP assomiglia molto a un protocollo in stile GBN}. Ci sono però delle differenze. Infatti, una modifica proposta per il TCP, il cosiddetto \textbf{riscontro selettivo}, consente a un ricevente TCP di riscontrare selettivamente segmenti fuori sequenza piuttosto che riscontrare cumulativamente l'ultimo segmento ricevuto correttamente, in sequenza. \\
+Quindi, TCP è un ibrido tra i due sistemi.
+\subsubsection{Controllo di flusso}
+Ricordiamo che gli host riservano un buffer di ricezione per la connessione. Quando la connessione TCP riceve byte che sono costretti e in sequenza, colloca i dati nel buffer di ricezione. Il processo dell'applicazione associato leggerà i dati da questo buffer. Se l'applicazione è relativamente lenta nella lettura dei dati, il mittente potrebbe inviare troppi dati e potrebbe saturare il buffer di ricezione. \\
+Il TCP fornisce alle sue applicazioni un \textbf{servizio di controllo del flusso}, ovvero un servizio di adattamento delle velocità. Questo controllo è detto \textbf{controllo della congestione}. \\
+Il TCP fornisce il controllo di flusso attracerso il mantenimento nel mittente di una variabile detta \textbf{finestra di ricezione} \textit{(receive window)}. La finestra di ricezione è usata per dare al mittente un'idea di quanto spazio è disponibile nel buffer del ricevente. \textbf{La finestra di ricezione è dinamica}, ovvero varia durante la connessione. \\
+Definiamo le seguenti variabili:
+\begin{itemize}
+	\item \emph{LastByteRead}: numer dell'ultimo byte nel flusso di dati letto dal buffer dal processo dell'applicazione in B
+	\item \emph{LastByteRcvd}: numero dell'ultimo byte nel flusso di dati che è arrivato dalla rete ed è stato collocato nel buffer di ricezione in B
+\end{itemize}
+Poichè al TCP non è permesso di saturare il buffer assegnato, dobbiamo avere:
+\begin{center}
+	$LastByteRcvd - LastByteRead \leq RcvBuffer$
+\end{center}
+La finestra di ricezione, \emph{RcvWindow}, è posta uguale alla quantità di spazio disponibile nel buffer:
+\begin{center}
+	$RcvWindow = RcvBuffer - [LasstByteRcvs - LastByteRead]$
+\end{center}
+Poichè lo spazio disponibile cambia con il tempo, \emph{RcvWindow} è dinamica. \\
+Come viene usata \emph{RcvWindow}? B inserisce in ogni segmento inviato ad A il valore attuale di \emph{RcvWindow}, inizialmente impostando $RcvWindow = RcvBuffer$. \\
+L'host A a sua volta mantiene traccia di due variabili:
+\begin{itemize}
+	\item LastByteSent: ultimo byte inviato
+	\item LastByteAcked: ultimo byte riscontrato
+\end{itemize}
+La differenza tra questi due è l'insieme dei byte non ancora riscontrati. \\
+Poichè B invia dati ad A solo se deve inviare qualcosa o se deve dare riscontro, nel caso il buffer venisse svuotato ma B non dovesse inviare niente, allora A non saprebbe mai che il buffer si è svuotato. Per risolvere, A continua ad inviare segmenti con un byte di dati quando la finestra di ricezione di B è zero, in questo modo, quando saranno ricevuti dal buffer, B invierà un riscontro con la nuova \emph{RcvWindow}.
+\subsubsection{Gestione della connessione TCP}
+Ora vedremo come una connessione TCP viene instaurata e chiusa. \\
+Supponiamo che un host A (client) voglia instaurare una connessione con un host B (server). Il processo del client informa il TCP che vuole stabilire una connessione con il server. Il TCP client procede allora a stabilirla nel seguente modo:
+\begin{itemize}
+	\item \textbf{Passo 1}: $TCP_{client}$ invia uno speciale segmento a $TCP_{server}$. Questo segmento non contiene dati dello strato di applicazione ma un bit del campo flag nell'intestazione, il cosiddetto SYN bit, è posto a 1. Inoltre il client sceglie un numero di sequenza iniziale (\emph{client\_isn}) e inserisce questo numero nel campo numero di sequenza del segmento iniziale SYN.
+	\item \textbf{Passo 2}: Quando il datagram IP contenente il segmento SYN del $TCP_{client}$ arriva al server dell'host, il server estrae il segmento TCP dal datagram, determina il buffer TCP e le variabili alla connessione, e invia al client TCP un segmento che autorizza la connessione. Anche questo segmento non contiene dati dello strato di applicazione ma contiene tre informazioni:
+		\begin{itemize}
+			\item SYN posto a 1
+			\item il campo di riscontro del segmento TCP è posto a client\_isn + 1
+			\item il server sceglie il proprio numero iniziale di sequenza (\emph{server\_isn}) e colloca questo valore nel campo del numero di sequenza nell'intestazione TCP	
+		\end{itemize}
+		A volte ci si riferisce al segmento che autorizza la connessione come a un segmento \textbf{SYNACK}.
+	\item \textbf{Passo 3}: Dopo la ricezione del segmento SYNACK, anche il client destina buffer e variabili alla connessione. L'host del client invia allora al server un ulteriore segmento. Quest'ultimo segmento riscontra il segmento che autorizza la connessione inserendo nel campo di riscontro \emph{server\_isn + 1}. Il bit SYN è posto a 0 perchè la connessione è stabilita
+\end{itemize}
+Questa è la procedura di \textbf{handshake a tre vie}.
+\begin{figure}
+	\includegraphics[scale=0.6]{img/035.png}
+	\caption{Handshake a tre vie}
+\end{figure}
+\\
+Ciascuno dei due processi che partecipano a una connessione TCP possono chiuderla. Quando viene chiusa, le risorse (buffer e variabili) negli host sono deallocate. \\
+Il processo dell'applicazione imposta un comando di chiusura, questo fa sì che il TCP del client inviii nuo speciale segmento TCP al processo dell'altro host. Questo segmento speciale ha un bit nel campo flag dell'intestazione del segmento, il campo \textbf{FIN} posto a 1. Quando l'host riceve questo segmento, invia un ACK al mittente per poi a sua volta inviare un segmento di chiusura della connessione allo stesso modo. Il primo host a questo punto invia un ACK in risposta e tutti e due deallocheranno le risorse. \\
+\begin{figure}
+	\includegraphics[scale=0.6]{img/036.png}
+	\caption{Chiusura di una connessione TCP}
+\end{figure}
+Durante il periodo dell'esistenza della connessione tCP, il protocollo TCP funziona in ciascun host eseguendo transizioni tra vari \textbf{stati del TCP}. 
+\begin{figure}
+	\includegraphics[scale=0.6]{img/037.png}
+	\caption{Tipica sequenza degli stati per i quali passa un TCP del client}
+	\includegraphics[scale=0.6]{img/038.png}
+	\caption{Tipica sequenza degli stati per i quali passa un TCP del server, supponendo che sia il client a interrompere la connessione}
+\end{figure}
+
+\subsection{Principi del controllo della congestione}
+Sappiamo che una delle cause principali della perdita di segmenti è la congestione della rete. La ritrasmissione dei segmenti cura l'effetto ma per correggere il problema alla radice servono sistemi che "strozzino" i sender nel caso di una congestione.
+\subsubsection{Le cause e i costi della congestione}
+Considereremo tre scenari di complessità crescente in cui si verifica la congestione. In tutti i casi valuteremo le cause della congestione e i suoi costi.
+\paragraph{Scenario 1: due sender, un router con buffer infinito}
+\begin{figure}
+	\includegraphics[scale=0.6]{img/039.png}
+	\caption{Primo scenario di congestione: due connessioni dividono un singolo hop con buffer infinito}
+\end{figure}
+Due host (A e B), ciuscino con una connessione che condivide un singolo hop (salto, router) fra sorgente e destinazione.\\
+Assumiamo che A stia inviando dati a una velocità media di $\lambda_{in}$ byte/s. Questi dati sono "originali", nel senso che ciascuna unità di dati è inviata nel socket una sola volta. I dati sono incapsulati e spediti. non viene eseguito alcun recupero degli errori (ad esempio ritrasmissione), controllo di flusso o controllo della congestione. Ignorando il carico addizionale dovuto all'aggiunt delle informazioni di intestazione, la velocità a cui l'host A offre il traffico al router in questo primo scenario è $\lambda_{in}$ byte/s. L'host B opera in maniera simile, quindi suppioniamo che stia inviando anch'esso dati alla velocità di $\lambda_{in}$ byte/s.\\
+I pacchetti degli host A e B passano attraverso un router e su un link di uscita condiviso di capacità R. Il router ha buffer che permettono di incamerare i pacchetti in arrivo quando la velocità di arrivo supera la capacità di uscita. \\
+\begin{figure}
+	\includegraphics[scale=0.6]{img/040.png}
+	\caption{Primo scenario di congestione:throughput e ritardo in funzione della velocità di spedizione dell'host}
+\end{figure}
+Il grafico riporta il \textbf{throughput per la connessione} (numero di byte al secondo al receiver) in funzione della velocità di spedizione dei dati: per una velocità fra 0 e R/2, il thorughput al receiver uguaglia la velocità di spedizione del sender. \\ \\
+\textbf{Attenzione}: il limite superiore R/2 è una conseguenza della condivisione della capacità del link fra le due connessioni. Infatti, quando la velocità di spedizione supera R/2, il throughput è solo R/2. \\ \\
+Quando la velocità di spedizione supera R/2, il numero medio di pacchetti in coda nel router diventa illimitato, e il rituardo emdio tra sorgente e destinazione diventa infinito (assumendo che la connessione vada avanti all'infinito). Quindi, operare vicino a R come velocità è certo ottimo per il throughput ma pessimo per il ritardo. \\
+Abbiamo trovato il costo della congestione di rete in questo scenario: ci si devono aspettare grandi ritardi di coda quando la velocità di arrivo dei pacchetti è prossima alla capacità del link.
+\paragraph{Scenario 2: due sender, un router con buffer finito}
+\begin{figure}
+	\includegraphics[scale=0.6]{img/041.png}
+	\caption{Secondo scenario: due host (con ritrasmissioni) e un router con buffer finito}
+\end{figure}
+Assumiamo ora che il buffer del router sia finito. Una conseguenza di ciò è che i pacchetti in eccesso saranno scartati quando raggiungono un buffer pieno. Consideriamo anche che ciascuna connessione sia affidabile, ovvero che se un pacchetto viene perso dal router, sarà ritrasmesso dal mittente. Proprio per il fatto che i pacchetti possono essere rispediti dobbiamo stare attenti al termine "velocità di spedizione":
+\begin{itemize}
+	\item lo strato dell'applicazione invia dati a $\lambda_{in}$ byte/s
+	\item lo strato di trasporto invia dati (originali e ritrasmessi) a $\lambda_{in}^{'}$ byte/s. Ci si riferisce a questa velocità come \textbf{carico offerto alla rete}
+\end{itemize}
+Ora, se il mittente potesse sapere se il buffer è pieno o no allora non ci sarebbero ritrasmissioni, portando a $\lambda_{in}^{'} = \lambda_{in}$. Questo caso è illustrato dalla retta superiore del grafico a sinistra. \\
+Ora invece consideriamo il caso nel quale il sender rispedisca un pacchetto solo quando è sicuro che sia andato perso. In questo caso, le prestazioni potrebbero assomigliare a quelle del grafico a destra.
+\paragraph{Scenario 2: due sender, un router con buffer finito}
+\begin{figure}
+	\includegraphics[scale=0.6]{img/042.png}
+	\caption{Secondo scenario: prestazioni}
+\end{figure}
+Per capire, consideriamo il caso in cui il carico offerto $\lambda_{in}^{'}$ sia uguale a 0,5R. In accordo con la figura a destra, a questo valore di carico offerto la velocità dei dati spediti spediti all'applicazione del receiver è R/3. Allora, delle 0,5R unità di dati trasmessi, 0,333R byte/s (in media) sono dati originali e 0,166R byte/s (in media) sono dati ritrasmessi. \\
+Vediamo qui un altro costo della congestione della rete: il sender deve eseguire ritrasmissioni per compensare i pacchetti scartati (dropped) a causa del sovraccarico del buffer. \\
+Infine, consideriamo il caso nel quale il timer del sender scada prematuramente e il sender ritrasmetta il pacchetto che in realtà è stato ritardato dalla coda ma non è stato perso. In questo caso il lavoro fatto dal router nell'inoltrare la trasmissione della copia del pacchetto originale è sprecato. Il router, invece, avrebbe meglio usato la capacità di trasmissione del link per inviare un pacchetto diverso. \\
+Ecco un altro costo della congestione di rete: le ritrasmissioni non necessarie a fronte di grandi ritardi portano il router a usare la larghezza di banda del suo link per inoltrare copie non necessarie. \\
+La curva inferiore del grafico a sinistra mostra il throughput in funzione  del carico offerto quando si assume che ciascun pacchetto debba essere inoltrato (in media) due volte dal router, riducendo il valore asintotico a R/4.
+\paragraph{Scenario 3: quattro sender, router con buffer finito e percorsi a salti multipli}
+\begin{figure}
+	\includegraphics[scale=0.6]{img/043.png}
+	\caption{Quattro sender, router con buffer finito e percorsi a salti multipli}
+\end{figure}
+Quattro host trasmettono pacchetti, ciascuno su percorsi di due salti sovrapposti. Assumiamo ancora che ciascun host usi un meccanismo di timeout/ritrasmissione per implementare un servizio di trasferimento affidabile dei dati, che tutti gli host abbiano lo stesso valore di $\lambda_{in}$ e che tutti i link dei router abbiano capacità R byte/s. \\
+Consideriamo la connessione A-C, passando attraverso i router R1 e R2. La connessione A-C condivide R1 con D-B e R2 con B-D. per valori estremamente piccoli di $\lambda_{in}$, il sovraccarico del buffer è raro e il throughput è circa uguale al carico offerto. Per valori leggermente superiori di $\lambda_{in}$, il throughput corrispondente è anch'esso maggiore, e una maggior quantità di dati originali è trasmessa nella rete e raggiunge la destinazione, il sovraccarico è anche raro. Quindi, per piccoli valori di $\lambda_{in}$, un aumento di $\lambda_{in}$ si traduce in un aumento di $\lambda_{out}$. \\
+Consideriamo ora il caso in cui $\lambda_{in}$ (e quindi $\lambda_{in}^{'}$ sia estremamente grande. Consideriamo il router R2. il traffico A-C in arrivo al router R2 può avere una velocità di arrivo che è al massimo R, la capcità del link da R1 a R2, indipendentemente dal valore di $\lambda_{in}$. Se $\lambda_{in}^{'}$ è estremamente grande per tutte le connessioni, allora la velocità di arrivo del traffico di B-D a R2 può essere più grande di quella del traffico A-C. Poichè il traffico di A-C e quello di B-D devono competere al router R2 a causa del limitato spazio di buffer, la quantità del traffico di A-C che con successo attraversa R2 diminuscie sempre più quando il carico offerto da B-D continua ad aumentare. Al limite, quando il carico offerto si avvicina all'infinito, un buffer vuoto in R2 è immediatamente riempito da un pacchetto di B-D, e il throughput della connessione A-C in R2 va a zero. \\
+Questo, in sostanza, implica che il throughput end-to-end di A-C si porti a zero nella condizione limite di traffico pesante. \\
+\begin{figure}
+	\includegraphics[scale=0.6]{img/044.png}
+	\caption{Terzo scenario: prestazioni con buffer finito e percorsi a salti multipli}
+\end{figure}
+Il motivo per la diminuzione del throughput con l'incremento del carico offerto è evidente se sis considera l'ammontare del lavoro compiuto dalla rete. Se R2 si trova a scartare un pacchetto, allora il lavoro di R1 è stato sprecato. \\
+Qui possiamo vedere ancora un altro costo della perdita di un pacchetto dovuta alla congestione: quando un pacchetto è perso lungo un percorso, la capacità di trasmissione che è stata usata in ciascuno dei router a monte per inoltrare quel pacchetto al punto in cui si è perso è stata sprecata.
+
+\subsection{Controllo della congestione del TCP}
+Le due componenti più importanti di TCP sono:
+\begin{itemize}
+	\item fornisce un servizio di trasporto affidabile
+	\item ha un meccanismo di controllo della congestione
+\end{itemize}
+\subsection{Controllo della congestione del TCP}
+Le due componenti più importanti di TCP sono:
+\begin{itemize}
+	\item fornisce un servizio di trasporto affidabile
+	\item ha un meccanismo di controllo della congestione
+\end{itemize}
+L'approccio seguito da TCP è di fare sì che ogni mittente limiti il ritmo a cui immette traffico nella sua connessione in funzione della congestione in rete percepita. Se un mittente TCP percepisce che c'è poca congestione nel percorso tra sè e la destinazione, allora il mittente TCP aumenta il suo ritmo di trasmssione; se il mittente percepisce che c'è congestione lungo il percorso, allora il mittente riduce il suo ritmo di invio. Ma questo approccio solleva tre problemi:
+\begin{itemize}
+	\item in che modo il mittente TCP limita il ritmo a cui manda traffico nelle sue connessioni?
+	\item come un mittente TCP percepisce che c'è congestione nel percorso tra sè e la destinazione?
+	\item quale algoritmo dovrebbe utilizzare il mittente per cambiare il suo ritmo di invio in funzione della congestione end-to-end percepita?
+\end{itemize}
+Esamineremo prima in che modo un mittente limita il ritmo al quale invia traffico nella sua connessione. Il meccanismo di controllo della congestione del TCP da entrambi i lati della connessione deve tener traccia di un'altra variabile: la \textbf{finestra di congestione} \textit{(congestion window)}. La finestra di congestione impone una limitazione addizionale alla quantità di traffico che un host può inviare in una connessione. Specificatamente, l'ammontare dei dati non riscontrati che un host può avere all'interno di una connessione tCP non deve superare il minimo tra CongWin e RcvWin, che è:
+\begin{center}
+	$LastByteSent - LastByteAcked \leq min{CongWin, RcvWindow}$
+\end{center}
+Per porre l'attenzione sul controllo della congestione assumiamo che il buffer di ricezione del TCP sia abbastanza grande da poter ignorare il vincolo della finestra di ricezione. In questo caso, la quantità di dati non riscontrati che un host può avere all'interno di una connessione TCP è limitata unicamente attraverso \emph{CongWin}. \\
+Consideriamo una connessione per cui l perdita e i ritardi di trasmissione dei pacchetti siano trascurabili. Quindi, approssimativamente, all'inizio di ogni tempo di round-trip\footnote{Il Round Trip Time (acronimo RTT) nelle telecomunicazioni è il tempo che intercorre tra l'invio di un segnale più il tempo necessario per la ricezione della conferma di quel segnale.} (RTT), il limite sopra esposto permette al mittente di inviiare \emph{CongWin} byte di dati nella connessione, e alla fine del RTT il mittente riceve i riscontri per i dati. \\
+Quindi il ritmo di invio del mittente è circa \emph{CongWin/RTT} byte/s. \\
+Definiamo un \textit{"evento di perdita"} a un mittente TCP come il verificarsi o di un timeout o della ricezione di tre ACK duplicati dal ricevente\footnote{Che, come abbiamo detto precedentemente, porta alla ritrasmissione veloce dei pacchetti ancora senza ACK}. Quando c'è troppa congestione vi è perdita di datagrammi. Il datagram perso, a sua volta, dà luogo a un evento di perdita al mittente, o a un timeout o la ricezione di tre ACK duplicati, che è considerato dal mittente come un'indicazione della congestione del percorso. \\
+Ora siamo in grado di considerare l'algoritmo che un mittente TCP usa per regolare il suo ritmo di invio in funzione della congestione percepita, ovvero l'\textbf{algoritmo di controllo della congestione di TCP}. L'algoritmo ha tre componenti principali:
+\begin{itemize}
+	\item incremento adattivo, decremento moltiplicativo
+	\item partenza lenta (\textit{slow start})
+	\item reazione a eventi di timeout
+\end{itemize}
+\paragraph{Incremento adattivo, decremento moltiplicativo}
+L'idea alla base del controllo di congestione di TCP è quella di far ridurre al mittente il suo ritmo di invio (diminuendo la dimensione della sua finestra di congestione, \emph{CongWin}) quando si verifica un evento di perdita. Ma di quanto il mittente TCP deve ridurre la sua finestra di congestione quando si verifica un evento di perdita? Il TCP usa un approccio detto \textbf{"decremento moltiplicativo"}, che dimezza il valore attuale di \emph{CongWin} dopo un evento di perdita. Quindi, se il valore di \emph{CongWin} è attualmente di 20 kbyte e si verifica una perdita, \emph{CongWin} viene dimezzato a 10 kbyte. Il valore di \emph{CongWin} può continuare a scendere, ma non può scendere sotto a un MSS. Questa è una spiegazione MOLTO semplificata come vedremo dopo. \\
+Consideriamo ora come TCP debba aumentare il ritmo di invio se non percepisce congestione, ovvero quando non ci sono perdite. In questo caso TCP aumenta lentamente la sua finestra di congestione. Il mittente fa questo ogni volta che riceve un ACK, approssimativamente aumentandola di un MSS per ogni RTT fin quando non si verificano eventi di perdita. \\
+Quindi TCP aumenta additivamente \textbf{($CongWin = CongWin_{prec} + MSS$)} e riduce moltiplicativamente \textbf{($CongWin = CongWin_{prec}/2$)}. Per questo motivo, il controllo di congestione di TCP è spesso definito come un \textbf{algoritmo a incremento adattivo, decremento moltiplicativo (AIMD)}. La fase di incremento lineare del protocollo di controllo della congestione è nota come \textbf{prevenzione della congestione} \textit{(congestion avoidance)}
+\begin{figure}
+	\includegraphics[scale=0.6]{img/045.png}
+	\caption{Algoritmo di controllo della congestione a incremento additivo-decremento moltiplicativo}
+\end{figure}
+\paragraph{Partenza lenta (slow start)}
+Quando si inizia una connessione TCP il valore di CongWin è inizializzato a un MSS, dando luogo a un ritmo iniziale di invio pari approssimativamente a \emph{MSS/RTT}. Per esempio, se MSS = 500 byte e RTT = 200 ms, allora il ritmo iniziale è solo circa 20 kbit/s. Dato che la banda potrebbe essere molto maggiore di MSS/RTT, sarebbe uno spreco aumentare il ritmo linearmente. Quindi, invece di incrementare il suo ritmo linearmente durante questa fasse iniziale, un mittente TCP \textbf{aumenta il suo ritmo a velocità esponenziale, raddoppiando il valore di \emph{CongWin} ogni RTT}. Al primo segnale di congestione si entra nel regime normale AIMD. Quindi, durante questa fase iniziale, chiamata \textbf{partenza lenta}, il mittente TCP inizia trasmettendo a un ritmo lento ma aumentando a velocità esponenziale.
+\paragraph{Reazioni a eventi di timeout}
+Il quadro presentato fino ad ora è incompleto, poichè TCP si comporta in maniera differente se la congestione è rilevata attraverso un evento di timeout e non attraverso tre ACK consecutivi. \textbf{Dopo un evento di timeout, il mittente TCP entra in una fase di partenza lenta}. \\
+Il TCP gestisce queste dinamiche più complesse mettendo una variabile chiamata \textbf{\emph{Threshold}} \textit{(soglia)}, che determina la dimensione della finestra alla quale deve terminare la partenza lenta, e deve cominciare la prevenzione della congestione. La variabile \emph{Threshold} è inizialmente posta a un valore grande (65 kbyte) in modo che non abbia alcun effetto iniziale. Quando si verifica un evento di perdita, \emph{Threshold} è posto pari alla metà del valore attuale di \emph{CongWin}. Per esempio, se \emph{CongWin} è 20 kbyte, allora \emph{Threshold} viene posto a 10 kbyte e conserverà questo valore fino al successivo evento di perdita. \\
+Ora descriviamo come si comporta \emph{CongWin} dopo un evento di timeout:
+\begin{itemize}
+	\item \textbf{Fase iniziale}: partenza lenta, $CongWin = CongWin_{prec}*2$
+	\item \textbf{Raggiungimento \emph{CongWin = Threshold}}: AIMD, $CongWin = CongWin_{prec} + MSS$
+	\item \textbf{Evento di perdita, tipo ACK duplicato tre volte}: $CongWin = CongWin_{prec}/2$, $Threshold = CongWin_{prec}/2$
+	\item \textbf{Evento di timeout}: $CongWin = MSS$, $Threshold = CongWin_{prec}/2$, ricomincia la partenza lenta
+\end{itemize}
+Questo meccanismo è proprio della nuova versione di TCP, \textbf{TCP Reno}. Nella versione precedente, \textbf{TCP Tahoe}, per ogni evento di perdita si impostava \emph{CongWin = MSS}.
+\begin{figure}
+	\includegraphics[scale=0.6]{img/046.png}
+	\caption{Evoluzione della finestra di congestione del TCP}
+\end{figure}
+\paragraph{Descrizione macroscopica del throughput di TCP}
+Dato l'andamento di TCP, è naturale considerare quale possa essere il throughput medio di una connessione di lunga durata. Per questa analisi ignoriamo le fasi di partenza lenta e le perdite.\\
+Quando la dimensione della finestra è di w byte e il tempo di round-trip è uguale a RTT secondi, il ritmo di trasmissione di TCP è circa w/RTT. Fino ad un evento di perdita, w viene aumentato di un MSS per ogni RTT. Indichiamo con W il valore di w quando si verifica una perdita. Assumendo che W e RTT siano approssimativamente costanti, il ritmo di trasmissione di TCP varia tra \emph{$W/(2 * RTT)$ e $W/RTT$}. Poichè il throughput aumenta linearmente fra due valori estremi, abbiamo:
+\begin{center}
+	Throughput medio di una connessione = $\dfrac{0,75 * W}{RTT}$
+\end{center}
+\subsubsection{Fairness}
+Consideriamo K connessioni TCP, ciascuna con un diverso percorso da estremo a estremo, ma tutte passanti attraverso un link collo di bottiglia\footnote{Ovvero è l'unico congestionato e gli altri hanno capacità trasmissiva in abbondanza rispetto a questo} \textit{(bottleneck)} con ritmo di trasmissione pari a R bit/s. Supponiamo che ogni connessione stia trasferendo un grande file e non ci sia traffico UDP che passa attraverso il link collo di bottiglia. Un meccanismo di controllo della congestione è detto \textbf{fairness}, ovvero essere fair (equo) se il ritmo di trasmissione medio di ogni connessione è approssimativamente pari a R/K, cioè, ogni connessione ottiene un'uguale porzione della banda del link. \\
+\textbf{AIMD è fair? Sì.} Consideriamo due conenssioni TCP che condividono un singolo link con velocità di trasmissione R.
+\begin{figure}
+	\includegraphics[scale=0.6]{img/047.png}
+	\caption{Due connessioni TCP condividono la banda di un singolo link collo di bottiglia}
+\end{figure}
+Supponiamo che le due connessioni abbiano gli stessi MSS e RTT, che entrambe abbiano una grande quantità di dati da spedire e che nessun'altra connessione TCP o datagram UDP attraversino il link condiviso. Ignoriamo anche la partenza lenta e assumiamo che le connessioni TCP operino in modalità AIMD tutto il tempo.
+\begin{figure}
+	\includegraphics[scale=0.6]{img/048.png}
+	\caption{Throughput realizzati dalle connessioni TCP 1 e 2}
+\end{figure}
+Se le due connessioni TCP condividono equamente la larghezza di banda del link, allora il throughput ottenuto cadrà sulla freccia a 45 gradi (pari suddivisione della larghezza di banda). \\
+Supponiamo che le dimensioni della finestra di TCP siano quelle per cui a un certo tempo, le connessioni 1 e 2 realizzino i throughput indicati dal punto A. Poichè l'ammontare della larghezza di banda utilizzata insieme dalle due connessioni è inferiore a R, non ci saranno perdite, ed entrambe continueranno ad aumentare \emph{CongWin} di un MSS per ogni RTT, procedendo su di una linea crescente a 45 gradi. Alla fine la somma dei due throughput sarà superiore a R come evidenziato nel punto B, allora entrambe le connessioni ridurranno a metà la loro \emph{CongWin}, portandosi a C e così via, mantenendo un equilibrio. \\
+Questo è un caso molto irrealistico, infatti, ad esempio, la connessione con RTT inferiore aumenterà più velocemente, ottenendo la maggior parte della rete.
+\paragraph{Fairness e UDP}
+Molte applicazioni multimediali, come la telefonia su internet e le video conferenze, non girano su TCP proprio per questa ragione: non vogliono che il loro ritmo di trasmissione sia ridotto, anche se la rete è molto congestionata. Per questo girano su UDP, in questo modo possono aumentare costantemente la loro velocità senza problemi, sopportando alcune perdite di pacchetti. Dal punto di vista di TCP, le connessioni UDP non sono eque.
+\paragraph{Fairness e connessioni TCP in parallelo}
+TCP può non essere fair se l'applicazione sfrutta più connessioni TCP in parallelo. Per esempio i browser usano più connessioni per caricare le pagine. Per fare un esempio, immaginiamo che ci siano 9 connessioni TCP singole, tutte avranno R/9 di velocità di trasmissione. Se si aggiungesse una nuova applicazione diventerebbero 10, portando la velocità a R/10 per tutti. Se questa nuova applicazione, però, usasse 11 connessioni parallele, riuscirebbe a prendersi R/2 della banda possibile.
+
+\section{Strato di rete e instradamento}
+\subsection{Introduzione}
+\begin{figure}
+	\includegraphics[scale=0.6]{img/049.png}
+	\caption{Lo strato di rete}
+\end{figure}
+Nell'immagine abbiamo due host, H1 e H2, e svariati router sul loro percorso. Supponiamo che H1 sia il mittente e H2 il destinatario e consideriamo il ruolo dello strato di rete. \\
+lO strato di rete di H1 prende il segmento dallo strato di trasporto, incapsula ogni segmento in un datagram (che è il tipo di pacchetto dello strato di rete, e lo invia al primo router, R1. H2, quando riceve il datagram, estrae il segmento e lo invia allo strato di trasporto. Il ruolo primario dei router e di spedire (forward) i datagrammi da link di input a quello di output.
+\subsubsection{Forwarding e Routing}
+Il ruolo dello strato di rete è semplice: spostare i pacchetti tra i vari host. Per fare ciò si identificano due funzioni importanti:
+\begin{itemize}
+	\item \textbf{Forwarding}: quando un pacchetto arriva al link di input, il router semplicemente sposta il link all'appropriato link di output
+	\item \textbf{Routing}: Lo strato di network deve determinare il percorso che i pacchetti devono prendere affinchè arrivino dal mittente al ricevente. L'algoritmo che calcola questi percorsi si chiama \textbf{"algoritmo di routing"}.
+\end{itemize}
+Il termine forwarding si riferisce all'azione locale di trasferire i pacchetti mentre routing si riferisce al processo che coinvolge tutto il network. \\
+Ogni router ha una \textbf{tabella di forwarding}. Un router inoltra il pacchetto esaminando il valore do un campo dell'header del pacchetto e poi usando questo valore per indicizzarlo nella tabella di forwarding. Il valore immagazzinato nella tabella di forwarding indica l'interfaccia del link di output sul quale deve essere instradato il pacchetto.
+Nella figura viene mostrato il funzionamento della tabella di forwarding: il pacchetto arriva con un'intestazione, questa viene cercata all'interno della tabella e determina il link da prendere.
+\begin{figure}
+	\includegraphics[scale=0.6]{img/050.png}
+	\caption{L'algoritmo di routing determina il valore nella tabella di forwarding}
+\end{figure}
+Come vengono determinati i valori della tabella di routing? L'algoritmo determina i valori che sono inseriti nella tabella. L'algoritmo può essere centralizzato (risiede su di un router che poi invia le informazioni ai router periferici) o decentralizzato (in ogni router). \\
+Per impostare la terminologia, da qui useremo \textbf{packet switch} per indicare un dispositivo generico di packet-witching che trasferisce i pacchetti da un link all'altro. Alcuni packet switch, chiamati \textbf{link-layer switches}, basano le loro decisioni di forwarding sul valore nel campo del frame dello strato di collegamento, altri packet-switch, i \textbf{router} basano la loro decisione sul valore del campo dello strato di rete.
+\paragraph{Impostazione della connessione}
+In alcuni network di computer lo strato di network ha una terza funzione: \textbf{l'impostazione della connessione} (\textit{Connection setup}). La funzione è simile a quella dell'handshake, semplicemente viene eseguita tra tutti i router del percorso in modo che i pacchetti possano scorrere tra di essi.
+\subsubsection{Modelli di servizio di network}
+Quando il livello di trasporto trasmette un pacchetto al livello di rete, può fare affidamento sul livello di rete per inviare il pacchetto alla sua destinazione? Quando più pacchetti sono spediti, arriveranno tutti in ordine? L'intervallo di tempo tra l'invio sequenziale di due pacchetti sarà uguale all'intervallo di ricezione? La rete offrirà un feedback sulla congestione? \\
+La risposta a queste domande e altre sono determinate dal modello di servizio offerto dal livello di rete. Il \textbf{modello di servizio di rete} definisce le caratteristiche del trasporto end-to-end. \\
+Consideriamo ora alcuni servizi che il livello di rete può offrire. Il livello di trasporto del mittente, quando passa il segmento al livello di rete, specifica quali servizi includere:
+\begin{itemize}
+	\item \textbf{Spedizione garantita}: il servizio garantisce che il pacchetto arriverà
+	\item \textbf{Spedizione garantita con un ritardo massimo}: il servizio non solo garantisce la spedizione del pacchetto, ma consegnata entro entro un specifico limite di ritardo host-to-host
+\end{itemize}
+Per di più, i seguenti sevizi possono essere offerti ad un flusso dati:
+\begin{itemize}
+	\item \textbf{Arrivo in ordine}: il servizio garantisce che i pacchetti arriveranno nell'ordine di invio
+	\item \textbf{Banda minima garantita}: emula il comportamento del link di trasmissione, garantendo che sotto quella velocità di invio non ci sarà perdita di pacchetti e ogni pacchetto arriverà entro un certo ritardo (ad esempio, 40 millisecondi)
+	\item \textbf{Massimo jitter garantito}: il servizio garantisce che l'ammontare di tempo tra due pacchetti successivi è uguale all'ammontare di tempo tra i loro arrivi a destinazione
+	\item \textbf{Servizio di sicurezza}: usando una chiave segreta per la sessione che solo i due host conoscono, il livello di rete del mittente può criptare i pacchetti che poi saranno decriptati dal ricevente.
+\end{itemize}
+Il livello di rete di internet offre un solo servizio, conosciuto come \textbf{best-effort} (al meglio delle possibilità). Un servizio Best-effort è uguale a dire che è un servizio senza garanzie, infatti anche se non arrivassero mai i pacchetti allora il servizio sarebbe comunque best-effort.
+\begin{figure}
+	\includegraphics[scale=0.6]{img/051.png}
+	\caption{I modelli di servizio di internet, ATM CBR e ATM ABR. ATM = Asynchronous Transfer Mode, CBR = constant bit rate, ABR = Available bit rate}
+\end{figure}
+
+\subsection{Il protocollo di internet (IP): forwarding e indirizzamento (addressing) in internet}
+Ci sono due versioni di IP oggi, IPv4 e IPv6. Noi studieremo solo IPv4.
+\subsubsection{Formato dei datagrammi IPv4}
+\begin{figure}
+	\includegraphics[scale=0.6]{img/052.png}
+	\caption{Datagram IPv4}
+\end{figure}
+Ricordiamo che un pacchetto del livello di rete è detto "datagram". \\
+I campi chiave di un datagram IPv4 sono:
+\begin{itemize}
+	\item Numero di versione: questi 4 bit specificano la versione dl protocollo IP per sapere come identificare i seguenti campi
+	\item \textbf{lunghezza dell'header}: questi 4 bit determinano da che punto il datagram inizia veramente
+	\item \textbf{Tipo di servizio (TOS)}: servono a distinguere i vari tipi di datagram
+	\item\textbf{ Lunghezza del datagram}: mostra la lunghezza del datagram, dati e header compresi
+	\item Identificatori, flag, offset di frammentazione
+	\item \textbf{Time-to-live (TTL}): imposta un massimo di vita al datagram, in modo che non rimanga in rete per sempre. Questo valore viene decrementato di 1 ogni volta che il datagram è processato da un router. Se il TTL arriva a 0, il datagram viene scartato
+	\item \textbf{Protocollo}: questo campo viene usato solo quando il datagram arriva a destinazione. il valore di questo campo indica il protocollo specifico del livello di trasporto da usare (TCP o UDP)
+	\item \textbf{Checksum}: come per i segmenti di UDP e TCP
+	\item \textbf{Indirizzi IP di arrivo e destinazione}
+	\item \textbf{Opzionali}: permettono l'estensione dell'header
+	\item \textbf{Dati} (payload)
+\end{itemize}
+\paragraph{Frammentazione dei datagrammi IPv4}
+Il massimo ammontare di dati che un frame del livello di collegamento può trasportare è chiamato \textbf{"unita massima di trasmissione"} \textit{(MTU)}. Poichè ogni datagram IP è incapsulato in un frame del livello di collegamento per il trasporto da un router all'altro, allora l'MTU del protocollo del livello di collegamento pone un limite alla lunghezza del datagram IP. Il vero problema, però, non è questo limite ma il fatto che i vari router sul percorso possano utilizzare differenti protocolli con differenti MTU. Supponiamo che ci arrivi un pacchetto di data dimensione e che questo debba essere indirizzato verso un altro link ma, problema, questo ha un MTU inferiore rispetto a quello in entrata. Che fare? La soluzione è la frammentazione dei dati nel datagram IP in due più piccoli datagram IP, ognuno incapsulato in un datagram più piccolo in un frame separato. Ognuno di questi datagram è chiamato \textbf{frammento}. \\
+Per non aggiungere lavoro ai router, IPv4 non fa riassemblare i frame a questi ma è computo dell'host destinatario. Per riassemblarli, però, il sistema necessita di sapere se:
+\begin{itemize}
+	\item i frame fanno parte di un frame più grande
+	\item se ha ricevuto tutti i frame
+	\item come questi debbano essere riassemblati
+\end{itemize} 
+Per risolvere questo problema, IPv4 setta i campi di identificazione, flag e offset di frammentazione nell'intestazione. Quando un datagram viene creato, il mittente mette un numero di identificazione, l'IP di arrivo e di destinazione all'interno dell'intestazione. Tipicamente, ogni volta che viene creato un datagram il numero di identificazione viene incrementato di 1. Quando il datagram viene frammentato, vengono inseriti tutti questi campi e il numero di identificazione è uguale per tutti i frammenti, in questo modo il ricevente sa quando più frame fanno parte dello stesso frame originale. \\
+Poichè IP non è affidabile, quindi affinchè il ricevente sappia di aver effettivamente ricevuto l'ultimo frammento, il flag di questo è impostato a 0, mentre tutti gli altri hanno flag uguale a 1. In più l'offset permette di capire se il frammento è all'interno del datagram IP originale. \\
+Per fare un esempio, immaginiamo che un datagram di 4000 byte (20 byte di intestazione più 3980 byte di dati) arrivi ad un router e debba essere inoltrato su di un link con MTU di 1500 byte. Dobbiamo quindi frammentare il datagram in 3 frammenti. Supponiamo che il numero di identificazione sia 777. Le caratteristiche dei tre frammenti sono descritti dall'immagine.
+\begin{figure}
+	\includegraphics[scale=0.6]{img/053.png}
+	\caption{Frammenti IP}
+\end{figure}
+Alla destinazione, i dati vengono passati al livello di trasporto solo dopo che lo strato di collegamento ha ricostruito i datagram IP. Se non arrivano completi vengono scartati. Nel caso venga usato TCP, allora ci penserà questo a occuparsi della ritrasmissione dei paccehtit mancanti.
+\subsubsection{Indirizzamento IPv4}
+Prima di parlare di indirizzamento chiariamo come è fatto un network. Un host, tipicamente, ha un solo link che lo collega al network, quando l'UP dell'host vuole mandare un datagram, lo fa usando questo link. Il confine tra host e link fisico è chiamato \textbf{interfaccia}. Ora, poichè un router deve ricevere da un link e mandare il frame verso un link di uscita, un router deve avere almeno due link a cui corrispondono due interfacce. Quindi un router ha multiple interfacce, una per ogni link. Poichè ogni host e router può mandare e ricevere datagram IP, IP richiede che ogni host e ogni interfaccia router abbia il proprio indirizzo IP. Quindi, un indirizzo IP è tecnicamente legato ad un'interfaccia. \\
+Ogni indirizzo IPv4 è lungo 32 bit, portando ad avere $2^{32}$ indirizzi IP possibili. QUesti indirizzi sono tipicamente scritti in \textbf{"notazione puntata decimale"} 
+
+\end{document}
