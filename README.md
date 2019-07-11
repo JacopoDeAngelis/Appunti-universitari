@@ -63,4 +63,3 @@ Viene fornito anche il package contentente il preambolo personalizzato utilizzat
 - [Cesare](https://github.com/csr/LaureaTriennale-Bicocca)
 
 Oppure andate direttamente su [BicoccaHub](https://bicoccahub.netlify.com/)
-
