@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/Arch Linux) (preloaded format=pdflatex 2019.7.2)  6 JUL 2019 17:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Arch Linux) (preloaded format=pdflatex 2019.8.18)  18 AUG 2019 21:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -23,16 +23,16 @@ File: size11.clo 2018/09/03 v1.4i Standard LaTeX file (size option)
 \bibindent=\dimen102
 )
 (/usr/share/texmf-dist/tex/generic/babel/babel.sty
-Package: babel 2018/11/13 3.27 The Babel package
+Package: babel 2019/04/03 3.29 The Babel package
 
 (/usr/share/texmf-dist/tex/generic/babel/switch.def
-File: switch.def 2018/11/13 3.27 Babel switching mechanism
+File: switch.def 2019/04/03 3.29 Babel switching mechanism
 )
 (/usr/share/texmf-dist/tex/generic/babel-italian/italian.ldf
 Language: italian 2019/01/05 v.1.4.01 Italian support for the babel system
 
 (/usr/share/texmf-dist/tex/generic/babel/babel.def
-File: babel.def 2018/11/13 3.27 Babel common definitions
+File: babel.def 2019/04/03 3.29 Babel common definitions
 \babel@savecnt=\count88
 \U@D=\dimen103
 
@@ -235,10 +235,6 @@ Package ifvtex Info: VTeX not detected.
 Package: intcalc 2016/05/16 v1.2 Expandable calculations with integers (HO)
 Package: ifpdf 2018/09/07 v3.3 Provides the ifpdf switch
 Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
-Package etexcmds Info: Could not find \expanded.
-(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
-(etexcmds)             that some package has redefined \expanded.
-(etexcmds)             In the latter case, load this package earlier.
 Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
 Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
 Package: pdftexcmds 2018/09/10 v0.29 Utility functions of pdfTeX for LuaTeX (HO
@@ -419,52 +415,52 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 24.
  [3] [4]
-<img/001.png, id=294, 539.76656pt x 470.50781pt>
+<img/001.png, id=324, 539.76656pt x 470.50781pt>
 File: img/001.png Graphic file (type png)
 <use img/001.png>
 Package pdftex.def Info: img/001.png  used on input line 73.
 (pdftex.def)             Requested size: 323.86243pt x 282.30685pt.
  [5 <./img/001.png>] [6]
-<img/002.png, id=305, 453.94594pt x 386.19281pt>
+<img/002.png, id=336, 453.94594pt x 386.19281pt>
 File: img/002.png Graphic file (type png)
 <use img/002.png>
 Package pdftex.def Info: img/002.png  used on input line 112.
 (pdftex.def)             Requested size: 272.36966pt x 231.71745pt.
-<img/003.png, id=306, 377.91188pt x 287.57437pt>
+<img/003.png, id=337, 377.91188pt x 287.57437pt>
 File: img/003.png Graphic file (type png)
 <use img/003.png>
 Package pdftex.def Info: img/003.png  used on input line 122.
 (pdftex.def)             Requested size: 226.74887pt x 172.54594pt.
  [7] [8 <./img/002.png> <./img/003.png>] [9]
-<img/004.png, id=326, 417.05812pt x 291.33844pt>
+<img/004.png, id=356, 417.05812pt x 291.33844pt>
 File: img/004.png Graphic file (type png)
 <use img/004.png>
 Package pdftex.def Info: img/004.png  used on input line 151.
 (pdftex.def)             Requested size: 250.2368pt x 174.8044pt.
-<img/005.png, id=327, 439.6425pt x 377.15906pt>
+<img/005.png, id=357, 439.6425pt x 377.15906pt>
 File: img/005.png Graphic file (type png)
 <use img/005.png>
 Package pdftex.def Info: img/005.png  used on input line 153.
 (pdftex.def)             Requested size: 263.78752pt x 226.29718pt.
  [10] [11 <./img/004.png> <./img/005.png>]
-<img/006.png, id=341, 506.6428pt x 413.29407pt>
+<img/006.png, id=371, 506.6428pt x 413.29407pt>
 File: img/006.png Graphic file (type png)
 <use img/006.png>
 Package pdftex.def Info: img/006.png  used on input line 178.
 (pdftex.def)             Requested size: 303.98802pt x 247.97835pt.
-<img/007.png, id=342, 405.76593pt x 161.85469pt>
+<img/007.png, id=372, 405.76593pt x 161.85469pt>
 File: img/007.png Graphic file (type png)
 <use img/007.png>
 Package pdftex.def Info: img/007.png  used on input line 193.
 (pdftex.def)             Requested size: 243.46143pt x 97.11354pt.
  [12 <./img/006.png>] [13 <./img/007.png>] [14]
-<img/008.png, id=365, 336.50719pt x 246.1697pt>
+<img/008.png, id=395, 336.50719pt x 246.1697pt>
 File: img/008.png Graphic file (type png)
 <use img/008.png>
 Package pdftex.def Info: img/008.png  used on input line 246.
 (pdftex.def)             Requested size: 201.90585pt x 147.70294pt.
  [15 <./img/008.png>] [16]
-<img/009.png, id=381, 584.1825pt x 601.4972pt>
+<img/009.png, id=411, 584.1825pt x 601.4972pt>
 File: img/009.png Graphic file (type png)
 <use img/009.png>
 Package pdftex.def Info: img/009.png  used on input line 272.
@@ -490,7 +486,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 278--285
  []
 
 [17] [18 <./img/009.png (PNG copy)>]
-<img/010.png, id=391, 642.90187pt x 309.40594pt>
+<img/010.png, id=421, 642.90187pt x 309.40594pt>
 File: img/010.png Graphic file (type png)
 <use img/010.png>
 Package pdftex.def Info: img/010.png  used on input line 291.
@@ -500,12 +496,12 @@ Overfull \hbox (25.7441pt too wide) in paragraph at lines 291--292
 [][] 
  []
 
-<img/011.png, id=392, 238.64156pt x 200.24812pt>
+<img/011.png, id=422, 238.64156pt x 200.24812pt>
 File: img/011.png Graphic file (type png)
 <use img/011.png>
 Package pdftex.def Info: img/011.png  used on input line 301.
 (pdftex.def)             Requested size: 143.18602pt x 120.1498pt.
-<img/012.png, id=393, 568.37344pt x 323.70938pt>
+<img/012.png, id=423, 568.37344pt x 323.70938pt>
 File: img/012.png Graphic file (type png)
 <use img/012.png>
 Package pdftex.def Info: img/012.png  used on input line 303.
@@ -527,7 +523,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 319--323
 
 [20 <./img/010.png (PNG copy)>] [21 <./img/011.png (PNG copy)> <./img/012.png (
 PNG copy)>]
-<img/014.png, id=410, 554.82281pt x 274.77657pt>
+<img/014.png, id=440, 554.82281pt x 274.77657pt>
 File: img/014.png Graphic file (type png)
 <use img/014.png>
 Package pdftex.def Info: img/014.png  used on input line 330.
@@ -537,7 +533,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 333--334
 
  []
 
-<img/015.png, id=411, 240.14719pt x 207.77625pt>
+<img/015.png, id=441, 240.14719pt x 207.77625pt>
 File: img/015.png Graphic file (type png)
 <use img/015.png>
 Package pdftex.def Info: img/015.png  used on input line 337.
@@ -552,7 +548,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 346--347
 
  []
 
-<img/016.png, id=423, 642.90187pt x 485.56406pt>
+<img/016.png, id=454, 642.90187pt x 485.56406pt>
 File: img/016.png Graphic file (type png)
 <use img/016.png>
 Package pdftex.def Info: img/016.png  used on input line 352.
@@ -567,7 +563,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 355--357
 
  []
 
-<img/017.png, id=424, 347.79938pt x 361.35pt>
+<img/017.png, id=455, 347.79938pt x 361.35pt>
 File: img/017.png Graphic file (type png)
 <use img/017.png>
 Package pdftex.def Info: img/017.png  used on input line 361.
@@ -578,7 +574,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 364--366
  []
 
 [24] [25 <./img/016.png (PNG copy)> <./img/017.png (PNG copy)>]
-<img/018.png, id=441, 605.26125pt x 553.31718pt>
+<img/018.png, id=471, 605.26125pt x 553.31718pt>
 File: img/018.png Graphic file (type png)
 <use img/018.png>
 Package pdftex.def Info: img/018.png  used on input line 373.
@@ -589,7 +585,7 @@ Overfull \hbox (3.15953pt too wide) in paragraph at lines 373--374
  []
 
 [26 <./img/018.png (PNG copy)>] [27]
-<img/019.png, id=452, 647.41875pt x 912.40875pt>
+<img/019.png, id=482, 647.41875pt x 912.40875pt>
 File: img/019.png Graphic file (type png)
 <use img/019.png>
 Package pdftex.def Info: img/019.png  used on input line 395.
@@ -599,17 +595,17 @@ Overfull \hbox (28.45424pt too wide) in paragraph at lines 395--396
 [][] 
  []
 
-<img/020.png, id=453, 600.74437pt x 440.39531pt>
+<img/020.png, id=483, 600.74437pt x 440.39531pt>
 File: img/020.png Graphic file (type png)
 <use img/020.png>
 Package pdftex.def Info: img/020.png  used on input line 401.
 (pdftex.def)             Requested size: 360.4494pt x 264.23921pt.
-<img/021.png, id=454, 595.47469pt x 466.74374pt>
+<img/021.png, id=484, 595.47469pt x 466.74374pt>
 File: img/021.png Graphic file (type png)
 <use img/021.png>
 Package pdftex.def Info: img/021.png  used on input line 408.
 (pdftex.def)             Requested size: 357.28755pt x 280.0484pt.
-<img/022.png, id=455, 654.19406pt x 771.63281pt>
+<img/022.png, id=485, 654.19406pt x 771.63281pt>
 File: img/022.png Graphic file (type png)
 <use img/022.png>
 Package pdftex.def Info: img/022.png  used on input line 429.
@@ -625,7 +621,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 425--432
  []
 
 [28] [29 <./img/019.png (PNG copy)>]
-<img/023.png, id=466, 654.94687pt x 222.07968pt>
+<img/023.png, id=496, 654.94687pt x 222.07968pt>
 File: img/023.png Graphic file (type png)
 <use img/023.png>
 Package pdftex.def Info: img/023.png  used on input line 441.
@@ -635,7 +631,7 @@ Overfull \hbox (32.97116pt too wide) in paragraph at lines 441--442
  [] 
  []
 
-<img/024.png, id=467, 612.78937pt x 653.44125pt>
+<img/024.png, id=497, 612.78937pt x 653.44125pt>
 File: img/024.png Graphic file (type png)
 <use img/024.png>
 Package pdftex.def Info: img/024.png  used on input line 443.
@@ -647,7 +643,7 @@ Overfull \hbox (7.67645pt too wide) in paragraph at lines 443--444
 
 [30 <./img/020.png (PNG copy)>] [31 <./img/021.png (PNG copy)>] [32 <./img/022.
 png (PNG copy)>]
-<img/025.png, id=484, 640.64343pt x 129.48375pt>
+<img/025.png, id=514, 640.64343pt x 129.48375pt>
 File: img/025.png Graphic file (type png)
 <use img/025.png>
 Package pdftex.def Info: img/025.png  used on input line 455.
@@ -657,7 +653,7 @@ Overfull \hbox (24.38902pt too wide) in paragraph at lines 455--456
 [][] 
  []
 
-<img/026.png, id=485, 630.10406pt x 421.575pt>
+<img/026.png, id=515, 630.10406pt x 421.575pt>
 File: img/026.png Graphic file (type png)
 <use img/026.png>
 Package pdftex.def Info: img/026.png  used on input line 467.
@@ -667,19 +663,19 @@ Overfull \hbox (18.06535pt too wide) in paragraph at lines 467--468
 [][] 
  []
 
-<img/027.png, id=486, 422.32782pt x 270.25969pt>
+<img/027.png, id=516, 422.32782pt x 270.25969pt>
 File: img/027.png Graphic file (type png)
 <use img/027.png>
 Package pdftex.def Info: img/027.png  used on input line 477.
 (pdftex.def)             Requested size: 253.39864pt x 162.15706pt.
 [33] [34 <./img/023.png (PNG copy)> <./img/024.png (PNG copy)>] [35 <./img/025.
 png (PNG copy)> <./img/026.png (PNG copy)> <./img/027.png (PNG copy)>]
-<img/028.png, id=504, 493.845pt x 298.716pt>
+<img/028.png, id=534, 493.845pt x 298.716pt>
 File: img/028.png Graphic file (type png)
 <use img/028.png>
 Package pdftex.def Info: img/028.png  used on input line 485.
 (pdftex.def)             Requested size: 296.30928pt x 179.23097pt.
-<img/029.png, id=506, 654.94687pt x 612.03656pt>
+<img/029.png, id=536, 654.94687pt x 612.03656pt>
 File: img/029.png Graphic file (type png)
 <use img/029.png>
 Package pdftex.def Info: img/029.png  used on input line 487.
@@ -693,13 +689,13 @@ Overfull \hbox (32.97116pt too wide) in paragraph at lines 487--488
 LaTeX Warning: Float too large for page by 14.58412pt on input line 489.
 
 [36] [37 <./img/028.PNG> <./img/029.png (PNG copy)>]
-<img/030.png, id=519, 539.01375pt x 225.84375pt>
+<img/030.png, id=549, 539.01375pt x 225.84375pt>
 File: img/030.png Graphic file (type png)
 <use img/030.png>
 Package pdftex.def Info: img/030.png  used on input line 507.
 (pdftex.def)             Requested size: 323.41074pt x 135.50728pt.
  [38 <./img/030.png (PNG copy)>]
-<img/031.png, id=525, 424.58624pt x 393.72093pt>
+<img/031.png, id=555, 424.58624pt x 393.72093pt>
 File: img/031.png Graphic file (type png)
 <use img/031.png>
 Package pdftex.def Info: img/031.png  used on input line 515.
@@ -710,7 +706,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 535--538
  []
 
 [40]
-<img/032.png, id=537, 646.66594pt x 393.72093pt>
+<img/032.png, id=567, 646.66594pt x 393.72093pt>
 File: img/032.png Graphic file (type png)
 <use img/032.png>
 Package pdftex.def Info: img/032.png  used on input line 557.
@@ -721,12 +717,12 @@ Overfull \hbox (28.00255pt too wide) in paragraph at lines 557--558
  []
 
 [41 <./img/032.png (PNG copy)>]
-<img/033.png, id=543, 513.41812pt x 443.40656pt>
+<img/033.png, id=573, 513.41812pt x 443.40656pt>
 File: img/033.png Graphic file (type png)
 <use img/033.png>
 Package pdftex.def Info: img/033.png  used on input line 574.
 (pdftex.def)             Requested size: 308.05324pt x 266.04597pt.
-<img/034.png, id=544, 645.16031pt x 319.1925pt>
+<img/034.png, id=574, 645.16031pt x 319.1925pt>
 File: img/034.png Graphic file (type png)
 <use img/034.png>
 Package pdftex.def Info: img/034.png  used on input line 582.
@@ -737,22 +733,22 @@ Overfull \hbox (27.09917pt too wide) in paragraph at lines 582--583
  []
 
 [42 <./img/033.png (PNG copy)>] [43 <./img/034.png (PNG copy)>] [44]
-<img/035.png, id=563, 511.15968pt x 408.02437pt>
+<img/035.png, id=594, 511.15968pt x 408.02437pt>
 File: img/035.png Graphic file (type png)
 <use img/035.png>
 Package pdftex.def Info: img/035.png  used on input line 631.
 (pdftex.def)             Requested size: 306.69817pt x 244.81651pt.
-<img/036.png, id=564, 395.22656pt x 453.94594pt>
+<img/036.png, id=595, 395.22656pt x 453.94594pt>
 File: img/036.png Graphic file (type png)
 <use img/036.png>
 Package pdftex.def Info: img/036.png  used on input line 638.
 (pdftex.def)             Requested size: 237.13776pt x 272.36966pt.
-<img/037.png, id=565, 497.60907pt x 385.44pt>
+<img/037.png, id=596, 497.60907pt x 385.44pt>
 File: img/037.png Graphic file (type png)
 <use img/037.png>
 Package pdftex.def Info: img/037.png  used on input line 643.
 (pdftex.def)             Requested size: 298.56773pt x 231.26578pt.
-<img/038.png, id=566, 497.60907pt x 365.86688pt>
+<img/038.png, id=597, 497.60907pt x 365.86688pt>
 File: img/038.png Graphic file (type png)
 <use img/038.png>
 Package pdftex.def Info: img/038.png  used on input line 645.
@@ -760,7 +756,7 @@ Package pdftex.def Info: img/038.png  used on input line 645.
  [45]
 [46 <./img/035.png (PNG copy)> <./img/036.png (PNG copy)>] [47 <./img/037.png (
 PNG copy)> <./img/038.png (PNG copy)>]
-<img/039.png, id=584, 647.41875pt x 262.73157pt>
+<img/039.png, id=614, 647.41875pt x 262.73157pt>
 File: img/039.png Graphic file (type png)
 <use img/039.png>
 Package pdftex.def Info: img/039.png  used on input line 655.
@@ -770,7 +766,7 @@ Overfull \hbox (28.45424pt too wide) in paragraph at lines 655--656
 [][] 
  []
 
-<img/040.png, id=585, 557.83406pt x 258.21469pt>
+<img/040.png, id=615, 557.83406pt x 258.21469pt>
 File: img/040.png Graphic file (type png)
 <use img/040.png>
 Package pdftex.def Info: img/040.png  used on input line 662.
@@ -786,7 +782,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 658--669
  []
 
 [48 <./img/039.png (PNG copy)>]
-<img/041.png, id=592, 657.95813pt x 302.63063pt>
+<img/041.png, id=622, 657.95813pt x 302.63063pt>
 File: img/041.png Graphic file (type png)
 <use img/041.png>
 Package pdftex.def Info: img/041.png  used on input line 671.
@@ -797,13 +793,13 @@ Overfull \hbox (34.77792pt too wide) in paragraph at lines 671--672
  []
 
 [49 <./img/040.png (PNG copy)>]
-<img/042.png, id=601, 553.31718pt x 255.95625pt>
+<img/042.png, id=631, 553.31718pt x 255.95625pt>
 File: img/042.png Graphic file (type png)
 <use img/042.png>
 Package pdftex.def Info: img/042.png  used on input line 683.
 (pdftex.def)             Requested size: 331.99286pt x 153.57492pt.
  [50 <./img/041.png (PNG copy)>]
-<img/043.png, id=608, 616.55344pt x 502.87875pt>
+<img/043.png, id=638, 616.55344pt x 502.87875pt>
 File: img/043.png Graphic file (type png)
 <use img/043.png>
 Package pdftex.def Info: img/043.png  used on input line 693.
@@ -813,14 +809,14 @@ Overfull \hbox (9.9349pt too wide) in paragraph at lines 693--694
 [][] 
  []
 
-<img/044.png, id=609, 315.42844pt x 224.33812pt>
+<img/044.png, id=639, 315.42844pt x 224.33812pt>
 File: img/044.png Graphic file (type png)
 <use img/044.png>
 Package pdftex.def Info: img/044.png  used on input line 701.
 (pdftex.def)             Requested size: 189.25851pt x 134.6039pt.
 [51 <./img/042.png (PNG copy)>] [52 <./img/043.png (PNG copy)>] [53 <./img/044.
 png (PNG copy)>] [54]
-<img/045.png, id=630, 446.41782pt x 253.69781pt>
+<img/045.png, id=660, 446.41782pt x 253.69781pt>
 File: img/045.png Graphic file (type png)
 <use img/045.png>
 Package pdftex.def Info: img/045.png  used on input line 744.
@@ -833,25 +829,25 @@ Overfull \hbox (10.0592pt too wide) in paragraph at lines 757--758
 T1/cmr/m/n/10.95 2$\T1/cmr/m/n/10.95 ,
  []
 
-<img/046.png, id=638, 408.02437pt x 238.64156pt>
+<img/046.png, id=668, 408.02437pt x 238.64156pt>
 File: img/046.png Graphic file (type png)
 <use img/046.png>
 Package pdftex.def Info: img/046.png  used on input line 761.
 (pdftex.def)             Requested size: 244.81651pt x 143.18602pt.
 [56]
-<img/047.png, id=645, 447.92343pt x 202.50656pt>
+<img/047.png, id=675, 447.92343pt x 202.50656pt>
 File: img/047.png Graphic file (type png)
 <use img/047.png>
 Package pdftex.def Info: img/047.png  used on input line 774.
 (pdftex.def)             Requested size: 268.75612pt x 121.50485pt.
-<img/048.png, id=646, 385.44pt x 348.55219pt>
+<img/048.png, id=676, 385.44pt x 348.55219pt>
 File: img/048.png Graphic file (type png)
 <use img/048.png>
 Package pdftex.def Info: img/048.png  used on input line 779.
 (pdftex.def)             Requested size: 231.26578pt x 209.1329pt.
  [57 <./img/046.png (PNG copy)>] [58 <./img/047.png (PNG copy)> <./img/048.png 
 (PNG copy)>]
-<img/049.png, id=659, 629.35126pt x 648.17157pt>
+<img/049.png, id=689, 629.35126pt x 648.17157pt>
 File: img/049.png Graphic file (type png)
 <use img/049.png>
 Package pdftex.def Info: img/049.png  used on input line 793.
@@ -862,13 +858,13 @@ Overfull \hbox (17.61366pt too wide) in paragraph at lines 793--794
  []
 
 [59] [60 <./img/049.png (PNG copy)>]
-<img/050.png, id=671, 469.755pt x 441.90094pt>
+<img/050.png, id=701, 469.755pt x 441.90094pt>
 File: img/050.png Graphic file (type png)
 <use img/050.png>
 Package pdftex.def Info: img/050.png  used on input line 808.
 (pdftex.def)             Requested size: 281.85518pt x 265.14261pt.
  [61 <./img/050.png (PNG copy)>]
-<img/051.png, id=678, 611.28375pt x 207.02344pt>
+<img/051.png, id=708, 611.28375pt x 207.02344pt>
 File: img/051.png Graphic file (type png)
 <use img/051.png>
 Package pdftex.def Info: img/051.png  used on input line 832.
@@ -879,13 +875,13 @@ Overfull \hbox (6.77307pt too wide) in paragraph at lines 832--833
  []
 
 [62]
-<img/052.png, id=684, 432.86719pt x 308.65312pt>
+<img/052.png, id=715, 432.86719pt x 308.65312pt>
 File: img/052.png Graphic file (type png)
 <use img/052.png>
 Package pdftex.def Info: img/052.png  used on input line 840.
 (pdftex.def)             Requested size: 259.7223pt x 185.1933pt.
  [63 <./img/051.png (PNG copy)> <./img/052.png (PNG copy)>] [64]
-<img/053.png, id=696, 661.72218pt x 217.5628pt>
+<img/053.png, id=726, 661.72218pt x 217.5628pt>
 File: img/053.png Graphic file (type png)
 <use img/053.png>
 Package pdftex.def Info: img/053.png  used on input line 870.
@@ -895,42 +891,142 @@ Overfull \hbox (37.03638pt too wide) in paragraph at lines 870--871
 [][] 
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 875.
-[65 <./img/053.png (PNG copy)>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 875.
+<img/054.png, id=727, 703.87968pt x 487.8225pt>
+File: img/054.png Graphic file (type png)
+<use img/054.png>
+Package pdftex.def Info: img/054.png  used on input line 880.
+(pdftex.def)             Requested size: 422.33107pt x 292.69576pt.
+
+Overfull \hbox (62.33107pt too wide) in paragraph at lines 880--881
+[][] 
+ []
+
+<img/055.png, id=728, 542.77782pt x 576.65437pt>
+File: img/055.png Graphic file (type png)
+<use img/055.png>
+Package pdftex.def Info: img/055.png  used on input line 885.
+(pdftex.def)             Requested size: 325.6692pt x 345.99529pt.
+[65 <./img/053.png (PNG copy)>] [66 <./img/054.png (PNG copy)>] [67 <./img/055.
+png (PNG copy)>]
+Overfull \hbox (18.95097pt too wide) in paragraph at lines 897--898
+[]\T1/cmr/bx/n/10.95 Blocco del-l'I-SP\T1/cmr/m/n/10.95 : 200.23.16.0/20 ($[]$0
+000 00000000) 
+ []
+
+
+Overfull \hbox (29.26042pt too wide) in paragraph at lines 898--899
+[]\T1/cmr/bx/n/10.95 Organizzazione 0\T1/cmr/m/n/10.95 : 20023.16.0/23 ($[]$0 0
+0000000) 
+ []
+
+
+Overfull \hbox (29.26042pt too wide) in paragraph at lines 899--900
+[]\T1/cmr/bx/n/10.95 Organizzazione 1\T1/cmr/m/n/10.95 : 20023.18.0/23 ($[]$0 0
+0000000) 
+ []
+
+
+Overfull \hbox (29.26042pt too wide) in paragraph at lines 900--901
+[]\T1/cmr/bx/n/10.95 Organizzazione 2\T1/cmr/m/n/10.95 : 20023.20.0/23 ($[]$0 0
+0000000) 
+ []
+
+
+Overfull \hbox (29.26042pt too wide) in paragraph at lines 902--903
+[]\T1/cmr/bx/n/10.95 Organizzazione 7\T1/cmr/m/n/10.95 : 20023.30.0/23 ($[]$0 0
+0000000) 
+ []
+
+<img/056.png, id=745, 767.11594pt x 570.63188pt>
+File: img/056.png Graphic file (type png)
+<use img/056.png>
+Package pdftex.def Info: img/056.png  used on input line 912.
+(pdftex.def)             Requested size: 460.27312pt x 342.38177pt.
+
+Overfull \hbox (100.27312pt too wide) in paragraph at lines 912--913
+[][] 
+ []
+
+<img/057.png, id=746, 374.90062pt x 499.11469pt>
+File: img/057.png Graphic file (type png)
+<use img/057.png>
+Package pdftex.def Info: img/057.png  used on input line 918.
+(pdftex.def)             Requested size: 224.94211pt x 299.47112pt.
+[68] [69 <./img/056.png (PNG copy)>] [70 <./img/057.png (PNG copy)>]
+<img/058.png, id=764, 987.69pt x 466.74374pt>
+File: img/058.png Graphic file (type png)
+<use img/058.png>
+Package pdftex.def Info: img/058.png  used on input line 932.
+(pdftex.def)             Requested size: 592.61858pt x 280.0484pt.
+
+Overfull \hbox (232.61858pt too wide) in paragraph at lines 932--933
+[][] 
+ []
+
+[71] [72 <./img/058.png (PNG copy)>]
+<img/059.png, id=777, 428.35031pt x 288.3272pt>
+File: img/059.png Graphic file (type png)
+<use img/059.png>
+Package pdftex.def Info: img/059.png  used on input line 946.
+(pdftex.def)             Requested size: 257.01216pt x 172.99763pt.
+ [73] [74 <./img/059.png (PNG copy)>]
+<img/060.png, id=789, 1087.06125pt x 547.2947pt>
+File: img/060.png Graphic file (type png)
+<use img/060.png>
+Package pdftex.def Info: img/060.png  used on input line 976.
+(pdftex.def)             Requested size: 434.81679pt x 218.91399pt.
+
+Overfull \hbox (74.81679pt too wide) in paragraph at lines 976--977
+[][] 
+ []
+
+<img/061.png, id=790, 877.02657pt x 255.20343pt>
+File: img/061.png Graphic file (type png)
+<use img/061.png>
+Package pdftex.def Info: img/061.png  used on input line 978.
+(pdftex.def)             Requested size: 394.65831pt x 114.84047pt.
+
+Overfull \hbox (34.65831pt too wide) in paragraph at lines 978--979
+[][] 
+ []
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 981.
+[75] [76 <./img/060.png (PNG copy)> <./img/061.png (PNG copy)>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 981.
  (./Reti.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 875.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 875.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 981.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 981.
 Package rerunfilecheck Info: File `Reti.out' has not changed.
-(rerunfilecheck)             Checksum: ACE6829B0C922D82DFD7BEE77D4837BB;4579.
+(rerunfilecheck)             Checksum: E6004EFA6A15061F71D211303C68C978;5067.
  ) 
 Here is how much of TeX's memory you used:
- 7719 strings out of 492616
- 107839 string characters out of 6135178
- 217186 words of memory out of 5000000
- 11270 multiletter control sequences out of 15000+600000
+ 7800 strings out of 492623
+ 108882 string characters out of 6135669
+ 218306 words of memory out of 5000000
+ 11314 multiletter control sequences out of 15000+600000
  18642 words of font info for 47 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 30i,8n,37p,977b,488s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 30i,8n,37p,976b,490s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/font
 s/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/
 amsfonts/cm/cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
 8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/sh
 are/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texmf-dist/
-fonts/type1/public/cm-super/sfbi1095.pfb></usr/share/texmf-dist/fonts/type1/pub
-lic/cm-super/sfbx1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sf
-bx1200.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></us
-r/share/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/share/texmf-d
-ist/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf-dist/fonts/type1
-/public/cm-super/sfrm0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-supe
-r/sfrm1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-</usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/tex
-mf-dist/fonts/type1/public/cm-super/sfti1095.pfb>
-Output written on Reti.pdf (65 pages, 10262722 bytes).
+fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-dist/fonts/type1/pub
+lic/cm-super/sfbi1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sf
+bx1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200.pfb></us
+r/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf-d
+ist/fonts/type1/public/cm-super/sfrm0600.pfb></usr/share/texmf-dist/fonts/type1
+/public/cm-super/sfrm0800.pfb></usr/share/texmf-dist/fonts/type1/public/cm-supe
+r/sfrm0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb>
+</usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/tex
+mf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/share/texmf-dist/fonts/t
+ype1/public/cm-super/sfti1095.pfb>
+Output written on Reti.pdf (76 pages, 11027854 bytes).
 PDF statistics:
- 805 PDF objects out of 1000 (max. 8388607)
- 661 compressed objects within 7 object streams
- 207 named destinations out of 1000 (max. 500000)
- 677 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 916 PDF objects out of 1000 (max. 8388607)
+ 751 compressed objects within 8 object streams
+ 237 named destinations out of 1000 (max. 500000)
+ 765 words of extra memory for PDF output out of 10000 (max. 10000000)
 

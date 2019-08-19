@@ -44,9 +44,15 @@
 \BOOKMARK [2][-]{subsection.2.7}{Controllo della congestione del TCP}{section.2}% 44
 \BOOKMARK [2][-]{subsection.2.8}{Controllo della congestione del TCP}{section.2}% 45
 \BOOKMARK [3][-]{subsubsection.2.8.1}{Fairness}{subsection.2.8}% 46
-\BOOKMARK [1][-]{section.3}{Strato di rete e instradamento}{}% 47
+\BOOKMARK [1][-]{section.3}{Strato di rete}{}% 47
 \BOOKMARK [2][-]{subsection.3.1}{Introduzione}{section.3}% 48
 \BOOKMARK [3][-]{subsubsection.3.1.1}{Forwarding e Routing}{subsection.3.1}% 49
 \BOOKMARK [3][-]{subsubsection.3.1.2}{Modelli di servizio di network}{subsection.3.1}% 50
 \BOOKMARK [2][-]{subsection.3.2}{Il protocollo di internet \(IP\): forwarding e indirizzamento \(addressing\) in internet}{section.3}% 51
 \BOOKMARK [3][-]{subsubsection.3.2.1}{Formato dei datagrammi IPv4}{subsection.3.2}% 52
+\BOOKMARK [3][-]{subsubsection.3.2.2}{Frammentazione dei datagrammi IPv4}{subsection.3.2}% 53
+\BOOKMARK [3][-]{subsubsection.3.2.3}{Indirizzamento IPv4}{subsection.3.2}% 54
+\BOOKMARK [3][-]{subsubsection.3.2.4}{NAT \(network address translation}{subsection.3.2}% 55
+\BOOKMARK [1][-]{section.4}{Livello di rete: piano di controllo}{}% 56
+\BOOKMARK [2][-]{subsection.4.1}{Algoritmi di instradamento}{section.4}% 57
+\BOOKMARK [3][-]{subsubsection.4.1.1}{Instradamento link-state \(LS\)}{subsection.4.1}% 58

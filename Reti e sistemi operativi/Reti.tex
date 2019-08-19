@@ -787,7 +787,7 @@ Molte applicazioni multimediali, come la telefonia su internet e le video confer
 \paragraph{Fairness e connessioni TCP in parallelo}
 TCP può non essere fair se l'applicazione sfrutta più connessioni TCP in parallelo. Per esempio i browser usano più connessioni per caricare le pagine. Per fare un esempio, immaginiamo che ci siano 9 connessioni TCP singole, tutte avranno R/9 di velocità di trasmissione. Se si aggiungesse una nuova applicazione diventerebbero 10, portando la velocità a R/10 per tutti. Se questa nuova applicazione, però, usasse 11 connessioni parallele, riuscirebbe a prendersi R/2 della banda possibile.
 
-\section{Strato di rete e instradamento}
+\section{Strato di rete}
 \subsection{Introduzione}
 \begin{figure}
 	\includegraphics[scale=0.6]{img/049.png}
@@ -855,7 +855,7 @@ I campi chiave di un datagram IPv4 sono:
 	\item \textbf{Opzionali}: permettono l'estensione dell'header
 	\item \textbf{Dati} (payload)
 \end{itemize}
-\paragraph{Frammentazione dei datagrammi IPv4}
+\subsubsection{Frammentazione dei datagrammi IPv4}
 Il massimo ammontare di dati che un frame del livello di collegamento può trasportare è chiamato \textbf{"unita massima di trasmissione"} \textit{(MTU)}. Poichè ogni datagram IP è incapsulato in un frame del livello di collegamento per il trasporto da un router all'altro, allora l'MTU del protocollo del livello di collegamento pone un limite alla lunghezza del datagram IP. Il vero problema, però, non è questo limite ma il fatto che i vari router sul percorso possano utilizzare differenti protocolli con differenti MTU. Supponiamo che ci arrivi un pacchetto di data dimensione e che questo debba essere indirizzato verso un altro link ma, problema, questo ha un MTU inferiore rispetto a quello in entrata. Che fare? La soluzione è la frammentazione dei dati nel datagram IP in due più piccoli datagram IP, ognuno incapsulato in un datagram più piccolo in un frame separato. Ognuno di questi datagram è chiamato \textbf{frammento}. \\
 Per non aggiungere lavoro ai router, IPv4 non fa riassemblare i frame a questi ma è computo dell'host destinatario. Per riassemblarli, però, il sistema necessita di sapere se:
 \begin{itemize}
@@ -872,7 +872,111 @@ Per fare un esempio, immaginiamo che un datagram di 4000 byte (20 byte di intest
 \end{figure}
 Alla destinazione, i dati vengono passati al livello di trasporto solo dopo che lo strato di collegamento ha ricostruito i datagram IP. Se non arrivano completi vengono scartati. Nel caso venga usato TCP, allora ci penserà questo a occuparsi della ritrasmissione dei paccehtit mancanti.
 \subsubsection{Indirizzamento IPv4}
-Prima di parlare di indirizzamento chiariamo come è fatto un network. Un host, tipicamente, ha un solo link che lo collega al network, quando l'UP dell'host vuole mandare un datagram, lo fa usando questo link. Il confine tra host e link fisico è chiamato \textbf{interfaccia}. Ora, poichè un router deve ricevere da un link e mandare il frame verso un link di uscita, un router deve avere almeno due link a cui corrispondono due interfacce. Quindi un router ha multiple interfacce, una per ogni link. Poichè ogni host e router può mandare e ricevere datagram IP, IP richiede che ogni host e ogni interfaccia router abbia il proprio indirizzo IP. Quindi, un indirizzo IP è tecnicamente legato ad un'interfaccia. \\
-Ogni indirizzo IPv4 è lungo 32 bit, portando ad avere $2^{32}$ indirizzi IP possibili. QUesti indirizzi sono tipicamente scritti in \textbf{"notazione puntata decimale"} 
+Generalmente un host ha un solo colelgamento con la rete; quando l'implementazione di IP dell'host vuole inviare un datagramma, lo fa su tale collegamento. Il confine tra host e collegamento fisico viene detto interfaccia. \\
+Differentemente, poichè un router deve poter ricevere ed inviare datagrammi, deve avere almeno due collegamenti. Infatti il router presenta un'interfaccia per ogni collegamento. \\
+IP richiede che ogni interfaccia abbia un proprio indirizzo, pertanto l'indirizzo IP è associato all'interfaccia e non all'host. Gli indirizzi IP sono lunghi 32 bit (4 byte) e quindi si possono avere $2^{32}$ indirizzi, circa 4 miliardi. Tali indirizzi sono solitamente scritti in notazione decimale puntata, ovvero dove i byte sono separati da un singolo punto. \\
+Ogni interfaccia di host e router di internet ha un indirizzo IP globalmente univoco (eccetto se gestite da NAT, cosa che vedremo poi). Una parte dell'indirizzo di un'interfaccia è determinata dalla sottorete cui è collegata.
+\begin{figure}
+	\includegraphics[scale=0.6]{img/054.png}
+	\caption{Indirizzi delle interfacce e sottoreti}
+\end{figure}
+La figura mostra un router con tre interfacce (223.1.1.4, 223.1.2.9, 223.1.3.27) che connette sette host. I tre a sinistra e l'interfaccia del router cui sono connessi hanno un indirizzo IP nella forma 233.1.1.xxx, ossia i 24 bit a sinistra sono identici a quelli della loro interfaccia. Per IP, questa rete che interconnette tre interfacce di host e l'interfaccia di un router forma una \textbf{sottorete}. IP ha quindi assegnato a questa sottorete l'indirizzo 223.1.1.0/24, dove la notazione /24 è detta \textbf{maschera di sottorete (subnet mask)} e indica che i 24 bit più a sinistra dell'indrizzo definiscono l'indirizzo della sottorete. Di conseguenza la sottorente è composta da tre interfacce di host e una di router (numerata per ultima). \\
+\begin{figure}
+	\includegraphics[scale=0.6]{img/055.png}
+	\caption{Tre router che interconnettono sei sottoreti}
+\end{figure}
+Prendiamo il secondo caso dove abbiamo 3 router connessi da collegamenti punto a punto. Ciascuno ha tre interfacce (due per collegarsi agli altri router e una per la sottorete). Abbiamo quindi altre sottoreti che collegano i router tra di loro (ad esempio tra R1 ed R2 c'è la sottorete 223.1.9.xxx/24).
+\begin{center}
+	\textit{Per determinare le sottoreti si sgancino le interfacce da host e router in maniera tale da creare isole di reti isolate delimitate dalle interfacce. Ognuna di queste reti isolate viene detta sottorete (subnet)}
+\end{center}
+Cerchiamo di comprendere il meccanismo generale di assegnazione degli indirizzi internet: \textbf{classless interdomain routing (CIDR)}. CIDR generalizza la nozione di indirizzamento di sottorete, dividendo l'indirizzo in due parti e mantiene la forma decimale a.b.c.d/x, dove x indica il numero di bit della maschera di sottorete. \\
+I primi x bit costituiscono la porzione di rete dell'indirizzo IP e sono spesso detti \textbf{prefisso}. A un'organizzazione viene generalmente assegnato un blocco di indirizzi contigui con un prefisso comune. I rimanenti $32-x$ bit di un indirizzo possono essere usati per distinguere i dispositivi interni dell'organizzazione, che hanno tutti lo stesso prefisso di rete. È importante segnalare che ogni sottorete ha un altro indirizzo IP, il cosiddetto indirizzo \textbf{IP broadcast} 255.255.255.255 (o comunque l'ultimo indirizzo possibile per la sottorete). Quando un host emette un datagramma con destinazione 255.255.255.255 il messaggio viene ricevuto da tutti gli host.
+\paragraph{Come ottenere un blocco di indirizzi}
+Un provider al quale sia stato allocato, ad esempio, il blocco di indirizzi 200.23.16.0/20 dal proprio ISP, potrebbe a sua volta dividerlo in 8 blocchi uguali di indirizzi continue e fornirne uno a ciascuna delle otto organizzazioni che supporta:
+\begin{itemize}
+	\item \textbf{Blocco dell'ISP}: 200.23.16.0/20 (\underline{11001000 00010111 0001}0000 00000000)
+	\item \textbf{Organizzazione 0}: 20023.16.0/23 (\underline{11001000 00010111 0001\textbf{000}}0 00000000)
+	\item \textbf{Organizzazione 1}: 20023.18.0/23 (\underline{11001000 00010111 0001\textbf{001}}0 00000000)
+	\item \textbf{Organizzazione 2}: 20023.20.0/23 (\underline{11001000 00010111 0001\textbf{010}}0 00000000)
+	\item ...
+	\item \textbf{Organizzazione 7}: 20023.30.0/23 (\underline{11001000 00010111 0001\textbf{111}}0 00000000)
+\end{itemize}
+Quindi prima l'ISP ha dato un blocco con maschera da 20 bit, poi la rete ha riservato altri 3 bit (8 organizzazioni) alla divisione interna. 
+
+\paragraph{Come ottenere l'indirizzo di un host: DHCP}
+Mentre gli indirizzi delle interfacce di rete dei router sono configurati manualmente, generalmente per gli host si utilizza il \textbf{Dynamic Host Configuration Protocol (DHCP)}. DHCP consente a un host di ottenere un indirizzo IP in modo automatico, così come di apprendere informazioni aggiuntive, quali la maschera di sottorete, l'indirizzo del router per uscire dalla sotterete (spesso detto \textit{router di default} o \textit{gateway}) e l'indirizzo del suo DNS server locale. L'amministratore può decidere che un host riceva un indirizzo IP persistente, oppure un indirizzo IP temporaneo. \\
+DHCP viene detto protocollo plug-and-play per la sua camapcità di automatizzare la connessione degli host alla rete. \\
+Per capire le sue potenzialità immaginiamo uno studente che si connette da casa, poi in biblioteca e infine in classe. In ogni caso avrà bisogno di un nuovo indirizzo IP. DHCP è adatto a questa situazione in cui molti utenti vanno e vengono e gli indirizzi sono necessari per una quantità limitata di tempo. \\
+DHCP è un protocollo client-server. Nel caso più semplice ogni sottorete dispone di un server DHCP per quella rete, altrimenti serve un agente di relay DHCP (generalmente interno al router) che conosca l'indirizzo di un server DHCP per quella rete.
+\begin{figure}
+	\includegraphics[scale=0.6]{img/056.png}
+	\caption{Scenario del protocollo DHCP client-server}
+\end{figure}
+Nella seguente trattazione supporremo che nella sottorete sia disponibile un DHCP server.
+Per i nuovi host il protocollo DHCP si articola in quattro punti:
+\begin{figure}
+	\includegraphics[scale=0.6]{img/057.png}
+	\caption{Interazione client-server DHCP. yiaddr = your internet address}
+\end{figure}
+\begin{enumerate}
+	\item \textbf{Individuazione del server DHCP}: qeusta operazione viene svolta tramite un messaggio \textbf{DHCP discover}, che un client invia in un pacchetto UDP attraverso la porta 67. Il pacchetto UDP viene incapsulato in un datragramma IP che verrà inviato all'indirizzo di broadcast 255.255.255.255 con indirizzo di origine 0.0.0.0 (che sta a significare "questo router"), in questo modo il datagramma verrà inviato a tutti i nodi collegati alla sottorete.
+	\item \textbf{Offerta del server DHCP}: Un server DHCP che riceve un messaggio di identificazione, risponde al client con un messaggio \textbf{DHCP offer}, che viene inviato in broadcast a gtutti i nodi della sottorete (sempre indirizzo di invio 255.255.255.255). Poichè potrebbero esserci più server DHCP, l'host potrebbe ottenere più offerte. Ciascun messaggio di offerta contiene l'ID di transazione del messaggio ricevuto, l'indirizzo IP proposto, la maschera di sottorete e la durata della connessione (\textbf{leaes time}) dell'indirizzo IP (il lasso di tempo durante il quale l'indirizzo IP sarà valido). Tale valore solitamente dura ore o giorni.
+	\item \textbf{Richiesta DHCP}: il client appena collegato sceglie tra le offerte e risponderà con un messaggio DHCP request che riposta i parametri di configurazione.
+	\item \textbf{Conferma DHCP}: il server risponde con un messaggio DHCP ACK che conferma i parametri richiesti.
+\end{enumerate}
+Ovviamente DHCP fornisce anche un meccanismo che consente ai client di rinnovare la concessione di un indirizzo IP. \\
+DHCP presenta comunque dei problemi per quanto riguarda il mantenere una connessione TCP a un'applicaizone remota, spostandosi il nodo mobile da una sottorete a un'altra.
+\subsubsection{NAT (network address translation}
+Cosa accadrebbe se l'aumento di una rete portasse un ISP a non poter assegnare più indirizzi contigui? E cosa dovrebbe sapere il normale utente per gestire gli indirizzi IP? Esiste un approccio più semplice e sempre più usato: il \textbf{NAT (Network Address Translation)}.
+\begin{figure}
+	\includegraphics[scale=0.6]{img/058.png}
+	\caption{NAT}
+\end{figure}
+La figura mostra l'attività di un router abilitato al NAT, con un'interfaccia che fa parte della rete domestica (sulla destra). Le quattro interfacce della rete domestica hanno lo stesso indirizzo di sottorete, 10.0.0.0/24. Lo spazio di indirizzamento 10.0.0.0/8 è una delle tre parti dello spazio di indirizzi IP riservato alle \textbf{reti private} o \textbf{reame}. con indirizzi privati, ossia una rete i cui indirizzi hanno significato solo per i dispositivi interni. \\
+In effetti esistono molte reti private che usano un unico spazio di indirizzamento privato, 10.0.0.0/24 per scambiare pacchetti tra i loro dispositivi, ma questi inidirizzi non sono accessibili all'esterno. Ma se gli indirizzi privati hanno significato solo all'interno di una rete, come viene gestito l'indirizzamento dall'esterno? La risposta è il NAT. I router abilitati al NAT non appaiono come router al mondo esterno ma si comportano come un unico dispositivo con un unico indirizzo IP. In sostanza, il router abilitato al NAT nasconde i dettagli della rete domestica. All'interno della rete domestica gli indirizzi vengono generalmente assegnati invece tramite DHCP. \\
+Ma se il router ha un solo indirizzo, come possono essere indirizzati correttamente i dati dall'esterno all'host corretto? Si usa una \textbf{tabella di traduzione NAT} nel router NAT e si includono nelle righe di tale tabella i numeri di porta oltre agli indirizzi IP. \\
+Facendo riferimento alla figura, supponiamo che un utente dietro all'host 10.0.0.1 richieda una pagina web ad un server (porta 80) con indirizzo IP 128.119.40.186. L?host 10.0.0.1 assegna il numero di porta di origine (arbitrario) 3345 e invia il datagramma alla rete locale. Il router riceve il datagramma, genera per esso un nuovo numero di porta di origine 5001, sostituisce l'indirizzo IP con il proprio e sostituisce il numero di porta. Quando genera il nuovo numero di porta il router NAT può sceglierne qualsiasi non ancora usato. Notiamo che essendo il numero di porta a 16 bit, un router NAT può gestire 65.536 connessioni simultanee con un solo indirizzo IP. Il NAT a questo punto aggiunge una riga alla propria tabella di traduzione. Quando verrà restituito il pacchetto da parte del server web avverrà la traduzione inversa. \\
+NAT non è esente da problemi, infatti se ci fosse un server in esecuzione sulla rete domestica (e quindi deve avere dei numeri di porta noti), questo avrebbe dei problemi. Sono state proposte delle soluzioni come il NAT traversale e l'Universal Plug and Play (UPnP).
+
+\section{Livello di rete: piano di controllo}
+\subsection{Algoritmi di instradamento}
+Lo scopo degli algoritmi di instradamento è determinare i percorsi, o cammini, tra le sorgenti e i destinatari, attraverso la rete dei router. Tipicamente il percorso migliore è quello che ha costo minimo, anche se nella realtà potrebbero esserci altri problemi. Si noti che è sempre necessario avere una sequenza ben definita di router che il pacchetto attraversa viaggiando dall'host sorgente all'host destinataria, sia che il piano di controllo adotti un approccio per router che ne adotti uno logicamente centralizzato. \\
+Per formulare i problemi di instradamento si utilizza un \textbf{grafo}. Ricordiamo che un grafo \textit{G = (N, E)} è un insieme N di nodi e un insieme E di archi, ove ciascun arco collega una coppia di nodi di N.
+\begin{figure}
+	\includegraphics[scale=0.6]{img/059.png}
+	\caption{Modello astratto di grafo di una rete di calcolatori}
+\end{figure}
+Nel contesto dell'instradamento i nodi sono i router e gli archi sono i collegamenti fisici. Ogni arco è associato ad un valore che ne indica il costo. In genere, questo può riflettere la lunghezza fisica del collegamento, la velocità di collegamento o il suo prezzo. Per ora non ci occuperemo del calcolo dei costi, li assumeremo come dati. Per ogni arco (x, y) tra i nodi x e y denotiamo c(x, y) il suo costo. Se la coppia (x, y) non appartiene a E, poniamo $c(x, y) = +\infty$. Inoltre gli archi sono bidirezionali e un nodo y viene detto \textbf{adiacente} o \textbf{vicino} a un nodo x se (x, y) è un arco in E. Ricordiamo infine che un \textbf{percorso} in un grafo G = (N, E) è una sequenza di nodi $(x_{1}, x_{2}, ..., x_{n})$ tali che ciascuna delle coppie $(x_{1}, x_{2})$, $(x_{2}, x_{3})$, ..., $(x_{p-1}, x_{p})$ sia un arco appartenente a E.\\
+Lo scopo di un algoritmo di instradamento è quindi la ricerca del \textbf{percorso a costo minimo}. Si noti che se tutti gli archi hanno lo stesso costo, il percorso a costo minimo rappresenta anche il percorso più breve. In generale gli algoritmi di instradamento sono classificabili come centralizzati o decentralizzati:
+\begin{itemize}
+	\item \textbf{Algoritmo di instradamento centralizzato}: calcola il percorso a costo minimo tra una sorgente e una destinazione avendo una conoscenza globale e completa della rete. In altre parole, l'algoritmo riceve in ingresso tutti i collegamenti tra i nodi e i loro costi. Ciò richiede che l'algoritmo in qualche modo ottenga tale informazione prima di effettuare il vero e proprio calcolo. La caratteristica distintiva, tuttavia, è che un algoritmo globale ha informazioni complete su connettività e costi, per questo vengono spesso detti \textbf{algoritmi link-state (LS)} dato che l'algoritmo deve essere conscio del costo di ciascun collegamento di rete.
+	\item \textbf{Algoritmo di instradamento decentralizzato}: il percorso viene calcolato in modo distribuito e iterativo. Nesun nodo possiede informazioni complete sul costo di tutti i collegamenti di rete. Inizialmente i nodi conoscono solo il costo dei collegamenti adiacenti. L'algoritmo che studieremo è detto \textbf{distance-vector (DV)} poichè ogni nodo elabora un vettore di stima dei costi verso tutti gli altri nodi nella rete. Tali algoritmi prevedono scambi interattivi tra router vicini e possono essere implementati nei piani di controllo nei quali i router interagiscono direttamente, come nella figura vista prima.
+\end{itemize}
+Un secondo criterio di classificazione degli algoritmi di instradamento riguarda il fatto di essere \textbf{statici o dinamici}.
+\begin{itemize}
+	\item \textbf{Algoritmi di instradamento statici}: i percorsi cambiano molto raramente
+	\item \textbf{Algoritmi di instradamento dinamici}: determinano gli instradamenti al variare del volume di traffico o della tipologia di rete. Un algoritmo dinamico può essere eseguito sia periodicamente o come conseguenza diretta di un cambiamento nella tipologia o costo di un collegamento. Sono soggetti a problemi come l'instradamento in loop e l'oscillazione dei percorsi.
+\end{itemize}
+
+Un terzo criterio epr classificare gli algoritmi di instradamento è il fatto di essere più o meno sensibili (load-sensitive/insensitive) al carico della rete. In un \textbf{algoritmo sensibile al carico} i costi dei collegamenti variano dinamicamente per riflettere il livello corrente di congestione.
+\subsubsection{Instradamento link-state (LS)}
+In un instrdamento link-state la topologia di rete e i costi dei collegamenti sono noti. Ciò si ottiene con i nodi che notificano a tutta la rete lo stato dei collegamenti. Questi pacchetti contengono identità e costi dei collegamenti connessi al nodo che li invia- Questo viene spesso ottenuto tramite un \textbf{algoritmo di link-state broadcast}.\\
+L'algoritmo di calcolod ei percorsi che presentiamo associato all'instradamento link-state è noto come \textbf{algoritmo di Dijkstra} che calcola il percorso a costo minimo da un nodo (l'origine che chiameremo u) a tutti gli altri nodi della rete, è iterativo e ha le seguenti proprietà:
+\begin{itemize}
+	\item doopo la k-esima iterazione, i percorsi a costo minimo sono noti a k nodi di destinazione
+	\item tra i percorsi a costo minimo verso tutti i nodi di destinazione, questi k percorsi hanno i k costi più bassi
+\end{itemize}
+Adottiamo la seguente notazione:
+\begin{itemize}
+	\item D(v): costo minimo del percorso dal nodo origine alla destinazione v per quanto concerne l'iterazione corrente dell'algoritmo
+	\item p(v): immediato predecessore di v lungo il percorso a costo minimo dall'origine a v
+	\item N': sottoinsieme di nodi contenente tutti (e solo) i nodi v per cui il percorso a costo minimo dall'origine a v è definitivamente noto
+\end{itemize}
+\begin{figure}
+	\includegraphics[scale=0.4]{img/060.png}
+	\caption{Algoritmo di Dijkstra}
+	\includegraphics[scale=0.45]{img/061.png}
+	\caption{Esecuzione dell'algoritmo di Dijkstra sulla rete della figura iniziale}
+\end{figure}
 
 \end{document}

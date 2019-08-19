@@ -81,11 +81,18 @@
 \contentsline {subsubsection}{\numberline {2.8.1}Fairness}{57}{subsubsection.2.8.1}% 
 \contentsline {paragraph}{Fairness e UDP}{59}{section*.35}% 
 \contentsline {paragraph}{Fairness e connessioni TCP in parallelo}{59}{section*.36}% 
-\contentsline {section}{\numberline {3}Strato di rete e instradamento}{59}{section.3}% 
+\contentsline {section}{\numberline {3}Strato di rete}{59}{section.3}% 
 \contentsline {subsection}{\numberline {3.1}Introduzione}{59}{subsection.3.1}% 
 \contentsline {subsubsection}{\numberline {3.1.1}Forwarding e Routing}{59}{subsubsection.3.1.1}% 
 \contentsline {paragraph}{Impostazione della connessione}{62}{section*.37}% 
 \contentsline {subsubsection}{\numberline {3.1.2}Modelli di servizio di network}{62}{subsubsection.3.1.2}% 
 \contentsline {subsection}{\numberline {3.2}Il protocollo di internet (IP): forwarding e indirizzamento (addressing) in internet}{63}{subsection.3.2}% 
 \contentsline {subsubsection}{\numberline {3.2.1}Formato dei datagrammi IPv4}{63}{subsubsection.3.2.1}% 
-\contentsline {paragraph}{Frammentazione dei datagrammi IPv4}{64}{section*.38}% 
+\contentsline {subsubsection}{\numberline {3.2.2}Frammentazione dei datagrammi IPv4}{64}{subsubsection.3.2.2}% 
+\contentsline {subsubsection}{\numberline {3.2.3}Indirizzamento IPv4}{65}{subsubsection.3.2.3}% 
+\contentsline {paragraph}{Come ottenere un blocco di indirizzi}{68}{section*.38}% 
+\contentsline {paragraph}{Come ottenere l'indirizzo di un host: DHCP}{68}{section*.39}% 
+\contentsline {subsubsection}{\numberline {3.2.4}NAT (network address translation}{71}{subsubsection.3.2.4}% 
+\contentsline {section}{\numberline {4}Livello di rete: piano di controllo}{73}{section.4}% 
+\contentsline {subsection}{\numberline {4.1}Algoritmi di instradamento}{73}{subsection.4.1}% 
+\contentsline {subsubsection}{\numberline {4.1.1}Instradamento link-state (LS)}{75}{subsubsection.4.1.1}% 
