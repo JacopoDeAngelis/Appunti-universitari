@@ -56,3 +56,5 @@
 \BOOKMARK [1][-]{section.4}{Livello di rete: piano di controllo}{}% 56
 \BOOKMARK [2][-]{subsection.4.1}{Algoritmi di instradamento}{section.4}% 57
 \BOOKMARK [3][-]{subsubsection.4.1.1}{Instradamento link-state \(LS\)}{subsection.4.1}% 58
+\BOOKMARK [3][-]{subsubsection.4.1.2}{Instradamento distance-vector \(DV\)}{subsection.4.1}% 59
+\BOOKMARK [2][-]{subsection.4.2}{ICMP \(Internet Control Message Protocol}{section.4}% 60

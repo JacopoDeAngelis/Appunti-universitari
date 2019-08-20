@@ -109,8 +109,10 @@ Le reti telefoniche sono un esempio di rete a commutazione di circuito. Internet
 Nell’immagine qua accanto i quattro commutatori di circuito sono collegati da due link. Ognuno di questi link è costitutito da n circuiti, in modo che ciascun link possa mantenere n connessioni simultanee.
 I terminali sono collegati direttamente a uno dei commutatori. Alcuni degli host hanno un accesso analogico ai commutatori, mentre altri hanno un accesso numerico diretto. Per l’accesso analogico è necessario un modem. Quando due host desiderano comunicare, la rete stabilisce un circuito dedicato end-to-end fra essi. In questo caso viene prenotato un circuito su ciascuno dei due link.
 \begin{figure}
-	\includegraphics[scale=0.6]{img/002.png}
-	\caption{Una semplice rete a commutazione di circuito, che consiste di quattro commutatori di circuito collegati da quattro link}
+	\begin{center}
+		\includegraphics[scale=0.6]{img/002.png}
+		\caption{Una semplice rete a commutazione di circuito, che consiste di quattro commutatori di circuito collegati da quattro link}
+	\end{center}
 \end{figure}
 \paragraph{Multiplazione (multiplexing) nelle reti a commutazione di circuito)}
 Un circuito in un link è realizzato mediante la multiplazione a divisione di frequenza (FDM) o la multiplazione a divisione di tempo (TDM).
@@ -118,11 +120,15 @@ Con l’FDM, lo spettro di frequenza di un link è diviso fra le connessioni sta
 Per il TDM il dominio temporale è suddiviso tra quattro circuiti con quattro time slot in ciascun frame; a ciuacun circuito è assegnato lo stesso slot nei frame TDM che si succedono. La velocità di trasmissione di ciascun circuito è uguale a:
 \begin{center}
 	\textit{velocità del frame * numero di bit in uno slot}
-	\begin{figure}
-		\includegraphics[scale=0.6]{img/003.png}
-		\caption{Con L?FDM ciascun circuito occupa continuamente una frazione della larghezza di banda. Con il TDM ciascun circuito occupa periodicamente tutta la larghezza di banda durante brevi intervalli di tempo (durante gli slot)}
-	\end{figure}		
 \end{center}
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.7]{img/003.png}
+		\caption{Con L'FDM ciascun circuito occupa continuamente una frazione della larghezza di banda. Con il TDM ciascun circuito occupa periodicamente tutta la larghezza di banda durante brevi intervalli di tempo (durante gli slot)}
+	\end{center}
+\end{figure}
+
 per esempio, se il link trasmette 8000 frame al secondo e ogni slot è costituito da 8 bit, la velocità di trasmissione è 64 Kb/s. \\
 i fautori della commutazione di pacchetto hanno sempre sostenuto che la commutazione di circuito porta a sprechi, perché i circuiti dedicati sono inattivi durante i periodi silenti (ad esempio quando la linea telefonica non viene usata).
 \paragraph{Commutazione di pacchetto}
@@ -148,10 +154,12 @@ Quindi, la formula è:
 \end{center}
 Questo miglioramento deriva dal fatto che la commutazione di pacchetto agisce in parallelo.
 \begin{figure}
-	\includegraphics[scale=0.6]{img/004.png}
-	\caption{Tempi per il trasferimento del messaggio senza frammentazione dello stesso}
-	\includegraphics[scale=0.6]{img/005.png}
-	\caption{Tempi per il trasferimento del messaggio quando lo stesso è frammentato in 5000 pacchetti}
+	\begin{center}
+		\includegraphics[scale=0.7]{img/004.png}
+		\caption{Tempi per il trasferimento del messaggio senza frammentazione dello stesso}
+		\includegraphics[scale=0.7]{img/005.png}
+		\caption{Tempi per il trasferimento del messaggio quando lo stesso è frammentato in 5000 pacchetti}
+	\end{center}
 \end{figure}
 Il vantaggio della segmentazione è anche che nel caso ci sia un errore di bit su di un pacchetto, è il singolo pacchetto a poter essere scartato e non l’intero messaggio.
 La frammentazione non è priva di svantaggi, infatti al pacchetto devono essere aggiunte informazioni nell’\textbf{intestazione (header)} e queste possono comprendere l’identità di sorgente e destinatario. In più l’header richiede altri byte di spazio.
@@ -190,8 +198,10 @@ Gli ISP spesso si connettono in Network Access Point (NAP).
 
 \subsection{Ritardi e perdite nelle reti a commutazione di pacchetto}
 \begin{figure}
-	\includegraphics[scale=0.6]{img/007.png}
-	\caption{Ritardo al nodo e nel router A}
+	\begin{center}
+		\includegraphics[scale=0.6]{img/007.png}
+		\caption{Ritardo al nodo e nel router A}
+	\end{center}
 \end{figure}
 \subsubsection{Tipi di ritardo}
 \paragraph{Ritardo di elaborazione}
@@ -243,8 +253,10 @@ Ciascuno strato può eseguire uno o più di questi compiti:
 È costituita da cinque strati
 
 \begin{figure}
-	\includegraphics[scale=0.6]{img/008.png}
-	\caption{Protocollo a strati, livello = PDU} 
+	\begin{center}
+		\includegraphics[scale=1]{img/008.png}
+		\caption{Protocollo a strati, livello = PDU}
+	\end{center} 
 \end{figure}
 
 \paragraph{Strato di applicazione}
@@ -298,8 +310,10 @@ Un socket UDP è univocamente determinato da una coppia formata da un indirizzo 
 
 
 \begin{figure}
-	\includegraphics[scale=0.6]{img/011.png}
-	\caption{I campi dei numeri di porta sorgente e destinazione in un segmento dello strato di trasporto} 
+	\begin{center}
+		\includegraphics[scale=1]{img/011.png}
+		\caption{I campi dei numeri di porta sorgente e destinazione in un segmento dello strato di trasporto} 
+	\end{center}
 	\includegraphics[scale=0.6]{img/012.png}
 	\caption{L'inversione dei numeri di porta sorgente e destinazione}
 \end{figure}
@@ -334,8 +348,10 @@ Perchè scegliere UDP? Per i seguenti motivi:
 \subsubsection{Struttura del segmento UDP}
 
 \begin{figure}
-	\includegraphics[scale=0.6]{img/015.png}
-	\caption{Struttura del segmento UDP}
+	\begin{center}
+		\includegraphics[scale=1]{img/015.png}
+		\caption{Struttura del segmento UDP}
+	\end{center}
 \end{figure}
 
 La \textbf{checksum} \textit{(somma di controllo)} è usata dall'host ricevente per controllare se sono stati introdotti errori nel segmento.
@@ -512,8 +528,10 @@ TCP unisce a ciascun pezzo dei dati del client un'intestazione TCP, formando cos
 Quando il ricevente riceve i segmenti, questi sono posti nel buffer di ricezione della connessione TCP,
 \subsubsection{Struttura del segmento TCP}
 \begin{figure}
-	\includegraphics[scale=0.6]{img/031.png}
-	\caption{Struttura del segmento TCP}
+	\begin{center}
+		\includegraphics[scale=0.6]{img/031.png}
+		\caption{Struttura del segmento TCP}
+	\end{center}
 \end{figure}
 L'intestazione TCP è tipicamente di 20 byte. Come per UDP, l'intestazione comprende \textbf{numeri di porta sorgente e di destinazione e checksum}. Inoltre, l'intestazione TCP contiene anche:
 \begin{itemize}
@@ -805,8 +823,10 @@ Il termine forwarding si riferisce all'azione locale di trasferire i pacchetti m
 Ogni router ha una \textbf{tabella di forwarding}. Un router inoltra il pacchetto esaminando il valore do un campo dell'header del pacchetto e poi usando questo valore per indicizzarlo nella tabella di forwarding. Il valore immagazzinato nella tabella di forwarding indica l'interfaccia del link di output sul quale deve essere instradato il pacchetto.
 Nella figura viene mostrato il funzionamento della tabella di forwarding: il pacchetto arriva con un'intestazione, questa viene cercata all'interno della tabella e determina il link da prendere.
 \begin{figure}
-	\includegraphics[scale=0.6]{img/050.png}
-	\caption{L'algoritmo di routing determina il valore nella tabella di forwarding}
+	\begin{center}
+		\includegraphics[scale=0.6]{img/050.png}
+		\caption{L'algoritmo di routing determina il valore nella tabella di forwarding}
+	\end{center}
 \end{figure}
 Come vengono determinati i valori della tabella di routing? L'algoritmo determina i valori che sono inseriti nella tabella. L'algoritmo può essere centralizzato (risiede su di un router che poi invia le informazioni ai router periferici) o decentralizzato (in ogni router). \\
 Per impostare la terminologia, da qui useremo \textbf{packet switch} per indicare un dispositivo generico di packet-witching che trasferisce i pacchetti da un link all'altro. Alcuni packet switch, chiamati \textbf{link-layer switches}, basano le loro decisioni di forwarding sul valore nel campo del frame dello strato di collegamento, altri packet-switch, i \textbf{router} basano la loro decisione sul valore del campo dello strato di rete.
@@ -837,8 +857,10 @@ Il livello di rete di internet offre un solo servizio, conosciuto come \textbf{b
 Ci sono due versioni di IP oggi, IPv4 e IPv6. Noi studieremo solo IPv4.
 \subsubsection{Formato dei datagrammi IPv4}
 \begin{figure}
-	\includegraphics[scale=0.6]{img/052.png}
-	\caption{Datagram IPv4}
+	\begin{center}
+		\includegraphics[scale=0.6]{img/052.png}
+		\caption{Datagram IPv4}
+	\end{center}
 \end{figure}
 Ricordiamo che un pacchetto del livello di rete è detto "datagram". \\
 I campi chiave di un datagram IPv4 sono:
@@ -867,8 +889,10 @@ Per risolvere questo problema, IPv4 setta i campi di identificazione, flag e off
 Poichè IP non è affidabile, quindi affinchè il ricevente sappia di aver effettivamente ricevuto l'ultimo frammento, il flag di questo è impostato a 0, mentre tutti gli altri hanno flag uguale a 1. In più l'offset permette di capire se il frammento è all'interno del datagram IP originale. \\
 Per fare un esempio, immaginiamo che un datagram di 4000 byte (20 byte di intestazione più 3980 byte di dati) arrivi ad un router e debba essere inoltrato su di un link con MTU di 1500 byte. Dobbiamo quindi frammentare il datagram in 3 frammenti. Supponiamo che il numero di identificazione sia 777. Le caratteristiche dei tre frammenti sono descritti dall'immagine.
 \begin{figure}
-	\includegraphics[scale=0.6]{img/053.png}
-	\caption{Frammenti IP}
+	\begin{center}
+		\includegraphics[scale=0.5]{img/053.png}
+		\caption{Frammenti IP}
+	\end{center}
 \end{figure}
 Alla destinazione, i dati vengono passati al livello di trasporto solo dopo che lo strato di collegamento ha ricostruito i datagram IP. Se non arrivano completi vengono scartati. Nel caso venga usato TCP, allora ci penserà questo a occuparsi della ritrasmissione dei paccehtit mancanti.
 \subsubsection{Indirizzamento IPv4}
@@ -877,7 +901,7 @@ Differentemente, poichè un router deve poter ricevere ed inviare datagrammi, de
 IP richiede che ogni interfaccia abbia un proprio indirizzo, pertanto l'indirizzo IP è associato all'interfaccia e non all'host. Gli indirizzi IP sono lunghi 32 bit (4 byte) e quindi si possono avere $2^{32}$ indirizzi, circa 4 miliardi. Tali indirizzi sono solitamente scritti in notazione decimale puntata, ovvero dove i byte sono separati da un singolo punto. \\
 Ogni interfaccia di host e router di internet ha un indirizzo IP globalmente univoco (eccetto se gestite da NAT, cosa che vedremo poi). Una parte dell'indirizzo di un'interfaccia è determinata dalla sottorete cui è collegata.
 \begin{figure}
-	\includegraphics[scale=0.6]{img/054.png}
+	\includegraphics[scale=0.5]{img/054.png}
 	\caption{Indirizzi delle interfacce e sottoreti}
 \end{figure}
 La figura mostra un router con tre interfacce (223.1.1.4, 223.1.2.9, 223.1.3.27) che connette sette host. I tre a sinistra e l'interfaccia del router cui sono connessi hanno un indirizzo IP nella forma 233.1.1.xxx, ossia i 24 bit a sinistra sono identici a quelli della loro interfaccia. Per IP, questa rete che interconnette tre interfacce di host e l'interfaccia di un router forma una \textbf{sottorete}. IP ha quindi assegnato a questa sottorete l'indirizzo 223.1.1.0/24, dove la notazione /24 è detta \textbf{maschera di sottorete (subnet mask)} e indica che i 24 bit più a sinistra dell'indrizzo definiscono l'indirizzo della sottorete. Di conseguenza la sottorente è composta da tre interfacce di host e una di router (numerata per ultima). \\
@@ -909,13 +933,13 @@ DHCP viene detto protocollo plug-and-play per la sua camapcità di automatizzare
 Per capire le sue potenzialità immaginiamo uno studente che si connette da casa, poi in biblioteca e infine in classe. In ogni caso avrà bisogno di un nuovo indirizzo IP. DHCP è adatto a questa situazione in cui molti utenti vanno e vengono e gli indirizzi sono necessari per una quantità limitata di tempo. \\
 DHCP è un protocollo client-server. Nel caso più semplice ogni sottorete dispone di un server DHCP per quella rete, altrimenti serve un agente di relay DHCP (generalmente interno al router) che conosca l'indirizzo di un server DHCP per quella rete.
 \begin{figure}
-	\includegraphics[scale=0.6]{img/056.png}
+	\includegraphics[scale=0.5]{img/056.png}
 	\caption{Scenario del protocollo DHCP client-server}
 \end{figure}
 Nella seguente trattazione supporremo che nella sottorete sia disponibile un DHCP server.
 Per i nuovi host il protocollo DHCP si articola in quattro punti:
 \begin{figure}
-	\includegraphics[scale=0.6]{img/057.png}
+	\includegraphics[scale=1]{img/057.png}
 	\caption{Interazione client-server DHCP. yiaddr = your internet address}
 \end{figure}
 \begin{enumerate}
@@ -929,7 +953,7 @@ DHCP presenta comunque dei problemi per quanto riguarda il mantenere una conness
 \subsubsection{NAT (network address translation}
 Cosa accadrebbe se l'aumento di una rete portasse un ISP a non poter assegnare più indirizzi contigui? E cosa dovrebbe sapere il normale utente per gestire gli indirizzi IP? Esiste un approccio più semplice e sempre più usato: il \textbf{NAT (Network Address Translation)}.
 \begin{figure}
-	\includegraphics[scale=0.6]{img/058.png}
+	\includegraphics[scale=0.4]{img/058.png}
 	\caption{NAT}
 \end{figure}
 La figura mostra l'attività di un router abilitato al NAT, con un'interfaccia che fa parte della rete domestica (sulla destra). Le quattro interfacce della rete domestica hanno lo stesso indirizzo di sottorete, 10.0.0.0/24. Lo spazio di indirizzamento 10.0.0.0/8 è una delle tre parti dello spazio di indirizzi IP riservato alle \textbf{reti private} o \textbf{reame}. con indirizzi privati, ossia una rete i cui indirizzi hanno significato solo per i dispositivi interni. \\
@@ -943,8 +967,9 @@ NAT non è esente da problemi, infatti se ci fosse un server in esecuzione sulla
 Lo scopo degli algoritmi di instradamento è determinare i percorsi, o cammini, tra le sorgenti e i destinatari, attraverso la rete dei router. Tipicamente il percorso migliore è quello che ha costo minimo, anche se nella realtà potrebbero esserci altri problemi. Si noti che è sempre necessario avere una sequenza ben definita di router che il pacchetto attraversa viaggiando dall'host sorgente all'host destinataria, sia che il piano di controllo adotti un approccio per router che ne adotti uno logicamente centralizzato. \\
 Per formulare i problemi di instradamento si utilizza un \textbf{grafo}. Ricordiamo che un grafo \textit{G = (N, E)} è un insieme N di nodi e un insieme E di archi, ove ciascun arco collega una coppia di nodi di N.
 \begin{figure}
-	\includegraphics[scale=0.6]{img/059.png}
+	\includegraphics[scale=0.7]{img/059.png}
 	\caption{Modello astratto di grafo di una rete di calcolatori}
+	\label{fig: 059}
 \end{figure}
 Nel contesto dell'instradamento i nodi sono i router e gli archi sono i collegamenti fisici. Ogni arco è associato ad un valore che ne indica il costo. In genere, questo può riflettere la lunghezza fisica del collegamento, la velocità di collegamento o il suo prezzo. Per ora non ci occuperemo del calcolo dei costi, li assumeremo come dati. Per ogni arco (x, y) tra i nodi x e y denotiamo c(x, y) il suo costo. Se la coppia (x, y) non appartiene a E, poniamo $c(x, y) = +\infty$. Inoltre gli archi sono bidirezionali e un nodo y viene detto \textbf{adiacente} o \textbf{vicino} a un nodo x se (x, y) è un arco in E. Ricordiamo infine che un \textbf{percorso} in un grafo G = (N, E) è una sequenza di nodi $(x_{1}, x_{2}, ..., x_{n})$ tali che ciascuna delle coppie $(x_{1}, x_{2})$, $(x_{2}, x_{3})$, ..., $(x_{p-1}, x_{p})$ sia un arco appartenente a E.\\
 Lo scopo di un algoritmo di instradamento è quindi la ricerca del \textbf{percorso a costo minimo}. Si noti che se tutti gli archi hanno lo stesso costo, il percorso a costo minimo rappresenta anche il percorso più breve. In generale gli algoritmi di instradamento sono classificabili come centralizzati o decentralizzati:
@@ -960,12 +985,13 @@ Un secondo criterio di classificazione degli algoritmi di instradamento riguarda
 
 Un terzo criterio epr classificare gli algoritmi di instradamento è il fatto di essere più o meno sensibili (load-sensitive/insensitive) al carico della rete. In un \textbf{algoritmo sensibile al carico} i costi dei collegamenti variano dinamicamente per riflettere il livello corrente di congestione.
 \subsubsection{Instradamento link-state (LS)}
-In un instrdamento link-state la topologia di rete e i costi dei collegamenti sono noti. Ciò si ottiene con i nodi che notificano a tutta la rete lo stato dei collegamenti. Questi pacchetti contengono identità e costi dei collegamenti connessi al nodo che li invia- Questo viene spesso ottenuto tramite un \textbf{algoritmo di link-state broadcast}.\\
-L'algoritmo di calcolod ei percorsi che presentiamo associato all'instradamento link-state è noto come \textbf{algoritmo di Dijkstra} che calcola il percorso a costo minimo da un nodo (l'origine che chiameremo u) a tutti gli altri nodi della rete, è iterativo e ha le seguenti proprietà:
+In un instradamento link-state la topologia di rete e i costi dei collegamenti sono noti. Ciò si ottiene con i nodi che notificano a tutta la rete lo stato dei collegamenti. Questi pacchetti contengono identità e costi dei collegamenti connessi al nodo che li invia- Questo viene spesso ottenuto tramite un \textbf{algoritmo di link-state broadcast}.\\
+L'algoritmo di calcolo dei percorsi che presentiamo associato all'instradamento link-state è noto come \textbf{algoritmo di Dijkstra} che calcola il percorso a costo minimo da un nodo (l'origine che chiameremo u) a tutti gli altri nodi della rete, è iterativo e ha le seguenti proprietà:
 \begin{itemize}
 	\item doopo la k-esima iterazione, i percorsi a costo minimo sono noti a k nodi di destinazione
 	\item tra i percorsi a costo minimo verso tutti i nodi di destinazione, questi k percorsi hanno i k costi più bassi
 \end{itemize}
+
 Adottiamo la seguente notazione:
 \begin{itemize}
 	\item D(v): costo minimo del percorso dal nodo origine alla destinazione v per quanto concerne l'iterazione corrente dell'algoritmo
@@ -978,5 +1004,160 @@ Adottiamo la seguente notazione:
 	\includegraphics[scale=0.45]{img/061.png}
 	\caption{Esecuzione dell'algoritmo di Dijkstra sulla rete della figura iniziale}
 \end{figure}
+
+Consideriamo per esempio la rete nella figura \ref{fig: 059} e calcoliamo i percorsi a costo minimo da u a tutte le destinazioni.
+\begin{itemize}
+	\item Nel passo di inizializzaione i valori dei percorsi a costo minimo noti da u ai suoi nodi \emph{adiacenti}, v, w e x, sono posti rispettivamente a 2, 5 e 1.
+	\item Nella prima iterazione prendiamo in considerazione i nodi non ancora aggiunti all'insieme N' e determiniamo il nodo a costo minimo come alla fine della precedente iterazione. Tale nodo è x, di costo 1, e pertanto viene aggiunto all'insieme N'. Viene poi eseguita la riga 12 dell'algoritmo di Dijkstra per aggiornare D(v) per tutti i nodi, ottenenedo i risultati mostrati alla seconda riga della tabella. Il costo del percorso verso v non è cambiato, mentre per arrivare al nodo w (che era 5) passando per il nodo x è diventato 4. Viene quindi selezionato questo percorso a costo inferiore e il predecessore di w lungo il percorso minimo da u diventa x. Analogamento il costo verso x viene aggiornato a 2.
+	\item Nella seconda iterazione si trova che i nodi v e y hanno percorsi a costo minimo (2), ne scegliamo arbitrariamente uno e aggiungiamo y all'insieme N' che ora conterrà u, x e y. I costi verso i nodi rimanenti sono aggiornati nella terza riga della tabella
+	\item E così via...
+\end{itemize}
+Quando l'algoritmo termina, abbiamo per ciascun nodo il suo predecessore lungo il percorso a costo minimo dal nodo origine. La tabella di inoltro in un nodo, diciamo u, può pertanto essere costruita da queste informazioni memorizzando, per ciascuna destinazione, il nodo del successivo hop sul percorso a costo minimo da u alla destinazione come possiamo vedere all'immagine \ref{fig: 062}
+\begin{figure}
+	\includegraphics[scale=0.6]{img/062.png}
+	\caption{Percorso a costo minimo e tabella di inoltro per il nodo u}
+	\label{fig: 062}
+\end{figure}
+
+Qual è la complessità computazionale di questo algoritmo? Nella prima iterazione dobbiamo cercare su tutti gli n nodi per determinare quello w non in N' avente il costo minimo, alla seconda iterazione controlleremo n-1 nodi, alla terza n-2 e così via, arrivando quindi a $\dfrac{n(n+1)}{2}$, avremo quindi, nel caso peggiore, una complessità $O(n^{2})$.
+
+Prima di completare la trattazione consideriamo una condizione patologica, ovvero un loop di instradamento mostrato dall'immagine \ref{fig: 063}.
+\begin{figure}
+	\includegraphics[scale=0.7]{img/063.png}
+	\caption{Oscillazioni con instradamento sensibile alla congestione}
+	\label{fig: 063}
+\end{figure}
+La figura mostra una tipologia di rete in cui i costi dei collegamenti sono uguali al carico trasportato sul collegamento, il che riflette il ritardo che si verificherebbe. In questo caso i costi non sono simmetrici, ovvero c(u, v) $\neq$ c(v, u). Inoltre il nodo z e quello x danno origine a un'unità di traffico ciascuno verso w, mentre y invia una quantità di traffico pari a e, anche questo verso w. Come spiegato nell'immagine, questi costi non simmetrici portano l'algoritmo ad instradare alternativamente in senso orario e antiorario, portando così ad un loop non risolvibile.
+
+C'è una soluzione a questo problema? Una soluzione consiste nello stabilire che i costi dei collegamenti dei collegamenti non dipendono dalla quantità di traffico trasportato, cosa inaccettabile poichè uno degli scopi dell'instradamento è evitare la congestione dei link. Un'altra soluzione consiste nell'assicurarsi che non tutti i router lancino l'esecuzione dell'algoritmo nello stesso istante. Questa sembra essere una soluzione ragionevole, dato che vorremmo che l'istanza in esecuzione dell'algoritmo non fosse la stessa su ciascun nodo anche se i router eseguissero l'algoritmo con la stessa periodicità.
+
+\subsubsection{Instradamento distance-vector (DV)}
+Mentre l'instradamento LS usa informazioni globali, quello \textbf{distance vector} è iterativo, asincrono e distribuito:
+\begin{itemize}
+	\item \textbf{Distribuito}: ciascun nodo riceve parte dell'informazione da uno o più dei suoi vicini direttamente connessi a cui poi restituisce i risultati dei calcoli
+	\item \textbf{Asincrono}: non richiede che tutti i nodi operino al passo con gli altri
+	\item \textbf{Iterativo}: questo processo si ripete fino a quando non avviene ulteriore scambio informativo tra vicini, aspetto che porta a definire l'algoritmo come auto-terminante, ovvero non vi è alcun segnale che l'algoritmo debba fermarsi, semplicemente si blocca
+\end{itemize}
+
+Definiamo ora la \textbf{formula di Bellman-Ford}, importante per definire la relazione tra costi e percorsi a costo minimo. Sia $d_{x}(y)$ il costo del percorso a costo minimo dal nodo x al nodo y, allora i costi minimi sono:
+\begin{center}
+	$d_{x}(y) = min_{v}\{c(x, v) + d_{v}(y)\}$
+\end{center}
+dove $min_{v}$ riguarda tutti i vicini di x. Questa relazione mostra che il costo per arrivare da x a y è uguale al minimo tra le possibilità di percorso dal costo minimo già percorso sommato ai percorsi verso i nodi adiacenti.
+La formula di Bellman-Ford ha un'importanza pratica, in quando fornisce le righe della tabella di inoltro nel nodo x. Inoltre su questo su questa formula si basa l'\textbf{algoritmo di Bellman Ford} rappresentato all'immagine \ref{fig: 067}.
+\begin{figure}
+	\includegraphics[scale=0.4]{img/067.png}
+	\caption{Algoritmo di Bellman-Ford}
+	\label{fig: 067}
+\end{figure}
+L'idea di base è la seguente. Ciascun nodo x inizia con $D_{x}(y)$, una stima del costo del percorso a costo minimo da se stesso al nodo y, per tutti i nodi in N. Sia $D_{x} = [D_{x}(y): y in N]$ il vettore delle distanze del nodo x, che è il vettore delle stime dei costi da x a tutti gli altri nodi, y, in N. Con l'algoritmo di Bellman FOrd, ciascun nodo x mantiene i seguenti dati di instradamento:
+\begin{itemize}
+	\item Per ciascun vicino v, il costo c(x, v) da x al vicino v
+	\item Il vettore delle distanze del nodo x, che è $D_{x} = [D_{x}(y): y in N]$, contenente la stima presso x del costo verso tutte le destinazioni, y, in N
+	I vettori delle distanze di ciascuno dei suoi vicini, ossia $D_{v} = [D_{v}(y): y in N]$, per ciascun vicino y di x
+\end{itemize}
+In questo algoritmo distribuito e asincrono, quando un nodo percepisce un cambiamento nel proprio vettore delle distanze, ne invia una copia a tutti i suoi vicini. Quando un nodo x riceve un nuovo vettore da qualcuno dei suoi vicini, lo salva e usa la formula di Bellman-Ford per aggiornare il proprio. Nel caso ci siano cambiamenti inoltra il vettore ai propri vicini e così via.
+
+Ricordiamo che \textbf{l'algoritmo LS è centralizzato} nel senso che richiede a ciascun nodo di ottenere innanzitutto una mappa completa della rete prima di mandare in esecuzione l'algoritmo di Dijkstra, mentre l'algoritmo \textbf{Bellman Ford è decentralizzato}. Infatti le sole informazioni detenute dal nodo sono quelle presentate prima. Il funzionamento dell'algoritmo è presentato dall'immagine \ref{fig: 064}. La colonna di sinistra della figura mostra tre \textbf{tabelle di instradamento (routing table)} iniziali per ciascuno dei tre nodi. All'interno di una specifica tabella di instradamento le righe rappresentano i vettori delle distanze. La seconda e la terza riga di questa tabella rappresentano i vettori delle distanze ricevuti più di recente rispettivamente dai nodi y e z. Dato che al  momento dell'inizializzazione il nodo x non ha ricevuto nulla dai due nodi, questi valori sono posti a $\infty$.
+
+Dopo l'inizializzazione, ciascun nodo invia il proprio vettore ai suoi vicini come mostrato dalle frecce. Dopo aver ricevuto gli aggiornamenti, i nodi ricalcolano il vettore delle distanze. Ad esempio il nodo x calcola:
+\begin{itemize}
+	\item $D_{x}(x) = 0$
+	\item $D_{x}(y) = min\{c(x, y) + D_{y}(y), c(x, z) + D_{z}(y)\} = min\{2 + 0, 7 + 1\} = 2$
+	\item $D_{x}(z) = min\{c(x, y) + D_{y}(z), c(x, z) + D_{z}(z)\} = min\{2 + 1, 7 + 0\} = 3$
+\end{itemize}
+La seconda colonna pertanto mostra, per ciascun nodo, il nuovo vettore delle distanze. Nel caso vengano rilevati degli aggiornamenti al proprio vettore, questi saranno inviati agli altri nodi come si vede dalle frecce tra la seconda e la terza colonna, infatti y non cambia il proprio vettore e quindi non invia niente. Dopo la ricezione i nodi ricalcolano i propri vettori. A questo punto, dato che non vengono più inviati vettori, l'algoritmo entra in uno stato di quiescenza fino a quando non ci saranno ulteriori aggiornamenti.
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=1]{img/064.png}
+		\caption{Instradamento distance vector (DV)}
+		\label{fig: 064}
+	\end{center}
+\end{figure}
+
+\paragraph{Instradamento distance-vector: modifica dei costi e guasti dei collegamenti}
+\begin{figure}
+	\includegraphics[scale=0.5]{img/065.png}
+	\caption{Variazioni nel costo dei collegamenti}
+	\label{fig: 065}
+\end{figure}
+Prendiamo ad esempio lo scenario della figura \ref{fig: 065}. Nella figura \ref{fig: 065}(a) viene mostrato uno scenario dove c(y, x) passa da 1 a 4. In questa sede ci concentreremo solo sul percorso da y a z. L'algoritmo provoca la seguente sequenza di eventi:
+\begin{itemize}
+	\item All'istante $t_{0}$, y rileva il cambiamento nel costo del collegamento, aggiorna il proprio vettore e informa i vicini
+	\item All'istante $t_{1}$, z riceve l'aggiornamento da y e aggiorna la propria tabella, calcola un nuovo costo minimo verso x e invia il nuovo vettore delle distanze ai vicini
+	\item All'istante $t_{2}$, y riceve l'aggiornamento di z e aggiorna la propria tabella delle distanze. I costi minimi di y non cambiano e y non manda alcun messaggio a z. L'algoritmo entra in uno stato quiescente.
+\end{itemize}
+
+Ora consideriamo invece il caso dell'immagine \ref{fig: 065}(b), dove c(y, x) passa da 4 a 60.
+\begin{itemize}
+	\item Prima che il costo del collegamento cambi, $D_{y}(x) = 4, D_{y}(z) = 1, D_{z}(y) = 1, D_{z}(x) = 5\footnote{5 e non 50 perchè viene rappresentato il percorso con il costo minimo e non il costo del collegamento diretto}$. All'istante $t_{0}$, y rileva che il costo del collegamento è passato da 4 a 60 e calcola il nuovo percorso a costo minimo verso x con la formula
+	\begin{center}
+		$D_{y}(x) = min\{c(y, x) + D_{x}(x), c(y, z) + D_{z}(x)\} = min\{60 + 0, 1 + 5\} = 6$
+	\end{center}
+	Ovviamente noi sappiamo che il nuovo costo è errato, ma l'unica informazione che il nodo y possiede è che z ha detto che per arrivare a x ha un costo di 5. All'istante $t_{1}$ abbiamo un \textbf{instradamento ciclico}: al fine di giungere a x, y fa passare il percorso per z e z lo fa passare per y.
+	\item Dato che il nodo y ha calcolato un nuovo costo minimo verso x, informa z del suo nuovo vettore delle distanze all'istante $t_{1}$
+	\item In un istante successivo, z riceve il nuovo vettore delle distanze di y, il quale indica che il costo minimo di y verso x è 6, sa che può giungere a y a costo 1 e quindi calcola un nuovo vosto minimo pari a $D_{z}(x) = \{50 + 0, 1 + 6\} = 7$ per poi informare y.
+	\item Analogamente y cambiera il suo costo $D_{y}(x) = 8$ e così via.
+\end{itemize}
+Il ciclo si ripeterà per 44 iteraizoni prima che effettivamente z inizi a instradare attraverso il suo collegamento diretto. Ora abbiamo visto un caso con numeri ristretti, ma cosa sarebbe successo se c(y, x) fosse passato da 4 a 10.000 e c(z, x) fosse stato 9.999? Questi casi sono definiti \textbf{problemi di conteggio infinito}.
+
+\paragraph{Instradamento distance-vector: aggiunta dell'inversione avvelenata}
+Lo scenario descritto prima può essere risolto tramite la tecnica dell'\textbf{inversione avvelenata}. L'idea è che se z instrada tramite y per giungere alla destinazione x, allora z avvertirà che la sua distanza verso x è infinita, ovvero comunicherà $D_{z}(x) = \infty$, anche se in realtà sa che è 5, e continuerà a dire ciò fino a quando instraderà a x tramite y. Dato che y crede che non ci sia un percorso che collega z e x, continuerà a instradare direttamente a x.
+
+Quando avviene il cambiamento nell'immagine \ref{fig: 065}(b) y informa z del nuovo cambiamento, a questo punto z inizia ad inoltrare direttamente a x, informando anche y del vero costo $D_{z}(x) = 50$ che aggiornerà il proprio vettore ponendo $D_{y}(x) = 51$. 
+
+L'inversione avvelenata risolve solo i casi di cicli derivanti da nodi adiacenti ma non quelli derivanti da più nodi.
+
+\paragraph{Confronto tra gli instradamenti LS e DV}
+I due meccanismi hanno approcci complementari, infatti \textbf{DV dialoga solo con i nodi adiacenti}, informandoli delle stime a costo minimo da sè stesso a tutti i nodi che conosce. \textbf{LS dialoga con tutti i nodi via broadcast}, ma comunica solo i costi dei collegamenti direttamente connessi. 
+Ricordiamo che N rappresenta l'insieme dei nodi ed E l'insieme degli archi:
+\begin{itemize}
+	\item \textbf{Complessità dei messaggi}: LS richiede che ciascun nodo conosca il costo di ogni collegamento nella rete. Ciò implica l'invio di $O(|N|*|E|)$ messaggi. Inoltre ogni volta che cambia il costo di un collegamento, il nuovo costo deve essere comunicato a tutti i nodi. DV richiede lo scambio di messaggi tra nodi adiacenti ad ogni iterazione.
+	\item \textbf{Velocità di convergenza}: come abbiamo visto per LS è $O(|N|^{2})$ che richiede $O(|N|*|E|)$ messaggi. DV può convergere lentamente e può presentare cicli di instradamento e conteggi all'infinito
+	\item \textbf{Robustezza}: Con LS, un router può comunicare via broadcast un costo sbagliato per uno dei suoi collegamenti connessi (ma non per altri), ma i nodi si occupano di calcolare soltanto le proprie tabelle di inoltro, e gli altri nodi effettuano calcoli simili per quanto li riguarda. Ciò significa che i calcoli di instradamento sono isolati, fornendo un buon grado di robustezza. DV può portare a propagazioni di errori a tutte le destinazioni. Infatti a ogni iterazione, il calcolo di DV in un nodo viene comunicato aiu suoi vicini e quindi ai vicini dei vicini. Un calcolo errato può diffondersi a tutta la rete\footnote{Cosa che accadde nel 1997 in America: un danno ad un piccolo ISP si propagò e portò ad errori su tutta la dorsale americana}.
+\end{itemize}
+In conclusione, nessuno dei due meccanismi è migliore dell'altro ed entrambi vengono usati.
+
+\subsection{ICMP (Internet Control Message Protocol}
+Il protocollo ICMP viene usato da host e router per scambiarsi informazioni a livello di rete: il suo uso più tipico è la notifica degli errori
+
+ICMP è spesso considerato parte di IP, ma dal punto di vista dell'architettura si trova esattamente sopra IP, dato che i suoi messaggi vengono trasportati nei datagrammi IP: ossia i messacci ICMP vengono trasportati come payload di IP, esattamente come i segmenti TCP o UDP.
+
+I messaggi ICMP hanno un campo tipo e un campo codice e contengono l'intestazione e i primi 8 byte del datagramma IP che ha provocato la generazione del messaggio, in modo che il mittente possa determinare il datagramma che ha causato l'errore. Alcuni tipi di messaggio sono mostrati nella tabella. Notiamo che ICMP non viene usato solo per gli errori.
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.23]{img/068.png}
+		\caption{Datagramma ICMP}
+		\label{fig: 068}
+	\end{center}
+\end{figure}
+
+Ping invia un messaggio ICMP di tipo 8 e codice 0 verso l'host specificato \textit{(risposta echo)}. L'host di destinazione rivece la richiesta di echo e risponde con un messaggio ICMP di tipo 0 codice 0 \textit{(risposta echo a ping)}.
+
+Un altro utilizzo di ICMP è quello fatto da traceroute. Per determinare i nomi e gli indirizzi dei router tra sorgente e destinzione, il programma invia una sequenza di datagrammi IP ordinari verso la destinazione, ciascuno dei quali trasporta un  segmento UDP con numero di porta improbabile, il primo con TTL = 1, i seguenti a incrementare. quando il TTL scade e non ha ancora raggiunto la destinazione, i router inviano in risposta un messaggio ICMP di tipo 11 codice 0 \textit{(TTL scaduto)}. Quando invece il datagramma arriva a destinazione, il router di destinazione, questo noterà che la porta richiesta dal messaggio è improbabile, quindi invierà in risposta un messaggio ICMP di tipo 3 codice 3 \textit{(porta destinazione irraggiungibile)}. Quando questo messaggio arriverà al mittente, questo saprà di non dover inviare altri pacchetti e ora sa quali e quanti sono i router che lo separano dalla destinazione, nonchè il tempo di andata e ritorno.
+
+\begin{table}[]
+	\begin{tabular}{|l|l|l|}
+		\hline
+		\textbf{Tipo ICMP} & \textbf{Codice} & \textbf{Descrizione}                    \\ \hline
+		0                  & 0               & risposta echo (a ping)                  \\ \hline
+		3                  & 0               & rete destinazione irraggiungibile       \\ \hline
+		3                  & 1               & host destinazione irraggiungibile       \\ \hline
+		3                  & 2               & protocollo destinazione irraggiungibile \\ \hline
+		3                  & 3               & porta destinazione irraggiungibile      \\ \hline
+		3                  & 6               & rete destinazione sconosciuta           \\ \hline
+		3                  & 7               & host destinazione sconosciuto           \\ \hline
+		4                  & 0               & riduzione (controllo di congestione)    \\ \hline
+		8                  & 0               & risposta echo                           \\ \hline
+		9                  & 0               & annuncio di un router                   \\ \hline
+		10                 & 0               & scoperta di un router                   \\ \hline
+		11                 & 0               & TTL scaduto                             \\ \hline
+		12                 & 0               & intestazione IP errata                  \\ \hline
+	\end{tabular}
+	\caption{Tipi di messagio ICMP}
+	\label{tab: 001}
+\end{table}
+\pagebreak
+
 
 \end{document}
