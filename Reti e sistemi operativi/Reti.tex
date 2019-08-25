@@ -1,4 +1,3 @@
-
 \documentclass[11pt,a4paper]{article}
 \usepackage[italian]{babel}
 \usepackage[T1]{fontenc}
@@ -8,6 +7,7 @@
 \usepackage{amsmath}
 \makeindex[intoc]
 \usepackage[hyperfootnotes=false, colorlinks=true, linkcolor=black]{hyperref}
+\usepackage{verbatim}
 
 
 \begin{document}
@@ -96,7 +96,7 @@ Il servizio orientato alla connessione di internet è raggruppato con molti altr
 \textbf{Non esiste handshake.} Quando un’estremità di un’applicazione vuole inviare pacchetti a un’altra, semplicemente, li invia. Poiché manca l’handshake l’invio sarà più veloce ma non esisterà un messaggio di riscontro dell’avvenuta ricezione.
 \textbf{Il servizio di internet senza connessione è l’UDP (User Datagram Protocol).}
 
-\subsection{La sezione interna della rete}
+\subsection{Il nucleo della rete}
 \subsubsection{Commutazione di circuito e commutazione di pacchetto}
 Esistono due principali tipi di approccio per la costruzione della sezione interna di una rete:
 \begin{itemize}
@@ -105,6 +105,7 @@ Esistono due principali tipi di approccio per la costruzione della sezione inter
 \end{itemize}
 Le reti telefoniche sono un esempio di rete a commutazione di circuito. Internet, invece, è un esempio di rete a commutazione di pacchetto. Le reti non sono per forza o di un tipo o dell’altro.
 
+\begin{comment}
 \subsubsection{Commutazione di circuito}
 Nell’immagine qua accanto i quattro commutatori di circuito sono collegati da due link. Ognuno di questi link è costitutito da n circuiti, in modo che ciascun link possa mantenere n connessioni simultanee.
 I terminali sono collegati direttamente a uno dei commutatori. Alcuni degli host hanno un accesso analogico ai commutatori, mentre altri hanno un accesso numerico diretto. Per l’accesso analogico è necessario un modem. Quando due host desiderano comunicare, la rete stabilisce un circuito dedicato end-to-end fra essi. In questo caso viene prenotato un circuito su ciascuno dei due link.
@@ -114,7 +115,7 @@ I terminali sono collegati direttamente a uno dei commutatori. Alcuni degli host
 		\caption{Una semplice rete a commutazione di circuito, che consiste di quattro commutatori di circuito collegati da quattro link}
 	\end{center}
 \end{figure}
-\paragraph{Multiplazione (multiplexing) nelle reti a commutazione di circuito)}
+\paragraph{Multiplazione (multiplexing) nelle reti a commutazione di circuito)} \label{par: 001}
 Un circuito in un link è realizzato mediante la multiplazione a divisione di frequenza (FDM) o la multiplazione a divisione di tempo (TDM).
 Con l’FDM, lo spettro di frequenza di un link è diviso fra le connessioni stabilite sul link, dedicando così una banda di frequenza. \\
 Per il TDM il dominio temporale è suddiviso tra quattro circuiti con quattro time slot in ciascun frame; a ciuacun circuito è assegnato lo stesso slot nei frame TDM che si succedono. La velocità di trasmissione di ciascun circuito è uguale a:
@@ -130,7 +131,9 @@ Per il TDM il dominio temporale è suddiviso tra quattro circuiti con quattro ti
 \end{figure}
 
 per esempio, se il link trasmette 8000 frame al secondo e ogni slot è costituito da 8 bit, la velocità di trasmissione è 64 Kb/s. \\
-i fautori della commutazione di pacchetto hanno sempre sostenuto che la commutazione di circuito porta a sprechi, perché i circuiti dedicati sono inattivi durante i periodi silenti (ad esempio quando la linea telefonica non viene usata).
+I fautori della commutazione di pacchetto hanno sempre sostenuto che la commutazione di circuito porta a sprechi, perché i circuiti dedicati sono 	inattivi durante i periodi silenti (ad esempio quando la linea telefonica non viene usata).
+\end{comment}
+
 \paragraph{Commutazione di pacchetto}
 \textbf{Nelle moderne reti di calcolatori, la sorgente suddivide i messaggi lunghi in pezzi più piccoli di dati conosciuti come paccehtti.} \\
 Fra sorgente e destinazione ciascuno di questi pacchetti viaggia lungo link di comunicazione e commutatori di pacchetto (router). I pacchetti sono trasferiti sulla linea con velocità massima rispetto a quella del link. \\
@@ -203,7 +206,7 @@ Gli ISP spesso si connettono in Network Access Point (NAP).
 		\caption{Ritardo al nodo e nel router A}
 	\end{center}
 \end{figure}
-\subsubsection{Tipi di ritardo}
+\subsubsection{Tipi di ritardo} \label{par: ritardi}
 \paragraph{Ritardo di elaborazione}
 Tempo richiesto per esaminare l’intestazione del pacchetto e per determinare dove instradarlo.
 Può comprendere altri fattori come il tempo per il controllo degli errori.
@@ -213,7 +216,7 @@ Dopo quest’elaborazione, il router invia il pacchetto alla coda che precede il
 \paragraph{Ritardo di trasmissione}
 Sia la lunghezza del pacchetto L bit e la velocità di trasmissione tra i router A e B R bit/s. Il ritardo di trasmissione (detto anche \emph{ritardo store-and-forward}) è L/R, ovvero l'ammontare del tempo richiesto per trasmettere tutti i bit del pacchetto nel link.
 Il ritardo di trasmissione è tipicamente dell'ordine dei microsecondi ai millisecondi.
-\paragraph{Ritardo di propagazione}
+\paragraph{Ritardo di propagazione} 
 Il tempo richiesto per arrivare dall'inizio del link al router B è il ritardo di propagazione, \textbf{dipende dalla velocità di propagazione del link}.
 Si calcola come la \textbf{distanza fra due router diviso la velocità di propagazione del mezzo}, ovvero il ritardo di propagazione è $d/s$, dove d è la distanza fra i router A e B e s è la velocità di propagazione del link.
 \paragraph{Confronto tra ritardo di trasmissione e ritardo di propagazione}
@@ -226,7 +229,13 @@ Se indichiamo con $d_{elab}, d_{coda}, d_{trans}, d_{prop}$ i ritardi di elabora
 \subsubsection{Ritardo di coda e perdita di pacchetti}
 La più complicata e importante componente del ritardo totale del nodo è il ritardo di coda. A differenza degli altri ritardi, il ritardo di coda può variare da pacchetto a pacchetto. Se ci sono 10 pacchetti, il primo non avrà ritardo di coda, l'ultimo invece avrà un ritardo relativamente grande. \\
 Quand'è consistente e quando insignificante il ritardo di coda? Dipende molto da altri fattori come velocità del link, congestione e distribuzione del traffico.
-Indichiamo con a la velocità media di arrivo dei pacchetti (l'unità è pacchetti/s), R è la velocità di trasmissione (bit/s) e i pacchetti sono costituiti da L bit. Perciò, la velocità media a cui i bit arrivano ad accordarsi è $La bit/s$
+Indichiamo con:
+\begin{itemize}
+	\item a: la velocità media di arrivo dei pacchetti (l'unità è pacchetti/s)
+	\item R: è la velocità di trasmissione (bit/s)
+	\item L: numero di bit del pacchetto
+\end{itemize}	
+Perciò, la velocità media a cui i bit arrivano ad accordarsi è $La bit/s$
 Il rapporto \textbf{La/R, detto intensità di traffico}, ha un ruolo per la stima del ritardo di coda:
 \begin{itemize}
 	\item $>$1: arrivano più velocemente di quanto se ne vadano, in questo caso la coda continua ad aumentare
@@ -235,10 +244,39 @@ Il rapporto \textbf{La/R, detto intensità di traffico}, ha un ruolo per la stim
 \paragraph{Perdita di un pacchetto}
 Quando un pacchetto arriva su una coda piena, il pacchetto è scartato e perso. In questo caso può essere ritrasmesso dal nodo precedente, dal terminale o essere perso definitivamente.
 
+\subsubsection{Ritardo end-to-end}
+Concludiamo la trattazzione considerando il ritardo dalla sorgente alla destinazione (end-to-end delay).
+
+Supponiamo l'esistenza di N - 1 router tra l'host sorgente e quello di destinazione, che la rete non sia congestionata (quindi ritardo di accodamento trascurabile), il ritardo di elaborazione a ciascun router e presso il mittente è $d_{elab}$, la velocità di trasmissione sia R bps e la propagazione sia $d_{prop}$. I ritardi totali di nodo si accumulano e danno un ritardo complessivo end-to-end pari a:
+\begin{center}
+	$d_{end-to-end} = N(d_{elab} + d_{trasm} + d_{prop})$
+\end{center}
+
+\paragraph{Traceroute}
+Traceroute è un semplice programma che usando i messaggi ICMP (descritti successivamente al paragrafo \ref{par: ICMP}). L'host invia una serie di pacchetti speciali ad un altro host specificato e, per ogni router sul percorso, viene restituito un messaggio indicante nome e ritardo.
+
+Più nello specifico, si supponga l'esistenza di N-1 router tra l'origine e la destinazione. L'origine invia N pacchetti con l'indirizzo specificato e TTL (time to live)\footnote{Verrà visto nello specifico più avanti, per ora si consideri soltanto che per ogni passaggio tra router il TTL iniziale viene decrementato di 1, quando arriva a 0 il pacchetto viene scartato} crescente verso la destinazione. Quando l'n-router riceve l'N-esimo pacchetto (con TTL = 0), invece di instradarlo restituisce un messaggio al mittente contenente nome dell'n-esimo router e viene calcolato il ritardo tra i due.
+
+Traceroute ripete l'esperimento tre volte, infatti come si può vedere all'immagine \ref{fig: 083} i ritardi calcolati ogni volta sono 3.
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=1]{img/083.png}
+		\caption{Esempio di traceroute}
+		\label{fig: 083}
+	\end{center} 
+\end{figure}
+\subsubsection{Riassunto del calcolo dei ritardi}
+\begin{itemize}
+	\item \textbf{Ritardo di propagazione}: $\dfrac{d}{v}$ dove d è la distanza tra due router e v la velocità di propagazione del mezzo (m/s)
+	\item \textbf{Ritardo di trasmissione}: $\dfrac{L}{R}$ dove L è la grandezza del pacchetto e R la velocità di trasmissione del link (bit/s)
+\end{itemize}
+
 \subsection{Strati protocollari}
 \subsubsection{Architettura stratificata}
-Per ridurre la complessità progettuale, i progettisti della rete organizzano i protocolli a strati (layer) o livelli. \\
-Con un'architettura a strati dei protocolli, ciascun controllo appartiene a uno degli strati. Ciascun protocollo appartiene a uno degli strati, quindi il protocollo nello strato specifico è condiviso tra tutte le entità della rete che condividono quel protocollo. Queste entità comunicano tra di loro scambiandosi i messaggi dello strato n. Questi messaggi sono chiamati \textbf{n-PDU (layer-n Protocol Data Units)}. Il formato di una n-PDU è definito dal protocollo dello strato n. Quando presi nel loro insieme, i protocolli dei bari strati sono chiamati \textbf{pila protocollare}.\\
+Per ridurre la complessità progettuale, i progettisti della rete organizzano i protocolli a strati (layer) o livelli.
+
+Con un'architettura a strati dei protocolli, ciascun controllo appartiene a uno degli strati. Ciascun protocollo appartiene a uno degli strati, quindi il protocollo nello strato specifico è condiviso tra tutte le entità della rete che condividono quel protocollo. Queste entità comunicano tra di loro scambiandosi i messaggi dello strato n. Questi messaggi sono chiamati \textbf{n-PDU (layer-n Protocol Data Units)}. Il formato di una n-PDU è definito dal protocollo dello strato n. Quando presi nel loro insieme, i protocolli dei bari strati sono chiamati \textbf{pila protocollare}.
+
 Un concetto chiave è quello di \textbf{modello di servizio} di uno strato: si dice che lo strato $$n - 1$$ offre servizi allo strato n.
 \paragraph{Funzione degli strati}
 Ciascuno strato può eseguire uno o più di questi compiti:
@@ -258,7 +296,13 @@ Ciascuno strato può eseguire uno o più di questi compiti:
 		\caption{Protocollo a strati, livello = PDU}
 	\end{center} 
 \end{figure}
-
+Ad ogni livello corrisponde un tipo di pacchetto di informazione:
+\begin{itemize}
+	\item Livello di applicazione: messaggio
+	\item Livello di trasporto: segmenti
+	\item Livello di rete: datragrammi
+	\item Livello di collegamento: frame
+\end{itemize}
 \paragraph{Strato di applicazione}
 È responsabile del supporto delle applicazioni della rete, comprende molti protocolli tra i quali http, SMTP e FTP.
 \paragraph{Strato di trasporto}
@@ -274,9 +318,12 @@ I protocolli dello strato di trasporto (TCP e UDP) in un host sorgente passano u
 Per muovere un pacchetto da un nodo al successivo sul percorso, lo strato di rete deve delegare il servizio allo strato di collegamento. In particolare, a ciascun nodo IP passa il datagram allo strato di collegamento, che lo invia al nodo successivo lungo il percorso.
 \paragraph{Strato fisico}
 Il suo compito è quello di muovere singoli bit all'interno della rete da un nodo all'altro.
+
+\subsubsection{Incapsulamento}
+Ogni livello incapsula il messaggio dello strato superiore, questo vuol dire che il messaggio dello strato superiore diventa le informazioni di quello successivo.
 \pagebreak
 
-\section{Strato di trasporto}
+\section{Livello di trasporto}
 \subsection{Introduzione e servizio dello strato di trasporto}
 Un protocollo dello strato di trasporto fornisce una commutazione logica fra i processi applicativi che funzionano su host differenti. Per comunicazione logica intendiamo che dal punto di vista dell'applicazione, è come se i terminali su cui girano i processi fossero direttamente connessi. I processi applicativi usano la comunicazione logica fornita dallo strato di trasporto per scambiarsi messaggi, senza doversi occupare dei dettagli dell'infrastruttura fisica usata per trasportarli.\\ \\
 \textbf{Attenzione}: i protocolli dello strato di trasporto sono implementati nei terminali ma non nei router della rete. \\ \\
@@ -384,7 +431,8 @@ Le frecce delle due FSM\footnote{Per comprendere completamente il funzionamento 
 	\item \textbf{Lato ricevente}: quando viene ricevuto un pacchetto vengono estratti i dati e vengono inviati allo strato superiore
 \end{itemize}
 Con un canale completamente affidabile non serve alcun feedback da inviare al mittente.
-\paragraph{Trasferimento affidabile dei dati su un canale con errori sui bit: rdt2.0}
+
+\paragraph{Trasferimento affidabile dei dati su un canale con errori sui bit: rdt2.0} \label{par: numSequenza}
 \begin{figure}
 	\includegraphics[scale=0.6]{img/018.png}
 	\caption{rdt2.0: un protocollo per un canale con errori sui bit}
@@ -419,6 +467,7 @@ Poichè abbiamo assunto che il canale non possa perdere pacchetti, i pacchetti n
 \end{figure}
 Il protocollo rdt2.1 usa ACK e NAK dal ricevente al mittente. Quando riceve un pacchetto fuori sequenza o alterato inviai un NAK. Possiamo ottenere lo stesso effetto di un NAK se viene inviato ogni volta un ACK col numero dell'ultimo pacchetto ricevuto correttamente. Un mittente che riceve due ACK con lo stesso numero di sequenza (ovvero \textbf{duplicati dell'ACK}) capisce che l'ultimo pacchetto non è andato a buon fine. \\
 rdt2.2 introduce questa modifica, eliminando il NAK.
+
 \paragraph{Traferimento affidabile dei dati su un canale con perdite e con errori sui bit: rdt3.0}
 \begin{figure}
 	\includegraphics[scale=0.6]{img/021.png}
@@ -494,7 +543,7 @@ Il sender GBN deve affrontare tre tipi di eventi:
 	\caption{Descrizione dell'FSM estesa del receiver GBN}
 \end{figure}
 Le azioni del ricevente sono anch'esse semplici. Se un pacchetto con un numero di sequenza n è ricevuto correttamente ed è in ordine (ovvero se l'ultimo pacchetto inoltrato allo strato superiore è l'n*1) il ricevente invia un ACK per il pacchetto n. Negli altri casi il pacchetto viene scartato e rispedisce un ACK per l'ultimo pacchetto in ordine. In questo protocollo GBN, il ricevente scarta i pacchetti non in ordine, questo permette di non dover mantenere in memoria alcun pacchetto fuori ordine. Ovviamente lo svantaggio è la richiesta di più ritrasmissioni eventuali.
-\subsubsection{Ripetizione selettiva (SR}
+\subsubsection{Ripetizione selettiva (SR)}
 Esistono casi nei quali GBN può avere problemi di prestazioni, ad esempio quando la dimensione della finestra e il prodotto ritardo-larghezza di banda sono entrambi grandi, nelle pipeline possono trovarsi molti pacchetti. Un singolo errore può costringere GBN a ritrasmettere un grande numero di pacchetti, magari non tutti necessari. In più queste ritrasmissioni possono saturare la pipeline. \\
 I protocolli a ripetizione selettiva evitano le ritrasmissioni non necessarie grazie alla rispedizione di quei soli pacchetti che si sospetta siano giunti al ricevente con errori. Una finestra di dimensioni N dovrà ancora essere usata per limitare il numero di pacchetti da evadere, non riscontrati, nella pipeline.
 \begin{figure}
@@ -575,11 +624,12 @@ In realtà questo modo di calcolare l'RTT non tiene conto della varianza dei cam
 	\includegraphics[scale=0.6]{img/032.png}
 	\caption{RTT campionati e RTT stimati}
 \end{figure}
-Dati i valori \emph{EstimatedRTT} e \emph{DevRTT}, che valore dovrebbe essere usato per l'intervallo di timeout di TCP? Chiaramente l'intervallo dovrebbe essere maggiore o uguale a EstimatedRTT ma non troppo maggiore. È consigliabile impostare il timeout pari a EstimatedRTT pià un margine che dovrebbe essere grande quando ci sono fluttuazioni ampie nei valori di SampleRTT, piccolo in caso contrario. Il valore di DevRTT dovrebbe entrare in gioco qui.
+Dati i valori \emph{EstimatedRTT} e \emph{DevRTT}, che valore dovrebbe essere usato per l'intervallo di timeout di TCP? Chiaramente l'intervallo dovrebbe essere maggiore o uguale a EstimatedRTT ma non troppo maggiore. È consigliabile impostare il timeout pari a EstimatedRTT pià un margine che dovrebbe essere grande quando ci sono fluttuazioni ampie nei valori di SampleRTT, piccolo in caso contrario. Il valore di DevRTT dovrebbe entrare in gioco qui. \emph{DevRTT} è la stima di quanto \emph{SampleRTT} generalmente si discosta da \emph{EstimatedRTT}
 \begin{center}
 	$DevRTT = (1 - \beta)*DevRTT_{precedente} + \beta*|SampleRTT - EstimatedRTT|$
-	$TimeoutInterval = EstimatedRTT + 4 * DevRTT$
+	\textbf{$TimeoutInterval = EstimatedRTT + 4 * DevRTT$}
 \end{center}
+Dove $\beta$ è il numero di pacchetti considerati per la stima.
 \subsubsection{Trasferimento affidabile dei dati}
 Ricordiamo che il servizio IP è inaffidabile.\\
 Il TCP crea un \textbf{servizio di trasferimento affidabile dei dati} sopra al servizio inaffidabile best effort fornito da IP. Vediamo che ci sono tre principali eventi legati alla trasmissione e ritrasmissione dei dati nel mittente TCP:
@@ -728,24 +778,18 @@ Le due componenti più importanti di TCP sono:
 	\item fornisce un servizio di trasporto affidabile
 	\item ha un meccanismo di controllo della congestione
 \end{itemize}
-\subsection{Controllo della congestione del TCP}
-Le due componenti più importanti di TCP sono:
-\begin{itemize}
-	\item fornisce un servizio di trasporto affidabile
-	\item ha un meccanismo di controllo della congestione
-\end{itemize}
 L'approccio seguito da TCP è di fare sì che ogni mittente limiti il ritmo a cui immette traffico nella sua connessione in funzione della congestione in rete percepita. Se un mittente TCP percepisce che c'è poca congestione nel percorso tra sè e la destinazione, allora il mittente TCP aumenta il suo ritmo di trasmssione; se il mittente percepisce che c'è congestione lungo il percorso, allora il mittente riduce il suo ritmo di invio. Ma questo approccio solleva tre problemi:
 \begin{itemize}
 	\item in che modo il mittente TCP limita il ritmo a cui manda traffico nelle sue connessioni?
 	\item come un mittente TCP percepisce che c'è congestione nel percorso tra sè e la destinazione?
 	\item quale algoritmo dovrebbe utilizzare il mittente per cambiare il suo ritmo di invio in funzione della congestione end-to-end percepita?
 \end{itemize}
-Esamineremo prima in che modo un mittente limita il ritmo al quale invia traffico nella sua connessione. Il meccanismo di controllo della congestione del TCP da entrambi i lati della connessione deve tener traccia di un'altra variabile: la \textbf{finestra di congestione} \textit{(congestion window)}. La finestra di congestione impone una limitazione addizionale alla quantità di traffico che un host può inviare in una connessione. Specificatamente, l'ammontare dei dati non riscontrati che un host può avere all'interno di una connessione tCP non deve superare il minimo tra CongWin e RcvWin, che è:
+Esamineremo prima in che modo un mittente limita il ritmo al quale invia traffico nella sua connessione. Il meccanismo di controllo della congestione del TCP da entrambi i lati della connessione deve tener traccia di un'altra variabile: la \textbf{finestra di congestione} \textit{(congestion window)}. La finestra di congestione impone una limitazione addizionale alla quantità di traffico che un host può inviare in una connessione. Specificatamente, l'ammontare dei dati non riscontrati che un host può avere all'interno di una connessione TCP non deve superare il minimo tra CongWin e RcvWin, che è:
 \begin{center}
 	$LastByteSent - LastByteAcked \leq min{CongWin, RcvWindow}$
 \end{center}
 Per porre l'attenzione sul controllo della congestione assumiamo che il buffer di ricezione del TCP sia abbastanza grande da poter ignorare il vincolo della finestra di ricezione. In questo caso, la quantità di dati non riscontrati che un host può avere all'interno di una connessione TCP è limitata unicamente attraverso \emph{CongWin}. \\
-Consideriamo una connessione per cui l perdita e i ritardi di trasmissione dei pacchetti siano trascurabili. Quindi, approssimativamente, all'inizio di ogni tempo di round-trip\footnote{Il Round Trip Time (acronimo RTT) nelle telecomunicazioni è il tempo che intercorre tra l'invio di un segnale più il tempo necessario per la ricezione della conferma di quel segnale.} (RTT), il limite sopra esposto permette al mittente di inviiare \emph{CongWin} byte di dati nella connessione, e alla fine del RTT il mittente riceve i riscontri per i dati. \\
+Consideriamo una connessione per cui l perdita e i ritardi di trasmissione dei pacchetti siano trascurabili. Quindi, approssimativamente, all'inizio di ogni tempo di round-trip\footnote{Il Round Trip Time (acronimo RTT) nelle telecomunicazioni è il tempo che intercorre tra l'invio di un segnale più il tempo necessario per la ricezione della conferma di quel segnale.} (RTT), il limite sopra esposto permette al mittente di inviare \emph{CongWin} byte di dati nella connessione, e alla fine del RTT il mittente riceve i riscontri per i dati. \\
 Quindi il ritmo di invio del mittente è circa \emph{CongWin/RTT} byte/s. \\
 Definiamo un \textit{"evento di perdita"} a un mittente TCP come il verificarsi o di un timeout o della ricezione di tre ACK duplicati dal ricevente\footnote{Che, come abbiamo detto precedentemente, porta alla ritrasmissione veloce dei pacchetti ancora senza ACK}. Quando c'è troppa congestione vi è perdita di datagrammi. Il datagram perso, a sua volta, dà luogo a un evento di perdita al mittente, o a un timeout o la ricezione di tre ACK duplicati, che è considerato dal mittente come un'indicazione della congestione del percorso. \\
 Ora siamo in grado di considerare l'algoritmo che un mittente TCP usa per regolare il suo ritmo di invio in funzione della congestione percepita, ovvero l'\textbf{algoritmo di controllo della congestione di TCP}. L'algoritmo ha tre componenti principali:
@@ -805,7 +849,7 @@ Molte applicazioni multimediali, come la telefonia su internet e le video confer
 \paragraph{Fairness e connessioni TCP in parallelo}
 TCP può non essere fair se l'applicazione sfrutta più connessioni TCP in parallelo. Per esempio i browser usano più connessioni per caricare le pagine. Per fare un esempio, immaginiamo che ci siano 9 connessioni TCP singole, tutte avranno R/9 di velocità di trasmissione. Se si aggiungesse una nuova applicazione diventerebbero 10, portando la velocità a R/10 per tutti. Se questa nuova applicazione, però, usasse 11 connessioni parallele, riuscirebbe a prendersi R/2 della banda possibile.
 
-\section{Strato di rete}
+\section{Livello di rete: piano dei dati}
 \subsection{Introduzione}
 \begin{figure}
 	\includegraphics[scale=0.6]{img/049.png}
@@ -877,7 +921,7 @@ I campi chiave di un datagram IPv4 sono:
 	\item \textbf{Opzionali}: permettono l'estensione dell'header
 	\item \textbf{Dati} (payload)
 \end{itemize}
-\subsubsection{Frammentazione dei datagrammi IPv4}
+\subsubsection{Frammentazione dei datagrammi IPv4} \label{par: MTU}
 Il massimo ammontare di dati che un frame del livello di collegamento può trasportare è chiamato \textbf{"unita massima di trasmissione"} \textit{(MTU)}. Poichè ogni datagram IP è incapsulato in un frame del livello di collegamento per il trasporto da un router all'altro, allora l'MTU del protocollo del livello di collegamento pone un limite alla lunghezza del datagram IP. Il vero problema, però, non è questo limite ma il fatto che i vari router sul percorso possano utilizzare differenti protocolli con differenti MTU. Supponiamo che ci arrivi un pacchetto di data dimensione e che questo debba essere indirizzato verso un altro link ma, problema, questo ha un MTU inferiore rispetto a quello in entrata. Che fare? La soluzione è la frammentazione dei dati nel datagram IP in due più piccoli datagram IP, ognuno incapsulato in un datagram più piccolo in un frame separato. Ognuno di questi datagram è chiamato \textbf{frammento}. \\
 Per non aggiungere lavoro ai router, IPv4 non fa riassemblare i frame a questi ma è computo dell'host destinatario. Per riassemblarli, però, il sistema necessita di sapere se:
 \begin{itemize}
@@ -914,7 +958,7 @@ Prendiamo il secondo caso dove abbiamo 3 router connessi da collegamenti punto a
 	\textit{Per determinare le sottoreti si sgancino le interfacce da host e router in maniera tale da creare isole di reti isolate delimitate dalle interfacce. Ognuna di queste reti isolate viene detta sottorete (subnet)}
 \end{center}
 Cerchiamo di comprendere il meccanismo generale di assegnazione degli indirizzi internet: \textbf{classless interdomain routing (CIDR)}. CIDR generalizza la nozione di indirizzamento di sottorete, dividendo l'indirizzo in due parti e mantiene la forma decimale a.b.c.d/x, dove x indica il numero di bit della maschera di sottorete. \\
-I primi x bit costituiscono la porzione di rete dell'indirizzo IP e sono spesso detti \textbf{prefisso}. A un'organizzazione viene generalmente assegnato un blocco di indirizzi contigui con un prefisso comune. I rimanenti $32-x$ bit di un indirizzo possono essere usati per distinguere i dispositivi interni dell'organizzazione, che hanno tutti lo stesso prefisso di rete. È importante segnalare che ogni sottorete ha un altro indirizzo IP, il cosiddetto indirizzo \textbf{IP broadcast} 255.255.255.255 (o comunque l'ultimo indirizzo possibile per la sottorete). Quando un host emette un datagramma con destinazione 255.255.255.255 il messaggio viene ricevuto da tutti gli host.
+I primi x bit costituiscono la porzione di rete dell'indirizzo IP e sono spesso detti \textbf{prefisso}. A un'organizzazione viene generalmente assegnato un blocco di indirizzi contigui con un prefisso comune. I rimanenti $32-x$ bit di un indirizzo possono essere usati per distinguere i dispositivi interni dell'organizzazione, che hanno tutti lo stesso prefisso di rete. È importante segnalare che ogni sottorete ha un altro indirizzo IP, il cosiddetto indirizzo \textbf{IP broadcast} 255.255.255.255 (o comunque l'ultimo indirizzo possibile per la sottorete). Quando un host emette un datagramma con destinazione 255.255.255.255 il messaggio viene ricevuto da tutti gli host mentre l'altro indirizzo speciale è l'indirizzo di rete 0.0.0.0 (o comunque il primo indirizzo possibile per la sottorete). Il loro calcolo è spiegato a pagina \pageref{pag: 001}.
 \paragraph{Come ottenere un blocco di indirizzi}
 Un provider al quale sia stato allocato, ad esempio, il blocco di indirizzi 200.23.16.0/20 dal proprio ISP, potrebbe a sua volta dividerlo in 8 blocchi uguali di indirizzi continue e fornirne uno a ciascuna delle otto organizzazioni che supporta:
 \begin{itemize}
@@ -1118,7 +1162,7 @@ Ricordiamo che N rappresenta l'insieme dei nodi ed E l'insieme degli archi:
 \end{itemize}
 In conclusione, nessuno dei due meccanismi è migliore dell'altro ed entrambi vengono usati.
 
-\subsection{ICMP (Internet Control Message Protocol}
+\subsection{ICMP (Internet Control Message Protocol} \label{par: ICMP}
 Il protocollo ICMP viene usato da host e router per scambiarsi informazioni a livello di rete: il suo uso più tipico è la notifica degli errori
 
 ICMP è spesso considerato parte di IP, ma dal punto di vista dell'architettura si trova esattamente sopra IP, dato che i suoi messaggi vengono trasportati nei datagrammi IP: ossia i messacci ICMP vengono trasportati come payload di IP, esattamente come i segmenti TCP o UDP.
@@ -1159,5 +1203,848 @@ Un altro utilizzo di ICMP è quello fatto da traceroute. Per determinare i nomi 
 \end{table}
 \pagebreak
 
+\section{Livello di collegamento e reti locali}
+\subsection{Livello di collegamento: introduzione}
+Vediamo alcuni termini utili:
+\begin{itemize}
+	\item Nodo: qualunque dispositivo che opera a livello di collegamento (livello 2)
+	\item Collegamenti (link): i canali di comunicazione, che collegano nodi adiacenti lungo un cammino
+\end{itemize}
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=1]{img/066.png}
+		\caption{Sei passaggi a livello di collegamento tra host wireless e server}
+		\label{fig: 066}
+	\end{center}
+\end{figure}
+Consideriamo come esempio l'immagine \ref{fig: 066} e supponiamo di voler inviare un datagramma da uno degli host wireless a uno dei server. Il datagramma dovrà attraversare sei collegamenti, rappresentati dalle frecce all'interno della rete aziendale:
+\begin{enumerate}
+	\item collegamento wifi tra l'host sorgente e l'access point wifi
+	\item collegamento ehternet dall'access point allo switch a livello di collegamento
+	\item collegamento tra lo switch a livello di collegamento e il router
+	\item collegamento tra i due router
+	\item collegamento ethernet tra il router e lo switch a livello di collegamento
+	\item collegamento ethernet tra lo switch ed il server
+\end{enumerate}
+Su ogni collegamento, un nodo trasmittente incapsula il datagramma in un \textbf{frame del livello di collegamento \textit{(link layer frame)}} e lo trasmette lungo il collegamento stesso.
+\subsubsection{Servizi offerti dal livello di collegamento}
+I dettagli dei servizi forniti dal livello di collegamento possono variare da un protocollo all'altro. I possibili servizi includono:
+\begin{itemize}
+	\item \textbf{Framing}: Quasi tutti i protocolli incapsulano i datagrammi del livello di rete all'interno di un frame a livello di collegamento. I frame sono costituiti da un campo dati, nel quale è inserito il datagramma, e da vari campi di intestazione.
+	\item \textbf{Accesso al collegamento}: Un protocollo che controlla l'accesso al mezzo trasmissivo (MAC, medium access control) specifica le regole con cui immettere i frame nel collegamento.
+	\item \textbf{Consegna affidabile}: i protocolli a livello di collegamento che forniscono un servizio di consegna affidabile garantiscono il trasporto senza errori di ciascun datagramma. Analogamente al livello di trasporto, anche il servizio di consegna affidabile del livello di collegamento può essere realizzato attraverso acknowledgment e ritrasmissioni. Questo servizio è spesso offerto per i collegamenti con alto tasso di errore (ad esempio i collegamenti wireless). Viene invece considerato inutile per i collegamenti soggetti a basso tasso di errori, ovvero quelli tramite mezzo fisico.
+	\item \textbf{Rilevazione e correzione degli errori}: l'inserimento di bit di controllo degli errori all'interno dei frame e all'esecuzione di un controllo da parte del ricevente permettono i controlli sugli errori di trasmissione. Questi meccanismi sfruttano, come abbiamo già visto, il checksum anche se, in questo caso, viene generalmente implementato a livello hardware e non software.
+\end{itemize}
+\subsubsection{Dov'è implementato il livello di collegamento}
+Il livello di collegamento di un host è implementato in hardware o in software? Su una scheda o chip separati? Come si interfaccia con le latre parti dell'hardware dell'host e con il suo sistema operativo?
 
+La figura \ref{fig: 069} mostra la tipica architettura di un host. Per un dato collegamento, il protocollo del livello di collegamento è realizzato da un \textbf{adattatore di rete \textit{(network adapter)}}, noto anche come \textbf{scheda di rete \textit{(NIC, network interface card)}}. Il cuore della scheda è il controllder a livello di collegamento (link layer controller), che è di solito un chip dedicato che implementa molti dei servizi a livello di collegamento (framing, accesso al collegamento, rilevazione degli errori). La maggior parte delle funzionalità è quindi implementata nell'hardware.
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=1]{img/069.png}
+		\caption{Adattatore di rete: le sue relazioni con gli altri componenti dell'host e con le funzionalità della pila di protocolli}
+		\label{fig: 069}
+	\end{center}
+\end{figure}
+\begin{itemize}
+	\item \textbf{Lato mittente}: il controller riceve un datagramma, lo incapsula in un frame a livello di collegamento, lo trasmette sul canale di comunicazione, seguendo il protocollo di accesso al canale
+	\item \textbf{Lato ricevente}: un controller riceve l'intero frame, estrae il datagramma e lo consegna al livello di rete
+\end{itemize}
+
+Il livello di collegamento è una combinazione di hardware e software.
+
+\subsection{Tecniche di rilevazione e correzione degli errori}
+Esamineremo alcune tra le tecniche più semplici utilizzabili per il trattamento degli errori sui bit.  La figura \ref{fig: 070} schematizza lo scenario di riferimento. Nel nodo trasmittente, ai dati D che devono essere protetti vengono aggiunti dei \textbf{bit detti EDC \textit{(Error Detection and Correction)}}. I dati D e i bit EDC sono inviati in un frame al nodo ricevente. Questo legge una sequenza di bit D' ed EDC' che può essere diversa dall'originale, come risultato della modifica dei bit in transito.
+
+Il nodo ricevente deve determinare se D = D', potendo contare solo su D' e EDC'. Le attuali tecniche non consentono sempre al nodo ricevente di rilevare se si sono verificati errori nei bit. Anche con l'utilizzo dei bit di rilevazione degli errori è possibile che ci siano degli errori non rilevati. Bisogna quindi optare per uno schema per la rilevazione degli errori che riduca la probabilità di questo evento.
+
+Vedremo tre tecniche:
+\begin{itemize}
+	\item \textbf{Controllo di parità}
+	\item \textbf{Tecniche di checksum}: solitamente usato nel livello di trasporto
+	\item \textbf{Controllo a ridondanza ciclica}: in genere impiegato dalle schede di rete a livello di collegamento
+\end{itemize}
+\begin{figure}
+	\includegraphics[scale=0.6]{img/070.png}
+	\caption{Scenario di rilevazione e correzione degli errori}
+	\label{fig: 070}
+	\includegraphics[scale=0.6]{img/071.png}
+	\caption{Parità pari a un bit}
+	\label{fig: 071}
+\end{figure}
+
+\subsubsection{Controllo di parità}
+La forma più semplice di rilevamento degli errori è quella che utilizza un unico \textbf{bit di parità \textit{parity bit}}. Prendiamo che le informazioni da inviare nel blocco D siano costitutite da \emph{d} bit. In uno \textbf{schema di parità pari}, il mittente include un bit addizionale e sceglie il suo valore in modo da rendere pari il numero totale di bit 1 nei d+1 bit trasmessi. Nello \textbf{schema di parità dispari} fa la stessa cosa semplicemente rendendo il numero di 1 dispari. La figura \ref{fig: 072} mostra uno schema di parità pari.
+
+Con un solo bit di parità il ricevente deve solo contare il numero di 1 e, in base allo schema di parità, decidere se c'è un errore.
+
+Cosa accade però se è avvenuto un numero pari di errori nei bit? In questo caso l'errore non sarebbe rilevato. È stato statisticamente rilevato che gli errori tendono generalmente a verificarsi a raffiche (burst) invece che in modo indipendente. La probabilità che non vengano rilevati errori a burst in un frame protetto da un solo bit è circa del 50%. Bisogna usare metodi più sofisticati quindi.
+
+Prima di descrivere altri metodi generalizziamo il nostro approccio. La figura \ref{fig: 072} mostra che i \emph{d} bit del dato D sono suddivisi in i righe e j colonne per ognuna delle quali  stato calcolato un valore di parità. I risultati i + j + 1 bit di parità contengono bit per la rilevazione dell'errore nei frame a livello di collegamento.
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.6]{img/072.png}
+		\caption{Parità pari bidimensionale}
+		\label{fig: 072}
+	\end{center}
+\end{figure}
+
+Supponiamo ora che si verifichi un solo errore nei d bit originali. Con questo \textbf{schema di parità bidimensionale} i bit di parità della colonna e della riga contenenti il bit errato individueranno l'errore. Il ricevente può quindi usare i bit verticali ed orizzontali per identificare l'esatto bit errato.
+
+La capacità del rievente sia di rilevare sia correggere gli errori è conosciuta come \textbf{forward error correction \textit{(FEC, correzione degli errori in avanti)}}. In una configurazione di rete, le tecniche FEC possono essere impiegate singolarmente o abbinate a tecniche ARQ\footnote{\textbf{Automatic Repeat-reQuest}, è una strategia di controllo di errore, che svolge il compito di rivelare un errore (ma non di correggerlo). I pacchetti corrotti vengono scartati e viene richiesta la loro ritrasmissione.}. Le tecniche FEC sono molto utili, perchè possono diminuire il numero di ritrasmissioni e l'immediata correzione degli errori. Ciò consente di evitare un'attesa equivalente all'RTT, necessaria affichè il trasmittente riceva un pacchetto NAK e il pacchetto ritrasmesso torni al ricevente.
+
+\subsubsection{Checksum}
+Nelle tecniche che utilizzano il checksum i d bit visti prima sno trattati come una sequenza di numeri interi da k bit. Un semplice modo per eseguire il checksum è quello di sommare questi interi da k bit e usare il bit del risultato come bit per la rilevazione degli errori. Il \textbf{checksum di Internet} si basa su questo approccio: i dati sono trattati come interi di 16 bit e sommati, il complemento a 1 di questa somma costituisce il checksum che viene poi trasporto nell'intestazione dei segmenti.
+
+Nei protocolli TCP e UDP il checksum è calcolato per tutti i campi (intestazione e dati). In IP il checksum è calcolato solo sull'intestazione, perchè i segmenti TCP/UDP hanno il proprio.
+
+Le tecniche di checksum richiedono poco spazio ma hanno una capacità di errori relativamente limitata rispetto alle tecniche CRC utilizzate nel livello di collegamento. Allora perchè usare checksum e non CRC a livello di trasporto? Questo perchè il livello di trasporto è generalmente eseguito via software, si richiede quindi che le soluzioni di rilevazione errori siano leggere e veloci. La rilevaizone degli errori a livello di collegamento è svolto via hardware, permettendo quindi di svolgere in meno tempo operazioni più complicate.
+
+\subsubsection{Controllo a ridondanza ciclica (CRC)} \label{par: CRC}
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.6]{img/073.png}
+		\caption{CRC}
+		\label{fig: 073}
+	\end{center}
+\end{figure}
+I codici CRC sono anche detti \textbf{codici polinomiali}, in quanto è possibile vedere la stringa di bit da trasmettere come un polinomio i cui coefficienti sono i bit della stringa, con le operazioni sulla stringa di bit interpretate come aritmetica polinomiale.
+
+Come operano i codici CRC? Consideriamo \emph{d} bit costituenti i dati D da trasmettere e supponiamo che sorgente e destinazione si siano accordate su una stringa di \emph{r + 1} bit, conosciuta come \textbf{generatore}, che indicheremo con G. È necessario che i bit più significativo di G sia 1. L'idea alla base del codice CRC è illustrata nell'immagine \ref{fig: 073}. Dato un blocco di dati, D, il mittente sceglierà r bit addizionali, R,  e li unirà a D in modo da ottenere una stringa di \emph{d + r} bit che, interpretata in modo binario, sia divisibile per G (in aritmetica a modulo 2). CRC controlla se la divisione $\dfrac{(d + r)}{G}$ ha un resto diverso da 0, il rievente sa che si è verificato un errore. Tutti i calcoli sono effettuati in modulo 2 senza riporti nelle addizioni e prestiti nelle sottrazioni, quindi addizione e sottrazione sono uguali ed entrambe equivalgono a un'operazione di OR esclusivo (XOR) sui bit degli operandi.
+
+Un po' di chiarezza sulla matematica dietro a CRC. Moltriplicazioni e divisioni sono eseguite normalmente, quindi la moltiplicazione di una stringa $2^{k}$ corrisponde allo slittamento a sinistra della stirnga di k posizioni. Quindi, dati R e D, la quantità $D x 2^{r} XOR R$ fornisce come risultato la stringa di d + r bit mostrata nell'immagine \ref{fig: 073}.
+
+Torniamo alla questione di come il trasmittente calcoli R e ricordiamo che vogliamo trovare R in modo che esista un valore di n tale che 
+\begin{center}
+	$D x 2^{r} XOR R = nG$
+\end{center}. Ovvero, vogliamo scegliere R in modo che G sia divisibile per $D x 2^{r} XOR R$ senza resto. Se eseguiamo l'operazione di OR esclusivo di R con entrambi i membri dell'espressione, otteniamo 
+\begin{center}
+	$ D x 2^{r} = nG XOR R$
+\end{center}
+Questa espressione ci mostra che se dividiamo $D x 2^{r}$ per G, il valore del resto è precisamente R. Quindi, possiamo calcolare R come
+\begin{center}
+	$R = resto di (\dfrac{D x 2^{r}}{G}$
+\end{center} 
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.6]{img/074.png}
+		\caption{Esempio di cacolo di CRC}
+		\label{fig: 074}
+	\end{center}
+\end{figure}
+La figura \ref{fig: 074} mostra questo calcolo per D = 101110, d = 6, G = 1001, r = 3. I nove bit trasmessi sono  101110011.
+Riassument i simboli:
+\begin{itemize}
+	\item \textbf{G}: generatore, composto da una stringa di r + 1 bit, generato automaticamente da CRC in base al protocollo 
+	\item \textbf{D}: bit da spedire
+	\item \textbf{r}: numero di bit addizionali scelti dal mittente
+	\item \textbf{R}: bit addizionali uniti a D
+	\item d + r bit devono essere divisibili per G
+\end{itemize}
+CRC può rilevare errori a burst inferiori a r + 1 bit: ovvero tutti gli errori consecutivi di non oltre r bit saranno rilevati. La probabilità di avere un burst più lungo è $1 - 0,5^{r}$. Inoltre CRC può rilevare qualsiasi numero dispari di errori nei bit.
+
+\subsection{Collegamenti broadcast e protocolli di accesso multiplo} \label{par: accesso multiplo}
+Fino ad ora abbiamo visto due tipi di collegamento di rete: punto a punto e broadcast.
+
+Il \textbf{collegamento punto a punto} è costituito da un trasmittente a un'estremità del collegamento e da un unico ricevente dall'altra. Il \textbf{collegamento broadcast} può avere più nodi trasmittenti e riceventi connessi allo stesso canale broadcast condiviso.  Il termine broadcast indica che, quando un nodo trasmette un frame, il canale lo diffonde e tutti gli altri nodi ne ricevono una copia.
+
+In questo capitolo tratteremo il \textbf{problema dell'accesso multiplo}, ovvero come coordinare l'accesso di più nodi trasmittenti e riceventi in un canale broadcast condiviso. Come ripasso rivediamo un attimo come calcolare l'indirizzo di broadcast: ogni rete o subnet ha un indirizzo di broadcast riservato, che consente a tutti i partecipanti della rete di inviare un broadcast corrispondente. \textbf{Se tutti i bit dell'host sono impostati sul valore binario 1, si tratta di un indirizzo di broadcast}. Se invece tutti i bit dell'host sono impostati sul valore 0, si tratta dell'indirizzo della corrispondente subnet. \label{pag: 001} 
+
+\textbf{Esempio}: Indirizzo IPv4 192.128.64.7/24
+
+192.128.64.7 è l'indirizzo IP e 24 è la subnet mask. /24 corrisponde alla subnet mask 255.255.255.0. L'indirizzo IP è costituito da 4 numeri decimali, chiamati ottetti, che sono separati da punti. Un ottetto è formato da 8 bit, motivo per cui l'IPv4 è un indirizzo a 32 bit. Ogni ottetto può rappresentare un numero compreso tra 0 e 255. In questo caso, l'intero ultimo ottetto è composto da bit dell'host. In questo esempio, quindi, l'indirizzo di broadcast sarebbe 192.128.64.\textbf{255}, con tutti i bit dell'host a 1.
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.6]{img/075.png}
+		\caption{Esempio di calcolo dell'indirizzo di broadcast}
+		\label{fig: 075}
+	\end{center}
+\end{figure}
+Dall'immagine \ref{fig: 075} emerge quanto segue:
+\begin{itemize}
+	\item 192.128.64.0 = indirizzo di rete
+	\item 192.128.64.1 = primo indirizzo host
+	\item 192.128.64.254 = ultimo indirizzo host
+	\item 192.128.64.255 =\textbf{ indirizzo di broadcast}
+\end{itemize}
+Dove si trova quindi l'indirizzo di broadcast? L'indirizzo IP è una sequenza di numeri a 4 cifre con valori compresi tra 0 e 255. Un indirizzo di IP broadcast viene assegnato una volta sola in ogni rete. \textbf{Corrisponde sempre all'ultimo indirizzo IP della subnet.}
+Per dare un esempio differente, se l'indirizzo di rete fosse 154.34.2.46/28 (quindi con solo 4 bit per la subnet mask), avremmo:
+\begin{itemize}
+	\item 154.34.2.32 = indirizzo di rete (10011010.00100010.00000010.0010 \textbf{0000})
+	\item 154.34.2.33 = primo indirizzo host (10011010.00100010.00000010.0010 \textbf{0001})
+	\item 154.34.2.46= ultimo indirizzo host (10011010.00100010.00000010.0010 \textbf{1110})
+	\item 154.34.2.47 =\textbf{ indirizzo di broadcast} (10011010.00100010.00000010.0010 \textbf{1111})
+\end{itemize}
+
+Le reti usano i \textbf{protocolli di accesso multiplo} che fissano le modalità con cui i nodi regolano le loro trasmissioni sul canale condiviso. Nella figura \ref{fig: 076} alcuni esempi di accesso multiplo. Per semplificazione in questo paragrafo useremo il termine nodo per indicare il dispositivo che trasmette e riceve. Dato che tutti i nodi sono in grado di trasmettere frame, + possibile che due o più lo facciano nello stesso istante, per cui tutti i nodi riceveranno contemporaneamente più frame. Tra questi si genera una \textbf{collisione} a causa della quale nessuno dei nodi riceventi riuscirà a interpretare i frame.
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.6]{img/076.png}
+		\caption{Canali ad accesso multiplo}
+		\label{fig: 076}
+	\end{center}
+\end{figure}
+
+Per far sì che il canale di broadcast venga utilizzato in modo efficiente, occorre coordinare le trasmissioni dei nodi attivi. Possiamo classificare tutti i protocolli di accesso multiplo in una di queste categorie:
+\begin{itemize}
+	\item \textbf{Protocolli a suddivisione del canale} (channel partitioning protocol)
+	\item \textbf{Protocolli ad accesso casuale} (random access protocol)
+	\item \textbf{Protocolli a rotazione }(taking-turn protocol)
+\end{itemize}
+Idealmente, un protocollo di accesso multiplo per un canale broadcast con una velocità R bit al secondo dovrebbe avere le seguenti caratteristiche:
+\begin{enumerate}
+	\item Quando un solo nodo deve inviare i dati, questo dispone di un throughput pari a R bps
+	\item Quando M nodi devono inviare dati, questi dispongono di un throughput pari a $\dfrac{R}{M}$ bps. Ciò non implica necessariamente che ciascuno degli M nodi abbia sempre una velocità di trasmissione immediata $\dfrac{R}{M}$ ma la velocità media dovrebbe essero
+	\item Il protocollo è decentralzzato: in altre parole, non ci sono nodi principali che qualora non funzionassero correttamente potrebbero rendere inattivo l'intero sistema
+	\item Il protocollo è semplice, in modo che risulti economico da implementare
+\end{enumerate}
+
+\subsubsection{Protocolli a suddivisione del canale}
+Come mostrato al paragrafo \ref{par: 001}, il multiplexing a divisione di tempo, TDM, e quello a divisione di frequenza, FDM, sono due tecniche che possono essere utilizzate per suddividere la larghezza di banda di un canale broadcast fra i nodi che lo condividono. Per esempio, supponiamo che il canale supporti N nodi e che la sua velocità di trasmissione sia di R bps. TDM suddivide il tempo in \textbf{intervalli di tempo} (time frame) e poi divide ciascun intervallo di tempo in N \textbf{slot temporali} (time slot). Ogni slot è quindi assegnato a uno degli N nodi. Ogni volta che un nodo ha un pacchetto da inviare, trasmette i bit del pacchetto durante lo slot di tempo assegnatogli. Generalmente, le dimensioni dello slot sono stabilite in modo da consentire la trasmissione di un singolo pacchetto. La figura \ref{fig: 077} mostra un caso di TDM con quattro nodi.
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.6]{img/077.png}
+		\caption{Esempi di TDM e FDM con quattro nodi}
+		\label{fig: 077}
+	\end{center}
+\end{figure}
+TDM viene usato perchè evita le collisioni ed è imparziale: ciascun nodo ottiene $\dfrac{R}{N}$ bps. TDM presenta anche due inconvenienti, ovvero che anche quando non vi sono altri nodi che devono inviare, quello che deve inviare dovrà comunque aspettare il proprio turno e non potrà superare il limite medio $\dfrac{R}{M}$.
+
+Mentre TDM suddivide il canale in intervalli di tempo, FDM lo suddivide in frequenze differenti, ciascuna con una larghezza di banda $\dfrac{R}{M}$ e assegna ciascuna frequenza al nodo. Anche FDM evita le collisioni e divide equamente la banda, rimane comunque il problema che il mittente non può superare $\dfrac{R}{M}$ bps.
+
+Un terzo protocollo di suddivisione del canale è \textbf{l'accesso multiplo a divisione di codice \textit{(CDMA, code division multiple access)}}. CDMA assegna ad ogni nodo un codice. Ciascun nodo, quindi, utilizza il proprio codice univoco per codificare i dati inviati. Se i codici sono scelti accuratamente, le reti CDMA avranno la proprietà di consentire a nodi differenti di trasmettere simultaneamente e ai rispettivi destinatari di ricevere correttamente i bit dei dati codificati nonostante le interferenze.
+
+\subsubsection{Protocolli ad accesso casuale}
+Questi protocolli riguardano situazioni nelle quali un nodo trasmette sempre alla massima velocità consentita dal canale, cioè R bps. Quando si verifica una collisione, i nodi coinvolti ritrasmettono ripetutamente i loro frame fino a quando raggiungono la destinazione, senza collisioni. La ritrasmissione non è immediata, il nodo attende un periodo di tempo casuale (random delay), ogni nodo coinvolto in una collisione seleziona un ritardo casuale indipendente da quello degli altri nodi.
+
+\paragraph{Slotted ALOHA}
+Nella nostra descrizione assumeremo che:
+\begin{itemize}
+	\item tutti i frame consistano esattamente di L bit
+	\item il tempo sia suddiviso in slot di L/R secondi (cioè che uno slot equivalga al tempo di trasmissione di un paccehtto)
+	\item i nodi comincino la trasmissione dei frame solo all'inizio degli slot
+	\item i nodi siano sincronizzati in modo che tutti sappiano quando iniziano gli slot
+	\item qualora in uno slot due o più frame collidano, tutti i nodi della rete rilevino l'evento prima del termine dello slot
+\end{itemize}
+Indichiamo con p una probabilità. Le operazioni dei nodi slotted ALOHA sono:
+\begin{itemize}
+	\item Quando un nodo ha un nuovo frame da spedire, attende fino all'inizio dello slot successivo e poi trasmette l'intero frame
+	\item Se non si verifica una collisione, l'operazione ha avuto successo, quindi non occorre effettuare una ritrasmissione e il nodo può predisporre l'invio di un nuovo frame
+	\item Se si verifica una collisione, il nodo la rileva prima del termine dello slot e ritrasmette con probabilità p il suo frame durante gli slot successivi, fino a quando l'operazione non ha successo
+\end{itemize}
+\begin{figure}
+		\includegraphics[scale=0.6]{img/078.png}
+		\caption{I nodi 1, 2 e 3 collidono nel primo slot. Il nodo 2 riesce a trasmettere nel quarto slot, il nodo 1 nell'ottavo e il nodo 3 nel nono}
+		\label{fig: 078}
+\end{figure}
+I vantaggi di slotted ALOHA sono che consente a un singolo nodo di trasmettere continuamente pacchetti alla velocità massima del canale, quando è il solo nodo attivo. Un nodo si dice attivo se ha un frame da trasmettere; è decentralizzato, poichè ogni nodo rileva le collisioni e decide indipendentemente quando ritrasmettere.
+
+Slotted ALOHA funziona bene quando c'è un solo nodo attivo, ma se esistono molti nodi attivi? Esistono due problemi. Come vediamo dalla figura \ref{fig: 078}, una certa frazione degli slot presenterà collisioni e di conseguenza andrà "sprecata". Il secondo problema è che una grande frazione degli slot risulterà vuota, perchè tutti i nodi attivi valutano probabilisticamente se ritrasmettere o no. I soli slot non sprecati sono quelli utilizzati da un solo nodo per trasmettere. Lo slot in cui trasmette un solo nodo è chiamato \textbf{slot riuscito} (successful slot). L'efficienza di un protocollo di accesso multiplo che fa uso di slot temporali è definita come la frazione di slot riusciti in presenza di un elevato numero di nodi attivi che hanno sempre un elevato numero di pacchetti da spedire. Ora deriveremo l'efficienza massima del  protocollo. Per semplicità modifichiamo leggermete il protocollo e assumiamo che ciascun nodo tenti di trasmettere un frame in uno slot con probabilità p. Supponiamo che ciascun nodo abbia sempre un frame da spedire e che il nodo trasmetta con probabilità p un nuovo frame  uno che ha già subito una collisione. Ipotizziamo di avere N nodi. Quindi la probabilità che un nodo sia vincete significa che N-1 nodi siano inattivi. La probabilità che un nodo ritrasmetta è p mentre la probabilità che non ritrasmetta è 1 - p. La probabilità che i rimanenti nodi non trasmettano è $(1 - p)^{N - 1}$. Quindi la probabilità di successo di un dato nodo è $p(1 - p)^{N - 1}$. Poichè ci sono N nodi, la probabilità che un nodo abbia successo è $Np(1 - p)^{N - 1}$
+\begin{center}
+	Efficienza slotted ALOHA: $Np(1 - p)^{N - 1}$ \\
+	\textit{N: numero di nodi \\
+		p: probabilità di ritrasmissione \\
+		1 - p: probabilità di non ritrasmissione}
+\end{center}
+Per ottenere la massima efficienza bisogna trovare p* che massimizza questa espressione. Quindi, per $\lim_{N\to\infty} Np^{*}(1 - p^{*})^{N - 1}$ abbiamo che \textbf{l'efficienza massima di slotted ALOHA è $\dfrac{1}{e} =  37%$.}
+\begin{center}
+	\textbf{Efficienza massima slotted ALOHA}: 37\% \\
+	\textbf{Velocità effettiva di trasmissione}:  0,37 R bps \\
+	\textbf{Slot che viaggiano a vuoto}: 37\% \\
+	\textbf{Slot con collisioni}: 26\% \\ 
+\end{center}
+
+\paragraph{ALOHA}
+\begin{figure}
+		\includegraphics[scale=0.6]{img/079.png}
+		\caption{Interferenza delle trasmissioni in ALOHA puro}
+		\label{fig: 079}
+\end{figure}
+Il primo protocollo ALOHA era privo di slot, completamente decentralizzato. Il nodo trasmetteva immediatamente il pacchetto e nel caso di collisione lo ritrasmetteva con probabilità p. Altrimenti attenderà il tempo di trasmissione del frame per poi riprovare.
+
+Per determinare l'efficienza massima di ALOHA puro analizziamo un singolo nodo. Useremo le stesse assunzioni di prima e come unità di tempo, al posto degli slot, prenderemo il tempo di trasmissione del frame. Ad ogni istante la probabilità che un nodo stia trasmettendo è di p. Supponiamo che la trasmissione di un frame inizi al tempo $t_{0}$. Come illustrato nella figura \ref{fig: 079}, affinchè questo frame sia trasmesso con esito positivo nessun altro nodo può cominciare la sua trasmissione nell'intervallo di tempo $(t_{0} - 1, t_{0}]$, in quanto si sovrapporrebbe con l'inizio della trasmissione del frame del nodo i. La probabilità che tutti gli altri nodi non diano inizio a una trasmissione in questo intervallo è $(1 - p)^{N - 1}$. Analogamente nessun altro nodo deve iniziare a trasmettere in questo intervallo di tempo, la cui probabilità è sempre $(1 - p)^{N - 1}$. Quindi, possiamo notare che la probabilità che un certo nodo abbia successo nella trasmissione è $p(1 - p)^{2(N - 1)}$. Ricavando il limite come prima, otteniamo che l'efficienza massima del protocollo ALOHA puro è solo $\dfrac{1}{2e} = 18%$, la metà di slotted ALOHA.
+\begin{center}
+	\textbf{Efficienza massima ALOHA}: 18\% \\
+\end{center}
+
+\paragraph{CSMA: accesso multiplo con rilevamento della portante}
+Nei protocolli ALOHA i nodi prendono la decisione di trasmettere indipendentemente dall'attività degli altri nodi. Esistono due regole importanti per comunicare "in maniera civile":
+\begin{itemize}
+	\item \textbf{Ascoltare prima di parlare}: nel mondo delle reti questo si chiama \textbf{rilevamento della portante} (carrier sensing): un nodo ascolta il canale prima di trasmettere. Se il canale è già utilizzato attende
+	\item \textbf{Se qualcun altro comincia a parlare insieme a voi, smettete di parlare}: ciò si chiama \textbf{rilevamento della collisione} (collision detection), ovvero il nodo che stra trasmettendo rimane contemporaneamente in ascolto del canale. Se un nodo nota che un altro inizia una trasmissione che crea una collisione, si ferma e attende un periodo casuale di tempo prima di riprendere.
+\end{itemize}
+Queste due regole sono alla base dei protocolli \textbf{CSMA} (carrier sense multiple access) e \textbf{CSMA/CD} (CSMA with collision detection).
+
+La prima domanda è: perchè se tutti i nodi rilevano la portante comunque avvengono collisioni? La risposta è più chiara guardando l'immagine \ref{fig: 080} che illustra un diagramma spazio-temporale relativo a quattro nodi (A, B, C, D). L'asse orizzontale mostra la posizione dei nodi sul canale condiviso e quello verticale rappresenta il tempo.
+
+All'istante $t_{0}$, il nodo B rileva che il canale è inattivo (nessun altro nodo sta trasmettendo), comincia la trasmissione e i suoi vit si propagano in entrambe le direzioni lungo il mezzo trasmissivo. L'espandersi verso valle dei bit di B al crescere de tempo indica che è necessario un intervallo di tempo non nullo l'effettiva propagazione dei bit di B lungo il canale. Al tempo $t_{1} > t_{0}$, il nodo D ha un frame da spedire. Sebbene al tempo $t_{1}$ il nodo B stia ancora trasmettendo, i suoi bit non hanno ancora raggiunto D e quindi, in quell'istante, D ritiene libero il canale, inizierà quindi a trasmettere. Dopo un breve periodo la tramissione di D inizierà a interferire con quella di B.
+
+Quindi il ritardo di propagazione da un estremo all'altro di un canale broadcast avrà un ruolo cruciale per determinare le sue prestazioni. Maggiore è questo ritardo, maggiore sarà la possibilità che il nodo non si accorga che è già cominciata la trasmissione
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.6]{img/080.png}
+		\caption{Diagramma spazio-temporale di due nodi CSMA con trasmissioni in collisione}
+		\label{fig: 080}
+	\end{center}
+\end{figure}
+
+\paragraph{CSMA/CD: accesso multiplo a rilevazione della portante con rilevamento delle collisioni} \label{par: CSMA/CD}
+Nella figura \ref{fig: 080} i nodi non eseguono il rilevamento delle collisioni: B e D continuano a trasmettere i loro pacchetti anche se si è verificata una collisione. Quando un nodo rileva una collisione, cessa immediatamente la trasmissione. La figura \ref{fig: 081} mostra lo scenario dell'immagine \ref{fig: 080} ma ora i due nodi terminano la loro trasmissione poco dopo aver rilevato la collisione. Prima di analizzre il protocollo CSMA/CD riassumiamo le sue operazioni dal punto di vista di una scheda di rete collegata a un canale broadcast.
+\begin{enumerate}
+	\item La scheda ottiene direttamente un datagramma dal livello di rete, prepara un frame a livello di collegamento e lo sistema in un suo buffer
+	\item Quando riscontra che il canale è libero, inizia la trasmissione del frame, altrimenti resta in attesa
+	\item Durante la trasmissione verifica la presenza di eventuali segnali in entrata sul canale broadcast
+	\item La scheda di rete, se trasmette l'intero frame, ha finito il suo lavoro, altrimenti interrompe immediatamente la trasmissione
+	\item Dopo aver annullato la trasmissione, attende per un tempo casuale e ritorna al passo 2
+\end{enumerate}
+È chiaro che se due nodi scelgono lo stesso tempo casuale continueranno ad entrare in collisione.
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.6]{img/080.png}
+		\caption{Diagramma spazio-temporale di due nodi CSMA con rilevamento della collisione}
+		\label{fig: 081}
+	\end{center}
+\end{figure}
+Come si sceglie un appropriato tempo di attesa casuale (detto anche \textbf{tempo di backoff})? L'algoritmo di \textbf{binary exponential backoff} (attesa binaria esponenziale) risolve il problema. Quando il trasmittente riscontra l'n-esima collisione durante la trasmissione di un dato frame, stabilisce casualmente un valore K nell'insieme $/{0, 1, 2, ..., 2^{n} - 1/}$. Quindi più alto è il numero di collisioni, più grande sarà l'intervallo da cui K è estratto. Per fare un esempio, in ethernet l'intervallo di tempo che un nodo deve aspettare è pari a quello necessario per inviare K volte 512 bit e il valore massimo che n può assumere è 10. Quindi la cardinalità dell'insieme da cui è scelto K cresce esponenzialmente, raddoppiando il suo valore massimo ogni volta. Per questa ragione l'algoritmo è detto di \textbf{attesa binaria esponenziale}.
+
+\paragraph{Efficienza di CSMA/CD}
+Definiamo \textbf{efficienza di CSMA/CD} la frazione di tempo media durante la quale i frame sono trasferiti sul canale senzaa collisioni in presenza di un alto numero di nodi attivi, con un'elevata quantità di frame da inviare.
+
+Indichiamo con $d_{prop}$\footcite{Andare a vedere pagina \pageref{par: ritardi} per i calcoli dei ritardi} il tempo massimo che occorre al segnale per propagarsi tra due schede di rete. Dato $d_{trasm}$, ossia il tempo necessario per trasmettere un frame della maggior dimensione possibile, avremo l'approssimazione
+\begin{center}
+	Efficienza = $\dfrac{1}{1 + 5d_{prop}/d_{trasm}}$
+\end{center}
+Quindi quando $d_{prop}$ tende a 0, l'efficienza tende a 1. Mentre se $d_{trasm}$ cresce, l'efficienza tende a 1. Questi due fattori confermano che se il ritardo di propagazione fosse nullo, allora i vari nodi saprebbero subito se il canale è occupato o no, mentre se un frame si appropria di un canale può trattenerlo per un periodo di tempo lungo, rendendo il canale produttivo la maggior parte del tempo.
+
+\subsubsection{Protocolli a rotazione}
+Ricordiamo che due proprietà auspicabili di un protocollo di accesso multiplo sono:
+\begin{enumerate}
+	\item quando un solo nodo  è attivo, deve avere un throughput di R bps
+	\item quando sono attivi M nodi, ciascuno deve avere un throughput vicino a $\dfrac{R}{M}$ bps
+\end{enumerate}
+I protocolli visti fino ad ora presentano la prima ma non la seconda. Questo ha portato alla creazione dei \textbf{protocolli a rotazione} (taking-turn protocol), noi ne vedremo solo due.
+\paragraph{Protocollo polling}
+Uno dei nodi, designato come principale, interpella "a turno" tutti gli altri inviando un messaggio al nodo 1, comunicandogli che può trasmettere fino a un dato numero massimo di frame. Dopo che il nodo 1 ha trasmesso, il nodo principale avvisa il nodo 2 e così via. Il nodo principale può determinare che un nodo ha terminato la sua trasmissione dalla mancanza di segnali sul canale.
+
+Il protocollo polling elimina le collisioni e gli slot vuoti che si riscontrano nei protocolli ad accesso casuale e quindi può avere un'efficienza più elevata, ma presenta alcuni svantaggi:
+\begin{itemize}
+	\item \textbf{Introduzione del ritardo di polling}: il tempo richiesto per notificare a un nodo il permesso di trasmettere
+	\item \textbf{Guasto del nodo principale}: in questo caso l'intero canale diventa inattivo
+\end{itemize}
+
+\paragraph{Protocollo token-passing (protocollo a passaggio di gettone)}
+Non esiste un nodo principale ma un frame, un messaggio di controllo detto \textbf{token} (gettone) che circola fra i nodi in ordine prefissato. Il nodo 1, con il token, inizierà ad inviare il massimo numero di frame consentito per poi passare il token al nodo 2 e così via.
+
+Questo protocollo è decentralizzato ed efficiente ma presenta sempre dei problemi:
+\begin{itemize}
+	\item Il guasto di un canale può disattivare l'intero canale
+	\item Se un nodo non riesce ad inoltrare il token, occorre invocare procedure di recupero per rimetterlo in circolazione
+\end{itemize} 
+
+\subsection{Reti locali commutate}
+\begin{figure}
+	\includegraphics[scale=0.6]{img/082.png}
+	\caption{Una rete istituzionale connessa da quattro switch}
+	\label{fig: 082}
+\end{figure}
+La figura \ref{fig: 082} mostra una rete locale commutata che connette tre dipartimenti, due server e un router con quattro switch. Gli switch, operando a livello di collegamento, commutano frame invece che detagrammi a livello di rete, per cui non riconoscono gli indirizzi a livello di rete e non usano algoritmi di instradamento. Al posto degli indirizzi IP usano indirizzi a livello di collegamento per inoltrare i frame attraverso la rete.
+\subsubsection{Indirizzi a livello di collegamento e ARP}
+Host e router hanno indirizzi a livello di collegamento oltre che a livello di rete.
+\paragraph{Indirizzi MAC}
+In relatà non sono i nodi (ovvero gli host e i router) ad avere indirizzi a livello di collegamento, ma sono i loro adattatori (schede di rete) a possederli. Un host o un router con più interfacce di rete avrà più indirizzi a livello di collegamento associati a esse, esattamente come accadeva per gli indirizzi IP. È importante notare che gli switch a livello di collegamento non hanno indirizzi a livello di collegamento associati alle loro interfacce che connettono a host e router, questo perchè il loro compito  trasportare i datagrammi tra host e router; uno switch effettua questa operazione in modo trasparente, senza che host e router debbano intervenire. Gli indirizzi a livello di collegamento sono indicati con varie terminologie che vanno da \textbf{indirizzo fisico}, \textbf{indirizzo LAN} o \textbf{indirizzo MAC}. Quest'ultimo termine è quello più usato.
+
+L'indirizzo MAC è lungo 6 byte (48 bit) e i suoi valori sono espressi in notazione esadecimale, scrivendo due cifre esadecimali per ogni byte. Un'interessante proprietà degli indirizzi MAC è che non esistono due schede di rete con lo stesso indirizzo, queto perchè la IEEE\footnote{Lo IEEE, acronimo di Institute of Electrical and Electronic Engineers, spesso pronunciato I triple E, è un'associazione internazionale di scienziati professionisti con l'obiettivo della promozione delle scienze tecnologiche} sovraintende alla gestione degli indirizzi MAC. Gli indirizzi MAC hanno una struttura piatta (ovvero non gerarchica, non esiste una parte riservata alla rete e una al dispositivo come per gli indirizzi IP).
+
+Quando una scheda di rete vuole inviare un frame, vi inserisce l'indirizzo MAC di destinazione e lo immette nella LAN. Come per gli indirizzi IP, esiste anche l'\textbf{indirizzo MAC broadcast}, costituito da una stringa di 48 bit posti a 1 (FF-FF-FF-FF-FF-FF in notazione esadecimale).
+
+\paragraph{Protocollo per la risoluzione degli indirizzi (ARP)}
+\begin{figure}
+	\includegraphics[scale=0.6]{img/084.png}
+	\caption{Ogni nodo di una LAN ha un indirizzo IP e l'adattatore di ciascun nodo ha un indirizzo MAC}
+	\label{fig: 084}
+\end{figure}
+Dato che esistono sia indirizzi a livello di rete (IP) sia indirizzi a livello di collegamento (MAC), si presenta la necessità della loro conversione. Internet affida questo compito al \textbf{protocollo di risoluzione degli indirizzi (ARP, address resolution protocol)}.
+
+Per capire la necessità di questo protocollo prendiamo l'immagine \ref{fig: 084}. Ciascun nodo ha un indirizzo IP e la scheda di ciascun nodo ha un indirizzo MAC. In questa trattazione assumeremo che lo switch invii sempre in broadcast tutti i frame. Supponiamo ora che il nodo C con indirizzo IP 222.222.222.220 voglia inviare un datagramma IP al nodo A con indirizzo IP 222.222.222.222. In questo caso i due nodi appartengono alla stessa sottorete, quindi il nodo trasmittente deve fornire alla sua scheda il datagramma IP e l'indirizzo MAC con i quali verrà costruito un frame che verrà immesso sulla LAN.
+
+Per determinare l'indirizzo MAC del destinatario viene usato MAC: un modulo ARP nel nodo sorgente riceve in input un indirizzo IP della stessa LAN e restituisce l'indirizzo MAC corrispondente. ARP può essere usato solo tra i nodi della stessa sottorete.
+
+Cerchiamo di capire come funziona ARP. Nella RAM dei nodi vi è una tabella ARP che contiene la corrispondenza tra indirizzi IP e MAC. La tabella contiene anche un valore relativo al TTL, che indica quando bisognerà eliminare una data voce dalla tabella. Il tipico TTL è 20 minuti. Un esempio è raffigurato dalla tabella \ref{tab: 002}.
+\begin{table}[]
+	\begin{tabular}{|l|l|l|}
+		\hline
+		\multicolumn{1}{|c|}{\textbf{Indirizzo IP}} & \multicolumn{1}{c|}{\textbf{Indirizzo MAC}} & \multicolumn{1}{c|}{\textbf{TTL}} \\ \hline
+		222.222.222.221                             & 88-B2-2F-54-1A-0F                           & 13:45:00                          \\ \hline
+		222.222.222.223                             & 5C-66-AB-90-75-B1                           & 13:52:00                          \\ \hline
+	\end{tabular}
+	\caption{Una possibile tabella ARP per il nodo 222.222.222.220}
+	\label{tab: 002}
+\end{table}
+
+ARP come ottiene l'indirizzo MAC? Il nodo trasmittente costruisce uno speciale pacchetto, chiamato \textbf{pacchetto ARP}, che ha molti campi, compresi quelli per gli indirizzi IP e MAC di chi spedisce e di chi riceve. Lo scopo di un pacchetto ARP di richiesta è interrogare tutti gli altri nodi della sottorete riguardo all'indirizzo MC corrispondente all'indirizzo IP da risolvere. Essendo inviato in broadcast, tutti gli altri nodi della rete ricevono il pacchetto e controllano se l'indirizzo IP corrisponde al proprio. L'unico nodo (se esiste) che ha l'indirizzo corrispondente invia al nodo richiedente un frame di risposta ARP con la corrispondenza desiderata. Il nodo ricevente quindi aggiornerà la propria tabella ARP.
+
+ARP è un protocollo plug-and-play.
+
+\paragraph{Come inviare un datagramma a un nodo esterno alla sottorete}
+\begin{figure}
+	\includegraphics[scale=0.6]{img/085.png}
+	\caption{Due sottoreti connesse da un router}
+	\label{fig: 085}
+\end{figure}
+Osserviamo la figura \ref{fig: 085} dove vengono rappresentate due sottoreti connesse da un router. Notiamo che ci sono due tipi di nodi: host e router. Ciascun host ha un indirizzo IP e una scheda di rete mentre il router, che ha una scheda di rete per ogni interfaccia, ha due indirizzi IP, due indirizzi MAC, due moduli ARP e due schede di rete. Notiamo anche che la sottorete 1 ha indirizzo di rete 111.111.111/24 e la sottorete 2 ha indirizzo 222.222.222/24.
+
+Cosa accade se un host della sottorete 1 volesse inviare un datagramma ad un host della sottorete 2? In particolare supponiamo che l'host 111.111.111.111 voglia inviare un datagramma all'host 222.222.222.222. Poichè il datagramma deve essere inviato tramite il router centrale, l'indirizzo MAC da collegare al frame sarà quello del router che verrà acquisito tramite ARP. La risoluzione da indirizzo IP a indirizzo MAC per la sottorete 2, quindi, sarà compito del router.
+
+\subsubsection{Ethernet}
+Ethernet è attualmente la tecnologia per LAN cablate più diffusa, questo grazie alle alte velocità e alla semplicità rispetto ad altre tecnologie come token ring, FDDI e ATM. Due implementazioni differenti sono quella tramite hub\footnote{Un hub è un dispositivo a livello fisico che agisce sui singoli bit e non sui frame. Quando un bit arriva a un'interfaccia, l'hub semplicemente rigenera il bit, amplifica la sua potenza e lo trasmette su tutte le altre interfacce} e quella tramite switch\footnote{Uno switch è privo di collisioni, è un commutatore di pacchetti store-and-forward e opera a livello 2 (livello di collegamento)}, venuta successivamente ha rimpiazzato l'altra.
+
+\paragraph{Struttura dei frame ethernet}
+\begin{figure}
+	\includegraphics[scale=0.6]{img/086.png}
+	\caption{Struttura di un frame ethernet}
+	\label{fig: 086}
+\end{figure}
+Notiamo dall'immagine \ref{fig: 086} che ethernet può trasportare altri tipi di pacchetti a livello di rete oltre al datagramma IP.
+
+Supponiamo che la scheda di rete trasmittente, A, abbia indirizzo MAC AA-AA-AA-AA-AA-AA e che il ricevente, B, abbia indirizzo MAC BB-BB-BB-BB-BB-BB. La scheda di rete A incapsula il datagramma IP in un frame ethernet e lo passa al livello fisico. B ottiene il frame a livello fisico, estrae il datagramma IP e lo passa al livello di rete. Esaminiamo ora i campi:
+\begin{itemize}
+	\item \textbf{Campo dati} (da 46 a 1500 byte): contiene il datagramma IP. Dato che l'unità massima di trasmissione (MTU)\footnote{Vedere paragrafo \ref{par: MTU}} per ethernet è di 1500 byte, se il datagramma IP supera questo valore, l'host deve frammentare il datagramma. Se invece sarà inferiore a 46 byte dovrà essere riempito
+	\item \textbf{Indirizzo di destinazione} (6 byte):Campo che include l'indirizzo MAC della scheda che dovrà ricevere il pacchetto (BB-BB-BB-BB-BB-BB)
+	\item \textbf{Indirizzo sorgente} (6 byte): Campo che include l'indirizzo MAC della scheda che trasmette il pacchetto (AA-AA-AA-AA-AA-AA)
+	\item \textbf{Tipo} (2 byte): consente a ethernet di supportare vari protocolli di rete
+	\item \textbf{Controllo a ridondanza ciclica (CRC)}\footnote{(Nell'immagine è segnato come FCS)}\footnote{Vedere paragrafo \ref{par: CRC}} (4 byte): questo campo consente di rilevare errori a livello di bit nei frame
+	\item \textbf{Preambolo} (8 byte): sette byte hanno i bit 10101010 e l'ultimo è 10101011 (SFD, start frame delimeter). i primi sette servono per "risvegliare" la scheda di rete dei riceventi e sincronizzare i loro clock con quello del ricevente. Gli ultimi due bit del preambolo (i primi 11 consecutivi) avvisano la scheda che stanno arrivando i dati
+	\item \textbf{Frame Check Sequence (FCS)} (4 byte): 
+\end{itemize}
+A livello di rete tutte le tecnologie ethernet forniscono un servizio senza connessione (ovvero senza handshake). Questo problema viene corretto nel caso l'applicazione stia usando TCP.
+
+\subsubsection{Switch a livello di collegamento}
+Il ruolo dello switch è ricevere i frame in ingresso e inoltrarli sui collegamenti in uscita. Lo switch stesso è trasparente ai nodi: un nodo indirizza i frame direttamente ad un altro nodo senza sapere se ci sarà uno switch sul percorso.
+
+Poichè i frame che arrivano possono eccedere temporaneamente la velocità di uscita dello switch, ogni interfaccia è dotata di un buffer.
+
+\paragraph{Inoltro e filtraggio}
+Il \textbf{filtraggio} (filtering) è la funzionalità dello switch che determina se un frame debba essere inoltrato a una qualche interfaccia o scartato. L'\textbf{inoltro} (forwarding) consiste nell'individuazione dell'interfaccia verso cui il frame deve essere diretto e, quindi, nell'inviarlo a quell'interfaccia. Le operazioni di filtraggio e inoltro di uno switch sono eseguite mediante tabella di commutazione (switch table) composta da alcune voci, non tutte obbligatorie per tutti i nodi:
+\begin{itemize}
+	\item Indirizzo MAC del nodo
+	\item Interfaccia dello switch che conduce al nodo
+	\item Il momento in cui la voce per quel nodo è stata inserita nella tabella
+\end{itemize}
+Un esempio per lo switch dell'immagine \ref{fig: 082} è riportato dalla tabella \ref{tab: 003}.
+\begin{table}[]
+	\begin{tabular}{|l|l|l|}
+		\hline
+		\multicolumn{1}{|c|}{\textbf{Indirizzo}} & \multicolumn{1}{c|}{\textbf{Interfaccia}} & \multicolumn{1}{c|}{\textbf{Tempo}} \\ \hline
+		62-FE-F7-11-89-A3 				& 1				  9:32				\\ \hline
+		7C-BA-B2-B4-91-10				& 3				&9:36				\\ \hline
+		....													& ....			& .....				\\ \hline
+	\end{tabular}
+	\caption{Parte di una tabella di commutazione dello switch più in alto della figura \ref{fig: 082}}
+	\label{tab: 003}
+\end{table}
+Molti switch possono essere utilizzati per effettuare l'inoltro in base all'indirizzo MAC o IP di destinazione. Tuttavia manterremo la distinzione tale per cui gli switch utilizzano gli indirizzi MAC e non IP.
+
+Per fare un esempio, ipotizziamo che un frame con indirizzo di destinazione DD-DD-DD-DD-DD-DD giuunga allo switch sull'interfaccia x. Lo switch cerca l'indirizzo MAC nella sua tabella e i casi sono tre:
+\begin{enumerate}
+	\item Non vi è una voce della tabella per DD-DD-DD-DD-DD-DD: lo switch inoltra copie del frame ai buffer di uscita tranne x. Quindi, se non c'è la voce lo switch inoltra a tutti
+	\item Vi è una voce della tabella per DD-DD-DD-DD-DD-DD associato a x: in questo caso il frame proviene dalla stessa scheda di rete che lo invia, quindi viene filtrato
+	\item Vi è una voce della tabella per DD-DD-DD-DD-DD-DD ed  è associato a $y \neq x$: Il frame viene inoltrato al segmento LAN sull'interfaccia y
+\end{enumerate}
+
+\paragraph{Autoapprendimento}
+Uno switch ha la caratteristica di costruire automaticamente, dinamicamente e in modo autonomo le proprie tabelle. Questa capacità è ottenuta nel seguente modo:
+\begin{enumerate}
+	\item La tabella è inizialmente vuota
+	\item Di ogni frame che riceve, lo switch archivia nella sua tabella
+		\begin{itemize}
+			\item l'indirizzo MAC del campo indirizzo sorgente del frame
+			\item l'interfaccia da cui arriva il frame
+			\item il momento di arrivo
+		\end{itemize}
+			Quando tutti i nodi della LAN avranno inviato un frame, la tabella sarà completa
+	\item Quando, dopo un periodo detto \textbf{aging time}, lo switch non riceve frame da un determinato indirizzo sorgente, lo cancella dalla tabella
+\end{enumerate}
+Gli switch sono dispositivi plug-and-play, non devono essere configurati prima o dopo il collegamento alla LAN.
+
+\paragraph{Proprietà della commutazione a livello di collegamento}
+Possiamo identificare svariati vantaggi:
+\begin{itemize}
+	\item \textbf{Eliminazione delle collisioni}: in una LAN costituita da switch e senza hub non vi è spreco di banda a causa delle collisioni, questo perchè immagazzinano i frame nei buffer e ne inviano massimo uno su ogni segmento di LAN in un certo istante
+	\item \textbf{Collegamenti eterogenei}: poichè i vari collegamenti sono isolati, questi possno funzionare a velocità differenti e possono usare mezzi trasmissivi differenti.
+	\item \textbf{Gestione}: oltre a fornire maggiore sicurezza, uno switch facilita anche la gestione della rete. Infatti, ad esempio, il malfunzionamento di una scheda di rete viene identificato subito dallo switch e la disattiva. In più gli switch possono notificare agli amministratori di rete dove sono i problemi, permettendo interventi più semplici.
+\end{itemize}
+
+\paragraph{Switch e router a confronto}
+I router sono commutatori di pacchetto store-and-forward che inoltrano pacchetti usando gli indirizzi a livello di rete. Gli switch si distinguono dai router perchè usano gli indirizzi MAC. I router sono commutatori di pacchetti di livello 3 (rete), gli switch di livello 2 (collegamento)\footnote{Anche se gli switch moderni possono inoltrare frame a livello 2 tramite MAC o a datagrammi a livello 3 tramite IP}. Nonostante queste differenze, certe volte bisogna scegliere tra i due.
+
+\textbf{Switch}: sono dispositivi plug-and-play, hanno capacità di filtraggio e inoltro elevate ma elaborano pacchetti solo fino al livello 2. Hanno contro il fatto che una grande rete di switch creerebbe molto traffico ARP e non offrono protezione contro le tempeste broadcast, quindi se un host iniziasse a trasmettere in broadcast continuamente, gli switch inoltrerebbero automaticamente, facendo collassare la rete.
+
+\textbf{Router}: poichè gli indirizzi IP sono gerarchici, generalmente i pacchetti non presentano cicli attraverso i router, anche nel caso in cui la rete presenti percorsi ridondanti. Sono soggetti a cicli se le tabelle del router sono configurate male. I pacchetti hanno un campo per limitare la percorrenza dei cicli. I router proteggono dalle temppeste broadcast ma non sono plug-and-play. Hanno tempi di elaborazione più lunghi dovendo elaborare fino al livello 3.
+\begin{figure}
+	\includegraphics[scale=0.6]{img/087.png}
+	\caption{Elaorazione dei pacchetti negli switch, nei router e negli host}
+	\label{fig: 087}
+\end{figure}
+
+Come scegliere quindi? Generalmente per le reti piccole risultano sufficienti degli switch. Le reti più grandi, con migliaia di host, includono tipicamente oltre agli switch anche dei router che forniscono un isolamento del traffico più efficace, evitano le tempeste broadcast e usano percorsi più funzionali.
+\begin{table}[]
+	\begin{tabular}{|l|l|l|}
+		\hline
+		\multicolumn{1}{|c|}{} & \multicolumn{1}{c|}{\textbf{Hub}} & \multicolumn{1}{c|}{\textbf{Router}} & \multicolumn{1}{c|}{\textbf{Switch}} \\ \hline
+		Isolamento del traffico			& No		& Sì		& Sì			\\ \hline
+		Plug and play							& Sì			& No	& Sì			\\ \hline
+		Instradamento ottimale		& No		& Sì		& No		\\ \hline
+	\end{tabular}
+	\caption{Confronto tra le caratteristiche dei più diffusi dispositivi di interconnessione}
+	\label{tab: 004}
+\end{table}
+
+\subsubsection{LAN virtuali (VLAN)}
+Possiamo identificare tre inconveniente nella configurazione dell'immagine \ref{fig: 082}:
+\begin{itemize}
+	\item \textbf{Mancanza di isolamento del traffico}: sebbene la gerarchia localizzi il traffico di un gruppo in un solo switch, il traffico broadcast deve ancora attraversare l'intera rete. Sarebbe preferibile limitare tale traffico, anche per ragioni di sicurezza e riservatezza, in modo che le comunicazioni di un gruppo non possano essere intercettate da parte di un altro. Questo tipo di isolamento potrebbe essere fornito sostituendo lo switch centrale con un router
+	\item \textbf{Uso efficiente degli switch}: se invece di 3 grupi ce ne fossero 10, sarebbero necessari 10 switch di primo livello (quelli che raccolgono gruppi di host). Se ogni gruppo fosse piccolo (ad esempio 10 host) basterebbe un solo switch a 96 porte, anche se questo andrebbe contro l'isolamento del traffico
+	\item \textbf{Gestione degli utenti}: se un dipendente si muovesse tra i gruppi, sarebbe necessario cambiare la posatura della rete per connetterlo a un altro switch
+\end{itemize}
+Fortunatamente, queste difficoltà possono essere superate utilizzando uno switch che supporti una \textbf{Virtual Local Area Network (VLAN o virtual LAN)}. Tale switch permette di definire più reti locali su una singola infrastruttura fisica di rete locale.
+
+\begin{figure}
+	\includegraphics[scale=0.6]{img/088.png}
+	\caption{Un singolo switch con due LAN configurate}
+	\label{fig: 088}
+\end{figure}
+In una VLAN basata sulle porte, le porte (interfacce) dello switch vengono divise dal gestore di rete in gruppi, ognuno dei quali costituisce una VLAN le cui porte formano un dominio broadcast. La figura \ref{fig: 088} mostra la divisione delle porte nei gruppi 2-8 e 9-15 (1 e 16 non sono assegnate). Ora però è stato introdotto un nuovo problema, ovvero come trasmettere il traffico tra le due VLAN. Una soluzione sarebbe collegare le due VLAN ad un router. In realtà gli switch solitamente contengono sia uno switch che un router, in modo che non sia necessario un router esterno.
+
+\begin{figure}
+	\includegraphics[scale=0.6]{img/089.png}
+	\caption{Connessione di due switch abilitati VLAN a due VLAN (a) con due cavi (b) con il trunking}
+	\label{fig: 089}
+	\includegraphics[scale=0.6]{img/090.png}
+	\caption{Frame ethernet originale (in alto), frame ethernet 802.1Q con etichetta VLAN (in basso)}
+	\label{fig: 090}
+\end{figure}
+Ora immaginiamo che i dipartimenti della figura \ref{fig: 082} siano in edifici separati dove deve essere offerto accesso alla rete e questa fa parte della VLAN di dipartimento. La figura \ref{fig: 089} (a) mostra un secondo switch a 8 porte, ognuna definita come appartenente a una delle due VLAN. Questa soluzione non risulta scalabile poichè per N VLAN occorrerebbero N porte per ogni switch, semplicemente per interconnettere i due switch.
+
+Un approccio più scalabile è noto come \textbf{VLAN trunking}. La figura \ref{fig: 089} (b) mostra questo approccio. Una porta speciale per ogni switch (porta 16 a sinistra e porta 1 a destra) viene configurata come porta di trunking per interconnettere i due switch VLAN. La porta appartiene a tutte le VLAN e i frame inviati a qualunque VLAN vengono inoltrati atraverso il collegamento di trunking all'altro switch. Ma come fa uno switch a sapere che un frame che arriva a una porta di trunking appartiene a una VLAN particolare? IEEE ha definito un formato esteso di frame ethernet per frame che attraversano un trunk VLAN. Semplicemente consiste in un frame ethernet con aggiunta di una \textbf{etichetta VLAN} di quattro byte nell'intestazione che trasporta l'identità della VVLAN a cui il frame appartiene. L'etichetta viene rimossa dallo switch ricevente.
+
+L'etichetta VLAN consiste di un campo TPID (tag protocol identifier) di due byte (con un valore fisso esadecimale di 81-100) e un campo tag control information di due byte, contenente il campo di identificazione della VLAN a 12 bit e un campo di priorità a 3 bit.
+
+\section{Reti mobili e wireless}
+\subsection{Introduzione}
+\begin{figure}
+	\includegraphics[scale=0.6]{img/091.png}
+	\caption{Componenti di una rete wireless}
+	\label{fig: 091}
+	\includegraphics[scale=0.6]{img/092.png}
+	\caption{Caratteristiche dei collegamenti di alcuni standard per reti wireless}
+	\label{fig: 092}
+\end{figure}
+In una rete wireless possiamo identificare i seguenti elementi: 
+\begin{itemize}
+	\item \textbf{Host wireless}: come nel caso delle reti cablate, gli host sono dispositivi periferici che eseguono applicazioni
+	\item \textbf{Collegamenti wireless}: ci sono differenti tipi di tecnologia wireless che differiscono per velocità di connessione e distanza raggiungibile (figura \ref{fig: 092})
+	\item \textbf{Stazione base}: è la componente chiave di un'infrastruttura di rete wireless e non ha una controparte nelle reti cablate. Una stazione base è responsabile dell'invio e dalla ricezione dei dati tra gli host wireless associati. Quando diciamo che un host wireless è "associato" ad una stazione base, intendiamo che l'host si trova nell'area di copertura della stazione base e che la utilizza per trasmettere dati verso il resto della rete. Un esempio sono i ripetitori di cella nelle reti cellulare. 
+\end{itemize}
+
+Gli host associati a una stazione base sono considerati come operanti in \textbf{modalità infrastruttura}, in quando i tradizionali servizi di rete sono forniti dalla rete attraverso la stazione base. Nelle \textbf{reti ad hoc}, gli host wireless non hanno un'infrastruttura a cui connettersi e devono occuparsi loro dei vari servizi.
+
+L'host, quando si sposta da una copertura ad un'altra, cambia la stazione a cui è associato. Questo processo si chiama \textbf{handoff}.
+
+A livello più alto possiamo classificare le reti wireless secondo due criteri:
+\begin{enumerate}
+	\item se un pacchetto nella rete attraversa un solo collegamento wireless (hop) o più di uno
+	\item se vi è un'infrastruttura, come una stazione base, oppure no
+\end{enumerate}
+
+\begin{itemize}
+	\item \textbf{Hop singolo, con infrastruttura}: hanno una stazione base che si collega ad una rete cablata più grande. Le reti cellulare rientrano in questa categoria
+	\item \textbf{Hop singolo, senza infrastruttura}: non c'è una stazione base collegata alla rete wireless. Le reti bluetooth fanno parte di questo gruppo
+	\item \textbf{Hop multiplo, con infrastruttura}: è presente una stazione base, collegata tramite cavo alla rete più grande. Tuttavia alcuni nodi potrebbero dover fare affidamento per le loro comunicazioni su altri nodi wireless. Le reti mesh wireless sono di questo tipo
+	\item \textbf{Hop multiplo, senza infrastruttura}: non c'è una stazione base e i nodi possono dover ritrasmette i messaggi a parecchi altri nodi per raggiungere la destinazione.  I casi di questo gruppo sono molto particolari e complicati
+\end{itemize}
+
+\subsection{Collegamenti wireless e caratteristiche di rete}
+Iniziamo elencando le principali differenza tra le reti cablate e wireless.
+\begin{itemize}
+	\item \textbf{Attenuazione del segnale}: il segnale wireless si attenua al crescere della distanza percorsa e per ogni ostacolo incontrato
+	\item \textbf{Interferenze da parte di altre sorgenti}: sorgenti radio che trasmettono nella stessa banda di frequenza interferiscono tra loro
+	\item \textbf{Propagaizone su più cammini (multipath propagation)}: la propagazione su più cammini si veerifica quando una parte delle onde elettromagnetiche si riflette su oggetti e sul terreno, percorrendo cammini di diversa distanza. Questo fenomeno disturba il segnale
+\end{itemize}
+
+Tutto ciò ci fa capire che gli errori nei bit sono più probabili nelle reti wireless, per questo usano potenti codici CRC e anche un protocollo affidabile a livello di collegamento.
+
+Il \textbf{rapporto segnale rumore (SNR, signal-to-noise ratio)} p una misura relativa all'intensità del segnale ricevuto e del rumore ambientale. L'SNR solitamente viene misurato in deciblel (dB) ed è venti volte il logaritmo in base 10 dell'ampiezza del segnale ricevuto diviso per l'ampiezza del rumore. Un SNR più alto significa una maggior capacità di distinzione tra segnale e rumore.
+\begin{figure}
+	\includegraphics[scale=0.6]{img/093.png}
+	\caption{BER, tasso di trasmissione e SNR}
+	\label{fig: 093}
+\end{figure}
+La figura \ref{fig: 093} mostra il tasso di errore sul bit (BER), cioè approssimativamente la probabilità che un bit trasmesso sia ricevuto sbagliato dal ricevente, rispetto a SNR e per diverse tecniche di modulazione. Possiamo notare che:
+\begin{itemize}
+	\item \textbf{Per un dato schema di modulazione, maggiore è SNR, minore è il BER}: un mittente piò aumentare SNR incrementando la potenza di trasmissione, diminuendo così anche il rischio di errori. Notare che oltre una certa soglia, però, il miglioramento è limitato
+	\item \textbf{Per un dato SNR, una tecnica di modulazione con più elevato tasso di trasmissione dei bit ha un BER più alto}
+	\item \textbf{La selezione dinamica delle tecniche di modulazione del livello fisico può essere usata per adattare la tecnica di modulazione alle condizioni del canale}
+\end{itemize}
+
+\begin{figure}
+	\includegraphics[scale=0.6]{img/094.png}
+	\caption{Problema del nodo nascosto causato da un ostacolo (a) o dal fading (b)}
+	\label{fig: 094}
+\end{figure}
+Nei collegmenti wireless ci sono anche altri problemi, come vediamo dalla figura \ref{fig: 094}. Supponiamo che le stazioni A e C stiano trasmettendo alla stazione B. Il \textbf{problema del terminale nascosto} deriva dal fatto che ostacoli fisici potrebbero impedire la comunicazione. Il \textbf{fading} (attenuazione del segnale), invece, è quando la stazione non è rilevabile a causa della degradazione del segnale in base alla distanza.
+
+\subsection{Wi-Fi: LAN wireless 802.11}
+\begin{table}[]
+	\begin{tabular}{|l|l|l|}
+		\hline
+		\multicolumn{1}{|c|}{\textbf{Standard}} & \multicolumn{1}{c|}{\textbf{Gamma di frequenze}} & \multicolumn{1}{c|}{\textbf{Velocità di trasferitmento dei dati}} \\ \hline
+		802.11b                                 & 2,4 GHz                                          & Fino a 11 Mbps                                                    \\ \hline
+		802.11a                                 & 5 GHz                                            & Fino a 54 Mbps                                                    \\ \hline
+		802.11g                                 & 2,4 GHz                                          & Fino a 54 Mbps                                                    \\ \hline
+		802.11n                                 & 2,4 GHz e 5 GHz                                  & Fino a 450 Mbps                                                   \\ \hline
+		802.11ac                                & 5 GHz                                            & Fino a 1300 Mbps                                                  \\ \hline
+	\end{tabular}
+	\caption{Riepilogo degli standard IEEE 802.11}
+	\label{tab: 004}
+\end{table}
+Gli standard 802.11 hanno in comune diverse caratteristiche. Utilizzano lo stesso protocollo di accesso al mezzo, CSMA/CA, e la stessa struttura del frame a livello di collegamento. TUtti possono ridurre la frequenza trasmissiva per raggiungere distanze maggiori. Inoltre hanno la retrocompatibilità.
+
+I tre standard presentano notevoli differenze a livello fisico come la frequenza. In più, i due standard più recenti (n e ac) usano antenne a più ingressi e più uscite (MIMO multiple input multiple output). Le base station 802.11ac possono trasmettere a più stazioni simultaneamente e possono avere antenne intelligenti con beamforming adattivo in modo da ridurre le interferenze e aumentare le distanze.
+
+\subsubsection{Architettura di 802.11}
+\begin{figure}
+	\includegraphics[scale=0.6]{img/095.png}
+	\caption{Architettura della LAN 802.11}
+	\label{fig: 095}
+\end{figure}
+La figura \ref{fig: 095} mostra i componenti basilari dell'architettura dello standard 802.11, il cui blocco principale è il \textbf{basic service set \textit{(BSS, insieme di servizi di base)}}, che contiene una o più stazioni wireless e una stazione base centrale, detta \textbf{access point \textit{(AP, punto di accesso}}. La figura mostra l'AP di due BSS connessi al dispositivo d'interconnessione (switch o router) che, a sua volta, porta verso internet. In una classica rete domestica si trovano un AP e un router (spesso nello stesso dispositivo) che connettono il BSS a internet.
+
+Le stazioni 802.11 hanno indirizzi MAC di 6 byte che sono cablati nel firmware della scheda di rete. Ciascun AP ha anche un indirizzo MAC per le interfacce wireless.
+
+Le reti wireless che usano AP sono anche chiamate \textbf{wireless LAN con infrastruttura}, dove l'infrastruttura è composta da AP, rete ethernet che li collega e un router.
+
+\paragraph{Canali e associazione}
+\begin{figure}
+	\includegraphics[scale=0.6]{img/096.jpg}
+	\caption{Schema dei canali di 802.11b}
+	\label{fig: 096}
+\end{figure}
+Quando un amministratore di rete installa un AP, gli assegna uno o due identificativi, detti \textbf{SSID \textit{(service set identifier)}}. L'amministratore deve anche assegnare all'AP un numero di canale. Per comprendere questo concetto dobbiamo ricordare che 802.11b/g opera nella banda 2,4 - 2,4835 GHz. In questi 85 MHz di banda vengono definiti 11 canali di larghezza 22 MHz, parzialmente sovrapposti. Due canali non si sovrappongono se sono separati da 4 o più canali. Più nello specifico, l'unico terzetto di canali non sovrapposti è quello costituito da 1, 6, 11. Lo schema è mostrato nell'immagine \ref{fig: 096}.
+
+Ora descriviamo la situazione tipica della \textbf{giungle wi-fi} (wi-fi jungle), ovvero un luogo in cui la stazione wireless riceve un segnale abbastanza intenso da 2 o più AP, ad esempio in università.
+
+Supponiamo di trovare 5 AP nella nostra giungla. Per ottenere l'accesso a internet la nostra stazione deve collegarsi ad un unico AP. Come ci si associa ad una stazione specifica? E come si conoscono gli AP raggiungibili in una giungla?
+
+Lo standard 802.11 richiede che gli AP inviino periodicamente dei \textbf{frame beacon}, che contengono il proprio codice SSID e il proprio indirizzo MAC. La stazione wireless analizza gli 11 canali alla ricerca di questi beacon.
+
+La scelta non è data dallo standard 802.11, è invece definita nel firmware della singola stazione wireless. 
+\begin{figure}
+	\includegraphics[scale=0.6]{img/097.png}
+	\caption{Scansione attiva e passiva degli access point}
+	\label{fig: 097}
+\end{figure}
+
+Il processo di scansione dei canali e di ascolto dei frame beacon è chiamato \textbf{scansione passiva} (Figura \ref{fig: 097} (a). Un host wireless esegue anche una \textbf{scansione attiva} (Figura \ref{fig: 097} (b)), inviando in broadcast un frame sonda che verrà ricevuto da tutti gli altri AP nel raggio di copertura dell'host wireess. L'AP risponde al frame sonda di richiesta con uno di risposta. L'host wireless può quindi scegliere l'AP con il quale associarsi. 
+
+Una volta scelto l'AP, l'host invia un frame di richiesta di associazione all'AP che risponde con un frame di risposta di associazione. Una volta associato con un AP, l'host vorrà entrre nella sottorete, nel senso dell'indirizzamento IP, alla quale appartiene l'AP.
+
+\subsubsection{Protocollo MAC di 802.11}
+Poichè stazioni multiple potrebbero trasmettere frame di dati contemporaneamente sullo stesso canale, è necessario un protocollo ad accesso multiplo. In questo contesto, per stazione intendiamo sia la stazione wireless che l'AP. Riprendendo il paragrafo \ref{par: accesso multiplo}, ci sono tre classi si protocolli ad accesso multiplo:
+\begin{itemize}
+	\item suddivisione del canale (CDMA)
+	\item accesso casuale
+	\item rotazione
+\end{itemize}
+802.11 sfrutta un protocollo ad accesso casuale chiamato \textbf{CSMA con prevenzione di collisioni}, o più sinteticamente \textbf{CSMA/CA} (CSMA, carrier sense multiple access. CA, collision avoidance). Ricordiamo che CSMA significa accesso multiplo con rilevamento della portante, ovvero le stazioni ascoltano il canale prima di trasmettere e non trasmettono se è occupato.
+
+Il protocollo MAC di 802.11 è differente rispetto a quello di ethernet. Innanzitutto invece di rilevare le collisioni, 802.11 le previene. Inoltre, essendo il tasso di errore nei bit nei canali wireless elevato, 802.11 utilizza uno schema di "avvenuta ricezione/ritrasmissione"  a livello di collegamento (ARQ).
+
+802.11 non rileva le collisioni per due motivi:
+\begin{itemize}
+	\item La possibilità di rilevare collisioni richiede la capacità di inviare e ricevere contemporaneamente. A causa della potenza del segnale ricevuto inferiore rispetto a quello trasmesso, sarebbe costoso implementare questa possibilità
+	\item Anche se il terminale potesse ricevere e inviare contemporaneamente, non potrebbe rilevare tutte le collisioni a causa del problema del terminale nascosto e dell'attenuazione del segnale
+\end{itemize}
+
+Per questo 802.11 non rileva le collisioni ma direttamente le previene. Prima di capire come, dobbiamo esaminare lo schema di \textbf{conferma di avvenuta ricezione} (acknowledgment scheme) a livello di collegamento di 802.11. Per contrastare la possibilità che un frame non arrivi alla stazione wireless, MAC 802.11 utilizza la conferma di avvenuta ricezione a livello di collegamento. Come mostrato nella figura \ref{fig: 098}, quando la stazione di destinazione riceve un frame che passa il controllo CRC, attende per un breve periodo di tempo, noto come \textbf{SIFS \textit{(short inter-frame space, spazio breve tra frame}}, dopo il quale invia al mittente un frame di conferma di avvenuta ricezione. Se la stazione trasmittente non riceve questo riscontro entro un arco di tempo stabilito, presupporrà un errore e ritrasmetterà il frame. Se il frame di conferma non sarà ricevuto dopo un numero prefissato di ritrasmissioni, la stazione trasmittente passerà oltre e scarterà il frame.
+
+Ora possiamo descrivere il protocollo CSMA/CA. Supponiamo che una stazione abbia un frame da trasmettere.
+\begin{enumerate}
+	\item Se la stazione percepisce il canale come inattivo, allora trasmette il frame dopo un periodo noto come \textbf{DIFS \textit{(distributed inter-frame space, spazio distribuito tra frame}}
+	\item Altrimenti, la stazione sceglie un valore casuale di ritardo usando un'attesa binaria esponenziale (paragrafo \ref{par: CSMA/CD} e decrementa questo valore dopo DIFS solo quando il canale viene percepito come inattivo. Se il canale viene percepito come occupato, il contatore rimane fermo
+	\item Quando il contatore arriva a 0, la stazione trasmette l'intero frame e aspetta il frame di conferma
+	\item Se riceve la conferma, la stazione sa che il frame è stato ricevuto correttamente e, nel caso debba inviare un altro frame, tornerebbe al passo 2. Se il frame di conferma non viene ricevuto, torna al passo 2 incrementando il ritardo
+\end{enumerate}
+
+\begin{figure}
+	\includegraphics[scale=0.6]{img/098.png}
+	\caption{IEEE 802.11 usa acknowledgment a livello di collegamento}
+	\label{fig: 098}
+\end{figure}
+
+\paragraph{Terminali nascosti: RTS e CTS}
+\begin{figure}
+	\includegraphics[scale=0.6]{img/099.png}
+	\caption{Esempio di terminale nascosto: H1 risulta nascosto ad H2 e viceversa}
+	\label{fig: 099}
+\end{figure}
+Il protocollo MAC 802.11 può anche includere (è opzionale) un sistema di prenotazione per sopperire al problema dei terminali nascosti. Vediamo nell'immagine \ref{fig: 099} un caso nel quale ci sono due stazioni wireless e un AP. le due stazioni sono collocate nel raggio dell'AP. A causa dell'attenuazione, i due terminali, H1 e H2, non si possono vedere. Ora, supponiamo che H1 stia trasmettendo un frame e a metà della trasmissione inizi anche H2. H2, non rilevando collisioni sul canale, attenderà DIFS per poi trasmettere il frame, generando una collisione.
+
+Per evitare questo problema, il protocollo 802.11 prevede due frame di controllo:
+\begin{itemize}
+	\item \textbf{RTS} (request to send, richiesta di invio)
+	\item \textbf{CTS} (clear to send, abilitazione a trasmettere)
+\end{itemize}
+per riservare l'intero canale. Il trasmittente, quando vuole inviare dati, invia il frame RTS all'AP, indicando il tempo totale richiesto per la trasmissione e del frame di conferma ACK. L'AP, quando riceve il frame RTS, risponde diffondendo in broadcast il frame CTS. Questo comunica al trasmittente che può inviare a agli altri che il canale è occupato.
+
+L'utilizzo di RTS e CTS può incrementare le prestazioni per due motivi:
+\begin{itemize}
+	\item Risolve il problema del terminale nascosto
+	\item Dato che i frame RTS e CTS sono piccoli, una collisione che li coinvolgesse sarebbe di breve durata
+\end{itemize}
+Questo sistema introduce comunque un ritardo e consuma risorse, per questo motivo questi frame vengono usati solo  per la trasmissione di lunghi frame di dati.
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.6]{img/100.png}
+		\caption{Come evitare le collisioni utilizzando frame RTS e CTS}
+		\label{fig: 100}
+	\end{center}
+\end{figure}
+
+\subsubsection{Pacchetto IEEE 802.11}
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.6]{img/101.png}
+		\caption{Struttura di un frame 802.11}
+		\label{fig: 101}
+	\end{center}
+\end{figure}
+I frame 802.11 sono molto simili ai frame ethernet, ma contengono campi specifici per l'utilizzo nei collegamenti wireless. I numeri sopra ciascun campo nell'immagine \ref{fig: 101} rappresentano la lunghezza in byte, quelli sopra i sottocampi i bit.
+\paragraph{Campi payload e CRC}
+Il payload è solitamente un datagramma IP o un pacchetto ARP. In genere non raggiunge i 1500 byte. I campi hanno un CRC di 32 bit che permette al ricevente il rilevamento degli errori nei bit.
+
+\paragraph{Campi indirizzo}
+Ogni indirizzo può contenerete un indirizzo MAC di 6 byte. I tre campi indirizzo sono necessari a scopi d'interconnessione, il quarto è impiegato nelle reti ad hoc ma non in quelle con infrastruttura.
+\begin{itemize}
+	\item \textbf{L'indirizzo 2} è l'indirizzo MAC della stazione che trasmette il frame
+	\item \textbf{L'indirizzo 1} è l'indirizzo MAC della stazione che riceve il frame
+	\item \textbf{L'indirizzo 3} è l'indirizzo MAC dell'interfaccia del router
+\end{itemize}
+
+\begin{figure}
+	\begin{center}
+		\includegraphics[scale=0.6]{img/102.png}
+		\caption{Uso dei campi indirizzo nei frame 802.11: invio di frame da H1 a R1}
+		\label{fig: 102}
+	\end{center}
+\end{figure}
+Per capire meglio l'indirizzo 3 usiamo come esempio l'immagine \ref{fig: 102}. Serve ricordare che l'AP lavora a livello di collegamento, quindi non comprende i datagrammi IP nè i suoi indirizzi. Supponiamo di dover trasportare un datagramma dall'interfaccia R1 del router alla stazione wireless H1. Il router non sa dell'esistenza dell'AP.
+\begin{itemize}
+	\item Il router, ce conosce l'indirizzo IP di H1 utilizza ARP per determinare l'indirizzo MAC di H1. Dopo aver ottenuto l'indirizzo MAC di H1, l'interfaccia del router R1 incapsula il datagramma IP in un frame ethernet. I campi indirizzo del pacchetto contengono anche l'indirizzo MAC di R1 e quello di H1.
+	\item Quando il frame ethernet giunge all'AP, questo lo converte in un frame 802.11 prima di ritrasmetterlo. L'AP riempie i campi indirizzo 1 e 2 con l'indirizzo MAC di H1 e il proprio, mentre l'indirizzo 3 sarà quello del router R1. In questo mdo 1 è in grado di determinare l'indirizzo MAC dell'interfaccia del router che ha inviato il datagramma.
+\end{itemize}
+Ora vediamo cosa accade quando H1 risponde.
+\begin{itemize}
+	\item H1 crea un frame 802.11, riempiendo i campi indirizzo 1 e 2 con il suo e quello dell'AP e l'indirizzo 3 sarà quello di E1
+	\item Quando l'AP riceve il frame 802.11, lo converte in un frame ethernet. Il campo dell'indirizzo sorgente è quello di H1, mentre quello di destinazione è quello di R1.
+\end{itemize}
+L'indirizzo 3 gioca un ruolo cruciale per interconnettere il BSS con una rete cablata.
+
+\paragraph{Campi numero di sequenza, durata e di controllo del pacchetto}
+Il \textbf{numero di sequenza} svolge la stessa funzione di quello che si trova al livello di trasporto (paragrafo \ref{par: numSequenza}).
+
+802.11 permette alla stazione trasmittente di riservare il canale per un periodo di tempo, questo valore è incluso nel campo \textbf{durata}.
+
+Il \textbf{campo di controllo del frame} è articolato in più sottocampi. I campi \textbf{tipo} e \textbf{sottotipo} sono utilizzati per distinguere frame di associazione, RTS, CTS, ACK e dati. \\
+I campi \textbf{verso AP} e \textbf{da AP} definiscono la funzione dei diversi campi indirizzo. Il significato cambia se viene usata una rete ad hoc o con infrastruttura e, in questo caso, se il frame è inviato da una stazione o da un AP. \\
+Il campo \textbf{WEP} specifica un'eventuale cifratura dei dati.
+
+\subsubsection{Mobilità all'interno di una sottorete IP}
+\begin{figure}
+		\includegraphics[scale=0.6]{img/103.png}
+		\caption{Mobilità all'interno della stessa sottorete}
+		\label{fig: 103}
+\end{figure}
+La mobilità tra diversi BSS è semplice se si tratta della stessa sottorete (ad esempio spostandosi nell'edificio universitario).
+
+Prendiamo ad esempio l'immagine \ref{fig: 103}. Notiamo che i due AP sono connessi ad uno switch e non a un router. Quindi tutte le stazioni all'interno dei due BSS apparterranno alla stessa sottorete IP. Quindi, quando H1 passa da BBS1 a BBS2, può mantenere il suo indirizzo IP e le sue connessioni TCP aperte. Se fosse stato un router avrebbe dovuto richiedere un nuovo indirizzo IP e chiudere le sue connessioni TCP.
+
+Dal punto di vista dell'handoff tra AP1 e AP2 la cosa è semplice, mentre come fa lo switch a sapere che H1 si è spostato da un AP all'altro? Semplice, autoapprendendo e costruendo una nuova entrata sulla tabella di inoltro.
+
+\subsubsection{Funzionalità avanzate di 802.11}
+\paragraph{Adattamento del tasso in 802.11}
+Abbiamo visto prima nella figura  \ref{fig: 093} che esistono diverse tecniche di modulazione che si associano a scenari di SNR distinti. Consideriamo ora un utente che si trova a 20 metri dalla stazione base e ha un altro SNR. Dato l'altro SNR, può comunicare con la stazione base usando una modulazione che fornisce un tasso trasmissivo alto, mantenendo un BER basso. Ora immaginiamo che l'utente si allontani, diminuendo l'SNR al crescere della distanza. In questo caso arriveremo ad un punto nel quale i frame non saranno più ricevuti correttamente.
+
+Per questa ragione alcune implementazioni di 802.11 sono in grado di variare il tasso tramissivo selezionando in modo adattivo le tecniche di modulazione. Se un nodo invia due frame consecutivi senza ricevere un riscontro, il tasso trasmissivo ricade al successivo valore più basso. Se per 10 frame consecutivi viene confermata la ricezione o scade il timer che tiene traccia del tempo dall'ultima sostituzione del tasso, il tasso trasmissivo viene incrementato.
+
+Questo sistema è simile a quello del controllo di congestione di TCP.
+
+\paragraph{Gestione dell'energia}
+Un nodo è in grado di alternare esplicitamente tra gli stati di "attivo" (wake) e "inattivo" (sleep). Un nodo indica all'AP che sta per disattivarsi impostando a 1 il bit di gestione energetica nell'intestazione del frame 802.11. Il nodo imposta un timer perchè torni ad attivarsi appena prima dell'instante in cui l'AP è programmato per mandare il frame beacon. Dato che l'AP è a conoscenza del fatto che il nodo sta per disattivarsi non dovrà inviare frame al nodo e memorizza i frame destinati all'host disattivo per una trasmissione successiva.
+\pagebreak
+
+\section{Formulario}
+\subsection{Introduzione}
+Siano:
+\begin{itemize}
+	\item L la lunghezza (length) del pacchetto in bit
+	\item R la velocità (rate) di trasmissione in bit per secondo
+	\item d la distanza (distance) tra due nodi in metri
+	\item s la velocità (speed) di propagazione del segnale in metri al secondo
+	\item a il tasso medio (average rate) con cui arrivano pacchetti, in pacchetti al secondo
+\end{itemize}
+
+Abbiamo:
+\begin{itemize}
+	\item Ritardo di trasmissione: $\dfrac{L}{R}$
+	\item Ritardo di propagazione: $\dfrac{d}{s}$
+	\item Intensità del traffico: $\dfrac{aL}{R}$ che deve essere <1 per non aumentare la coda
+\end{itemize}
+
+\subsection{Livello di trasporto}
+Siano
+\begin{itemize}
+	\item N la dimensione della finestra in numero di pacchetti
+	\item RTT il round trip time in secondi
+	\item O la dimensione di un oggetto in bit
+	\item MSS la massima dimensione di un segmento in bit
+\end{itemize}
+
+Abbiamo:
+\begin{itemize}
+	\item Utilizzazione del canale: $\dfrac{N * \dfrac{L}{R}}{RTT + \dfrac{L}{R}}$, se uguale a 1 significa utilizzo continuo
+	\item Throughput medio: $\dfrac{\dfrac{3}{4} * N * L}{RTT}$
+	\item Latenza (senza stalli): $2 * RTT + \dfrac{O}{R}$
+	\item Dimensione massima finestra: $1 + \dfrac{R}{MSS} * RTT$
+	\item Tasso di perdita dei pacchetti: $\dfrac{1}{\dfrac{3}{8} * N^{2}}$
+	\item Controllo della congestione TCP:
+	\begin{itemize}
+		\item Aumento additivo della finestra di congestione: $CongWin = CongWin_{prec} + MSS$)}
+		\item Riduzione moltiplicativa della finestra di congestione: $CongWin = CongWin_{prec}/2$
+		\item Fase iniziale: partenza lenta, $CongWin = CongWin_{prec}*2$
+		\item Raggiungimento \emph{CongWin = Threshold}: AIMD, $CongWin = CongWin_{prec} + MSS$
+		\item Evento di perdita, tipo ACK duplicato tre volte: $CongWin = CongWin_{prec}/2$, $Threshold = CongWin_{prec}/2$
+		\item Evento di timeout: $CongWin = MSS$, $Threshold = CongWin_{prec}/2$, ricomincia la partenza lenta
+	\end{itemize}
+	\item ACK/numero di sequenza:
+	\begin{itemize}
+		\item PacchettoA : seq = x; ack = y; caricodati = ‘n'
+		\item PacchettoB : seq = y; ack = x + n
+	\end{itemize}
+\end{itemize}
+
+\subsection{Livello di collegamento}
+Siano:
+\begin{itemize}
+	\item N: numero di nodi
+	\item p: probabilità di ritrasmissione
+	\item 1 - p: probabilità di non ritrasmissione
+\end{itemize}
+\begin{itemize}
+	\item r bit di CRC rappresentano un generatore G di r + 1 bit, in grado di rilevare errori a raffica fino a r + 1 bit.
+	\item Efficienza slotted ALOHA: $Np(1 - p)^{N - 1}$ --> 37\%
+	\item Efficienza ALOHA: $p(1 - p)^{2(N - 1)}$ --> 18\%
+	\item Efficienza CSMA/CD: $\dfrac{1}{1 + 5d_{prop}/d_{trasm}}$, tenda a 1 aumentando il ritardo di trasmissione
+\end{itemize}
 \end{document}
