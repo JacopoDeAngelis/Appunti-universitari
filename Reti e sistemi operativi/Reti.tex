@@ -5,15 +5,16 @@
 \usepackage{graphicx}
 \usepackage{imakeidx}
 \usepackage{amsmath}
-\makeindex[intoc]
 \usepackage[hyperfootnotes=false, colorlinks=true, linkcolor=black]{hyperref}
-\usepackage{verbatim}
+\usepackage[style=numeric-comp,useprefix,hyperref,backend=bibtex]{biblatex}
 
 
 \begin{document}
 \title{Reti e sistemi operativi - Reti}
 \author{Jacopo De Angelis}
 \maketitle
+
+\pagebreak
 \tableofcontents
 \pagebreak
 
@@ -105,8 +106,7 @@ Esistono due principali tipi di approccio per la costruzione della sezione inter
 \end{itemize}
 Le reti telefoniche sono un esempio di rete a commutazione di circuito. Internet, invece, è un esempio di rete a commutazione di pacchetto. Le reti non sono per forza o di un tipo o dell’altro.
 
-\begin{comment}
-\subsubsection{Commutazione di circuito}
+\subsubsection{Commutazione di circuito} \label{par: TDM/FDM}
 Nell’immagine qua accanto i quattro commutatori di circuito sono collegati da due link. Ognuno di questi link è costitutito da n circuiti, in modo che ciascun link possa mantenere n connessioni simultanee.
 I terminali sono collegati direttamente a uno dei commutatori. Alcuni degli host hanno un accesso analogico ai commutatori, mentre altri hanno un accesso numerico diretto. Per l’accesso analogico è necessario un modem. Quando due host desiderano comunicare, la rete stabilisce un circuito dedicato end-to-end fra essi. In questo caso viene prenotato un circuito su ciascuno dei due link.
 \begin{figure}
@@ -115,7 +115,7 @@ I terminali sono collegati direttamente a uno dei commutatori. Alcuni degli host
 		\caption{Una semplice rete a commutazione di circuito, che consiste di quattro commutatori di circuito collegati da quattro link}
 	\end{center}
 \end{figure}
-\paragraph{Multiplazione (multiplexing) nelle reti a commutazione di circuito)} \label{par: 001}
+\paragraph{Multiplazione (multiplexing) nelle reti a commutazione di circuito)} 
 Un circuito in un link è realizzato mediante la multiplazione a divisione di frequenza (FDM) o la multiplazione a divisione di tempo (TDM).
 Con l’FDM, lo spettro di frequenza di un link è diviso fra le connessioni stabilite sul link, dedicando così una banda di frequenza. \\
 Per il TDM il dominio temporale è suddiviso tra quattro circuiti con quattro time slot in ciascun frame; a ciuacun circuito è assegnato lo stesso slot nei frame TDM che si succedono. La velocità di trasmissione di ciascun circuito è uguale a:
@@ -132,7 +132,6 @@ Per il TDM il dominio temporale è suddiviso tra quattro circuiti con quattro ti
 
 per esempio, se il link trasmette 8000 frame al secondo e ogni slot è costituito da 8 bit, la velocità di trasmissione è 64 Kb/s. \\
 I fautori della commutazione di pacchetto hanno sempre sostenuto che la commutazione di circuito porta a sprechi, perché i circuiti dedicati sono 	inattivi durante i periodi silenti (ad esempio quando la linea telefonica non viene usata).
-\end{comment}
 
 \paragraph{Commutazione di pacchetto}
 \textbf{Nelle moderne reti di calcolatori, la sorgente suddivide i messaggi lunghi in pezzi più piccoli di dati conosciuti come paccehtti.} \\
@@ -1241,7 +1240,7 @@ Il livello di collegamento di un host è implementato in hardware o in software?
 La figura \ref{fig: 069} mostra la tipica architettura di un host. Per un dato collegamento, il protocollo del livello di collegamento è realizzato da un \textbf{adattatore di rete \textit{(network adapter)}}, noto anche come \textbf{scheda di rete \textit{(NIC, network interface card)}}. Il cuore della scheda è il controllder a livello di collegamento (link layer controller), che è di solito un chip dedicato che implementa molti dei servizi a livello di collegamento (framing, accesso al collegamento, rilevazione degli errori). La maggior parte delle funzionalità è quindi implementata nell'hardware.
 \begin{figure}
 	\begin{center}
-		\includegraphics[scale=1]{img/069.png}
+		\includegraphics[scale=0.6]{img/069.png}
 		\caption{Adattatore di rete: le sue relazioni con gli altri componenti dell'host e con le funzionalità della pila di protocolli}
 		\label{fig: 069}
 	\end{center}
@@ -1265,7 +1264,7 @@ Vedremo tre tecniche:
 	\item \textbf{Controllo a ridondanza ciclica}: in genere impiegato dalle schede di rete a livello di collegamento
 \end{itemize}
 \begin{figure}
-	\includegraphics[scale=0.6]{img/070.png}
+	\includegraphics[scale=0.35]{img/070.png}
 	\caption{Scenario di rilevazione e correzione degli errori}
 	\label{fig: 070}
 	\includegraphics[scale=0.6]{img/071.png}
@@ -1283,7 +1282,7 @@ Cosa accade però se è avvenuto un numero pari di errori nei bit? In questo cas
 Prima di descrivere altri metodi generalizziamo il nostro approccio. La figura \ref{fig: 072} mostra che i \emph{d} bit del dato D sono suddivisi in i righe e j colonne per ognuna delle quali  stato calcolato un valore di parità. I risultati i + j + 1 bit di parità contengono bit per la rilevazione dell'errore nei frame a livello di collegamento.
 \begin{figure}
 	\begin{center}
-		\includegraphics[scale=0.6]{img/072.png}
+		\includegraphics[scale=0.5]{img/072.png}
 		\caption{Parità pari bidimensionale}
 		\label{fig: 072}
 	\end{center}
@@ -1355,7 +1354,7 @@ In questo capitolo tratteremo il \textbf{problema dell'accesso multiplo}, ovvero
 192.128.64.7 è l'indirizzo IP e 24 è la subnet mask. /24 corrisponde alla subnet mask 255.255.255.0. L'indirizzo IP è costituito da 4 numeri decimali, chiamati ottetti, che sono separati da punti. Un ottetto è formato da 8 bit, motivo per cui l'IPv4 è un indirizzo a 32 bit. Ogni ottetto può rappresentare un numero compreso tra 0 e 255. In questo caso, l'intero ultimo ottetto è composto da bit dell'host. In questo esempio, quindi, l'indirizzo di broadcast sarebbe 192.128.64.\textbf{255}, con tutti i bit dell'host a 1.
 \begin{figure}
 	\begin{center}
-		\includegraphics[scale=0.6]{img/075.png}
+		\includegraphics[scale=0.3]{img/075.png}
 		\caption{Esempio di calcolo dell'indirizzo di broadcast}
 		\label{fig: 075}
 	\end{center}
@@ -1401,7 +1400,7 @@ Idealmente, un protocollo di accesso multiplo per un canale broadcast con una ve
 \end{enumerate}
 
 \subsubsection{Protocolli a suddivisione del canale}
-Come mostrato al paragrafo \ref{par: 001}, il multiplexing a divisione di tempo, TDM, e quello a divisione di frequenza, FDM, sono due tecniche che possono essere utilizzate per suddividere la larghezza di banda di un canale broadcast fra i nodi che lo condividono. Per esempio, supponiamo che il canale supporti N nodi e che la sua velocità di trasmissione sia di R bps. TDM suddivide il tempo in \textbf{intervalli di tempo} (time frame) e poi divide ciascun intervallo di tempo in N \textbf{slot temporali} (time slot). Ogni slot è quindi assegnato a uno degli N nodi. Ogni volta che un nodo ha un pacchetto da inviare, trasmette i bit del pacchetto durante lo slot di tempo assegnatogli. Generalmente, le dimensioni dello slot sono stabilite in modo da consentire la trasmissione di un singolo pacchetto. La figura \ref{fig: 077} mostra un caso di TDM con quattro nodi.
+Come mostrato al paragrafo \ref{par: TDM/FDM}, il multiplexing a divisione di tempo, TDM, e quello a divisione di frequenza, FDM, sono due tecniche che possono essere utilizzate per suddividere la larghezza di banda di un canale broadcast fra i nodi che lo condividono. Per esempio, supponiamo che il canale supporti N nodi e che la sua velocità di trasmissione sia di R bps. TDM suddivide il tempo in \textbf{intervalli di tempo} (time frame) e poi divide ciascun intervallo di tempo in N \textbf{slot temporali} (time slot). Ogni slot è quindi assegnato a uno degli N nodi. Ogni volta che un nodo ha un pacchetto da inviare, trasmette i bit del pacchetto durante lo slot di tempo assegnatogli. Generalmente, le dimensioni dello slot sono stabilite in modo da consentire la trasmissione di un singolo pacchetto. La figura \ref{fig: 077} mostra un caso di TDM con quattro nodi.
 
 \begin{figure}
 	\begin{center}
@@ -1448,7 +1447,7 @@ Slotted ALOHA funziona bene quando c'è un solo nodo attivo, ma se esistono molt
 		p: probabilità di ritrasmissione \\
 		1 - p: probabilità di non ritrasmissione}
 \end{center}
-Per ottenere la massima efficienza bisogna trovare p* che massimizza questa espressione. Quindi, per $\lim_{N\to\infty} Np^{*}(1 - p^{*})^{N - 1}$ abbiamo che \textbf{l'efficienza massima di slotted ALOHA è $\dfrac{1}{e} =  37%$.}
+Per ottenere la massima efficienza bisogna trovare p* che massimizza questa espressione. Quindi, per $\lim_{N\to\infty} Np^{*}(1 - p^{*})^{N - 1}$ abbiamo che \textbf{l'efficienza massima di slotted ALOHA è $\dfrac{1}{e} =  37\%$.}
 \begin{center}
 	\textbf{Efficienza massima slotted ALOHA}: 37\% \\
 	\textbf{Velocità effettiva di trasmissione}:  0,37 R bps \\
@@ -1464,9 +1463,9 @@ Per ottenere la massima efficienza bisogna trovare p* che massimizza questa espr
 \end{figure}
 Il primo protocollo ALOHA era privo di slot, completamente decentralizzato. Il nodo trasmetteva immediatamente il pacchetto e nel caso di collisione lo ritrasmetteva con probabilità p. Altrimenti attenderà il tempo di trasmissione del frame per poi riprovare.
 
-Per determinare l'efficienza massima di ALOHA puro analizziamo un singolo nodo. Useremo le stesse assunzioni di prima e come unità di tempo, al posto degli slot, prenderemo il tempo di trasmissione del frame. Ad ogni istante la probabilità che un nodo stia trasmettendo è di p. Supponiamo che la trasmissione di un frame inizi al tempo $t_{0}$. Come illustrato nella figura \ref{fig: 079}, affinchè questo frame sia trasmesso con esito positivo nessun altro nodo può cominciare la sua trasmissione nell'intervallo di tempo $(t_{0} - 1, t_{0}]$, in quanto si sovrapporrebbe con l'inizio della trasmissione del frame del nodo i. La probabilità che tutti gli altri nodi non diano inizio a una trasmissione in questo intervallo è $(1 - p)^{N - 1}$. Analogamente nessun altro nodo deve iniziare a trasmettere in questo intervallo di tempo, la cui probabilità è sempre $(1 - p)^{N - 1}$. Quindi, possiamo notare che la probabilità che un certo nodo abbia successo nella trasmissione è $p(1 - p)^{2(N - 1)}$. Ricavando il limite come prima, otteniamo che l'efficienza massima del protocollo ALOHA puro è solo $\dfrac{1}{2e} = 18%$, la metà di slotted ALOHA.
+Per determinare l'efficienza massima di ALOHA puro analizziamo un singolo nodo. Useremo le stesse assunzioni di prima e come unità di tempo, al posto degli slot, prenderemo il tempo di trasmissione del frame. Ad ogni istante la probabilità che un nodo stia trasmettendo è di p. Supponiamo che la trasmissione di un frame inizi al tempo $t_{0}$. Come illustrato nella figura \ref{fig: 079}, affinchè questo frame sia trasmesso con esito positivo nessun altro nodo può cominciare la sua trasmissione nell'intervallo di tempo $(t_{0} - 1, t_{0}]$, in quanto si sovrapporrebbe con l'inizio della trasmissione del frame del nodo i. La probabilità che tutti gli altri nodi non diano inizio a una trasmissione in questo intervallo è $(1 - p)^{N - 1}$. Analogamente nessun altro nodo deve iniziare a trasmettere in questo intervallo di tempo, la cui probabilità è sempre $(1 - p)^{N - 1}$. Quindi, possiamo notare che la probabilità che un certo nodo abbia successo nella trasmissione è $p(1 - p)^{2(N - 1)}$. Ricavando il limite come prima, otteniamo che l'efficienza massima del protocollo ALOHA puro è solo $\dfrac{1}{2e} = 18\%$, la metà di slotted ALOHA.
 \begin{center}
-	\textbf{Efficienza massima ALOHA}: 18\% \\
+	\textbf{Efficienza massima ALOHA}: 18% \\
 \end{center}
 
 \paragraph{CSMA: accesso multiplo con rilevamento della portante}
@@ -1512,7 +1511,7 @@ Come si sceglie un appropriato tempo di attesa casuale (detto anche \textbf{temp
 \paragraph{Efficienza di CSMA/CD}
 Definiamo \textbf{efficienza di CSMA/CD} la frazione di tempo media durante la quale i frame sono trasferiti sul canale senzaa collisioni in presenza di un alto numero di nodi attivi, con un'elevata quantità di frame da inviare.
 
-Indichiamo con $d_{prop}$\footcite{Andare a vedere pagina \pageref{par: ritardi} per i calcoli dei ritardi} il tempo massimo che occorre al segnale per propagarsi tra due schede di rete. Dato $d_{trasm}$, ossia il tempo necessario per trasmettere un frame della maggior dimensione possibile, avremo l'approssimazione
+Indichiamo con $d_{prop}$\footnote{Andare a vedere pagina \pageref{par: ritardi} per i calcoli dei ritardi} il tempo massimo che occorre al segnale per propagarsi tra due schede di rete. Dato $d_{trasm}$, ossia il tempo necessario per trasmettere un frame della maggior dimensione possibile, avremo l'approssimazione
 \begin{center}
 	Efficienza = $\dfrac{1}{1 + 5d_{prop}/d_{trasm}}$
 \end{center}
@@ -1545,7 +1544,7 @@ Questo protocollo è decentralizzato ed efficiente ma presenta sempre dei proble
 
 \subsection{Reti locali commutate}
 \begin{figure}
-	\includegraphics[scale=0.6]{img/082.png}
+	\includegraphics[scale=0.55]{img/082.png}
 	\caption{Una rete istituzionale connessa da quattro switch}
 	\label{fig: 082}
 \end{figure}
@@ -1572,16 +1571,19 @@ Per capire la necessità di questo protocollo prendiamo l'immagine \ref{fig: 084
 Per determinare l'indirizzo MAC del destinatario viene usato MAC: un modulo ARP nel nodo sorgente riceve in input un indirizzo IP della stessa LAN e restituisce l'indirizzo MAC corrispondente. ARP può essere usato solo tra i nodi della stessa sottorete.
 
 Cerchiamo di capire come funziona ARP. Nella RAM dei nodi vi è una tabella ARP che contiene la corrispondenza tra indirizzi IP e MAC. La tabella contiene anche un valore relativo al TTL, che indica quando bisognerà eliminare una data voce dalla tabella. Il tipico TTL è 20 minuti. Un esempio è raffigurato dalla tabella \ref{tab: 002}.
-\begin{table}[]
-	\begin{tabular}{|l|l|l|}
-		\hline
-		\multicolumn{1}{|c|}{\textbf{Indirizzo IP}} & \multicolumn{1}{c|}{\textbf{Indirizzo MAC}} & \multicolumn{1}{c|}{\textbf{TTL}} \\ \hline
-		222.222.222.221                             & 88-B2-2F-54-1A-0F                           & 13:45:00                          \\ \hline
-		222.222.222.223                             & 5C-66-AB-90-75-B1                           & 13:52:00                          \\ \hline
-	\end{tabular}
-	\caption{Una possibile tabella ARP per il nodo 222.222.222.220}
-	\label{tab: 002}
-\end{table}
+\begin{center}
+	\begin{table}[]
+		\begin{tabular}{|l|l|l|}
+			\hline
+			\multicolumn{1}{|c|}{\textbf{Indirizzo IP}} & \multicolumn{1}{c|}{\textbf{Indirizzo MAC}} & \multicolumn{1}{c|}{\textbf{TTL}} \\ \hline
+			222.222.222.221                             & 88-B2-2F-54-1A-0F                           & 13:45:00                          \\ \hline
+			222.222.222.223                             & 5C-66-AB-90-75-B1                           & 13:52:00                          \\ \hline
+		\end{tabular}
+		\caption{Una possibile tabella ARP per il nodo 222.222.222.220}
+		\label{tab: 002}
+	\end{table}
+\end{center}
+
 
 ARP come ottiene l'indirizzo MAC? Il nodo trasmittente costruisce uno speciale pacchetto, chiamato \textbf{pacchetto ARP}, che ha molti campi, compresi quelli per gli indirizzi IP e MAC di chi spedisce e di chi riceve. Lo scopo di un pacchetto ARP di richiesta è interrogare tutti gli altri nodi della sottorete riguardo all'indirizzo MC corrispondente all'indirizzo IP da risolvere. Essendo inviato in broadcast, tutti gli altri nodi della rete ricevono il pacchetto e controllano se l'indirizzo IP corrisponde al proprio. L'unico nodo (se esiste) che ha l'indirizzo corrispondente invia al nodo richiedente un frame di risposta ARP con la corrispondenza desiderata. Il nodo ricevente quindi aggiornerà la propria tabella ARP.
 
@@ -1589,7 +1591,7 @@ ARP è un protocollo plug-and-play.
 
 \paragraph{Come inviare un datagramma a un nodo esterno alla sottorete}
 \begin{figure}
-	\includegraphics[scale=0.6]{img/085.png}
+	\includegraphics[scale=0.5]{img/085.png}
 	\caption{Due sottoreti connesse da un router}
 	\label{fig: 085}
 \end{figure}
@@ -1602,7 +1604,7 @@ Ethernet è attualmente la tecnologia per LAN cablate più diffusa, questo grazi
 
 \paragraph{Struttura dei frame ethernet}
 \begin{figure}
-	\includegraphics[scale=0.6]{img/086.png}
+	\includegraphics[scale=1]{img/086.png}
 	\caption{Struttura di un frame ethernet}
 	\label{fig: 086}
 \end{figure}
@@ -1639,7 +1641,7 @@ Un esempio per lo switch dell'immagine \ref{fig: 082} è riportato dalla tabella
 		\multicolumn{1}{|c|}{\textbf{Indirizzo}} & \multicolumn{1}{c|}{\textbf{Interfaccia}} & \multicolumn{1}{c|}{\textbf{Tempo}} \\ \hline
 		62-FE-F7-11-89-A3 				& 1				  9:32				\\ \hline
 		7C-BA-B2-B4-91-10				& 3				&9:36				\\ \hline
-		....													& ....			& .....				\\ \hline
+		....							& ....			& .....				\\ \hline
 	\end{tabular}
 	\caption{Parte di una tabella di commutazione dello switch più in alto della figura \ref{fig: 082}}
 	\label{tab: 003}
@@ -1683,19 +1685,19 @@ I router sono commutatori di pacchetto store-and-forward che inoltrano pacchetti
 
 \textbf{Router}: poichè gli indirizzi IP sono gerarchici, generalmente i pacchetti non presentano cicli attraverso i router, anche nel caso in cui la rete presenti percorsi ridondanti. Sono soggetti a cicli se le tabelle del router sono configurate male. I pacchetti hanno un campo per limitare la percorrenza dei cicli. I router proteggono dalle temppeste broadcast ma non sono plug-and-play. Hanno tempi di elaborazione più lunghi dovendo elaborare fino al livello 3.
 \begin{figure}
-	\includegraphics[scale=0.6]{img/087.png}
+	\includegraphics[scale=0.35]{img/087.png}
 	\caption{Elaorazione dei pacchetti negli switch, nei router e negli host}
 	\label{fig: 087}
 \end{figure}
 
 Come scegliere quindi? Generalmente per le reti piccole risultano sufficienti degli switch. Le reti più grandi, con migliaia di host, includono tipicamente oltre agli switch anche dei router che forniscono un isolamento del traffico più efficace, evitano le tempeste broadcast e usano percorsi più funzionali.
 \begin{table}[]
-	\begin{tabular}{|l|l|l|}
+	\begin{tabular}{|l|l|l|l|}
 		\hline
-		\multicolumn{1}{|c|}{} & \multicolumn{1}{c|}{\textbf{Hub}} & \multicolumn{1}{c|}{\textbf{Router}} & \multicolumn{1}{c|}{\textbf{Switch}} \\ \hline
-		Isolamento del traffico			& No		& Sì		& Sì			\\ \hline
-		Plug and play							& Sì			& No	& Sì			\\ \hline
-		Instradamento ottimale		& No		& Sì		& No		\\ \hline
+                        & \multicolumn{1}{c|}{\textbf{Hub}} & \multicolumn{1}{c|}{\textbf{Router}} & \multicolumn{1}{c|}{\textbf{Switch}} \\ \hline
+Isolamento dal traffico & No                                & Sì                                   & Sì                                   \\ \hline
+Plug and play           & Sì                                & No                                   & Sì                                   \\ \hline
+Instradamento ottimale  & No                                & Sì                                   & No                                   \\ \hline
 	\end{tabular}
 	\caption{Confronto tra le caratteristiche dei più diffusi dispositivi di interconnessione}
 	\label{tab: 004}
@@ -1718,10 +1720,10 @@ Fortunatamente, queste difficoltà possono essere superate utilizzando uno switc
 In una VLAN basata sulle porte, le porte (interfacce) dello switch vengono divise dal gestore di rete in gruppi, ognuno dei quali costituisce una VLAN le cui porte formano un dominio broadcast. La figura \ref{fig: 088} mostra la divisione delle porte nei gruppi 2-8 e 9-15 (1 e 16 non sono assegnate). Ora però è stato introdotto un nuovo problema, ovvero come trasmettere il traffico tra le due VLAN. Una soluzione sarebbe collegare le due VLAN ad un router. In realtà gli switch solitamente contengono sia uno switch che un router, in modo che non sia necessario un router esterno.
 
 \begin{figure}
-	\includegraphics[scale=0.6]{img/089.png}
+	\includegraphics[scale=0.5]{img/089.png}
 	\caption{Connessione di due switch abilitati VLAN a due VLAN (a) con due cavi (b) con il trunking}
 	\label{fig: 089}
-	\includegraphics[scale=0.6]{img/090.png}
+	\includegraphics[scale=0.5]{img/090.png}
 	\caption{Frame ethernet originale (in alto), frame ethernet 802.1Q con etichetta VLAN (in basso)}
 	\label{fig: 090}
 \end{figure}
@@ -1807,15 +1809,15 @@ Nei collegmenti wireless ci sono anche altri problemi, come vediamo dalla figura
 		802.11ac                                & 5 GHz                                            & Fino a 1300 Mbps                                                  \\ \hline
 	\end{tabular}
 	\caption{Riepilogo degli standard IEEE 802.11}
-	\label{tab: 004}
+	\label{tab: 005}
 \end{table}
-Gli standard 802.11 hanno in comune diverse caratteristiche. Utilizzano lo stesso protocollo di accesso al mezzo, CSMA/CA, e la stessa struttura del frame a livello di collegamento. TUtti possono ridurre la frequenza trasmissiva per raggiungere distanze maggiori. Inoltre hanno la retrocompatibilità.
+Gli standard 802.11 hanno in comune diverse caratteristiche. Utilizzano lo stesso protocollo di accesso al mezzo, CSMA/CA, e la stessa struttura del frame a livello di collegamento. Tutti possono ridurre la frequenza trasmissiva per raggiungere distanze maggiori. Inoltre hanno la retrocompatibilità.
 
 I tre standard presentano notevoli differenze a livello fisico come la frequenza. In più, i due standard più recenti (n e ac) usano antenne a più ingressi e più uscite (MIMO multiple input multiple output). Le base station 802.11ac possono trasmettere a più stazioni simultaneamente e possono avere antenne intelligenti con beamforming adattivo in modo da ridurre le interferenze e aumentare le distanze.
 
 \subsubsection{Architettura di 802.11}
 \begin{figure}
-	\includegraphics[scale=0.6]{img/095.png}
+	\includegraphics[scale=0.5]{img/095.png}
 	\caption{Architettura della LAN 802.11}
 	\label{fig: 095}
 \end{figure}
@@ -1827,7 +1829,7 @@ Le reti wireless che usano AP sono anche chiamate \textbf{wireless LAN con infra
 
 \paragraph{Canali e associazione}
 \begin{figure}
-	\includegraphics[scale=0.6]{img/096.jpg}
+	\includegraphics[scale=0.8]{img/096.jpg}
 	\caption{Schema dei canali di 802.11b}
 	\label{fig: 096}
 \end{figure}
@@ -1841,7 +1843,7 @@ Lo standard 802.11 richiede che gli AP inviino periodicamente dei \textbf{frame 
 
 La scelta non è data dallo standard 802.11, è invece definita nel firmware della singola stazione wireless. 
 \begin{figure}
-	\includegraphics[scale=0.6]{img/097.png}
+	\includegraphics[scale=0.34]{img/097.png}
 	\caption{Scansione attiva e passiva degli access point}
 	\label{fig: 097}
 \end{figure}
@@ -1878,7 +1880,7 @@ Ora possiamo descrivere il protocollo CSMA/CA. Supponiamo che una stazione abbia
 \end{enumerate}
 
 \begin{figure}
-	\includegraphics[scale=0.6]{img/098.png}
+	\includegraphics[scale=1]{img/098.png}
 	\caption{IEEE 802.11 usa acknowledgment a livello di collegamento}
 	\label{fig: 098}
 \end{figure}
@@ -1915,7 +1917,7 @@ Questo sistema introduce comunque un ritardo e consuma risorse, per questo motiv
 \subsubsection{Pacchetto IEEE 802.11}
 \begin{figure}
 	\begin{center}
-		\includegraphics[scale=0.6]{img/101.png}
+		\includegraphics[scale=0.3]{img/101.png}
 		\caption{Struttura di un frame 802.11}
 		\label{fig: 101}
 	\end{center}
@@ -2020,7 +2022,7 @@ Abbiamo:
 	\item Tasso di perdita dei pacchetti: $\dfrac{1}{\dfrac{3}{8} * N^{2}}$
 	\item Controllo della congestione TCP:
 	\begin{itemize}
-		\item Aumento additivo della finestra di congestione: $CongWin = CongWin_{prec} + MSS$)}
+		\item Aumento additivo della finestra di congestione: $CongWin = CongWin_{prec} + MSS$)
 		\item Riduzione moltiplicativa della finestra di congestione: $CongWin = CongWin_{prec}/2$
 		\item Fase iniziale: partenza lenta, $CongWin = CongWin_{prec}*2$
 		\item Raggiungimento \emph{CongWin = Threshold}: AIMD, $CongWin = CongWin_{prec} + MSS$

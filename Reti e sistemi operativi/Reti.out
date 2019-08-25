@@ -6,7 +6,7 @@
 \BOOKMARK [2][-]{subsection.1.2}{La sezione di accesso alla rete}{section.1}% 6
 \BOOKMARK [3][-]{subsubsection.1.2.1}{Terminali, client e server}{subsection.1.2}% 7
 \BOOKMARK [3][-]{subsubsection.1.2.2}{Servizio senza connessione e servizio orientato alla connessione}{subsection.1.2}% 8
-\BOOKMARK [2][-]{subsection.1.3}{La sezione interna della rete}{section.1}% 9
+\BOOKMARK [2][-]{subsection.1.3}{Il nucleo della rete}{section.1}% 9
 \BOOKMARK [3][-]{subsubsection.1.3.1}{Commutazione di circuito e commutazione di pacchetto}{subsection.1.3}% 10
 \BOOKMARK [3][-]{subsubsection.1.3.2}{Commutazione di circuito}{subsection.1.3}% 11
 \BOOKMARK [2][-]{subsection.1.4}{Accesso alla rete e mezzi trasmissivi}{section.1}% 12
@@ -16,45 +16,77 @@
 \BOOKMARK [2][-]{subsection.1.6}{Ritardi e perdite nelle reti a commutazione di pacchetto}{section.1}% 16
 \BOOKMARK [3][-]{subsubsection.1.6.1}{Tipi di ritardo}{subsection.1.6}% 17
 \BOOKMARK [3][-]{subsubsection.1.6.2}{Ritardo di coda e perdita di pacchetti}{subsection.1.6}% 18
-\BOOKMARK [2][-]{subsection.1.7}{Strati protocollari}{section.1}% 19
-\BOOKMARK [3][-]{subsubsection.1.7.1}{Architettura stratificata}{subsection.1.7}% 20
-\BOOKMARK [3][-]{subsubsection.1.7.2}{La pila protocollare di internet}{subsection.1.7}% 21
-\BOOKMARK [1][-]{section.2}{Strato di trasporto}{}% 22
-\BOOKMARK [2][-]{subsection.2.1}{Introduzione e servizio dello strato di trasporto}{section.2}% 23
-\BOOKMARK [3][-]{subsubsection.2.1.1}{Relazione fra gli strati di trasporto e di rete}{subsection.2.1}% 24
-\BOOKMARK [3][-]{subsubsection.2.1.2}{Panoramica dello strato di trasporto in internet}{subsection.2.1}% 25
-\BOOKMARK [2][-]{subsection.2.2}{Multiplexing e demultiplexing}{section.2}% 26
-\BOOKMARK [3][-]{subsubsection.2.2.1}{Multiplazione e demultiplazione orientate alla connesione}{subsection.2.2}% 27
-\BOOKMARK [2][-]{subsection.2.3}{Trasporto senza connessione: UDP}{section.2}% 28
-\BOOKMARK [3][-]{subsubsection.2.3.1}{Struttura del segmento UDP}{subsection.2.3}% 29
-\BOOKMARK [3][-]{subsubsection.2.3.2}{Checksum di UDP}{subsection.2.3}% 30
-\BOOKMARK [2][-]{subsection.2.4}{Principi di un trasferimento affidabile dei dati}{section.2}% 31
-\BOOKMARK [3][-]{subsubsection.2.4.1}{Costruzione di un protocollo per il trasferimento affidabile dei dati}{subsection.2.4}% 32
-\BOOKMARK [3][-]{subsubsection.2.4.2}{Protocolli pipeline per il trasferimento affidabile dei dati}{subsection.2.4}% 33
-\BOOKMARK [3][-]{subsubsection.2.4.3}{Go-Back-N \(GBN\)}{subsection.2.4}% 34
-\BOOKMARK [3][-]{subsubsection.2.4.4}{Ripetizione selettiva \(SR}{subsection.2.4}% 35
-\BOOKMARK [2][-]{subsection.2.5}{Trasporto orientato alla connessione: TCP}{section.2}% 36
-\BOOKMARK [3][-]{subsubsection.2.5.1}{La connessione TCP}{subsection.2.5}% 37
-\BOOKMARK [3][-]{subsubsection.2.5.2}{Struttura del segmento TCP}{subsection.2.5}% 38
-\BOOKMARK [3][-]{subsubsection.2.5.3}{Trasferimento affidabile dei dati}{subsection.2.5}% 39
-\BOOKMARK [3][-]{subsubsection.2.5.4}{Controllo di flusso}{subsection.2.5}% 40
-\BOOKMARK [3][-]{subsubsection.2.5.5}{Gestione della connessione TCP}{subsection.2.5}% 41
-\BOOKMARK [2][-]{subsection.2.6}{Principi del controllo della congestione}{section.2}% 42
-\BOOKMARK [3][-]{subsubsection.2.6.1}{Le cause e i costi della congestione}{subsection.2.6}% 43
-\BOOKMARK [2][-]{subsection.2.7}{Controllo della congestione del TCP}{section.2}% 44
-\BOOKMARK [2][-]{subsection.2.8}{Controllo della congestione del TCP}{section.2}% 45
-\BOOKMARK [3][-]{subsubsection.2.8.1}{Fairness}{subsection.2.8}% 46
-\BOOKMARK [1][-]{section.3}{Strato di rete}{}% 47
-\BOOKMARK [2][-]{subsection.3.1}{Introduzione}{section.3}% 48
-\BOOKMARK [3][-]{subsubsection.3.1.1}{Forwarding e Routing}{subsection.3.1}% 49
-\BOOKMARK [3][-]{subsubsection.3.1.2}{Modelli di servizio di network}{subsection.3.1}% 50
-\BOOKMARK [2][-]{subsection.3.2}{Il protocollo di internet \(IP\): forwarding e indirizzamento \(addressing\) in internet}{section.3}% 51
-\BOOKMARK [3][-]{subsubsection.3.2.1}{Formato dei datagrammi IPv4}{subsection.3.2}% 52
-\BOOKMARK [3][-]{subsubsection.3.2.2}{Frammentazione dei datagrammi IPv4}{subsection.3.2}% 53
-\BOOKMARK [3][-]{subsubsection.3.2.3}{Indirizzamento IPv4}{subsection.3.2}% 54
-\BOOKMARK [3][-]{subsubsection.3.2.4}{NAT \(network address translation}{subsection.3.2}% 55
-\BOOKMARK [1][-]{section.4}{Livello di rete: piano di controllo}{}% 56
-\BOOKMARK [2][-]{subsection.4.1}{Algoritmi di instradamento}{section.4}% 57
-\BOOKMARK [3][-]{subsubsection.4.1.1}{Instradamento link-state \(LS\)}{subsection.4.1}% 58
-\BOOKMARK [3][-]{subsubsection.4.1.2}{Instradamento distance-vector \(DV\)}{subsection.4.1}% 59
-\BOOKMARK [2][-]{subsection.4.2}{ICMP \(Internet Control Message Protocol}{section.4}% 60
+\BOOKMARK [3][-]{subsubsection.1.6.3}{Ritardo end-to-end}{subsection.1.6}% 19
+\BOOKMARK [3][-]{subsubsection.1.6.4}{Riassunto del calcolo dei ritardi}{subsection.1.6}% 20
+\BOOKMARK [2][-]{subsection.1.7}{Strati protocollari}{section.1}% 21
+\BOOKMARK [3][-]{subsubsection.1.7.1}{Architettura stratificata}{subsection.1.7}% 22
+\BOOKMARK [3][-]{subsubsection.1.7.2}{La pila protocollare di internet}{subsection.1.7}% 23
+\BOOKMARK [3][-]{subsubsection.1.7.3}{Incapsulamento}{subsection.1.7}% 24
+\BOOKMARK [1][-]{section.2}{Livello di trasporto}{}% 25
+\BOOKMARK [2][-]{subsection.2.1}{Introduzione e servizio dello strato di trasporto}{section.2}% 26
+\BOOKMARK [3][-]{subsubsection.2.1.1}{Relazione fra gli strati di trasporto e di rete}{subsection.2.1}% 27
+\BOOKMARK [3][-]{subsubsection.2.1.2}{Panoramica dello strato di trasporto in internet}{subsection.2.1}% 28
+\BOOKMARK [2][-]{subsection.2.2}{Multiplexing e demultiplexing}{section.2}% 29
+\BOOKMARK [3][-]{subsubsection.2.2.1}{Multiplazione e demultiplazione orientate alla connesione}{subsection.2.2}% 30
+\BOOKMARK [2][-]{subsection.2.3}{Trasporto senza connessione: UDP}{section.2}% 31
+\BOOKMARK [3][-]{subsubsection.2.3.1}{Struttura del segmento UDP}{subsection.2.3}% 32
+\BOOKMARK [3][-]{subsubsection.2.3.2}{Checksum di UDP}{subsection.2.3}% 33
+\BOOKMARK [2][-]{subsection.2.4}{Principi di un trasferimento affidabile dei dati}{section.2}% 34
+\BOOKMARK [3][-]{subsubsection.2.4.1}{Costruzione di un protocollo per il trasferimento affidabile dei dati}{subsection.2.4}% 35
+\BOOKMARK [3][-]{subsubsection.2.4.2}{Protocolli pipeline per il trasferimento affidabile dei dati}{subsection.2.4}% 36
+\BOOKMARK [3][-]{subsubsection.2.4.3}{Go-Back-N \(GBN\)}{subsection.2.4}% 37
+\BOOKMARK [3][-]{subsubsection.2.4.4}{Ripetizione selettiva \(SR\)}{subsection.2.4}% 38
+\BOOKMARK [2][-]{subsection.2.5}{Trasporto orientato alla connessione: TCP}{section.2}% 39
+\BOOKMARK [3][-]{subsubsection.2.5.1}{La connessione TCP}{subsection.2.5}% 40
+\BOOKMARK [3][-]{subsubsection.2.5.2}{Struttura del segmento TCP}{subsection.2.5}% 41
+\BOOKMARK [3][-]{subsubsection.2.5.3}{Trasferimento affidabile dei dati}{subsection.2.5}% 42
+\BOOKMARK [3][-]{subsubsection.2.5.4}{Controllo di flusso}{subsection.2.5}% 43
+\BOOKMARK [3][-]{subsubsection.2.5.5}{Gestione della connessione TCP}{subsection.2.5}% 44
+\BOOKMARK [2][-]{subsection.2.6}{Principi del controllo della congestione}{section.2}% 45
+\BOOKMARK [3][-]{subsubsection.2.6.1}{Le cause e i costi della congestione}{subsection.2.6}% 46
+\BOOKMARK [2][-]{subsection.2.7}{Controllo della congestione del TCP}{section.2}% 47
+\BOOKMARK [3][-]{subsubsection.2.7.1}{Fairness}{subsection.2.7}% 48
+\BOOKMARK [1][-]{section.3}{Livello di rete: piano dei dati}{}% 49
+\BOOKMARK [2][-]{subsection.3.1}{Introduzione}{section.3}% 50
+\BOOKMARK [3][-]{subsubsection.3.1.1}{Forwarding e Routing}{subsection.3.1}% 51
+\BOOKMARK [3][-]{subsubsection.3.1.2}{Modelli di servizio di network}{subsection.3.1}% 52
+\BOOKMARK [2][-]{subsection.3.2}{Il protocollo di internet \(IP\): forwarding e indirizzamento \(addressing\) in internet}{section.3}% 53
+\BOOKMARK [3][-]{subsubsection.3.2.1}{Formato dei datagrammi IPv4}{subsection.3.2}% 54
+\BOOKMARK [3][-]{subsubsection.3.2.2}{Frammentazione dei datagrammi IPv4}{subsection.3.2}% 55
+\BOOKMARK [3][-]{subsubsection.3.2.3}{Indirizzamento IPv4}{subsection.3.2}% 56
+\BOOKMARK [3][-]{subsubsection.3.2.4}{NAT \(network address translation}{subsection.3.2}% 57
+\BOOKMARK [1][-]{section.4}{Livello di rete: piano di controllo}{}% 58
+\BOOKMARK [2][-]{subsection.4.1}{Algoritmi di instradamento}{section.4}% 59
+\BOOKMARK [3][-]{subsubsection.4.1.1}{Instradamento link-state \(LS\)}{subsection.4.1}% 60
+\BOOKMARK [3][-]{subsubsection.4.1.2}{Instradamento distance-vector \(DV\)}{subsection.4.1}% 61
+\BOOKMARK [2][-]{subsection.4.2}{ICMP \(Internet Control Message Protocol}{section.4}% 62
+\BOOKMARK [1][-]{section.5}{Livello di collegamento e reti locali}{}% 63
+\BOOKMARK [2][-]{subsection.5.1}{Livello di collegamento: introduzione}{section.5}% 64
+\BOOKMARK [3][-]{subsubsection.5.1.1}{Servizi offerti dal livello di collegamento}{subsection.5.1}% 65
+\BOOKMARK [3][-]{subsubsection.5.1.2}{Dov'\350 implementato il livello di collegamento}{subsection.5.1}% 66
+\BOOKMARK [2][-]{subsection.5.2}{Tecniche di rilevazione e correzione degli errori}{section.5}% 67
+\BOOKMARK [3][-]{subsubsection.5.2.1}{Controllo di parit\340}{subsection.5.2}% 68
+\BOOKMARK [3][-]{subsubsection.5.2.2}{Checksum}{subsection.5.2}% 69
+\BOOKMARK [3][-]{subsubsection.5.2.3}{Controllo a ridondanza ciclica \(CRC\)}{subsection.5.2}% 70
+\BOOKMARK [2][-]{subsection.5.3}{Collegamenti broadcast e protocolli di accesso multiplo}{section.5}% 71
+\BOOKMARK [3][-]{subsubsection.5.3.1}{Protocolli a suddivisione del canale}{subsection.5.3}% 72
+\BOOKMARK [3][-]{subsubsection.5.3.2}{Protocolli ad accesso casuale}{subsection.5.3}% 73
+\BOOKMARK [3][-]{subsubsection.5.3.3}{Protocolli a rotazione}{subsection.5.3}% 74
+\BOOKMARK [2][-]{subsection.5.4}{Reti locali commutate}{section.5}% 75
+\BOOKMARK [3][-]{subsubsection.5.4.1}{Indirizzi a livello di collegamento e ARP}{subsection.5.4}% 76
+\BOOKMARK [3][-]{subsubsection.5.4.2}{Ethernet}{subsection.5.4}% 77
+\BOOKMARK [3][-]{subsubsection.5.4.3}{Switch a livello di collegamento}{subsection.5.4}% 78
+\BOOKMARK [3][-]{subsubsection.5.4.4}{LAN virtuali \(VLAN\)}{subsection.5.4}% 79
+\BOOKMARK [1][-]{section.6}{Reti mobili e wireless}{}% 80
+\BOOKMARK [2][-]{subsection.6.1}{Introduzione}{section.6}% 81
+\BOOKMARK [2][-]{subsection.6.2}{Collegamenti wireless e caratteristiche di rete}{section.6}% 82
+\BOOKMARK [2][-]{subsection.6.3}{Wi-Fi: LAN wireless 802.11}{section.6}% 83
+\BOOKMARK [3][-]{subsubsection.6.3.1}{Architettura di 802.11}{subsection.6.3}% 84
+\BOOKMARK [3][-]{subsubsection.6.3.2}{Protocollo MAC di 802.11}{subsection.6.3}% 85
+\BOOKMARK [3][-]{subsubsection.6.3.3}{Pacchetto IEEE 802.11}{subsection.6.3}% 86
+\BOOKMARK [3][-]{subsubsection.6.3.4}{Mobilit\340 all'interno di una sottorete IP}{subsection.6.3}% 87
+\BOOKMARK [3][-]{subsubsection.6.3.5}{Funzionalit\340 avanzate di 802.11}{subsection.6.3}% 88
+\BOOKMARK [1][-]{section.7}{Formulario}{}% 89
+\BOOKMARK [2][-]{subsection.7.1}{Introduzione}{section.7}% 90
+\BOOKMARK [2][-]{subsection.7.2}{Livello di trasporto}{section.7}% 91
+\BOOKMARK [2][-]{subsection.7.3}{Livello di collegamento}{section.7}% 92
