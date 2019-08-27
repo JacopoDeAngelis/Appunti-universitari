@@ -1,4 +1,4 @@
-\documentclass[11pt,a4paper]{article}
+\documentclass[11pt,a4paper]{book}
 \usepackage[italian]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -44,23 +44,23 @@ Programma esteso
 \end{itemize}
 
 \pagebreak
-\section{Reti di calcolatori e internet}
-\subsection{Che cos'è internet?}
-\subsubsection{Una descrizione pratica}
+\chapter{Reti di calcolatori e internet}
+\section{Che cos'è internet?}
+\subsection{Una descrizione pratica}
 Internet è una rete pubblica di calcolatori sparsi in tutto il mondo. I terminali sono collegatri tra di loro attraverso link di comunicazione, diversi link possono trasmettere i dati a differenti velocità. Questa velocità è chiamata “larghezza di banda” e di solito si misura in bit/secondo. \\
 Solitamente i terminali sono collegati indirettamente attraverso dispositivi di comunicazione detti router. Un router preleva le informazioni che arrivano tramite uno di questi link in ingresso e lo reindirizza a un link in uscita. Queste informazioni sono chiamate “pacchetti”. Il tragitto del pacchetto da è detto route o path. Internet usa una tecnica conosciuta come “commutazione di pacchetto” (packet switching) che permette a più terminali di condividere un cammino o anche solo parte di questo.
 I terminali accedono a internet attraverso gli ISP (Internet Service Providers). Ogni ISP è una serie di router e di link di comunicazione. \\
 I terminali eseguono protocolli di comunicazione che controllano l’invio e la ricezione di informazioni all’interno di internet. Due dei più importanti sono il TCP (Transmission Control Protocol) e l’IP (Internet Protocol). Il protocollo IP specifica il formato dei pacchetti che sono scambiati fra router e fra terminali.
 
-\subsubsection{Descrizione del servizio}
+\subsection{Descrizione del servizio}
 Internet permette la distribuzione delle applicazioni che girano sui suoi terminali per scambiare dati fra le diverse unità.
 Internet fornisce due servizi per le applicazioni da esso distribuite: un servizio orientato alla connesione e un servizio senza connessione. Il primo garantisce che i dati trasmessi saranno consegnati al destinatario nella loro integrità, il secondo invece risulta inaffidabile.
 
-\subsubsection{Che cos'è un protocollo?}
+\subsection{Che cos'è un protocollo?}
 Un protocollo definisce il formato e l’ordine dei messaggi scambiati tra due o più entità comunicanti, così come le azioni che hanno luogo a seguito della trasmissione e/o ricezione di un messaggio o di altri eventi.
 
-\subsection{La sezione di accesso alla rete}
-\subsubsection{Terminali, client e server}
+\section{La sezione di accesso alla rete}
+\subsection{Terminali, client e server}
 I computer colelgati a internet sono spesso chiamati host o end-system (“terminali”). Ci si riferisce a essi come terminali perché sono collocati nella sezione di accesso a internet. Il termine host (ospite) deriva dal fatto che ospitano (eseguono) programmi di livello applicativo come i browser o simili. \\
 Gli host, a volte, sono suddivisi in due categorie:
 \begin{itemize}
@@ -76,7 +76,7 @@ Poiché, tipicamente, un client gira su un calcolatore mentre il server gira su 
 \end{figure}
 A questo livello di astrazione i router, i link e altri “componenti” di internet servono come “scatola nera” che trasferisce messaggi tra i diversi componenti per la comunicazione in internet.
 
-\subsubsection{Servizio senza connessione e servizio orientato alla connessione}
+\subsection{Servizio senza connessione e servizio orientato alla connessione}
 Le reti TCP/IP, e in particolare internet, forniscono due tipi di servizio per le sue applicazioni:
 \begin{itemize}
 	\item Un servizio senza connessione
@@ -97,8 +97,8 @@ Il servizio orientato alla connessione di internet è raggruppato con molti altr
 \textbf{Non esiste handshake.} Quando un’estremità di un’applicazione vuole inviare pacchetti a un’altra, semplicemente, li invia. Poiché manca l’handshake l’invio sarà più veloce ma non esisterà un messaggio di riscontro dell’avvenuta ricezione.
 \textbf{Il servizio di internet senza connessione è l’UDP (User Datagram Protocol).}
 
-\subsection{Il nucleo della rete}
-\subsubsection{Commutazione di circuito e commutazione di pacchetto}
+\section{Il nucleo della rete}
+\subsection{Commutazione di circuito e commutazione di pacchetto}
 Esistono due principali tipi di approccio per la costruzione della sezione interna di una rete:
 \begin{itemize}
 	\item l\textbf{a commutazione di circuito} (circuit switching): le risorse necessarie lungo un percorso per fornire la comunicazione fra due terminali sono riservate per la durata della sessione.
@@ -106,7 +106,7 @@ Esistono due principali tipi di approccio per la costruzione della sezione inter
 \end{itemize}
 Le reti telefoniche sono un esempio di rete a commutazione di circuito. Internet, invece, è un esempio di rete a commutazione di pacchetto. Le reti non sono per forza o di un tipo o dell’altro.
 
-\subsubsection{Commutazione di circuito} \label{par: TDM/FDM}
+\subsection{Commutazione di circuito} \label{par: TDM/FDM}
 Nell’immagine qua accanto i quattro commutatori di circuito sono collegati da due link. Ognuno di questi link è costitutito da n circuiti, in modo che ciascun link possa mantenere n connessioni simultanee.
 I terminali sono collegati direttamente a uno dei commutatori. Alcuni degli host hanno un accesso analogico ai commutatori, mentre altri hanno un accesso numerico diretto. Per l’accesso analogico è necessario un modem. Quando due host desiderano comunicare, la rete stabilisce un circuito dedicato end-to-end fra essi. In questo caso viene prenotato un circuito su ciascuno dei due link.
 \begin{figure}
@@ -166,8 +166,8 @@ Questo miglioramento deriva dal fatto che la commutazione di pacchetto agisce in
 Il vantaggio della segmentazione è anche che nel caso ci sia un errore di bit su di un pacchetto, è il singolo pacchetto a poter essere scartato e non l’intero messaggio.
 La frammentazione non è priva di svantaggi, infatti al pacchetto devono essere aggiunte informazioni nell’\textbf{intestazione (header)} e queste possono comprendere l’identità di sorgente e destinatario. In più l’header richiede altri byte di spazio.
 
-\subsection{Accesso alla rete e mezzi trasmissivi}
-\subsubsection{Accesso alla rete}
+\section{Accesso alla rete e mezzi trasmissivi}
+\subsection{Accesso alla rete}
 L’accesso può essere classificato in tre categorie:
 \begin{itemize}
 	\item Accesso domestico
@@ -176,14 +176,14 @@ L’accesso può essere classificato in tre categorie:
 \end{itemize}
 Queste categorie, però, non sono rigide e vincolanti.
 
-\subsubsection{Mezzi fisici}
+\subsection{Mezzi fisici}
 Si dividono in due categorie:
 \begin{itemize}
 	\item Guidati: guidati attraverso un mezzo solido
 	\item Non guidati: si propagano nell’atmosfera
 \end{itemize}
 
-\subsection{Gli ISP e la rete dorsale di internet}
+\section{Gli ISP e la rete dorsale di internet}
 \begin{figure}
 	\includegraphics[scale=0.6]{img/006.png}
 	\caption{Interconnessione degli ISP}
@@ -198,14 +198,14 @@ Quando due ISP sono collegati direttamente tra di loro sono detti “pari” tra
 I punti di collegamento tra i vari ISP sono detti “punti di presenza” (POP).
 Gli ISP spesso si connettono in Network Access Point (NAP).
 
-\subsection{Ritardi e perdite nelle reti a commutazione di pacchetto}
+\section{Ritardi e perdite nelle reti a commutazione di pacchetto}
 \begin{figure}
 	\begin{center}
 		\includegraphics[scale=0.6]{img/007.png}
 		\caption{Ritardo al nodo e nel router A}
 	\end{center}
 \end{figure}
-\subsubsection{Tipi di ritardo} \label{par: ritardi}
+\subsection{Tipi di ritardo} \label{par: ritardi}
 \paragraph{Ritardo di elaborazione}
 Tempo richiesto per esaminare l’intestazione del pacchetto e per determinare dove instradarlo.
 Può comprendere altri fattori come il tempo per il controllo degli errori.
@@ -225,7 +225,7 @@ Se indichiamo con $d_{elab}, d_{coda}, d_{trans}, d_{prop}$ i ritardi di elabora
 \begin{center}
 	$d_{elab} = d_{elab} + d_{coda} + d_{trans} + d_{prop}$
 \end{center}
-\subsubsection{Ritardo di coda e perdita di pacchetti}
+\subsection{Ritardo di coda e perdita di pacchetti}
 La più complicata e importante componente del ritardo totale del nodo è il ritardo di coda. A differenza degli altri ritardi, il ritardo di coda può variare da pacchetto a pacchetto. Se ci sono 10 pacchetti, il primo non avrà ritardo di coda, l'ultimo invece avrà un ritardo relativamente grande. \\
 Quand'è consistente e quando insignificante il ritardo di coda? Dipende molto da altri fattori come velocità del link, congestione e distribuzione del traffico.
 Indichiamo con:
@@ -243,7 +243,7 @@ Il rapporto \textbf{La/R, detto intensità di traffico}, ha un ruolo per la stim
 \paragraph{Perdita di un pacchetto}
 Quando un pacchetto arriva su una coda piena, il pacchetto è scartato e perso. In questo caso può essere ritrasmesso dal nodo precedente, dal terminale o essere perso definitivamente.
 
-\subsubsection{Ritardo end-to-end}
+\subsection{Ritardo end-to-end}
 Concludiamo la trattazzione considerando il ritardo dalla sorgente alla destinazione (end-to-end delay).
 
 Supponiamo l'esistenza di N - 1 router tra l'host sorgente e quello di destinazione, che la rete non sia congestionata (quindi ritardo di accodamento trascurabile), il ritardo di elaborazione a ciascun router e presso il mittente è $d_{elab}$, la velocità di trasmissione sia R bps e la propagazione sia $d_{prop}$. I ritardi totali di nodo si accumulano e danno un ritardo complessivo end-to-end pari a:
@@ -264,14 +264,14 @@ Traceroute ripete l'esperimento tre volte, infatti come si può vedere all'immag
 		\label{fig: 083}
 	\end{center} 
 \end{figure}
-\subsubsection{Riassunto del calcolo dei ritardi}
+\subsection{Riassunto del calcolo dei ritardi}
 \begin{itemize}
 	\item \textbf{Ritardo di propagazione}: $\dfrac{d}{v}$ dove d è la distanza tra due router e v la velocità di propagazione del mezzo (m/s)
 	\item \textbf{Ritardo di trasmissione}: $\dfrac{L}{R}$ dove L è la grandezza del pacchetto e R la velocità di trasmissione del link (bit/s)
 \end{itemize}
 
-\subsection{Strati protocollari}
-\subsubsection{Architettura stratificata}
+\section{Strati protocollari}
+\subsection{Architettura stratificata}
 Per ridurre la complessità progettuale, i progettisti della rete organizzano i protocolli a strati (layer) o livelli.
 
 Con un'architettura a strati dei protocolli, ciascun controllo appartiene a uno degli strati. Ciascun protocollo appartiene a uno degli strati, quindi il protocollo nello strato specifico è condiviso tra tutte le entità della rete che condividono quel protocollo. Queste entità comunicano tra di loro scambiandosi i messaggi dello strato n. Questi messaggi sono chiamati \textbf{n-PDU (layer-n Protocol Data Units)}. Il formato di una n-PDU è definito dal protocollo dello strato n. Quando presi nel loro insieme, i protocolli dei bari strati sono chiamati \textbf{pila protocollare}.
@@ -286,7 +286,7 @@ Ciascuno strato può eseguire uno o più di questi compiti:
 	\item Multiplexing
 	\item Instaurazione della connessione
 \end{itemize}
-\subsubsection{La pila protocollare di internet}
+\subsection{La pila protocollare di internet}
 È costituita da cinque strati
 
 \begin{figure}
@@ -318,21 +318,21 @@ Per muovere un pacchetto da un nodo al successivo sul percorso, lo strato di ret
 \paragraph{Strato fisico}
 Il suo compito è quello di muovere singoli bit all'interno della rete da un nodo all'altro.
 
-\subsubsection{Incapsulamento}
+\subsection{Incapsulamento}
 Ogni livello incapsula il messaggio dello strato superiore, questo vuol dire che il messaggio dello strato superiore diventa le informazioni di quello successivo.
 \pagebreak
 
-\section{Livello di trasporto}
-\subsection{Introduzione e servizio dello strato di trasporto}
+\chapter{Livello di trasporto}
+\section{Introduzione e servizio dello strato di trasporto}
 Un protocollo dello strato di trasporto fornisce una commutazione logica fra i processi applicativi che funzionano su host differenti. Per comunicazione logica intendiamo che dal punto di vista dell'applicazione, è come se i terminali su cui girano i processi fossero direttamente connessi. I processi applicativi usano la comunicazione logica fornita dallo strato di trasporto per scambiarsi messaggi, senza doversi occupare dei dettagli dell'infrastruttura fisica usata per trasportarli.\\ \\
 \textbf{Attenzione}: i protocolli dello strato di trasporto sono implementati nei terminali ma non nei router della rete. \\ \\
 \begin{figure}
 	\includegraphics[scale=0.6]{img/009.png}
 	\caption{Lo strato di trasporto fornisce una comunicazione logica piuttosto che fisica tra le applicazioni}
 \end{figure}
-\subsubsection{Relazione fra gli strati di trasporto e di rete}
+\subsection{Relazione fra gli strati di trasporto e di rete}
 Mentre un protocollo dello strato di trasporto fornisce una \emph{comunicazione logica tra i processi} che funzionano su differenti host, un protocollo dello strato di rete fornisce la \emph{comunicazione logica fra gli host}.
-\subsubsection{Panoramica dello strato di trasporto in internet}
+\subsection{Panoramica dello strato di trasporto in internet}
 Per semplificare la terminologia, nel contesto di internet, ci riferiamo alla 4-PDU come a un segmento. \\ \\
 \textbf{Attenzione}: nella letteratura ci si riferisce alla PDU per TCP come a un segmento, al PDU per UDP come a un datagram. In questo testo, però, si utilizzerà solo la notazione "segmento".\\ \\
 Il protocollo dello strato di rete ha un nome: \textbf{IP} (Internet Protocol). L'IP fornisce la comunicazione logica fra gli host. Il modello di servizio di IP è un \textbf{servizio best effort}, ovvero che "fa del suo meglio" per consegnare i segmenti fra i due host ma senza garanzie; per questo motivo IP è un \textbf{servizio inaffidabile}. Ricordiamo che \textbf{ciascun host ha un unico indirizzo IP}.\\
@@ -340,7 +340,7 @@ La maggior responsabilità di UDP e TCP è di estendere il servizio di spedizion
 Questi due servizi, \textbf{spedizioni di dati da processo a processo} e \textbf{verifica degli errori} sono i due soli servizi forniti da UDP, infatti UDP è un servizio inaffidabile.\\
 TCP offre molti servizi addizionali; prima di tutto un \textbf{trasferimento affidabile dei dati} usando controllo del flusso, numeri di sequenza, riscontri (acknowledgment) e timer, in questo modo TCP si assicura che i dati siano spediti da un processo mittente al destinatario correttamente e in ordine. TCP converte perciò il servizio inaffidabile IP in un servizio affidabile. \\*
 TCP usa anche il controllo di congestione, ovvero previene la saturazione da parte di qualsiasi connessione TCP della rete suddividendo equamente la banda di un link congestionato tra le connessioni TCP che lo attraversano. I campi dei numeri di porta sorgente e destinazione in un segmento dello strato di trasportosano. Il traffico UDP, invece, non è regolabile.
-\subsection{Multiplexing e demultiplexing}
+\section{Multiplexing e demultiplexing}
 Per l'host destinatario, lo strato di trasporto riceve i segmenti (le PDU dello strato di trasporto) allo strato di rete posto subito sotto di esso. Lo strato di trasporto ha la responsabilità di inviare i dati di questi segmenti all'appropriato processo applicativo che funziona sull'host.
 Per comprendere come funzioni ricordiamoci prima di tutto che un processo ha un \textbf{socket}, che è una porta attraverso la quale i dati passano dalla rete al processo, e attraverso la quale i dati passano dal processo alla rete. Lo strato di trasporto nel terminale ricevente non consegna effettivamente i dati direttamente a un processo, \textbf{ma li consegna invece a un socket intermediario}. Possono esserci più socket e tutte hanno un identificatore unico. L'identificatore dipende dal fatto che il socket sia UDP o TCP.\\
 Ogni segmento dello strato di trasporto ha un insieme di campi dedicati all'identificazione del socket; lo strato di trasporto esamina questi capi per determinare il socket ricevente e indirizzargli i segmenti.
@@ -365,7 +365,7 @@ Un socket UDP è univocamente determinato da una coppia formata da un indirizzo 
 \end{figure}
 
 
-\subsubsection{Multiplazione e demultiplazione orientate alla connesione}
+\subsection{Multiplazione e demultiplazione orientate alla connesione}
 Una sottile differenza tra un socket TCP e un socket UDP è che un socket TCP è identificato da una 4-upla:
 \begin{itemize}
 	\item indirizzo IP di sorgente
@@ -375,7 +375,7 @@ Una sottile differenza tra un socket TCP e un socket UDP è che un socket TCP è
 \end{itemize}
 In particolare, e al contrario di UDP, due segmenti TCP entranti che recano indirizzi IP di sorgente diversi o numeri di porta sorgente diversi saranno diretti verso due diversi socket. \\
 
-\subsection{Trasporto senza connessione: UDP}
+\section{Trasporto senza connessione: UDP}
 L'UDP, definito nella RFC 768, esegue il minimo che un protocollo di trasporto può fare. Tranne che per la funzione di multiplexing/demultiplexing e qualche piccola verifica degli errori, esso aggiunge poco all'IP. Semplicemente aggiunge i numeri di porta di origine e destinazione, poi lo strato di rete incapsula i segmenti in un datagram IP e quindi poi li invia all'host di destinazione in modalità best effort. \\ \\
 \textbf{Attenzione}: con l'UDP, prima della spedizione del segmento, \textbf{non c'è handshake} fra le entità dello strato di trasporto che spediscono e ricevono. Per questo si dice che l'UDP è senza connessione. \\ \\
 Il DNS è un esempio di un protocollo dello strato di applicazione che usa l'UDP: quando l'applicazione DNS in un host vuole fare una richiesta, essa costruisce un messaggio di richiesta DNS e passa il messaggio a UDP. Infatti, se non riceve risposta, essa tenta ancora di inviare la richiesta a un altro server dei nomi, o informa l'applicazione che ha fatto la richiesta che gli è impossibile ottenere una risposta. \\
@@ -391,7 +391,7 @@ Perchè scegliere UDP? Per i seguenti motivi:
 	\caption{Applicazioni diffuse in internet e protocolli che adottano}
 \end{figure}
 \textbf{Attenzione}: UDP può essere usato per generare un servizio affidabile, semplicemente i controlli di riscontro e ritrasmissione devono essere inseriti nell'applicazione stessa, cosa tediosa ma molto vantaggiosa per velocità di comunicazione e funzionalità. Molte applicazioni streaming sfruttano questo sistema. \\
-\subsubsection{Struttura del segmento UDP}
+\subsection{Struttura del segmento UDP}
 
 \begin{figure}
 	\begin{center}
@@ -401,7 +401,7 @@ Perchè scegliere UDP? Per i seguenti motivi:
 \end{figure}
 
 La \textbf{checksum} \textit{(somma di controllo)} è usata dall'host ricevente per controllare se sono stati introdotti errori nel segmento.
-\subsubsection{Checksum di UDP}
+\subsection{Checksum di UDP}
 La checksum di UDP effettua il rilevamento degli errori, ovvero se i bit del segmento sono stati alterati nel loro percorso. \\
 \begin{itemize}
 	\item \textbf{Lato mittente}: si effettua il complemento a 1\footnote{Si ottiene convertendo tutti gli 0 in 1 e tutti gli 1 in 0} della somma di tutte le parole a 16 bit del segmento, scartando ogni overflow. Il risultato è inserito nel campo checksum del segmento UDP.
@@ -409,14 +409,14 @@ La checksum di UDP effettua il rilevamento degli errori, ovvero se i bit del seg
 \end{itemize}
 Alcune implementazioni dell'UDP scartano semplicemente il segmento danneggiato, altri lo passano all'applicazione con l'aggiunta di un'avvertenza.
 
-\subsection{Principi di un trasferimento affidabile dei dati}
+\section{Principi di un trasferimento affidabile dei dati}
 \begin{figure}
 	\includegraphics[scale=0.6]{img/016.png}
 	\caption{Astrazione di un servizio affidabile. rdt = reliable data trasfer, udt = unreliable data trasfer}
 \end{figure}
 È compito del protocollo di \textbf{trasferimento affidabile dei dati} l'implementazione di quest'astrazione del servizio. La difficoltà di questo compito deriva dal fatto che lo strato sottostante il protocollo di trasferimento affidabile dei dati può essere inaffidabile. Ad esempio, TCP è un protocollo di trasferimento affidabile che è implementato sopra uno strato di rete (IP) inaffidabile da terminale a terminale. \\
 Per questa trattazione assumeremo che lo strato di rete sia inaffidabile. Tratteremo, inoltre, solo il caso di trasferimento unidirezionale dei dati. Il caso bidirezionale \textit{(full duplex} dei dati non è più complicato ma è più noioso da spiegare. \\
-\subsubsection{Costruzione di un protocollo per il trasferimento affidabile dei dati}
+\subsection{Costruzione di un protocollo per il trasferimento affidabile dei dati}
 Ora analizzeremo una serie di protocolli di complessità crescente fino ad un perfetto protocollo di trasferimento affidabile dei dati.
 \paragraph{Trasferimento affidabile dei dati su un canale completamente affidabile: rdt1.0}
 \begin{figure}
@@ -493,7 +493,7 @@ Abbiamo assemblato un protocollo di trasferimento dei dati: checksum, numeri di 
 	\includegraphics[scale=0.6]{img/022.png}
 	\caption{Operazioni dell'rdt3.0, il protocollo a bit alternati}
 \end{figure}
-\subsubsection{Protocolli pipeline per il trasferimento affidabile dei dati}
+\subsection{Protocolli pipeline per il trasferimento affidabile dei dati}
 Il problema principale di rdt3.0 è il fatto che è un protocollo stop-and-wait. Infatti, in un protocollo stop-and-wait il mittente è spesso in attesa (idle) poichè deve aspettare una risposta dal ricevente. Un modo per risolvere le attese troppo lunghe è permettere al mittente di inviare più pacchetti senza aspettare i riscontri. Questa tecnica è detta \textbf{pipelining}. Il pipelining ha molte conseguenze per i protocolli con trasferimento affidabile dei dati:
 \begin{itemize}
 	\item La gamma dei numeri di sequenza deve essere aumentata per evitare ripetizioni
@@ -513,7 +513,7 @@ Si possono identificare due approcci alla riparazione degli errori:
 	\item Go-Back-n
 	\item ripetizione selettiva
 \end{itemize}
-\subsubsection{Go-Back-N (GBN)}
+\subsection{Go-Back-N (GBN)}
 Il mittente può trasmettere pacchetti multipli senza aspettare il riscontro, ma è costretto ad avere non più di un certo numero massimo consentito di pacchetti non riscontrati, N, nella pipeline.
 \begin{figure}
 	\includegraphics[scale=0.6]{img/025.png}
@@ -542,7 +542,7 @@ Il sender GBN deve affrontare tre tipi di eventi:
 	\caption{Descrizione dell'FSM estesa del receiver GBN}
 \end{figure}
 Le azioni del ricevente sono anch'esse semplici. Se un pacchetto con un numero di sequenza n è ricevuto correttamente ed è in ordine (ovvero se l'ultimo pacchetto inoltrato allo strato superiore è l'n*1) il ricevente invia un ACK per il pacchetto n. Negli altri casi il pacchetto viene scartato e rispedisce un ACK per l'ultimo pacchetto in ordine. In questo protocollo GBN, il ricevente scarta i pacchetti non in ordine, questo permette di non dover mantenere in memoria alcun pacchetto fuori ordine. Ovviamente lo svantaggio è la richiesta di più ritrasmissioni eventuali.
-\subsubsection{Ripetizione selettiva (SR)}
+\subsection{Ripetizione selettiva (SR)}
 Esistono casi nei quali GBN può avere problemi di prestazioni, ad esempio quando la dimensione della finestra e il prodotto ritardo-larghezza di banda sono entrambi grandi, nelle pipeline possono trovarsi molti pacchetti. Un singolo errore può costringere GBN a ritrasmettere un grande numero di pacchetti, magari non tutti necessari. In più queste ritrasmissioni possono saturare la pipeline. \\
 I protocolli a ripetizione selettiva evitano le ritrasmissioni non necessarie grazie alla rispedizione di quei soli pacchetti che si sospetta siano giunti al ricevente con errori. Una finestra di dimensioni N dovrà ancora essere usata per limitare il numero di pacchetti da evadere, non riscontrati, nella pipeline.
 \begin{figure}
@@ -554,8 +554,8 @@ I protocolli a ripetizione selettiva evitano le ritrasmissioni non necessarie gr
 Il problema è identificare la dimensione necessaria della finestra affinché non ci siano errori.
 \pagebreak
 
-\subsection{Trasporto orientato alla connessione: TCP}
-\subsubsection{La connessione TCP}
+\section{Trasporto orientato alla connessione: TCP}
+\subsection{La connessione TCP}
 Si dice che TCP è \textbf{orientato alla connessione} perché prima che un processo applicativo possa cominciare a spedire dati, i due processi devono scambiarsi un \textbf{handshake} \textit{(stretta di mano)}, ovvero devono prima inviarsi alcuni segmenti preliminari per stabilire i parametri del successivo trasferimento di dati.
 TCP funziona solo nei terminali e non negli elementi intermedi della rete, questi elementi non mantengono lo stato della connessione TCP. Infatti, i router intermedi dimenticano completamente la connessione TCP, vedono solo i datagram, non le connessioni. \\
 Una connessione TCP fornisce un trasferimento dei dati \textbf{full duplex}, cioè consente ai dati di viaggiare contemporaneamente nelle due direzioni. Una connessione TCP è anche \textbf{point-to-point}, cioè fra un singolo sender e un singolo receiver. Con TCP il cosiddetto \emph{"multicasting"} (il trasferimento da un mittente a più riceventi contemporaneamente) è impossibile. \\
@@ -574,7 +574,7 @@ TCP indirizza i dati al \textbf{buffer di spedizione} (send buffer) della connes
 La quantità massima di dati che può essere prelevata e inserita in segmenti è limitata dalla \textbf{dimensione massima del segmento} (\textbf{MSS}, \textit{Maximum Segment Size}). Il valore di MSS dipende dall'implementazione del TCP (determinata dal sistema operativo) e spesso può essere configurato. \\
 TCP unisce a ciascun pezzo dei dati del client un'intestazione TCP, formando così i segmenti TCP. \\
 Quando il ricevente riceve i segmenti, questi sono posti nel buffer di ricezione della connessione TCP,
-\subsubsection{Struttura del segmento TCP}
+\subsection{Struttura del segmento TCP}
 \begin{figure}
 	\begin{center}
 		\includegraphics[scale=0.6]{img/031.png}
@@ -629,7 +629,7 @@ Dati i valori \emph{EstimatedRTT} e \emph{DevRTT}, che valore dovrebbe essere us
 	\textbf{$TimeoutInterval = EstimatedRTT + 4 * DevRTT$}
 \end{center}
 Dove $\beta$ è il numero di pacchetti considerati per la stima.
-\subsubsection{Trasferimento affidabile dei dati}
+\subsection{Trasferimento affidabile dei dati}
 Ricordiamo che il servizio IP è inaffidabile.\\
 Il TCP crea un \textbf{servizio di trasferimento affidabile dei dati} sopra al servizio inaffidabile best effort fornito da IP. Vediamo che ci sono tre principali eventi legati alla trasmissione e ritrasmissione dei dati nel mittente TCP:
 \begin{itemize}
@@ -653,7 +653,7 @@ Quando il mittente TCP riceve tre duplicati ACK per gli stessi dati, prende ques
 \paragraph{Go-Back-N o ripetizione selettiva?}
 Ricordiamo che i riscontri TCP sono cumulativi e che i segmenti ricevuti correttamente ma guori sequenza non sono riscontrati individualmente dal ricevente. Quindi, TCP deve ricordare solo il più piccolo numero di sequenza di un byte trasmesso ma non riscontrato. In questo senso \textbf{TCP assomiglia molto a un protocollo in stile GBN}. Ci sono però delle differenze. Infatti, una modifica proposta per il TCP, il cosiddetto \textbf{riscontro selettivo}, consente a un ricevente TCP di riscontrare selettivamente segmenti fuori sequenza piuttosto che riscontrare cumulativamente l'ultimo segmento ricevuto correttamente, in sequenza. \\
 Quindi, TCP è un ibrido tra i due sistemi.
-\subsubsection{Controllo di flusso}
+\subsection{Controllo di flusso}
 Ricordiamo che gli host riservano un buffer di ricezione per la connessione. Quando la connessione TCP riceve byte che sono costretti e in sequenza, colloca i dati nel buffer di ricezione. Il processo dell'applicazione associato leggerà i dati da questo buffer. Se l'applicazione è relativamente lenta nella lettura dei dati, il mittente potrebbe inviare troppi dati e potrebbe saturare il buffer di ricezione. \\
 Il TCP fornisce alle sue applicazioni un \textbf{servizio di controllo del flusso}, ovvero un servizio di adattamento delle velocità. Questo controllo è detto \textbf{controllo della congestione}. \\
 Il TCP fornisce il controllo di flusso attracerso il mantenimento nel mittente di una variabile detta \textbf{finestra di ricezione} \textit{(receive window)}. La finestra di ricezione è usata per dare al mittente un'idea di quanto spazio è disponibile nel buffer del ricevente. \textbf{La finestra di ricezione è dinamica}, ovvero varia durante la connessione. \\
@@ -679,7 +679,7 @@ L'host A a sua volta mantiene traccia di due variabili:
 \end{itemize}
 La differenza tra questi due è l'insieme dei byte non ancora riscontrati. \\
 Poichè B invia dati ad A solo se deve inviare qualcosa o se deve dare riscontro, nel caso il buffer venisse svuotato ma B non dovesse inviare niente, allora A non saprebbe mai che il buffer si è svuotato. Per risolvere, A continua ad inviare segmenti con un byte di dati quando la finestra di ricezione di B è zero, in questo modo, quando saranno ricevuti dal buffer, B invierà un riscontro con la nuova \emph{RcvWindow}.
-\subsubsection{Gestione della connessione TCP}
+\subsection{Gestione della connessione TCP}
 Ora vedremo come una connessione TCP viene instaurata e chiusa. \\
 Supponiamo che un host A (client) voglia instaurare una connessione con un host B (server). Il processo del client informa il TCP che vuole stabilire una connessione con il server. Il TCP client procede allora a stabilirla nel seguente modo:
 \begin{itemize}
@@ -713,9 +713,9 @@ Durante il periodo dell'esistenza della connessione tCP, il protocollo TCP funzi
 	\caption{Tipica sequenza degli stati per i quali passa un TCP del server, supponendo che sia il client a interrompere la connessione}
 \end{figure}
 
-\subsection{Principi del controllo della congestione}
+\section{Principi del controllo della congestione}
 Sappiamo che una delle cause principali della perdita di segmenti è la congestione della rete. La ritrasmissione dei segmenti cura l'effetto ma per correggere il problema alla radice servono sistemi che "strozzino" i sender nel caso di una congestione.
-\subsubsection{Le cause e i costi della congestione}
+\subsection{Le cause e i costi della congestione}
 Considereremo tre scenari di complessità crescente in cui si verifica la congestione. In tutti i casi valuteremo le cause della congestione e i suoi costi.
 \paragraph{Scenario 1: due sender, un router con buffer infinito}
 \begin{figure}
@@ -771,7 +771,7 @@ Questo, in sostanza, implica che il throughput end-to-end di A-C si porti a zero
 Il motivo per la diminuzione del throughput con l'incremento del carico offerto è evidente se sis considera l'ammontare del lavoro compiuto dalla rete. Se R2 si trova a scartare un pacchetto, allora il lavoro di R1 è stato sprecato. \\
 Qui possiamo vedere ancora un altro costo della perdita di un pacchetto dovuta alla congestione: quando un pacchetto è perso lungo un percorso, la capacità di trasmissione che è stata usata in ciascuno dei router a monte per inoltrare quel pacchetto al punto in cui si è perso è stata sprecata.
 
-\subsection{Controllo della congestione del TCP}
+\section{Controllo della congestione del TCP}
 Le due componenti più importanti di TCP sono:
 \begin{itemize}
 	\item fornisce un servizio di trasporto affidabile
@@ -828,7 +828,7 @@ Quando la dimensione della finestra è di w byte e il tempo di round-trip è ugu
 \begin{center}
 	Throughput medio di una connessione = $\dfrac{0,75 * W}{RTT}$
 \end{center}
-\subsubsection{Fairness}
+\subsection{Fairness}
 Consideriamo K connessioni TCP, ciascuna con un diverso percorso da estremo a estremo, ma tutte passanti attraverso un link collo di bottiglia\footnote{Ovvero è l'unico congestionato e gli altri hanno capacità trasmissiva in abbondanza rispetto a questo} \textit{(bottleneck)} con ritmo di trasmissione pari a R bit/s. Supponiamo che ogni connessione stia trasferendo un grande file e non ci sia traffico UDP che passa attraverso il link collo di bottiglia. Un meccanismo di controllo della congestione è detto \textbf{fairness}, ovvero essere fair (equo) se il ritmo di trasmissione medio di ogni connessione è approssimativamente pari a R/K, cioè, ogni connessione ottiene un'uguale porzione della banda del link. \\
 \textbf{AIMD è fair? Sì.} Consideriamo due conenssioni TCP che condividono un singolo link con velocità di trasmissione R.
 \begin{figure}
@@ -848,15 +848,15 @@ Molte applicazioni multimediali, come la telefonia su internet e le video confer
 \paragraph{Fairness e connessioni TCP in parallelo}
 TCP può non essere fair se l'applicazione sfrutta più connessioni TCP in parallelo. Per esempio i browser usano più connessioni per caricare le pagine. Per fare un esempio, immaginiamo che ci siano 9 connessioni TCP singole, tutte avranno R/9 di velocità di trasmissione. Se si aggiungesse una nuova applicazione diventerebbero 10, portando la velocità a R/10 per tutti. Se questa nuova applicazione, però, usasse 11 connessioni parallele, riuscirebbe a prendersi R/2 della banda possibile.
 
-\section{Livello di rete: piano dei dati}
-\subsection{Introduzione}
+\chapter{Livello di rete: piano dei dati}
+\section{Introduzione}
 \begin{figure}
 	\includegraphics[scale=0.6]{img/049.png}
 	\caption{Lo strato di rete}
 \end{figure}
 Nell'immagine abbiamo due host, H1 e H2, e svariati router sul loro percorso. Supponiamo che H1 sia il mittente e H2 il destinatario e consideriamo il ruolo dello strato di rete. \\
 lO strato di rete di H1 prende il segmento dallo strato di trasporto, incapsula ogni segmento in un datagram (che è il tipo di pacchetto dello strato di rete, e lo invia al primo router, R1. H2, quando riceve il datagram, estrae il segmento e lo invia allo strato di trasporto. Il ruolo primario dei router e di spedire (forward) i datagrammi da link di input a quello di output.
-\subsubsection{Forwarding e Routing}
+\subsection{Forwarding e Routing}
 Il ruolo dello strato di rete è semplice: spostare i pacchetti tra i vari host. Per fare ciò si identificano due funzioni importanti:
 \begin{itemize}
 	\item \textbf{Forwarding}: quando un pacchetto arriva al link di input, il router semplicemente sposta il link all'appropriato link di output
@@ -875,7 +875,7 @@ Come vengono determinati i valori della tabella di routing? L'algoritmo determin
 Per impostare la terminologia, da qui useremo \textbf{packet switch} per indicare un dispositivo generico di packet-witching che trasferisce i pacchetti da un link all'altro. Alcuni packet switch, chiamati \textbf{link-layer switches}, basano le loro decisioni di forwarding sul valore nel campo del frame dello strato di collegamento, altri packet-switch, i \textbf{router} basano la loro decisione sul valore del campo dello strato di rete.
 \paragraph{Impostazione della connessione}
 In alcuni network di computer lo strato di network ha una terza funzione: \textbf{l'impostazione della connessione} (\textit{Connection setup}). La funzione è simile a quella dell'handshake, semplicemente viene eseguita tra tutti i router del percorso in modo che i pacchetti possano scorrere tra di essi.
-\subsubsection{Modelli di servizio di network}
+\subsection{Modelli di servizio di network}
 Quando il livello di trasporto trasmette un pacchetto al livello di rete, può fare affidamento sul livello di rete per inviare il pacchetto alla sua destinazione? Quando più pacchetti sono spediti, arriveranno tutti in ordine? L'intervallo di tempo tra l'invio sequenziale di due pacchetti sarà uguale all'intervallo di ricezione? La rete offrirà un feedback sulla congestione? \\
 La risposta a queste domande e altre sono determinate dal modello di servizio offerto dal livello di rete. Il \textbf{modello di servizio di rete} definisce le caratteristiche del trasporto end-to-end. \\
 Consideriamo ora alcuni servizi che il livello di rete può offrire. Il livello di trasporto del mittente, quando passa il segmento al livello di rete, specifica quali servizi includere:
@@ -896,9 +896,9 @@ Il livello di rete di internet offre un solo servizio, conosciuto come \textbf{b
 	\caption{I modelli di servizio di internet, ATM CBR e ATM ABR. ATM = Asynchronous Transfer Mode, CBR = constant bit rate, ABR = Available bit rate}
 \end{figure}
 
-\subsection{Il protocollo di internet (IP): forwarding e indirizzamento (addressing) in internet}
+\section{Il protocollo di internet (IP): forwarding e indirizzamento (addressing) in internet}
 Ci sono due versioni di IP oggi, IPv4 e IPv6. Noi studieremo solo IPv4.
-\subsubsection{Formato dei datagrammi IPv4}
+\subsection{Formato dei datagrammi IPv4}
 \begin{figure}
 	\begin{center}
 		\includegraphics[scale=0.6]{img/052.png}
@@ -920,7 +920,7 @@ I campi chiave di un datagram IPv4 sono:
 	\item \textbf{Opzionali}: permettono l'estensione dell'header
 	\item \textbf{Dati} (payload)
 \end{itemize}
-\subsubsection{Frammentazione dei datagrammi IPv4} \label{par: MTU}
+\subsection{Frammentazione dei datagrammi IPv4} \label{par: MTU}
 Il massimo ammontare di dati che un frame del livello di collegamento può trasportare è chiamato \textbf{"unita massima di trasmissione"} \textit{(MTU)}. Poichè ogni datagram IP è incapsulato in un frame del livello di collegamento per il trasporto da un router all'altro, allora l'MTU del protocollo del livello di collegamento pone un limite alla lunghezza del datagram IP. Il vero problema, però, non è questo limite ma il fatto che i vari router sul percorso possano utilizzare differenti protocolli con differenti MTU. Supponiamo che ci arrivi un pacchetto di data dimensione e che questo debba essere indirizzato verso un altro link ma, problema, questo ha un MTU inferiore rispetto a quello in entrata. Che fare? La soluzione è la frammentazione dei dati nel datagram IP in due più piccoli datagram IP, ognuno incapsulato in un datagram più piccolo in un frame separato. Ognuno di questi datagram è chiamato \textbf{frammento}. \\
 Per non aggiungere lavoro ai router, IPv4 non fa riassemblare i frame a questi ma è computo dell'host destinatario. Per riassemblarli, però, il sistema necessita di sapere se:
 \begin{itemize}
@@ -938,7 +938,7 @@ Per fare un esempio, immaginiamo che un datagram di 4000 byte (20 byte di intest
 	\end{center}
 \end{figure}
 Alla destinazione, i dati vengono passati al livello di trasporto solo dopo che lo strato di collegamento ha ricostruito i datagram IP. Se non arrivano completi vengono scartati. Nel caso venga usato TCP, allora ci penserà questo a occuparsi della ritrasmissione dei paccehtit mancanti.
-\subsubsection{Indirizzamento IPv4}
+\subsection{Indirizzamento IPv4}
 Generalmente un host ha un solo colelgamento con la rete; quando l'implementazione di IP dell'host vuole inviare un datagramma, lo fa su tale collegamento. Il confine tra host e collegamento fisico viene detto interfaccia. \\
 Differentemente, poichè un router deve poter ricevere ed inviare datagrammi, deve avere almeno due collegamenti. Infatti il router presenta un'interfaccia per ogni collegamento. \\
 IP richiede che ogni interfaccia abbia un proprio indirizzo, pertanto l'indirizzo IP è associato all'interfaccia e non all'host. Gli indirizzi IP sono lunghi 32 bit (4 byte) e quindi si possono avere $2^{32}$ indirizzi, circa 4 miliardi. Tali indirizzi sono solitamente scritti in notazione decimale puntata, ovvero dove i byte sono separati da un singolo punto. \\
@@ -993,7 +993,7 @@ Per i nuovi host il protocollo DHCP si articola in quattro punti:
 \end{enumerate}
 Ovviamente DHCP fornisce anche un meccanismo che consente ai client di rinnovare la concessione di un indirizzo IP. \\
 DHCP presenta comunque dei problemi per quanto riguarda il mantenere una connessione TCP a un'applicaizone remota, spostandosi il nodo mobile da una sottorete a un'altra.
-\subsubsection{NAT (network address translation}
+\subsection{NAT (network address translation}
 Cosa accadrebbe se l'aumento di una rete portasse un ISP a non poter assegnare più indirizzi contigui? E cosa dovrebbe sapere il normale utente per gestire gli indirizzi IP? Esiste un approccio più semplice e sempre più usato: il \textbf{NAT (Network Address Translation)}.
 \begin{figure}
 	\includegraphics[scale=0.4]{img/058.png}
@@ -1005,8 +1005,8 @@ Ma se il router ha un solo indirizzo, come possono essere indirizzati correttame
 Facendo riferimento alla figura, supponiamo che un utente dietro all'host 10.0.0.1 richieda una pagina web ad un server (porta 80) con indirizzo IP 128.119.40.186. L?host 10.0.0.1 assegna il numero di porta di origine (arbitrario) 3345 e invia il datagramma alla rete locale. Il router riceve il datagramma, genera per esso un nuovo numero di porta di origine 5001, sostituisce l'indirizzo IP con il proprio e sostituisce il numero di porta. Quando genera il nuovo numero di porta il router NAT può sceglierne qualsiasi non ancora usato. Notiamo che essendo il numero di porta a 16 bit, un router NAT può gestire 65.536 connessioni simultanee con un solo indirizzo IP. Il NAT a questo punto aggiunge una riga alla propria tabella di traduzione. Quando verrà restituito il pacchetto da parte del server web avverrà la traduzione inversa. \\
 NAT non è esente da problemi, infatti se ci fosse un server in esecuzione sulla rete domestica (e quindi deve avere dei numeri di porta noti), questo avrebbe dei problemi. Sono state proposte delle soluzioni come il NAT traversale e l'Universal Plug and Play (UPnP).
 
-\section{Livello di rete: piano di controllo}
-\subsection{Algoritmi di instradamento}
+\chapter{Livello di rete: piano di controllo}
+\section{Algoritmi di instradamento}
 Lo scopo degli algoritmi di instradamento è determinare i percorsi, o cammini, tra le sorgenti e i destinatari, attraverso la rete dei router. Tipicamente il percorso migliore è quello che ha costo minimo, anche se nella realtà potrebbero esserci altri problemi. Si noti che è sempre necessario avere una sequenza ben definita di router che il pacchetto attraversa viaggiando dall'host sorgente all'host destinataria, sia che il piano di controllo adotti un approccio per router che ne adotti uno logicamente centralizzato. \\
 Per formulare i problemi di instradamento si utilizza un \textbf{grafo}. Ricordiamo che un grafo \textit{G = (N, E)} è un insieme N di nodi e un insieme E di archi, ove ciascun arco collega una coppia di nodi di N.
 \begin{figure}
@@ -1027,7 +1027,7 @@ Un secondo criterio di classificazione degli algoritmi di instradamento riguarda
 \end{itemize}
 
 Un terzo criterio epr classificare gli algoritmi di instradamento è il fatto di essere più o meno sensibili (load-sensitive/insensitive) al carico della rete. In un \textbf{algoritmo sensibile al carico} i costi dei collegamenti variano dinamicamente per riflettere il livello corrente di congestione.
-\subsubsection{Instradamento link-state (LS)}
+\subsection{Instradamento link-state (LS)}
 In un instradamento link-state la topologia di rete e i costi dei collegamenti sono noti. Ciò si ottiene con i nodi che notificano a tutta la rete lo stato dei collegamenti. Questi pacchetti contengono identità e costi dei collegamenti connessi al nodo che li invia- Questo viene spesso ottenuto tramite un \textbf{algoritmo di link-state broadcast}.\\
 L'algoritmo di calcolo dei percorsi che presentiamo associato all'instradamento link-state è noto come \textbf{algoritmo di Dijkstra} che calcola il percorso a costo minimo da un nodo (l'origine che chiameremo u) a tutti gli altri nodi della rete, è iterativo e ha le seguenti proprietà:
 \begin{itemize}
@@ -1074,7 +1074,7 @@ La figura mostra una tipologia di rete in cui i costi dei collegamenti sono ugua
 
 C'è una soluzione a questo problema? Una soluzione consiste nello stabilire che i costi dei collegamenti dei collegamenti non dipendono dalla quantità di traffico trasportato, cosa inaccettabile poichè uno degli scopi dell'instradamento è evitare la congestione dei link. Un'altra soluzione consiste nell'assicurarsi che non tutti i router lancino l'esecuzione dell'algoritmo nello stesso istante. Questa sembra essere una soluzione ragionevole, dato che vorremmo che l'istanza in esecuzione dell'algoritmo non fosse la stessa su ciascun nodo anche se i router eseguissero l'algoritmo con la stessa periodicità.
 
-\subsubsection{Instradamento distance-vector (DV)}
+\subsection{Instradamento distance-vector (DV)}
 Mentre l'instradamento LS usa informazioni globali, quello \textbf{distance vector} è iterativo, asincrono e distribuito:
 \begin{itemize}
 	\item \textbf{Distribuito}: ciascun nodo riceve parte dell'informazione da uno o più dei suoi vicini direttamente connessi a cui poi restituisce i risultati dei calcoli
@@ -1161,7 +1161,7 @@ Ricordiamo che N rappresenta l'insieme dei nodi ed E l'insieme degli archi:
 \end{itemize}
 In conclusione, nessuno dei due meccanismi è migliore dell'altro ed entrambi vengono usati.
 
-\subsection{ICMP (Internet Control Message Protocol} \label{par: ICMP}
+\section{ICMP (Internet Control Message Protocol} \label{par: ICMP}
 Il protocollo ICMP viene usato da host e router per scambiarsi informazioni a livello di rete: il suo uso più tipico è la notifica degli errori
 
 ICMP è spesso considerato parte di IP, ma dal punto di vista dell'architettura si trova esattamente sopra IP, dato che i suoi messaggi vengono trasportati nei datagrammi IP: ossia i messacci ICMP vengono trasportati come payload di IP, esattamente come i segmenti TCP o UDP.
@@ -1202,8 +1202,8 @@ Un altro utilizzo di ICMP è quello fatto da traceroute. Per determinare i nomi 
 \end{table}
 \pagebreak
 
-\section{Livello di collegamento e reti locali}
-\subsection{Livello di collegamento: introduzione}
+\chapter{Livello di collegamento e reti locali}
+\section{Livello di collegamento: introduzione}
 Vediamo alcuni termini utili:
 \begin{itemize}
 	\item Nodo: qualunque dispositivo che opera a livello di collegamento (livello 2)
@@ -1226,7 +1226,7 @@ Consideriamo come esempio l'immagine \ref{fig: 066} e supponiamo di voler inviar
 	\item collegamento ethernet tra lo switch ed il server
 \end{enumerate}
 Su ogni collegamento, un nodo trasmittente incapsula il datagramma in un \textbf{frame del livello di collegamento \textit{(link layer frame)}} e lo trasmette lungo il collegamento stesso.
-\subsubsection{Servizi offerti dal livello di collegamento}
+\subsection{Servizi offerti dal livello di collegamento}
 I dettagli dei servizi forniti dal livello di collegamento possono variare da un protocollo all'altro. I possibili servizi includono:
 \begin{itemize}
 	\item \textbf{Framing}: Quasi tutti i protocolli incapsulano i datagrammi del livello di rete all'interno di un frame a livello di collegamento. I frame sono costituiti da un campo dati, nel quale è inserito il datagramma, e da vari campi di intestazione.
@@ -1234,7 +1234,7 @@ I dettagli dei servizi forniti dal livello di collegamento possono variare da un
 	\item \textbf{Consegna affidabile}: i protocolli a livello di collegamento che forniscono un servizio di consegna affidabile garantiscono il trasporto senza errori di ciascun datagramma. Analogamente al livello di trasporto, anche il servizio di consegna affidabile del livello di collegamento può essere realizzato attraverso acknowledgment e ritrasmissioni. Questo servizio è spesso offerto per i collegamenti con alto tasso di errore (ad esempio i collegamenti wireless). Viene invece considerato inutile per i collegamenti soggetti a basso tasso di errori, ovvero quelli tramite mezzo fisico.
 	\item \textbf{Rilevazione e correzione degli errori}: l'inserimento di bit di controllo degli errori all'interno dei frame e all'esecuzione di un controllo da parte del ricevente permettono i controlli sugli errori di trasmissione. Questi meccanismi sfruttano, come abbiamo già visto, il checksum anche se, in questo caso, viene generalmente implementato a livello hardware e non software.
 \end{itemize}
-\subsubsection{Dov'è implementato il livello di collegamento}
+\subsection{Dov'è implementato il livello di collegamento}
 Il livello di collegamento di un host è implementato in hardware o in software? Su una scheda o chip separati? Come si interfaccia con le latre parti dell'hardware dell'host e con il suo sistema operativo?
 
 La figura \ref{fig: 069} mostra la tipica architettura di un host. Per un dato collegamento, il protocollo del livello di collegamento è realizzato da un \textbf{adattatore di rete \textit{(network adapter)}}, noto anche come \textbf{scheda di rete \textit{(NIC, network interface card)}}. Il cuore della scheda è il controllder a livello di collegamento (link layer controller), che è di solito un chip dedicato che implementa molti dei servizi a livello di collegamento (framing, accesso al collegamento, rilevazione degli errori). La maggior parte delle funzionalità è quindi implementata nell'hardware.
@@ -1252,7 +1252,7 @@ La figura \ref{fig: 069} mostra la tipica architettura di un host. Per un dato c
 
 Il livello di collegamento è una combinazione di hardware e software.
 
-\subsection{Tecniche di rilevazione e correzione degli errori}
+\section{Tecniche di rilevazione e correzione degli errori}
 Esamineremo alcune tra le tecniche più semplici utilizzabili per il trattamento degli errori sui bit.  La figura \ref{fig: 070} schematizza lo scenario di riferimento. Nel nodo trasmittente, ai dati D che devono essere protetti vengono aggiunti dei \textbf{bit detti EDC \textit{(Error Detection and Correction)}}. I dati D e i bit EDC sono inviati in un frame al nodo ricevente. Questo legge una sequenza di bit D' ed EDC' che può essere diversa dall'originale, come risultato della modifica dei bit in transito.
 
 Il nodo ricevente deve determinare se D = D', potendo contare solo su D' e EDC'. Le attuali tecniche non consentono sempre al nodo ricevente di rilevare se si sono verificati errori nei bit. Anche con l'utilizzo dei bit di rilevazione degli errori è possibile che ci siano degli errori non rilevati. Bisogna quindi optare per uno schema per la rilevazione degli errori che riduca la probabilità di questo evento.
@@ -1272,7 +1272,7 @@ Vedremo tre tecniche:
 	\label{fig: 071}
 \end{figure}
 
-\subsubsection{Controllo di parità}
+\subsection{Controllo di parità}
 La forma più semplice di rilevamento degli errori è quella che utilizza un unico \textbf{bit di parità \textit{parity bit}}. Prendiamo che le informazioni da inviare nel blocco D siano costitutite da \emph{d} bit. In uno \textbf{schema di parità pari}, il mittente include un bit addizionale e sceglie il suo valore in modo da rendere pari il numero totale di bit 1 nei d+1 bit trasmessi. Nello \textbf{schema di parità dispari} fa la stessa cosa semplicemente rendendo il numero di 1 dispari. La figura \ref{fig: 072} mostra uno schema di parità pari.
 
 Con un solo bit di parità il ricevente deve solo contare il numero di 1 e, in base allo schema di parità, decidere se c'è un errore.
@@ -1292,14 +1292,14 @@ Supponiamo ora che si verifichi un solo errore nei d bit originali. Con questo \
 
 La capacità del rievente sia di rilevare sia correggere gli errori è conosciuta come \textbf{forward error correction \textit{(FEC, correzione degli errori in avanti)}}. In una configurazione di rete, le tecniche FEC possono essere impiegate singolarmente o abbinate a tecniche ARQ\footnote{\textbf{Automatic Repeat-reQuest}, è una strategia di controllo di errore, che svolge il compito di rivelare un errore (ma non di correggerlo). I pacchetti corrotti vengono scartati e viene richiesta la loro ritrasmissione.}. Le tecniche FEC sono molto utili, perchè possono diminuire il numero di ritrasmissioni e l'immediata correzione degli errori. Ciò consente di evitare un'attesa equivalente all'RTT, necessaria affichè il trasmittente riceva un pacchetto NAK e il pacchetto ritrasmesso torni al ricevente.
 
-\subsubsection{Checksum}
+\subsection{Checksum}
 Nelle tecniche che utilizzano il checksum i d bit visti prima sno trattati come una sequenza di numeri interi da k bit. Un semplice modo per eseguire il checksum è quello di sommare questi interi da k bit e usare il bit del risultato come bit per la rilevazione degli errori. Il \textbf{checksum di Internet} si basa su questo approccio: i dati sono trattati come interi di 16 bit e sommati, il complemento a 1 di questa somma costituisce il checksum che viene poi trasporto nell'intestazione dei segmenti.
 
 Nei protocolli TCP e UDP il checksum è calcolato per tutti i campi (intestazione e dati). In IP il checksum è calcolato solo sull'intestazione, perchè i segmenti TCP/UDP hanno il proprio.
 
 Le tecniche di checksum richiedono poco spazio ma hanno una capacità di errori relativamente limitata rispetto alle tecniche CRC utilizzate nel livello di collegamento. Allora perchè usare checksum e non CRC a livello di trasporto? Questo perchè il livello di trasporto è generalmente eseguito via software, si richiede quindi che le soluzioni di rilevazione errori siano leggere e veloci. La rilevaizone degli errori a livello di collegamento è svolto via hardware, permettendo quindi di svolgere in meno tempo operazioni più complicate.
 
-\subsubsection{Controllo a ridondanza ciclica (CRC)} \label{par: CRC}
+\subsection{Controllo a ridondanza ciclica (CRC)} \label{par: CRC}
 \begin{figure}
 	\begin{center}
 		\includegraphics[scale=0.6]{img/073.png}
@@ -1342,7 +1342,7 @@ Riassument i simboli:
 \end{itemize}
 CRC può rilevare errori a burst inferiori a r + 1 bit: ovvero tutti gli errori consecutivi di non oltre r bit saranno rilevati. La probabilità di avere un burst più lungo è $1 - 0,5^{r}$. Inoltre CRC può rilevare qualsiasi numero dispari di errori nei bit.
 
-\subsection{Collegamenti broadcast e protocolli di accesso multiplo} \label{par: accesso multiplo}
+\section{Collegamenti broadcast e protocolli di accesso multiplo} \label{par: accesso multiplo}
 Fino ad ora abbiamo visto due tipi di collegamento di rete: punto a punto e broadcast.
 
 Il \textbf{collegamento punto a punto} è costituito da un trasmittente a un'estremità del collegamento e da un unico ricevente dall'altra. Il \textbf{collegamento broadcast} può avere più nodi trasmittenti e riceventi connessi allo stesso canale broadcast condiviso.  Il termine broadcast indica che, quando un nodo trasmette un frame, il canale lo diffonde e tutti gli altri nodi ne ricevono una copia.
@@ -1399,7 +1399,7 @@ Idealmente, un protocollo di accesso multiplo per un canale broadcast con una ve
 	\item Il protocollo è semplice, in modo che risulti economico da implementare
 \end{enumerate}
 
-\subsubsection{Protocolli a suddivisione del canale}
+\subsection{Protocolli a suddivisione del canale}
 Come mostrato al paragrafo \ref{par: TDM/FDM}, il multiplexing a divisione di tempo, TDM, e quello a divisione di frequenza, FDM, sono due tecniche che possono essere utilizzate per suddividere la larghezza di banda di un canale broadcast fra i nodi che lo condividono. Per esempio, supponiamo che il canale supporti N nodi e che la sua velocità di trasmissione sia di R bps. TDM suddivide il tempo in \textbf{intervalli di tempo} (time frame) e poi divide ciascun intervallo di tempo in N \textbf{slot temporali} (time slot). Ogni slot è quindi assegnato a uno degli N nodi. Ogni volta che un nodo ha un pacchetto da inviare, trasmette i bit del pacchetto durante lo slot di tempo assegnatogli. Generalmente, le dimensioni dello slot sono stabilite in modo da consentire la trasmissione di un singolo pacchetto. La figura \ref{fig: 077} mostra un caso di TDM con quattro nodi.
 
 \begin{figure}
@@ -1415,7 +1415,7 @@ Mentre TDM suddivide il canale in intervalli di tempo, FDM lo suddivide in frequ
 
 Un terzo protocollo di suddivisione del canale è \textbf{l'accesso multiplo a divisione di codice \textit{(CDMA, code division multiple access)}}. CDMA assegna ad ogni nodo un codice. Ciascun nodo, quindi, utilizza il proprio codice univoco per codificare i dati inviati. Se i codici sono scelti accuratamente, le reti CDMA avranno la proprietà di consentire a nodi differenti di trasmettere simultaneamente e ai rispettivi destinatari di ricevere correttamente i bit dei dati codificati nonostante le interferenze.
 
-\subsubsection{Protocolli ad accesso casuale}
+\subsection{Protocolli ad accesso casuale}
 Questi protocolli riguardano situazioni nelle quali un nodo trasmette sempre alla massima velocità consentita dal canale, cioè R bps. Quando si verifica una collisione, i nodi coinvolti ritrasmettono ripetutamente i loro frame fino a quando raggiungono la destinazione, senza collisioni. La ritrasmissione non è immediata, il nodo attende un periodo di tempo casuale (random delay), ogni nodo coinvolto in una collisione seleziona un ritardo casuale indipendente da quello degli altri nodi.
 
 \paragraph{Slotted ALOHA}
@@ -1517,7 +1517,7 @@ Indichiamo con $d_{prop}$\footnote{Andare a vedere pagina \pageref{par: ritardi}
 \end{center}
 Quindi quando $d_{prop}$ tende a 0, l'efficienza tende a 1. Mentre se $d_{trasm}$ cresce, l'efficienza tende a 1. Questi due fattori confermano che se il ritardo di propagazione fosse nullo, allora i vari nodi saprebbero subito se il canale è occupato o no, mentre se un frame si appropria di un canale può trattenerlo per un periodo di tempo lungo, rendendo il canale produttivo la maggior parte del tempo.
 
-\subsubsection{Protocolli a rotazione}
+\subsection{Protocolli a rotazione}
 Ricordiamo che due proprietà auspicabili di un protocollo di accesso multiplo sono:
 \begin{enumerate}
 	\item quando un solo nodo  è attivo, deve avere un throughput di R bps
@@ -1542,14 +1542,14 @@ Questo protocollo è decentralizzato ed efficiente ma presenta sempre dei proble
 	\item Se un nodo non riesce ad inoltrare il token, occorre invocare procedure di recupero per rimetterlo in circolazione
 \end{itemize} 
 
-\subsection{Reti locali commutate}
+\section{Reti locali commutate}
 \begin{figure}
 	\includegraphics[scale=0.55]{img/082.png}
 	\caption{Una rete istituzionale connessa da quattro switch}
 	\label{fig: 082}
 \end{figure}
 La figura \ref{fig: 082} mostra una rete locale commutata che connette tre dipartimenti, due server e un router con quattro switch. Gli switch, operando a livello di collegamento, commutano frame invece che detagrammi a livello di rete, per cui non riconoscono gli indirizzi a livello di rete e non usano algoritmi di instradamento. Al posto degli indirizzi IP usano indirizzi a livello di collegamento per inoltrare i frame attraverso la rete.
-\subsubsection{Indirizzi a livello di collegamento e ARP}
+\subsection{Indirizzi a livello di collegamento e ARP}
 Host e router hanno indirizzi a livello di collegamento oltre che a livello di rete.
 \paragraph{Indirizzi MAC}
 In relatà non sono i nodi (ovvero gli host e i router) ad avere indirizzi a livello di collegamento, ma sono i loro adattatori (schede di rete) a possederli. Un host o un router con più interfacce di rete avrà più indirizzi a livello di collegamento associati a esse, esattamente come accadeva per gli indirizzi IP. È importante notare che gli switch a livello di collegamento non hanno indirizzi a livello di collegamento associati alle loro interfacce che connettono a host e router, questo perchè il loro compito  trasportare i datagrammi tra host e router; uno switch effettua questa operazione in modo trasparente, senza che host e router debbano intervenire. Gli indirizzi a livello di collegamento sono indicati con varie terminologie che vanno da \textbf{indirizzo fisico}, \textbf{indirizzo LAN} o \textbf{indirizzo MAC}. Quest'ultimo termine è quello più usato.
@@ -1599,7 +1599,7 @@ Osserviamo la figura \ref{fig: 085} dove vengono rappresentate due sottoreti con
 
 Cosa accade se un host della sottorete 1 volesse inviare un datagramma ad un host della sottorete 2? In particolare supponiamo che l'host 111.111.111.111 voglia inviare un datagramma all'host 222.222.222.222. Poichè il datagramma deve essere inviato tramite il router centrale, l'indirizzo MAC da collegare al frame sarà quello del router che verrà acquisito tramite ARP. La risoluzione da indirizzo IP a indirizzo MAC per la sottorete 2, quindi, sarà compito del router.
 
-\subsubsection{Ethernet}
+\subsection{Ethernet}
 Ethernet è attualmente la tecnologia per LAN cablate più diffusa, questo grazie alle alte velocità e alla semplicità rispetto ad altre tecnologie come token ring, FDDI e ATM. Due implementazioni differenti sono quella tramite hub\footnote{Un hub è un dispositivo a livello fisico che agisce sui singoli bit e non sui frame. Quando un bit arriva a un'interfaccia, l'hub semplicemente rigenera il bit, amplifica la sua potenza e lo trasmette su tutte le altre interfacce} e quella tramite switch\footnote{Uno switch è privo di collisioni, è un commutatore di pacchetti store-and-forward e opera a livello 2 (livello di collegamento)}, venuta successivamente ha rimpiazzato l'altra.
 
 \paragraph{Struttura dei frame ethernet}
@@ -1622,7 +1622,7 @@ Supponiamo che la scheda di rete trasmittente, A, abbia indirizzo MAC AA-AA-AA-A
 \end{itemize}
 A livello di rete tutte le tecnologie ethernet forniscono un servizio senza connessione (ovvero senza handshake). Questo problema viene corretto nel caso l'applicazione stia usando TCP.
 
-\subsubsection{Switch a livello di collegamento}
+\subsection{Switch a livello di collegamento}
 Il ruolo dello switch è ricevere i frame in ingresso e inoltrarli sui collegamenti in uscita. Lo switch stesso è trasparente ai nodi: un nodo indirizza i frame direttamente ad un altro nodo senza sapere se ci sarà uno switch sul percorso.
 
 Poichè i frame che arrivano possono eccedere temporaneamente la velocità di uscita dello switch, ogni interfaccia è dotata di un buffer.
@@ -1703,7 +1703,7 @@ Instradamento ottimale  & No                                & Sì               
 	\label{tab: 004}
 \end{table}
 
-\subsubsection{LAN virtuali (VLAN)}
+\subsection{LAN virtuali (VLAN)}
 Possiamo identificare tre inconveniente nella configurazione dell'immagine \ref{fig: 082}:
 \begin{itemize}
 	\item \textbf{Mancanza di isolamento del traffico}: sebbene la gerarchia localizzi il traffico di un gruppo in un solo switch, il traffico broadcast deve ancora attraversare l'intera rete. Sarebbe preferibile limitare tale traffico, anche per ragioni di sicurezza e riservatezza, in modo che le comunicazioni di un gruppo non possano essere intercettate da parte di un altro. Questo tipo di isolamento potrebbe essere fornito sostituendo lo switch centrale con un router
@@ -1733,8 +1733,8 @@ Un approccio più scalabile è noto come \textbf{VLAN trunking}. La figura \ref{
 
 L'etichetta VLAN consiste di un campo TPID (tag protocol identifier) di due byte (con un valore fisso esadecimale di 81-100) e un campo tag control information di due byte, contenente il campo di identificazione della VLAN a 12 bit e un campo di priorità a 3 bit.
 
-\section{Reti mobili e wireless}
-\subsection{Introduzione}
+\chapter{Reti mobili e wireless}
+\section{Introduzione}
 \begin{figure}
 	\includegraphics[scale=0.6]{img/091.png}
 	\caption{Componenti di una rete wireless}
@@ -1767,7 +1767,7 @@ A livello più alto possiamo classificare le reti wireless secondo due criteri:
 	\item \textbf{Hop multiplo, senza infrastruttura}: non c'è una stazione base e i nodi possono dover ritrasmette i messaggi a parecchi altri nodi per raggiungere la destinazione.  I casi di questo gruppo sono molto particolari e complicati
 \end{itemize}
 
-\subsection{Collegamenti wireless e caratteristiche di rete}
+\section{Collegamenti wireless e caratteristiche di rete}
 Iniziamo elencando le principali differenza tra le reti cablate e wireless.
 \begin{itemize}
 	\item \textbf{Attenuazione del segnale}: il segnale wireless si attenua al crescere della distanza percorsa e per ogni ostacolo incontrato
@@ -1797,7 +1797,7 @@ La figura \ref{fig: 093} mostra il tasso di errore sul bit (BER), cioè approssi
 \end{figure}
 Nei collegmenti wireless ci sono anche altri problemi, come vediamo dalla figura \ref{fig: 094}. Supponiamo che le stazioni A e C stiano trasmettendo alla stazione B. Il \textbf{problema del terminale nascosto} deriva dal fatto che ostacoli fisici potrebbero impedire la comunicazione. Il \textbf{fading} (attenuazione del segnale), invece, è quando la stazione non è rilevabile a causa della degradazione del segnale in base alla distanza.
 
-\subsection{Wi-Fi: LAN wireless 802.11}
+\section{Wi-Fi: LAN wireless 802.11}
 \begin{table}[]
 	\begin{tabular}{|l|l|l|}
 		\hline
@@ -1815,7 +1815,7 @@ Gli standard 802.11 hanno in comune diverse caratteristiche. Utilizzano lo stess
 
 I tre standard presentano notevoli differenze a livello fisico come la frequenza. In più, i due standard più recenti (n e ac) usano antenne a più ingressi e più uscite (MIMO multiple input multiple output). Le base station 802.11ac possono trasmettere a più stazioni simultaneamente e possono avere antenne intelligenti con beamforming adattivo in modo da ridurre le interferenze e aumentare le distanze.
 
-\subsubsection{Architettura di 802.11}
+\subsection{Architettura di 802.11}
 \begin{figure}
 	\includegraphics[scale=0.5]{img/095.png}
 	\caption{Architettura della LAN 802.11}
@@ -1852,7 +1852,7 @@ Il processo di scansione dei canali e di ascolto dei frame beacon è chiamato \t
 
 Una volta scelto l'AP, l'host invia un frame di richiesta di associazione all'AP che risponde con un frame di risposta di associazione. Una volta associato con un AP, l'host vorrà entrre nella sottorete, nel senso dell'indirizzamento IP, alla quale appartiene l'AP.
 
-\subsubsection{Protocollo MAC di 802.11}
+\subsection{Protocollo MAC di 802.11}
 Poichè stazioni multiple potrebbero trasmettere frame di dati contemporaneamente sullo stesso canale, è necessario un protocollo ad accesso multiplo. In questo contesto, per stazione intendiamo sia la stazione wireless che l'AP. Riprendendo il paragrafo \ref{par: accesso multiplo}, ci sono tre classi si protocolli ad accesso multiplo:
 \begin{itemize}
 	\item suddivisione del canale (CDMA)
@@ -1908,13 +1908,13 @@ L'utilizzo di RTS e CTS può incrementare le prestazioni per due motivi:
 Questo sistema introduce comunque un ritardo e consuma risorse, per questo motivo questi frame vengono usati solo  per la trasmissione di lunghi frame di dati.
 \begin{figure}
 	\begin{center}
-		\includegraphics[scale=0.6]{img/100.png}
+		\includegraphics[scale=1]{img/100.png}
 		\caption{Come evitare le collisioni utilizzando frame RTS e CTS}
 		\label{fig: 100}
 	\end{center}
 \end{figure}
 
-\subsubsection{Pacchetto IEEE 802.11}
+\subsection{Pacchetto IEEE 802.11}
 \begin{figure}
 	\begin{center}
 		\includegraphics[scale=0.3]{img/101.png}
@@ -1962,7 +1962,7 @@ Il \textbf{campo di controllo del frame} è articolato in più sottocampi. I cam
 I campi \textbf{verso AP} e \textbf{da AP} definiscono la funzione dei diversi campi indirizzo. Il significato cambia se viene usata una rete ad hoc o con infrastruttura e, in questo caso, se il frame è inviato da una stazione o da un AP. \\
 Il campo \textbf{WEP} specifica un'eventuale cifratura dei dati.
 
-\subsubsection{Mobilità all'interno di una sottorete IP}
+\subsection{Mobilità all'interno di una sottorete IP}
 \begin{figure}
 		\includegraphics[scale=0.6]{img/103.png}
 		\caption{Mobilità all'interno della stessa sottorete}
@@ -1974,7 +1974,7 @@ Prendiamo ad esempio l'immagine \ref{fig: 103}. Notiamo che i due AP sono connes
 
 Dal punto di vista dell'handoff tra AP1 e AP2 la cosa è semplice, mentre come fa lo switch a sapere che H1 si è spostato da un AP all'altro? Semplice, autoapprendendo e costruendo una nuova entrata sulla tabella di inoltro.
 
-\subsubsection{Funzionalità avanzate di 802.11}
+\subsection{Funzionalità avanzate di 802.11}
 \paragraph{Adattamento del tasso in 802.11}
 Abbiamo visto prima nella figura  \ref{fig: 093} che esistono diverse tecniche di modulazione che si associano a scenari di SNR distinti. Consideriamo ora un utente che si trova a 20 metri dalla stazione base e ha un altro SNR. Dato l'altro SNR, può comunicare con la stazione base usando una modulazione che fornisce un tasso trasmissivo alto, mantenendo un BER basso. Ora immaginiamo che l'utente si allontani, diminuendo l'SNR al crescere della distanza. In questo caso arriveremo ad un punto nel quale i frame non saranno più ricevuti correttamente.
 
@@ -1984,10 +1984,11 @@ Questo sistema è simile a quello del controllo di congestione di TCP.
 
 \paragraph{Gestione dell'energia}
 Un nodo è in grado di alternare esplicitamente tra gli stati di "attivo" (wake) e "inattivo" (sleep). Un nodo indica all'AP che sta per disattivarsi impostando a 1 il bit di gestione energetica nell'intestazione del frame 802.11. Il nodo imposta un timer perchè torni ad attivarsi appena prima dell'instante in cui l'AP è programmato per mandare il frame beacon. Dato che l'AP è a conoscenza del fatto che il nodo sta per disattivarsi non dovrà inviare frame al nodo e memorizza i frame destinati all'host disattivo per una trasmissione successiva.
+
 \pagebreak
 
-\section{Formulario}
-\subsection{Introduzione}
+\chapter{Formulario}
+\section{Introduzione}
 Siano:
 \begin{itemize}
 	\item L la lunghezza (length) del pacchetto in bit
@@ -2004,7 +2005,7 @@ Abbiamo:
 	\item Intensità del traffico: $\dfrac{aL}{R}$ che deve essere <1 per non aumentare la coda
 \end{itemize}
 
-\subsection{Livello di trasporto}
+\section{Livello di trasporto}
 Siano
 \begin{itemize}
 	\item N la dimensione della finestra in numero di pacchetti
@@ -2036,7 +2037,7 @@ Abbiamo:
 	\end{itemize}
 \end{itemize}
 
-\subsection{Livello di collegamento}
+\section{Livello di collegamento}
 Siano:
 \begin{itemize}
 	\item N: numero di nodi
