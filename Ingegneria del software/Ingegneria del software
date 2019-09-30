@@ -1,0 +1,43 @@
+\documentclass[11pt,a4paper]{book}
+\usepackage[italian]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{imakeidx}
+\usepackage{amsmath}
+\usepackage[hyperfootnotes=false, colorlinks=true, linkcolor=black]{hyperref}
+\usepackage[style=numeric-comp,useprefix,hyperref,backend=bibtex]{biblatex}
+
+
+\begin{document}
+\title{Ingegneria del software}
+\author{Jacopo De Angelis}
+\maketitle
+
+\pagebreak
+\tableofcontents
+\pagebreak
+
+\begin{LARGE}
+Programma esteso
+\end{LARGE}
+
+\begin{itemize}
+    \item Presentazione del corso. Obiettivi e contenuti.
+    \item Ingegneria del software: model-driven software engineering, component-based software engineering, aspect-oriented software engineering, distributed software engineering.
+    \item Architetture software. Progettazione dell’architetture software. Pattern architetturali. Diagramma dei package, dei componenti e di deployment.
+    \item Applicazione dei design pattern nello sviluppo del software. Modellazione di un framework di persistenza con i design pattern.  Sviluppo di un sistema di gestione di risorse con i design pattern.
+    \item Best practices in Java. Reflessivitá in Java. Sviluppo di strumenti come plug-in di Eclipse.
+    \item Sistemi self-managed e self-adaptive: concetti fondamentali, domini applicativi, e case study. Model-driven engineering.
+    \item Aspect-oriented software engineering: concetti fondamentali. Aspect-oriented design e programmazione.
+    \item Valutazione della qualita' del software. Metriche per la valutazione del software.  Utilizzo del tool Understand.
+    \item Identificazione e rimozione di violazioni nel codice attraverso SonarQube.
+    \item Utilizzo di Git e GitHub, cooperazione in team durante lo sviluppo di un progetto.
+    \item Gestione dei progetti software: concetti base. Pianificazione dei progetti: diagrammi Gantt e PERT. Gestione dei rischi, gestione della qualitá.
+    \item Utilizzo di  SonarCloud   
+    \item Introduzione al DevOps
+    \item Continuous Integration: utilizzo di Travis (distributed continuous integration service)
+\end{itemize}
+\pagebreak
+
+

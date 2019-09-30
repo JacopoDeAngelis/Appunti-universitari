@@ -1,0 +1,81 @@
+\documentclass[11pt,a4paper]{book}
+\usepackage[italian]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{imakeidx}
+\usepackage{amsmath}
+\usepackage[hyperfootnotes=false, colorlinks=true, linkcolor=black]{hyperref}
+\usepackage[style=numeric-comp,useprefix,hyperref,backend=bibtex]{biblatex}
+
+
+\begin{document}
+\title{Programmazione C++}
+\author{Jacopo De Angelis}
+\maketitle
+
+\pagebreak
+\tableofcontents
+\pagebreak
+
+\begin{LARGE}
+Programma esteso
+\end{LARGE}
+
+\begin{itemize}
+	\item Introduzione al C++.
+	\item Concetti base di programmazione C++
+	\begin{itemize}
+		\item tipi di dati, puntatori,  reference, scoping
+		\item casting,
+	\end{itemize}
+
+	\item C++ come linguaggio ad oggetti
+	\begin{itemize}
+		\item classi, costruttori e distruttori, overloading, metodi friend
+		\item inline, constness"           
+	\end{itemize}	
+	\item Concetti avanzati di programmazione C++
+	\begin{itemize}
+		\item overloading degli operatori
+		\item metodi virtual, abstract, polimorfismo
+		\item ereditarietà
+	\end{itemize}
+	\item Programmazione generica
+	\begin{itemize}
+		\item template
+		\item iteratori
+	\end{itemize}	
+	\item La libreria Standard (STL)
+	\begin{itemize}
+		\item Le classi container
+		\item Gli algoritmi
+		\item Funtori
+		\item Multithread
+	\end{itemize}	
+	\item Uso delle librerie esterne
+	\begin{itemize}
+		\item Librerie statiche
+		\item Librerie dinamiche
+		\item La libreria OpenMP
+	\end{itemize}	
+	\item I nuovi standard C++11, C++14
+	
+	\item Applicazioni GUI
+	\begin{itemize}
+		\item Ambiente di sviluppo QT Creator
+		\item Sviluppo di interfacce grafiche
+		\item Gestione degli eventi
+		\item Le librerie Qt, QTWidgetscontenuto...
+	\end{itemize}
+\end{itemize}
+\pagebreak
+
+\chapter{Introduzione}
+\section{Il design di C++}
+C++ è basato su due idee:
+\begin{itemize}
+    \item mapping diretto delle operazoini built-in e dei tipi di hardware in modo da fornire un uso efficiente della memoria e operazioni a basso livello;
+    \item astrazioni flessibili e accessibili per fornire dei tipi definiti dall'utente
+\end{itemize}
+
