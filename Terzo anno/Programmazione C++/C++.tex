@@ -472,6 +472,36 @@ La chiave è separare il primo argomento dal resto e trattarli in maniera ricors
 \lstinputlisting[language=C++]{code/054.cpp}\label{code: 054}
 
 \chapter{Contenitori e algoritmi}
+\section{Librerie}
+\subsection{Headers e namespace della libreria standard}
+Ogni libreria standard è offerta tramite qualche header standardizzato, ad esempio:
+\begin{itemize}
+	\item \#include<string>
+	\item \#include<list>
+\end{itemize}
+La libreria standard è definita all'interno del namespace \emph{std}. Per usare le sue libreria possiamo usare il prefisso \emph{std::}.
+\lstinputlisting[language=C++]{code/055.cpp}\label{code: 055}
+Ad esempio, per permettere l'utilizzo delle stringhe, all'inizio del file dobbiamo inserire:
+\lstinputlisting[language=C++]{code/056.cpp}\label{code: 056}
+Generalmente è una pessima scelta includere ogni nome da un namespace.
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.6]{img/006.jpg}
+		\caption{Lista ridotta degli header standard}
+		\label{fig: 006}
+	\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.6]{img/007.jpg}
+		\caption{Container}
+		\label{fig: 007}
+	\end{center}
+\end{figure}
+
+\chapter{Funzioni base}
+\section{Tipi e dichiarazioni}
 
 
 \end{document}
