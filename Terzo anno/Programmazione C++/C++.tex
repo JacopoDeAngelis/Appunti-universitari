@@ -502,6 +502,226 @@ Generalmente è una pessima scelta includere ogni nome da un namespace.
 
 \chapter{Funzioni base}
 \section{Tipi e dichiarazioni}
+Per massimizzare la portabilità del codice è saggio essere espliciti in cosa è definito di base e cosa nell'implementazione corrente. Utilizzare solo tipi definiti dallo standard è il prezzo da pagare per la portabilità del codice. Un tipico esempio è di presentare tutte le dipendenze basate sull'hardware in forma di costanti e definire i timi negli header. Per supportare queste tecniche la libreria standard offre \emph{numeric\_limits}. Molti controlli sulle feature derivanti dall'implementazione può essere fatta tramite asserzioni statiche. Ad esempio
+\lstinputlisting[language=C++]{code/057.cpp}\label{code: 057}
+I comportamenti non definiti sono peggiori, in quanto possono comportare in modi non desiderati. Ad esempio:
+\lstinputlisting[language=C++]{code/058.cpp}\label{code: 058}
+L'esito più prevedibile è che si vada a sovrascrivere dei dati in aree di memoria non appartenenti all'array.
 
+\subsection{Implementazione}
+Un'implementazione di C++ può essere hostata o essere a sè stante. Un'implementazione hostata include tutte le librerie standard. Un'implementazione a sè stante può offrire meno librerie standard finchè le seguenti sono offerte:
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.6]{img/008.jpg}
+		\caption{Librerie obbligatorie}
+		\label{fig: 008}
+	\end{center}
+\end{figure}
+
+Le implementazioni freestanding sono pensate per codice che possa girare con il minimo delle risorse necessarie.
+
+\subsection{Caratteri di base}
+Il set di base si basa su ASCII-7. Per estenderlo un ambiente può mappare il set esteso in più modi, ad esempio usando nomi universali.
+
+\section{Tipi}
+\subsection{Tipi fondamentali}
+\begin{itemize}
+	\item booleani (bool)
+	\item Caratteri (char, wchar\_t)
+	\item Interi (int, short, long, long int, long long...)
+	\item decimali (float, double, long double)
+	\item void (assenza di informazione)
+\end{itemize}
+Da qua si possono costruire altri tipi come:
+\begin{itemize}
+	\item puntatori (int*)
+	\item Array (char[])
+	\item riferimenti (double\& e vettori<int>\&\&)
+\end{itemize}
+In può si possono definire tipi definiti dall'utente:
+\begin{itemize}
+	\item strutture dati e classi
+	\item enumerazioni
+\end{itemize}
+
+\subsection{Caratteri}
+\begin{itemize}
+	\item char: 8 bit
+	\item signed char: come har ma può contenere valori positivi e negativi
+	\item unsigned char: come char ma garantisce il suo essere senza segno
+	\item wchar\_t: offre set estesi come unicode e la sua grandezza è derivante dalla sicurezza
+	\item char16\_t: UTF-16
+	\item char32\_t: UTF-32
+\end{itemize}
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.6]{img/009.jpg}
+		\caption{Caratteri speciali}
+		\label{fig: 009}
+	\end{center}
+\end{figure}
+
+\subsection{Integrali}
+Possono essere decimali, ottali o esadecimali. Se inizia con 0x allora è un esadecimale, se inizia solo con 0 è un ottale.
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.6]{img/010.jpg}
+		\caption{Tipi di intero}
+		\label{fig: 010}
+	\end{center}
+\end{figure}
+
+I numeri vengono distinti in base a forma, valore e suffisso:
+% Please add the following required packages to your document preamble:
+% \usepackage{graphicx}
+\begin{table}[]
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|c|c|c|l|}
+\hline
+\textbf{Forma} & \textbf{Valore} & \textbf{Suffisso}                                                                 & \multicolumn{1}{c|}{\textbf{Contenitori adatti}}                                                                                  \\ \hline
+               & numero          &                                                                                   & int, long int, long long int                                                                                                      \\ \hline
+0, 0x          & numero          &                                                                                   & \begin{tabular}[c]{@{}l@{}}int, unsigned int, long int,\\ unsigned long int, long long int,\\ unsigned long long int\end{tabular} \\ \hline
+               & numero          & u, U                                                                              & \begin{tabular}[c]{@{}l@{}}unsigned int, unsigned long int,\\ unsigned long long int\end{tabular}                                 \\ \hline
+               & numero          & l, L                                                                              & long int, long long int                                                                                                           \\ \hline
+0, 0x          & numero          & l, L                                                                              & \begin{tabular}[c]{@{}l@{}}long int, unsigned long int,\\ long long int, \\ unsigned long long int\end{tabular}                   \\ \hline
+               & numero          & \begin{tabular}[c]{@{}c@{}}ul, lu, uL, Lu, Ul, \\ lU, UL, LU\end{tabular}         & \begin{tabular}[c]{@{}l@{}}unsigned long int, \\ unsigned long long int\end{tabular}                                              \\ \hline
+               & numero          & ll, LL                                                                            & long long int                                                                                                                     \\ \hline
+0, 0x          & numero          & ll, LL                                                                            & \begin{tabular}[c]{@{}l@{}}long long int, \\ unsigned long long int\end{tabular}                                                  \\ \hline
+               & numero          & \begin{tabular}[c]{@{}c@{}}llu, llU, ull, Ull, \\ LLu, LLU, uLL, ULL\end{tabular} & unsigned long long int                                                                                                            \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+\subsection{Dimensioni}
+Alcuni tipi fondamentali di C++, ad esempio int, sono basati sull'implementazione hardware del sistema. Cosa vuol dire ciò? Che se vuoi fare un sistema portabile bisogna prendersi particolarmente cura di questi piccoli dettagli in modo da non generare problemi.
+
+Limitare l'impatto delle caratteristiche basate sull'implementazione è semplice, limitare l'impatto di caratteristiche basate sull'hardware è decisamente più difficile. Usare le librerie standard quando possibile è sempre un'ottima strategia.
+
+La ragione per l'implementare più tipi di intero e più tipi di float è proprio questa, il dare agli sviluppatori più agio. Ci sono pochi assiomi riguardo le dimensioni:
+\begin{itemize}
+	\item 1 \equiv sizeof(char) \leq sizeof(short) \leq sizeof(int) \leq sizeof(long) \leq sizeof(long long)
+	\item 1 \leq sizeof(bool) \leq sizeof(long)
+	\item sizeof(char) \leq sizeof(wchar\_t) \leq sizeof(long)
+	\item sizeof(float) \leq sizeof(double) \leq sizeof(long double)
+	\item sizeof(N) \equiv sizeof(signed N) \equiv sizeof(unsigned N)
+\end{itemize}
+Dove N può essere char, short, int, long, long long. In più è garantito che char ha \textbf{minimo} 8 bit, short 16, long 32.
+
+Alcune implementazioni possono essere trovate tramite un semplice sizeof, altrimenti altre possono essere trovate in  <limits>. Ad esempio:
+\lstinputlisting[language=C++]{code/059.cpp}\label{code: 059}
+Le funzioni in <limits> sono constexpr, quindi possono essere usate senza overhead a runtime.
+Se si ha bisogno di tipi particolari si può includere la libreria <cstdint> che include, ad esempio:
+\lstinputlisting[language=C++]{code/060.cpp}\label{code: 060}
+
+L'header standard <cstddef> definisce un alias usato molto nelle librerie standard e nel codice utente: size\_t. É un tipo implementato di unsigned int che può contenere la grandezza in byte di qualsiasi oggetto. Quindi è usato quando si vuole avere la grandezza di un oggetto. Ad esempio:
+\lstinputlisting[language=C++]{code/061.cpp}\label{code: 061} 
+
+\subsection{Allineamento}
+L'allineamento dei dati è come i dati vengono disposti in memoria. In certi casi questo dettaglio può permettere di risparmiare molto spazio, ad esempio nelle struct. 
+
+Per fare un esempio:
+\lstinputlisting[language=C++]{code/062.cpp}\label{code: 062}
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.5]{img/011.jpg}
+		\caption{Struct "non efficiente"}
+		\label{fig: 011}
+	\end{center}
+\end{figure}
+\lstinputlisting[language=C++]{code/062.cpp}\label{code: 063}
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.5]{img/012.jpg}
+		\caption{Struct "efficiente"}
+		\label{fig: 012}
+	\end{center}
+\end{figure}
+
+La maggior parte delle volte questa cosa non interessa minimamente, si può programmare per anni senza nemmeno pensarci.
+
+L'operatore alignof() può ritornare l'allineamento di un'espressione. Ad esempio:
+
+\section{Dichiarazione}
+Deve esserci sempre al massimo una dichiarazione per nome in C. Nel caso ci siano variabili derivanti da librerie esterne ci si può riferire con \emph{extern}.
+
+\subsection{La struttura di una dichiarazione}
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.6]{img/013.jpg}
+		\caption{Operatori di dichiarazione}
+		\label{fig: 013}
+	\end{center}
+\end{figure}
+
+Le dichiarazioni possono essere fatte in cinque blocchi:
+\begin{enumerate}
+	\item prefisso opzionale (static o virtual)
+	\item tipo base
+	\item dichiaratore opzionale che include un nome (ad esempio p[8], n, *)
+	\item Suffisso opzionale per le funzioni (const, noexcept)
+	\item Inizializzatore opzionale ocorpo di funzione
+\end{enumerate}
+
+\subsection{Naming convention}
+\subsubsection{File}
+\begin{itemize}
+	\item .cpp è l'estensione di C++, .c di C e gli header sono .h
+	\item Per i file sorente usare file.cpp. Per gli header riferiti usare file.h. Si può anche usare file-impl.h per la dichiarazione di classi che non sono accessibili all'esterno del modulo. Se il file intero dichiara solo simboli interni al modulo, allora -impl è omesso
+	\item usare il suffisso -doc.h per i file che contengono solo documentazione di Doxygen
+	\item Per C++ cercare di dare al file lo stesso nome della classe che contengono. I file sono tutti all-lowercase
+	\item Cercare di evitare classi con lo stesso nome ma in posti differenti
+\end{itemize}
+
+\subsubsection{Guideline comuni tra C e C++}
+\begin{itemize}
+	\item Le macro per il preprocessore sono all-uppercase
+	\item i nomi includono le guardie come GMX\_DIRNAME\_HEADERNAME\_H
+	\item i boolean hanno sempre prefisso b, seguiti da PascalCase
+	\item le variabili enum hanno sempre prefisso e. Generalmente per enumerazioni usate tra più librerie la e è seguita da un altro prefisso, generalmente all-lowercase, per evitare coincidenze (ad esempio epbcNONE).
+	\item  Evitare abbreviazioni non comuni
+	\item Se si usano acronimi seguire la policy di Microsoft:
+	\begin{itemize}
+		\item Due lettere: all-uppercase
+		\item Tre o più lettere: Normalcase. Nel caso la prima lettera sia generalmente minuscola nell'uso dell'acronimo, allora usare all-lowercase
+	\end{itemize}
+\end{itemize}
+
+\subsubsection{Codice}
+\begin{itemize}
+	\item PascalCase per classi, struct e typedef
+	\item camelCase per funzioni e variabili
+	\item si può usare un nome lo snake\_case per variabili che sono fortemente rassomiglianti dei corrispettivi nella libreria standard-
+	\item Le interfacce hanno suffisso Interface
+	\item Le classi astratte hanno prefisso Abstract
+	\item Per variabili associate ad un oggetto ha un \_ finale
+	\item Gli accessori per una variabile foo\_ sono chiamati foo() e setFoo()
+	\item Le variabili globali hanno prefisso g\_
+	\item Le variabili statiche hanno prefisso s\_
+	\item Le costanti globali hanno prefisso c\_
+\end{itemize}
+
+\subsection{Parole chiave}
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.6]{img/014.jpg}
+		\caption{Parole chiave}
+		\label{fig: 014}
+	\end{center}
+\end{figure}
+
+\subsection{decltype()}
+Solitamente usiamo auto se vogliamo che l'interprete inferisca automaticamente il tipo del dato. In certi casi vogliamo solo dedurne il tipo senza inizializzare una variabile. Quindi possiamo usare decltype(expr) è il tipo di expr. Ad esempio, se sommiamo due matrici di tipo diverso, quale sarà il risultato? Con decltupe possiamo saperlo.
+\lstinputlisting[language=C++]{code/065.cpp}\label{code: 065}
+
+\subsection{Scope}
+\begin{itemize}
+	\item \textbf{Local scope}
+	\item \textbf{Class scope}
+	\item \textbf{Namespace scope}
+	\item \textbf{Global scope}
+	\item \textbf{Statement scope}
+	\item \textbf{Function scope}
+\end{itemize}
 
 \end{document}

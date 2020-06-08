@@ -1,6 +1,1 @@
-string compose(const string& name, const string& domain)
-{
-     return name + '@' + domain;
-}
-
-auto addr = compose("dmr","bell–labs.com")
+static_assert(4<=sizeof(int),"sizeof(int) too small");
