@@ -10,8 +10,10 @@ public:
      double imag() const { return im; }
      void imag(double d) { im=d; }
 
-     complex& operator+=(complex z) { re+=z.re, im+=z.im; return *this; } // add to re and im
-                                                                          // and return the result
+     complex& operator+=(complex z) { re+=z.re, im+=z.im; return *this; }
+     // add to re and im
+     // and return the result
+     
      complex& operator–=(complex z) { re–=z.re, im–=z.im; return *this; }
 
      complex& operator*=(complex);    // defined out-of-class somewhere

@@ -72,7 +72,7 @@ Programma esteso
 C++ è un linguaggio compilato. Il processo di compilazione è unione dei file è il seguente:
 \begin{figure}[h!]
 	\begin{center}
-		\includegraphics[scale=0.6]{img/001.jpg}
+		\includegraphics[scale=0.5]{img/001.jpg}
 		\caption{Processo di compilazione e unione}
 		\label{fig: 001}
 	\end{center}
@@ -100,7 +100,7 @@ Void indica che la funzione non ha valori di ritorno.
 \subsection{Tipi, variabili e aritmetica}
 Una dichiarazione è una stringa di codice che introduce il nome del programma. É costituita da tipo e nome. I tipi primitivi di C++ sono:
 \begin{itemize}
-	\item bool:
+	\item bool
 	\item char
 	\item int
 	\item double
@@ -624,7 +624,7 @@ Per fare un esempio:
 \lstinputlisting[language=C++]{code/062.cpp}\label{code: 062}
 \begin{figure}[h!]
 	\begin{center}
-		\includegraphics[scale=0.5]{img/011.jpg}
+		\includegraphics[scale=0.4]{img/011.jpg}
 		\caption{Struct "non efficiente"}
 		\label{fig: 011}
 	\end{center}
@@ -632,7 +632,7 @@ Per fare un esempio:
 \lstinputlisting[language=C++]{code/062.cpp}\label{code: 063}
 \begin{figure}[h!]
 	\begin{center}
-		\includegraphics[scale=0.5]{img/012.jpg}
+		\includegraphics[scale=0.4]{img/012.jpg}
 		\caption{Struct "efficiente"}
 		\label{fig: 012}
 	\end{center}
@@ -710,9 +710,16 @@ Le dichiarazioni possono essere fatte in cinque blocchi:
 	\end{center}
 \end{figure}
 
-\subsection{decltype()}
-Solitamente usiamo auto se vogliamo che l'interprete inferisca automaticamente il tipo del dato. In certi casi vogliamo solo dedurne il tipo senza inizializzare una variabile. Quindi possiamo usare decltype(expr) è il tipo di expr. Ad esempio, se sommiamo due matrici di tipo diverso, quale sarà il risultato? Con decltupe possiamo saperlo.
+\subsection{auto e decltype()}
+Solitamente usiamo auto se vogliamo che l'interprete inferisca automaticamente il tipo del dato. In certi casi vogliamo solo dedurne il tipo senza inizializzare una variabile. Quindi possiamo usare decltype(expr) è il tipo di expr. Ad esempio, se sommiamo due matrici di tipo diverso, quale sarà il risultato? Con decltype possiamo saperlo.
 \lstinputlisting[language=C++]{code/065.cpp}\label{code: 065}
+Quindi:
+\begin{itemize}
+	\item auto: lo usiamo per inferire il tipo della variaile dal dato
+	\item decltype: lo usiamo solo per conoscere il tipo di una funzione o di una variabile
+\end{itemize}
+
+Questi due strumenti sono importantissimi per quanto riguarda la programmazione generica.
 
 \subsection{Scope}
 \begin{itemize}
@@ -723,5 +730,85 @@ Solitamente usiamo auto se vogliamo che l'interprete inferisca automaticamente i
 	\item \textbf{Statement scope}
 	\item \textbf{Function scope}
 \end{itemize}
+
+\subsection{Inizializzazione}
+Può essere fatta in più modi:
+\begin{itemize}
+	\item Tramite assegnamento
+	\item Tramite lista di valori
+	\item Tramite graffe (rischio di narrowing, ovvero di arrotondamento se necessario)
+\end{itemize}
+\lstinputlisting[language=C++]{code/066.cpp}\label{code: 066}
+
+Quando inizializziamo dobbiamo considerare due fattori:
+\begin{itemize}
+	\item il tipo dell'oggetto
+	\item il tipo di inizializzazione
+\end{itemize}
+\lstinputlisting[language=C++]{code/067.cpp}\label{code: 067}
+Ad esempio usando l'inizializzatore {} riduciamo il rischio di conversioni
+\lstinputlisting[language=C++]{code/068.cpp}\label{code: 068}
+Quando usiamo auto interviene solo il tipo dell'inizializzatore, quindi possiamo usare tranquillamente =
+\lstinputlisting[language=C++]{code/069.cpp}\label{code: 069}
+In effetti, possiamo sfruttare a nostro vantaggio = con auto, poichè l'inizializzatore {} potrebbe creare sorprese inaspettate
+\lstinputlisting[language=C++]{code/070.cpp}\label{code: 070}
+Il che è abbastanza logico, basti pensare che
+\lstinputlisting[language=C++]{code/071.cpp}\label{code: 071}
+
+\section{Oggetti e valori}
+\subsection{Durata degli oggetti}
+\begin{itemize}
+	\item Automatica: a meno che un programmatore specifichi altrimenti, un oggetto dichiarato in una funzione è creato con la sua definizione e distrutto quando il suo nome esce dallo scope.
+	\item Statica: gli oggetti dichiarati globalmente o in un namespace e i valori \emph{static} dichiarati in funzioni o in classi sono creati e inizializzati solo una volta e vivono fino al termine del programma. Possono creare problemi in multithread, per questo bisogna implementare un sistema di lock
+	\item Free store: usando new e delete possiamo creare oggetti la cui gestione è esplicita
+	\item Oggetti temporanei: durano solo durante il loro uso. Ad esempio una varibile che viene valutata durante l'assegnamento avrà la durata della variabile ma il valore a destra dell'=, invece, avrà durata solo utile all'assegnamento
+	\item Locali al thread: un oggetto dichiarato thread\_local dura quanto il thread
+\end{itemize}
+
+\subsection{Alias}
+In certi casi magari il nome di una variabile è troppo lungo, complicato, brutto. Oppure differenti tipi hanno lo stesso nome nel contesto.
+\lstinputlisting[language=C++]{code/072.cpp}\label{code: 072}
+
+Una vecchia notazione usava typedef, per motivi di consistenza è stata portata avanti
+\lstinputlisting[language=C++]{code/073.cpp}\label{code: 073}
+Ad esempio qua definire int come int32\_t ci permette di comprendere subito che il programma mira ad un uso di int a 32 bit, quindi possiamo usare in maniere differenti le variabili, ad esempio
+\lstinputlisting[language=C++]{code/074.cpp}\label{code: 074}
+il suffisso \_t è convenzionale per gli alias.
+
+Gli alias possono essere usati anche per introdurre un template, ad esempio:
+\lstinputlisting[language=C++]{code/075.cpp}\label{code: 075}
+
+Non possiamo applicare modificatori come unsigned agli alias, ad esempio:
+\lstinputlisting[language=C++]{code/076.cpp}\label{code: 076}
+
+\chapter{Puntatori, array e reference}
+\section{Puntatori}
+Per un qualsiasi tipo T, T* è un "puntatore a T". I puntatori possono contenere indirizzi di oggetti. Ad esempio
+\lstinputlisting[language=C++]{code/077.cpp}\label{code: 077}
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.6]{img/015.jpg}
+		\caption{Puntatore}
+		\label{fig: 015}
+	\end{center}
+\end{figure}
+
+La funzione fondamentale dei puntatori è quella dello scollegamento del riferimento ("dereferencing"), ovvero riferirsi ad un oggetto tramite il suo puntatore. Questa operazione è chiamata indirizzamento ("indirection"). L'operatore di dereferenziamento unario è *. Ad esempio:
+\lstinputlisting[language=C++]{code/078.cpp}\label{code: 078}
+L'oggetto puntato da p è c, e il valore di c è 'a', quindi il valore di *p assegnato a c2 è 'a'.
+
+I puntatori puntano a unità di memoria minima, il valore più piccolo che possono puntare è un char (notare che i bool hanno la stessa grandezza minimo).
+
+Se si volesse valutare a livello di bit si potrebbe usare un operatore bitwish, come vedremo poi, o un bitset.
+
+Sfortunatamente puntatori ad array e puntatori a funzioni hanno una notazione più complicata:
+\lstinputlisting[language=C++]{code/079.cpp}\label{code: 079}
+
+\subsection{void*}
+void* è un puntatore ad un oggetto di cui non si conosce la variabile restituita. Può essere usato solo per puntare a variabili, non a funzioni o ad un membro interno di una classe. In più void* può essere associato ad un altro void*, può essere usato per comparazioni e può essere convertito esplicitamente ad un altro tipo. Altre operazioni non sono sicure in quanto il compilatore non potrebbe sapere che variabile è puntata. Per poter usare un void* dobbiamo convertirlo esplicitamente ad un puntatore di un tipo conosciuto. Per esempio:
+\lstinputlisting[language=C++]{code/080.cpp}\label{code: 080}
+
+
+
 
 \end{document}
