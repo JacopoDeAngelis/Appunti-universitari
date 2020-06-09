@@ -1,6 +1,7 @@
 \documentclass[11pt,a4paper]{book}
 
 \usepackage{Appunti_universitari}
+\usepackage{soul} % Si', serve solo per una battuta alla linea 854
 
 \begin{document}
 \title{Programmazione C++ \\
@@ -808,6 +809,109 @@ Sfortunatamente puntatori ad array e puntatori a funzioni hanno una notazione pi
 void* è un puntatore ad un oggetto di cui non si conosce la variabile restituita. Può essere usato solo per puntare a variabili, non a funzioni o ad un membro interno di una classe. In più void* può essere associato ad un altro void*, può essere usato per comparazioni e può essere convertito esplicitamente ad un altro tipo. Altre operazioni non sono sicure in quanto il compilatore non potrebbe sapere che variabile è puntata. Per poter usare un void* dobbiamo convertirlo esplicitamente ad un puntatore di un tipo conosciuto. Per esempio:
 \lstinputlisting[language=C++]{code/080.cpp}\label{code: 080}
 
+\subsection{nullptr}
+nullptr rappresenta un puntatore a null, ovvero un puntatore che per ora inutilizzato. Può essere assegnato ad ogni puntatore ma non a tipi built-in:
+\lstinputlisting[language=C++]{code/081.cpp}\label{code: 081}
+
+\section{Array}
+Per un tipo T, T[size] è un "array di size elementi di tipo T". Gli elementi sono indicizzati [0, size-1].
+
+Si può accedere agli elementi dell'array con la notazione array[n] dove n è l'indice dell'elemento. Gli accessi out of bound sono pericolosi e soprattutto spesso non sono controllati.
+
+Il numero di elementi deve essere un'espressione costante, ovvero o un valore fisso o il risultato di una constexpr.
+
+Array multidimensionali possono essere espressi come array di array.
+
+Se si ha visogno che i dati siano contigui un array è ideale, altrimenti può creare problemi.
+\lstinputlisting[language=C++]{code/082.cpp}\label{code: 082}
+Un array può essere allocato staticamente, sullo stack o nel free store:
+\lstinputlisting[language=C++]{code/083.cpp}\label{code: 083}
+
+Non esiste un assegnamento di un array e il nome di un array viene implicitamente convertito ad un puntatore verso il suo primo elemento.
+
+In particolare, è meglio evitare di usare puntatori nelle interfacce perchè la loro conversione automatica a puntatori provoca molti problemi generalmente. Se si alloca un array sul free store allora ci si deve assicurare di usare delete[] sul suo puntatore solo dopo il suo ultimo utilizzo.
+
+La maniera più sicura per avere un array sul free store è quello di avere un riferimento come una stringa, un vettore o un unique\_ptr. Se viene allocato staticamente allora bisogna essere sicuri di non cancellarlo mai.
+
+Uno degli usi più comuni di un array terminato da 0 sono le stringhe in C. In C++ alcune librerie standard si basano su di ciò.
+
+\subsection{Inizializzazione di array}
+Un array può essere inizializzato con una serie di valori. Nel caso venga dichiarato così, la grandezza dell'array verrà adattata al numero di elementi della lista. Se invece viene esplicitata la dimensione e si eccede con i dati in ingresso allora ci sarà un errore. Se invece se ne danno meno ci sarà un padding di 0 nelle celle non esplicitate:
+\lstinputlisting[language=C++]{code/084.cpp}\label{code: 084}
+Non c'è una copia built-in per gli array. Non puoi inizializzare un array con un altro, nemmeno se dello stesso tipo, e non c'è un assegnamento di array.
+\lstinputlisting[language=C++]{code/085.cpp}\label{code: 085}
+
+Quando si ha bisogno di un assegnamento ad una collezione di oggetti, meglio usare un vettore, un array o un valarray.
+
+\subsection{Stringhe}
+Attenzione ad alcune peculiarità delle stringhe:
+\begin{itemize}
+	\item le stringhe generalmente vengono considerate come terminate da \textbackslash0, quindi nel caso sia presente uno \textbackslash0 a metà frase difficilmente il compilatore penserà che ci sia altro dopo.
+	\item il compilatore considera un array di stringhe come una stringa continua
+\end{itemize}
+
+\subsubsection{Raw string}
+In certi casi un backslash è solo un backslash \textst{e un sigaro è solo un sigaro}.
+
+Per quei casi si può usare una raw string, indicata con un prefisso R alla dichiarazione della stringa:
+\lstinputlisting[language=C++]{code/086.cpp}\label{code: 086}
+
+E se volessi includere nella stringa "(? In questo caso possiamo usare un delimitatore interno alla stringa, l'importante è che sia simmetrico:
+\lstinputlisting[language=C++]{code/087.cpp}\label{code: 087}
+
+E le regex? Poter usare raw string in una regex è molto utile, soprattutto per casi complicati. In compenso non esistono caratteri di escape.
+
+\subsubsection{Set di caratteri estesi}
+Nel caso si abbia bisogno di caratteri speciali, si possono sfruttare le wchar\_t implicitamente:
+\lstinputlisting[language=C++]{code/088.cpp}\label{code: 088}
+
+\section{Puntatori negli array}
+Il nome di un array può essere usato come puntatore per il primo elemento, ad esempio:
+\lstinputlisting[language=C++]{code/089.cpp}\label{code: 089}
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.6]{img/016.jpg}
+		\caption{Puntatori negli array}
+		\label{fig: 016}
+	\end{center}
+\end{figure}
+
+Mai puntare a prima o dopo l'array.
+
+La conversione implicita di un array al suo puntatore significa che la dimensione dell'array si perde. Proprio per questo motivo è preferibile usare \emph{vector}, \emph{array} e \emph{string} della libreria standard, perchè superano questa difficoltà con \emph{size()}.
+
+\subsection{Navigare tra gli array}
+Si può accedere ad un array in due modi:
+\begin{enumerate}
+	\item direttamente iterando su di esso
+	\item sfruttando i puntatori
+\end{enumerate}
+\lstinputlisting[language=C++]{code/090.cpp}\label{code: 090}
+Il prefisso * dereferenzia un puntatore, in questo modo *p è il carattere puntato da p e ++ incrementa il puntatore. Le due versioni sono identiche per il compilatore.
+
+Per ogni array a e intero j, dove j è interno al range di a:
+\lstinputlisting[language=C++]{code/091.cpp}\label{code: 091}
+
+\subsection{Passare un array}
+Gli array non vengono passati per valore ma per puntatore al primo elemento.
+
+A cosa può portare questo? Che gli array vengano passati per valore e non per indirizzo alle funzioni, rischiando di creare effetti collaterali.
+
+\section{Puntatori e costanti}
+C++ offre due significati a costante:
+\begin{itemize}
+	\item \emph{constexpr}: valutata durante la compilazione
+	\item \emph{const}: non modificata all'interno dello scope
+\end{itemize}
+
+Il ruolo di \emph{consexpr} è di garantire la valutazione a compilazione, mentre \emph{const} è di essere immutabile per le interfacce.
+
+Le costanti hanno una grande utilità, in più bisogna tenere conto del fatto che:
+\begin{itemize}
+	\item Avere delle costanti simboliche invece di stringhe all'interno del codice è spesso utile
+	\item Molti puntatori vengono spesso letti ma non scritti
+	\item In molte funzioni i parametri vengono letti ma non scritti
+\end{itemize}
 
 
 
