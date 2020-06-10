@@ -965,4 +965,19 @@ Notare una cosa:
 
 Risultato? Uguale. Leggibilità? Decisamente migliore quella di next. Tendenzialmente è meglio evitare funzioni che modifichino le variabili passate.
 
+\subsection{Riferimenti rvalue}
+L'idea di avere più di un tipo di reference è per supportare differenti tipi di uso degli oggetti:
+\begin{itemize}
+	\item un lvalue non costante si riferisce ad un oggetto sul quale l'utente può scrivere
+	\item un lvalue costante è immutabile
+	\item un rvalue si riferisce ad un oggetto temporaneo che l'utente può modificare, assunto che l'oggetto non verrà mai più usato
+\end{itemize}
+
+Il dichiaratore \&\& significa "riferimento a rvalue". Non usiamo const in questo caso. Molti dei benefici risultanti dall'usare un riferimento rvalue sono legati alla scrittura dell'oggetto al quale si riferiscono. Sia un lvalue costante che un rvalue possono essere legati ad un rvalue, ciò che cambia è lo scopo:
+\begin{itemize}
+	\item Possiamo usare un riferimento rvalue per implementare una lettura distruttiva per ottimizzare quello che altrimenti sarebbe una copia
+	\item possiamo usare un riferimento ad un lvalue costante per prevenire modifiche degli argomenti
+\end{itemize}
+
+
 \end{document}
