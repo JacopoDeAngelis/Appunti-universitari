@@ -894,7 +894,7 @@ Per ogni array a e intero j, dove j è interno al range di a:
 
 \subsection{Passare un array}
 Gli array non vengono passati per valore ma per puntatore al primo elemento.
-
+\lstinputlisting[language=C++]{code/092.cpp}\label{code: 092}
 A cosa può portare questo? Che gli array vengano passati per valore e non per indirizzo alle funzioni, rischiando di creare effetti collaterali.
 
 \section{Puntatori e costanti}
@@ -913,6 +913,56 @@ Le costanti hanno una grande utilità, in più bisogna tenere conto del fatto ch
 	\item In molte funzioni i parametri vengono letti ma non scritti
 \end{itemize}
 
+Poichè una costante non può essere mutata deve essere inizializzata durante la sua dichiarazione.
+\lstinputlisting[language=C++]{code/094.cpp}\label{code: 094}
+Quando viene usato un puntatore, due oggetti sono coivolti: il puntatore e l'oggetto a cui punta. Mettere come prefisso di un puntatore \emph{const} rende l'oggetto, ma non il puntatore, una costante. Per dichiarare un puntatore costante dobbiamo usare *const invece del solo *. Ad esempio:
+\lstinputlisting[language=C++]{code/093.cpp}\label{code: 093}
+Un modo per capire meglio questa scrittura è leggere da destra a sinistra, ad esempio "cp è una costante puntatore a un char" e "pc2 è un puntatore ad un char costante"
 
+Un oggetto che è costante quando viene acceduto tramite un puntatore potrebbe essere variabile quando acceduto tramite altre vie. Dichiarando un puntatore costante la funzione impedisce di modificare l'oggetto puntato. Per esempio:
+\lstinputlisting[language=C++]{code/095.cpp}\label{code: 095}
+La prima versione è usata per le strighe quando l'elemento non deve essere modificato e ritorna un puntatore ad una costante che non permette modifiche. La seconda versione è usata per stringhe modificabili.
+
+\section{Riferimenti}
+Un puntatore ci permette di passare anche grandi quantità di dati con il minimo sforzo. Il tipo di puntatore determina cosa si possa fare con i dati attraverso il puntatore. Usare un puntatore è differente dall'usare il nome di un oggetto in alcuni modi:
+\begin{itemize}
+	\item Possiamo usare una sintassi differente, ad esempio *p invece di obj e p->m invece di obj.m
+	\item Possiamo creare un puntatore che punti a diversi oggetti in momenti differenti
+	\item Dobbiamo essere attendi quando usiamo puntatori in quando un puntatore potrebbe essere nullptr o puntare ad un oggetto che non era quello che ci aspettavamo
+\end{itemize}
+
+Queste differenze possono essere pesanti, ad esempio il controllo che non punti a nullptr. Molti problemi possono essere risolti tramite riferimenti (reference) che sono alias per un oggetto, solitamente implementato per contenere l'indirizzo di un oggetto e non impongono overhead di prestazioni comparati ai puntatori.
+
+Le differenze con i puntatori sono:
+\begin{itemize}
+	\item Puoi accedere ad un riferimento con esattamente la stessa sintassi del nome di un oggetto
+	\item un riferimento si riferisce sempre all'oggetto con il quale è stato inizializzato
+	\item non è un riferimento nullo e possiamo assumere che un riferimento si riferisca sempre ad un oggetto
+\end{itemize}
+
+\lstinputlisting[language=C++]{code/096.cpp}\label{code: 096}
+
+L'idea di passare per riferimento un valore ad una funzione è vecchissima. Ci sono tre tipi di riferimenti:
+\begin{enumerate}
+	\item lvalue: si riferiscono ad oggetti che vogliamo cambiare
+	\item const: si riferiscono ad oggetti immutabili
+	\item rvalue: si riferiscono ad oggetti che non vogliamo preservare dopo l'uso
+\end{enumerate}
+
+\subsection{Riferimenti lvalue}
+Nel tipo della variabile una notazione X\& significa "riferimento a X". É usata per riferirsi ad un lvalue
+\lstinputlisting[language=C++]{code/097.cpp}\label{code: 097}
+
+Per assicurare che il riferimento sia un nome di qualcosa dobbiamo inizializzare il riferimento
+\lstinputlisting[language=C++]{code/098.cpp}\label{code: 098}
+
+L'inizializzazione di un riferimento è differente dall'assegnamento. 
+\lstinputlisting[language=C++]{code/099.cpp}\label{code: 099}
+Qua ++rr non incrementa il riferimento di rr, è invece applicato all'intero al quale si riferisce rr, ovvero var. Conseguentemente il valore di un riferimento non può essere cambiato dopo l'inizializzazione. Per ottenere un puntatore ad un oggetto possiamo scrivere \&rr. Non possiamo avere un puntatore ad un riferimento.
+
+Notare una cosa:
+\lstinputlisting[language=C++]{code/100.cpp}\label{code: 100}
+
+Risultato? Uguale. Leggibilità? Decisamente migliore quella di next. Tendenzialmente è meglio evitare funzioni che modifichino le variabili passate.
 
 \end{document}
