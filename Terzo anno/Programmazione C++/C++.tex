@@ -224,7 +224,7 @@ I test di verità, oltre agli operatori ==, != ecc. abbiamo delle funzioni che s
 \subsubsection{Strutture}
 Il primo modo per costruire un nuovo tipo è, spesso, il riorganizzare i dati in una struttura.
 \lstinputlisting[language=C++]{code/012.cpp}\label{code: 012}
-Qua possiamo vedere l'implementazione di un vettore tramite struct e la sua inizializzazione.
+Qua possiamo vedere l'implementazione di un vettore tramite \emph{struct} e la sua inizializzazione.
 
 Per inizializzarlo dobbiamo però creare un'apposita funzione:
 \lstinputlisting[language=C++]{code/013.cpp}\label{code: 013}
@@ -618,7 +618,7 @@ Se si ha bisogno di tipi particolari si può includere la libreria <cstdint> che
 L'header standard <cstddef> definisce un alias usato molto nelle librerie standard e nel codice utente: size\_t. É un tipo implementato di unsigned int che può contenere la grandezza in byte di qualsiasi oggetto. Quindi è usato quando si vuole avere la grandezza di un oggetto. Ad esempio:
 \lstinputlisting[language=C++]{code/061.cpp}\label{code: 061} 
 
-\subsection{Allineamento}
+\subsection{Allineamento}\label{par: Allineamento}
 L'allineamento dei dati è come i dati vengono disposti in memoria. In certi casi questo dettaglio può permettere di risparmiare molto spazio, ad esempio nelle struct. 
 
 Per fare un esempio:
@@ -978,6 +978,57 @@ Il dichiaratore \&\& significa "riferimento a rvalue". Non usiamo const in quest
 	\item Possiamo usare un riferimento rvalue per implementare una lettura distruttiva per ottimizzare quello che altrimenti sarebbe una copia
 	\item possiamo usare un riferimento ad un lvalue costante per prevenire modifiche degli argomenti
 \end{itemize}
+
+\subsection{Riferimenti a riferimenti}
+Se si ha un riferimento ad riferimento si ottiene semplicemente un riferimento alla variabile del primo. Ma che tipo di riferimento?
+\lstinputlisting[language=C++]{code/102.cpp}\label{code: 102}
+
+In altre parole vince l'lvalue. 
+
+I riferimenti a riferimenti possono accadere come risultato di un alias o di un argomento per un template.
+
+\chapter{Strutture, unioni ed enumerazioni}
+\begin{itemize}
+	\item struct: sequenza di elementi di tipo arbitrario
+	\item union: una struct che mantiene solo uno dei suoi elementi alla volta
+	\item enum: set di nomi costante
+	\item enum class: è una enum dove gli enumeratori sono all'interno dello scope dell'enumerazione e non ci sono conversioni implicite
+\end{itemize}
+
+\section{Strutture}
+Un array è un'aggregazione di elementi dello stesso tipo. Nella sua forma più semplice, una \emph{struct} è un aggreato di elementi di tipo arbitrario. Ad esempio:
+\lstinputlisting[language=C++]{code/103.cpp}\label{code: 103}
+Ciò definisce un tipo chiamato Indirizzo, consistente degli oggetti di cui si ha bisogno per inviare mail a qualcuno all'interno degli Stati Uniti.
+
+Le variabili di tipo Indirizzo possono essere dichiarate come ogni altra variabile, e i membri individuali possono essere acceduti tramite dot notation (\emph{struct.elemento}). Ad esempio:
+\lstinputlisting[language=C++]{code/104.cpp}\label{code: 104}
+
+notare che jd.state potrebbe non essere inizializzato dalla stringa "NJ". Le stringhe terminano con \textbackslash0m quindi "NJ" ha tre caratteri. Uno in più rispetto a quanto contenibile da jd.state.
+
+Spesso le strutture sono accedute tramite puntatore usando l'operatore ->. Ad esempio>:
+\lstinputlisting[language=C++]{code/105.cpp}\label{code: 105}
+
+Quando p è un puntatore, p -> è equivalente e (*p).m
+
+Alternativamente, una \emph{struct} può essere passata per riferimento e acceduta tramite .:
+\lstinputlisting[language=C++]{code/106.cpp}\label{code: 106}
+
+\subsection{Layout delle \emph{struct}}
+Un oggetto di una \emph{struct} contiene i suoi membri nell'ordine di dichiarazione. Ciò può portare a un problema di allineamento (vedere pagina \pageref{par: Allineamento}).
+
+\subsection{nomi delle \emph{struct}}
+Il nome di una struct è subito utilizzabile tramite puntatore:
+\lstinputlisting[language=C++]{code/107.cpp}\label{code: 107}
+
+Mai istanziare direttamente una variabile dello stesso tipo:
+\lstinputlisting[language=C++]{code/108.cpp}\label{code: 108}
+
+Per permettere a due struct di fare riferimento a vicenda basta anche solo dichiararne il nome prima:
+\lstinputlisting[language=C++]{code/109.cpp}\label{code: 109}
+
+\subsection{Stutture e classi}
+
+
 
 
 \end{document}
