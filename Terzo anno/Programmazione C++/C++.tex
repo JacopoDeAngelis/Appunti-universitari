@@ -1026,7 +1026,15 @@ Mai istanziare direttamente una variabile dello stesso tipo:
 Per permettere a due struct di fare riferimento a vicenda basta anche solo dichiararne il nome prima:
 \lstinputlisting[language=C++]{code/109.cpp}\label{code: 109}
 
-\subsection{Stutture e classi}
+\subsection{Strutture e classi}
+Una struct è semplicemente una classe dove i membri sono pubblici di default. Una struct quindi può avere funzioni e costruttori, ad esempio:
+\lstinputlisting[language=C++]{code/110.cpp}\label{code: 110}
+
+Non devi scrivere un costruttore solo per inizializzare le variabili, serve anche per ordinare gli argomenti, convalidarli, modificarli, stabilire invarianti, ecc.. Ad esempio:
+\lstinputlisting[language=C++]{code/111.cpp}\label{code: 111}
+
+\subsection{Equivalenza e struct}
+Due struct sono differenti tipi che possono avere anche gli stessi elementi. Quindi l'uguaglianza o l'assegnamento tra struct diverse non restituisce niente.
 
 
 
