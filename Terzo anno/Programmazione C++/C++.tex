@@ -1036,6 +1036,44 @@ Non devi scrivere un costruttore solo per inizializzare le variabili, serve anch
 \subsection{Equivalenza e struct}
 Due struct sono differenti tipi che possono avere anche gli stessi elementi. Quindi l'uguaglianza o l'assegnamento tra struct diverse non restituisce niente.
 
+\section{Unioni}
+Una \emph{union} è un \emph{struct} nella quale tutti i membri sono allocati allo stesso indirizzo, in questo modo la \emph{union} oocupa sempre e solo tanto spazio quanto l'elemento più grande. Ovviamente, una \emph{union} può contenere un solo valore alla volta.
+\lstinputlisting[language=C++]{code/112.cpp}\label{code: 112}
+I membri s ed i non possono mai essere usati allo stesso momento, si potrebbe rimediare specificando che entrambi dovrebbero essere un'unione.
+\lstinputlisting[language=C++]{code/113.cpp}\label{code: 113}
+Il linguaggio non tiene traccia di quale valore è contenuto nella \emph{union}, quindi il programmatore deve fare ciò:
+\lstinputlisting[language=C++]{code/114.cpp}\label{code: 114}
+
+Per evitare errori, uno può incapsulare una \emph{union} in modo che la corrispondenza tra tipo e accesso all'unione possa essere garantita.
+
+La \emph{union} può certe volte essere usata male per "conversione di tipi". Questo uso errato è praticato soprattutto da programmatori che sono esperti in linguaggi che non hanno una conversione esplicita, quindi devono barare. Ad esempio "convertire" int in int* può essere assunto tramite equivalenza bitwise:
+\lstinputlisting[language=C++]{code/115.cpp}\label{code: 115}
+Questa non è una conversione.
+Le unioni possono essere essenziali da un punto di vista prestazionale. Bisogna tenere da conto che sono molto prone ad errori, quindi è meglio considerare di usarle il meno possibile.
+
+\subsection{\emph{Union} e classi}
+Tecnicamente, una \emph{union} è un tipo di \emph{struct} che è un tipo di classe. Le differenze sono:
+\begin{itemize}
+	\item una \emph{union} non può avere funzioni virtuali
+	\item una \emph{union} non può avere membri che siano reference
+	\item una \emph{union} non può avere una classe base
+	\item una \emph{union} ha un membro con un costruttore definito dall'utente, un'operazione di copia, una di spostamento o un decostruttore, e offre una speciale funzione delete per l'unione
+	\item al massimo un membro della \emph{union} può avere un inizializzaore
+	\item una \emph{union} non può essere usata come classe base
+\end{itemize}
+
+\subsection{\emph{Union} anonime}
+Per vedere come possiamo scrivere una classe che superi i problemi di una \emph{union} consideriamo una viariante di \emph{Entry}:
+\lstinputlisting[language=C++]{code/116.cpp}\label{code: 116}
+
+La funzione di accesso può essere definita come:
+\lstinputlisting[language=C++]{code/117.cpp}\label{code: 117}
+
+Queste funzioni controllano il tag \emph{type} e se una di queste corrisponde all'accesso desiderato, ritorna un riferimento al valore, altrimenti lancia un'eccezione. Una \emph{union} implementata così è chiamata \emph{tagged union} o \emph{discrimination union}.
+
+Queste funzioni non prendono da conto come il nuovo valore dovrebbe prendere da conto anche il valore precedente:
+\lstinputlisting[language=C++]{code/118.cpp}\label{code: 118}
+
 
 
 
