@@ -1071,8 +1071,111 @@ La funzione di accesso può essere definita come:
 
 Queste funzioni controllano il tag \emph{type} e se una di queste corrisponde all'accesso desiderato, ritorna un riferimento al valore, altrimenti lancia un'eccezione. Una \emph{union} implementata così è chiamata \emph{tagged union} o \emph{discrimination union}.
 
-Queste funzioni non prendono da conto come il nuovo valore dovrebbe prendere da conto anche il valore precedente:
+Queste funzioni di accesso in scrittura fanno lo stesso typechecking ma notare come tengono in considerazione il valore precedente.:
 \lstinputlisting[language=C++]{code/118.cpp}\label{code: 118}
+
+L'uso di una \emph{union} forza l'uso di alcune funzioni di basso livello per gestire la vita degli elementi della \emph{union}. Questa è un'altra ragione per non prendere sottogamba le \emph{union}. 
+
+Notare che la union nella dichiarazione di \emph{Entry2} non ha nome. Questo crea una \emph{union anonima}. Una \emph{union} anonima è un oggetto, non un tipo, e i suoi membri possono essere acceduti senza dover anteporre il suo nome. Questo significa che possiamo usare i membri di una \emph{union} anonima esattamente come qualsiasi altro membro della classe, finchè ci ricordiamo che i membri della union possono essere utilizzati uno alla volta.
+
+\emph{Entry2} ha un membro di un tipo con un operatore di assegnamento definito dall'utente, \emph{string}, in questo modo l'operatore di assegnamento alla union comprende la cancellazione. Se vogliamo assegnare \emph{Entry2}, dobiamo definire \emph{Entry2::operator=()}.
+\lstinputlisting[language=C++]{code/119.cpp}\label{code: 119}
+
+I costruttori e gli spostamenti possono essere definiti in maniera simile. Dobbiamo avere almeno uno o due costruttori per stabilire la corrispondenza tra \emph{type} tag e valore. Il decostruttore deve gestire il caso string:
+\lstinputlisting[language=C++]{code/120.cpp}\label{code: 120}
+
+\section{Enumerazioni}
+Una \emph{enumeration (enum)} è un tipo che può ontenere un set di interi specificati dall'utente.
+\lstinputlisting[language=C++]{code/121.cpp}\label{code: 121}
+Ci sono due tipi di \emph{enum}:
+\begin{itemize}
+	\item \emph{enum class}: i nomi degli enumeratori sono locali all'\emph{enum} e i loro valori non sono implicitamente convertiti
+	\item \emph{plain enum}: i nomi degli enumeratori sono nello stesso scope di enum e il loro valore è implicitamente convertito in integer
+\end{itemize}
+In generale è meglio preferire le prime.
+
+\subsection{enum classes}
+Una \emph{enum class} è un'enumerazione fortemente tipizzata e all'interno dello scope. Ad esempio:
+\lstinputlisting[language=C++]{code/122.cpp}\label{code: 122}
+Notare che gli enumeratori presenti in entrambe le enumerazioni non hanno conflitti grazie al loro scope ridotto.
+
+Quando si dice che gli elementi dell'enumerazione sono converitit automaticamente in integer ci si riferisce al loro indice:
+\lstinputlisting[language=C++]{code/123.cpp}\label{code: 123}
+
+Dichiarare una variabile Warning non come un int ma come una \emph{enum} può indicare all'utente e al compilatore come gestirla, ad esempio:
+\lstinputlisting[language=C++]{code/124.cpp}\label{code: 124}
+Poichè il giallo non è gestito il compilatore potrebbe avvisare della cosa.
+
+Un enumeratore può essere inizializzato da una constexpr di tipo integer, ad esempio:
+\lstinputlisting[language=C++]{code/125.cpp}\label{code: 125}
+
+É possibile dichiarare delle enum classe senza definirle, ad esempio:
+\lstinputlisting[language=C++]{code/126.cpp}\label{code: 126}
+
+Il valore di un tipo intero può essere esplicitamente convertito in un tipo enumerazione Il risultato di questa conversione è indefinito a meno che il valore non sia nel range del tipo dell'enumerazione, ad esempio:
+\lstinputlisting[language=C++]{code/127.cpp}\label{code: 127}
+
+\chapter{Dichiarazioni}
+\subsection{Riassunto delle dichiarazioni}
+\begin{itemize}
+	\item Dichiazione
+	\begin{itemize}
+		\item \textit{declaration}
+		\item \textit{$expression_{opt}$} ;
+		\item \textit{{$statement-list_{opt}$}}
+		\item \textbf{try} \textit{{ $statement-list_{opt}$ } handler-list}
+        \item[] 
+		\item \textbf{case} \textit{constant-expression : statement}
+		\item \textbf{default} : \textit{statement}
+		\item \textbf{break} ;
+		\item \textbf{continue} ;
+        \item[]  
+		\item \textbf{return} \textit{$expression_{opt}$} ;
+		\item \textbf{goto} \textit{identifier} ;
+		\item \textit{identifier : statement}
+        \item[]  
+		\item \textit{selection-statement}
+		\item \textit{iteration-statement}
+	\end{itemize}
+	
+	\item selezione
+	\begin{itemize}
+		\item \textbf{if} ( \textit{condition} ) \textit{statement}
+		\item \textbf{if} ( \textit{condition} ) \textit{statement} \textbf{else} \textit{statement}
+		\item \textbf{switch} ( \textit{condition} ) \textit{statement}
+	\end{itemize}
+	
+	\item iterazione
+	\begin{itemize}
+		\item \textbf{while} ( \textit{condition} ) \textit{statement}
+		\item \textbf{do} \textit{statement} \textbf{while} ( \textit{expression} ) ;
+		\item \textbf{for} ( \textit{for-init-statement $condition_{opt}$ ; $expression_{opt}$} ) \textit{statement}
+		\item \textbf{for} ( \textit{for-init-declaration : expression} ) \textit{statement}
+	\end{itemize}
+	
+	\item dichiarazione di lista
+	\begin{itemize}
+		\item \textit{statement $statement-list_{opt}$}
+	\end{itemize}
+	
+	\item condizioni
+	\begin{itemize}
+		\item \textit{expression}
+		\item \textit{type-specifier declarator = expression}
+		\item \textit{type-specifier declarator} { \textit{expression} }
+	\end{itemize}
+	
+	\item lista di handler
+	\begin{itemize}
+		\item \textit{handler $handler-list_{opt}$}
+	\end{itemize}
+	
+	\item handler
+	\begin{itemize}
+		\item \textbf{catch} ( exception-declaration ) { \textit{$statement-list_{opt}$}}
+	\end{itemize}
+\end{itemize}
+
 
 
 
