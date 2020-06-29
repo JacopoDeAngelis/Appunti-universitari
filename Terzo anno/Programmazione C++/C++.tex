@@ -1176,6 +1176,54 @@ Il valore di un tipo intero può essere esplicitamente convertito in un tipo enu
 	\end{itemize}
 \end{itemize}
 
+\section{Dichiarazione come inizializzazione}
+A meno che una variabile non sia dichiarata statica, l'inizializzatore è lanciato quando il thread passa attraverso la sua dichiarazione
+
+\chapter{Espressioni}
+\section{Una semplice calcolatrice}
+Consideriamo una semplice calcolatrice. Essa consiste in:
+\begin{itemize}
+	\item parser
+	\item input
+	\item tavola simbolica
+	\item driver
+\end{itemize}
+
+\subsection{Parser}
+\lstinputlisting[language=C++]{code/128.cpp}\label{code: 128}
+In altre parole un programma  una sequenza di espressioni separate da punto e virgola.
+
+In altre parole il programma è definibile tramite un DFA che contiene alcuni nodi base. I nomi non sono da definire prima dell'uso.
+Questa sintassi, abbastanza complicata alla prima vista, è chiamata "discesa ricorsiva" (recursive descent). É un modo abbastanza popolare\footnote{ma non immediato come dice il libro} per avere una tecnica top-down.
+In un linguaggio come C++, dove chiamare una funzione è abbastanza economico, è anche un metodo di programmazione efficiente.
+
+I simboli terminali (ad esempio end, number, + e -) sono riconosciuti da un analizzatore lessicale, e i simboli non terminali da una funzione di analisi sintattica, expr(), term() e prim(). 
+
+Come input, il parser usa un Token\_stream che incapsula la lettura dei caratteri e la loro composizione in token. Questa è la funzione di un Token\_stream: "tokenizza", ovvero trasforma lo stream di caratteri in token. Un token è una coppia \emph{{kind-of-token, valore}}, come {number, 123.45} dove 123.45 è stato trasformato in un float. In più il Token\_stream nasconde la fonte del carattere. Vedremo poi come possono essere presi direttamente da una linea di comando o da altri input di sistema. La definizione di un token è come segue:
+\lstinputlisting[language=C++]{code/129.cpp}\label{code: 129}
+
+Rappresentare un token tramite il valore intero del suo carattere è conveniente ed efficiente e può aiutare le persone che usano i debugger. L'interfaccia di Token\_stream è simile a questa:
+\lstinputlisting[language=C++]{code/130.cpp}\label{code: 130}
+L'implementazione è presentata dopo.
+
+Ogni funzione del parser prende un bool in ingresso, chiamato \emph{get} indicante se la funzione richiede la chiamata a Token\_stream::get() per il prossimo token. Ogni funzione valuta la propria espressione e ritorna il valore. La funzione expr() gestisce addizione e sottrazione. Consiste di un singolo loop che cerca termini da aggiungere o sottrarre:
+\lstinputlisting[language=C++]{code/131.cpp}\label{code: 131}
+
+La funzione prim() gestisce un valore base come expr() e term(), tranne per il fatto che essendo al livello più basso non ci serve un loop e va fatto il vero lavoro, non solo la gestione:
+\lstinputlisting[language=C++]{code/132.cpp}\label{code: 132}
+
+Quando un token è un numero, il suo valore è assegnato a number\_value. Similarmente quando è un nome viene assegnato a string\_value.
+
+Notare che prim() legge sempre un token in più che utilizza per analizzare la sua espressione primaria. Ad esempio per capire se un nome va assegnato o semplicemente letto guarda il token successivo per capire.
+
+\subsection{Input}
+Leggere l'input è la parte più difficile spesso. 
+
+
+
+
+
+
 
 
 
