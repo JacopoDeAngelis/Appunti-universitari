@@ -1218,8 +1218,52 @@ Notare che prim() legge sempre un token in più che utilizza per analizzare la s
 
 \subsection{Input}
 Leggere l'input è la parte più difficile spesso. 
+Iniziamo definendo Token\_stream:
+\lstinputlisting[language=C++]{code/133.cpp}\label{code: 133}
+Inizializziamo un Token\_stream con un input stream dal quale ottenere i suoi caratteri. Il Token\_stream implementa la convenzione di possedere un istream passato tramite un puntatore ma non tramite riferimento. 
 
+Un Token\_stream contiene tre valori: un puntatore ad un input stream (ip), un Boolean (owns), indicante il possesso dell'input stream, e il token corrente (ct).
 
+ct ha un valore di default. Le persone non dovrebbero chiamare current() prima di get(), ma se lo fanno almeno avranno un Token definito. Il valore iniziale per ct è Kind::end, così un programma che accede a current() in maniera errata non otterrà un valore che non sia quello di input.
+
+Token\_stream::get() viene presentato in due fasi:
+\begin{enumerate}
+	\item viene offerta una versione semplice che impone un peso sull'utente
+	\item successivamente viene modificato una versione più complicata ma più facile da usare
+\end{enumerate}
+
+L'idea è che get() legga un carattere, usi il carattere per decidere quale tipo di token richieda di essere composto, legga più caratteri di quanto sia necessario, e infine ritorna il Token rappresentante i caratteri letti.
+
+La dichiarazione iniziale legge il primo carattere che non sia uno spazio da *ip in ch e controlla che l'operazione di lettura abbia successo:
+\lstinputlisting[language=C++]{code/134.cpp}\label{code: 134}
+
+Di default l'operatore >> salta gli spazi bianchi (compresi newline, tabs ecc.) e lascia il valore di ch non cambiato se l'input fallisce. Conseguentemente ch==0 indica la fine dell'input.
+
+Notare come venga usata la notazione {} nell'assegnamento, questo per evitare di dover scrivere in due stringhe
+\lstinputlisting[language=C++]{code/135.cpp}\label{code: 135}
+Gli operatori vengono gestiti semplicemente facendoli passare con il loro valore:
+\lstinputlisting[language=C++]{code/136.cpp}\label{code: 136}
+I numeri sono gestiti in maniera simile:
+\lstinputlisting[language=C++]{code/137.cpp}\label{code: 137}
+(per inciso, questo è un pessimo modo di scrivere uno switch).
+
+Se un token non è la fine dell'input, un operatore, un carattere di punteggiatura o un numero, allora deve essere un nome. Un nome è trattato similarmente:
+\lstinputlisting[language=C++]{code/138.cpp}\label{code: 138}
+Infine possiamo avere un errore:
+\lstinputlisting[language=C++]{code/139.cpp}\label{code: 139}
+
+Quindi, ecco la funzione completa:
+\lstinputlisting[language=C++]{code/140.cpp}\label{code: 140}
+
+\subsection{Input di basso livello}
+Per rendere il programma più utilizzabile da un essere umano possiamo modificare cosa il programma si aspetti. Ad esempio, possiamo pensare ad un sostituto per il punto e virgola:
+\lstinputlisting[language=C++]{code/141.cpp}\label{code: 141}
+
+La chiamata a \emph{ip->get(ch)} legge un singolo carattere dall'input *ip. Di default get() non salta gli spazi allo stesso modo di >>. Il test \emph{if (!ip–>get(ch))} ha successo se nessun carattere può essere letto da cin, in questo caso Kind::end viene restituito per terminare la sessione di calcolo. L'operatore ! è usato perchè get() restituisce true in caso di successo.
+
+La funzione della libreria standard \emph{isspace()} offre un test per gli spazi bianchi restituendo 0 se il carattere \textbf{non} è uno spazio bianco. 
+
+\subsection{Gestione degli errori}
 
 
 
