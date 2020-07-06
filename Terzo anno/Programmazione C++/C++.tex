@@ -923,6 +923,13 @@ Un oggetto che è costante quando viene acceduto tramite un puntatore potrebbe e
 \lstinputlisting[language=C++]{code/095.cpp}\label{code: 095}
 La prima versione è usata per le strighe quando l'elemento non deve essere modificato e ritorna un puntatore ad una costante che non permette modifiche. La seconda versione è usata per stringhe modificabili.
 
+\subsection{Costanti in define o con const}
+Dipende da cosa devi farci:
+\begin{itemize}
+	\item verranno usate da più classi e lo includi in un header comune? define
+	\item verranno usate nella tua classe e basta? const
+\end{itemize}
+
 \section{Riferimenti}
 Un puntatore ci permette di passare anche grandi quantità di dati con il minimo sforzo. Il tipo di puntatore determina cosa si possa fare con i dati attraverso il puntatore. Usare un puntatore è differente dall'usare il nome di un oggetto in alcuni modi:
 \begin{itemize}
@@ -1264,10 +1271,72 @@ La chiamata a \emph{ip->get(ch)} legge un singolo carattere dall'input *ip. Di d
 La funzione della libreria standard \emph{isspace()} offre un test per gli spazi bianchi restituendo 0 se il carattere \textbf{non} è uno spazio bianco. 
 
 \subsection{Gestione degli errori}
+É sempre importante identificare e gestire gli errori. Per un programma semplice una funzione error() conta gli errori, scrive il messaggio di errore e ritorna, in questo caso, 1.
+\lstinputlisting[language=C++]{code/142.cpp}\label{code: 142}
+cerr è lo stream di output usato per riportare gli errori.
 
+\subsection{Driver}
+Abbiamo bisogno di un driver che faccia partire il programma. In questo caso le nostre funzioni saranno il classico main() per il setup e calculate() per le operazioni:
+\lstinputlisting[language=C++]{code/143.cpp}\label{code: 143}
+Per convenzione main() ritorna 0 se il programma termina normalmente, altrimenti ritorna un qualsiasi altro valore. Restituire i numero di errori occorsi è un'ottima soluzione in questo caso.
 
+Il principale compito del loop in calculate() è di leggere l'espressione e restituire la risposta. Ciò è eseguito tramite la linea:
+\lstinputlisting[language=C++]{code/144.cpp}\label{code: 144}
 
+L'argomento false dice ad expr() che non ha bisogno di chiamare ts.get() per leggere il token.
 
+Testare Kind::end assicura che il loop esca corretatmente quando ts.get() incontra un errore di input o un EOF. Un break esce dal ciclo più vicino. Testare Kind::print(per \textbackslash e ;) solleva expr() dalla responsabilità di gestire espressioni vuote. Un continue è equivalente all'andare alla fine del loop.
+
+\subsection{Header}
+La calcolatrice usa librerie standard, quindi devono essere incluse per completare il programma:
+\lstinputlisting[language=C++]{code/145.cpp}\label{code: 145}
+Tutti questi header offrono le funzioni nel namespace std in modo che possano essere usate esplicitamente senza std:: o senza dover includere un
+\lstinputlisting[language=C++]{code/146.cpp}\label{code: 146}
+
+\subsection{Argomenti passati da linea di comando}
+Se volessi passare da linea di comando le operazioni invece di dover prima attivare il programma e poi digitare potrei usare, all'interno di main, due classici placeholder: \emph{int argc} per il numero di argomenti, \emph{char* argv[]} per le stringhe. L'idea dietro al leggere da riga di comando è la stessa dietro al leggere dall'input stream.
+\lstinputlisting[language=C++]{code/147.cpp}\label{code: 147}
+
+\subsection{Una nota di stile}
+Usare le mappe per gli operatori è totalmente legittimo, anzi, è invogliato.
+
+\section{Riassunto degli operatori}
+Le precedenze sono uguali all'interno dei blocchi, priorità decrescente scendendo.
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.6]{img/018.jpg}
+		\label{fig: 018}
+	\end{center}
+\end{figure}
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.6]{img/019.jpg}
+		\label{fig: 019}
+	\end{center}
+\end{figure}
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.6]{img/020.jpg}
+		\label{fig: 020}
+	\end{center}
+\end{figure}
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.6]{img/021.jpg}
+		\label{fig: 021}
+	\end{center}
+\end{figure}
+
+Per dire
+\lstinputlisting[language=C++]{code/148.cpp}\label{code: 148}
+è equivalente a
+\lstinputlisting[language=C++]{code/149.cpp}\label{code: 149}
+
+\subsection{Risultati}
+I risultati aritmetici tra variabili di diverso tipo viene sempre reso tramite il "contenitore più grande".
+
+\section{constexpr}
+Il ruolo delle constexpr è di assicurare la valutazione a tempo di compilazione.
 
 
 
