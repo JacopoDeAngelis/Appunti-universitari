@@ -923,7 +923,7 @@ Un oggetto che è costante quando viene acceduto tramite un puntatore potrebbe e
 \lstinputlisting[language=C++]{code/095.cpp}\label{code: 095}
 La prima versione è usata per le strighe quando l'elemento non deve essere modificato e ritorna un puntatore ad una costante che non permette modifiche. La seconda versione è usata per stringhe modificabili.
 
-\subsection{Costanti in define o con const}
+\subsection{Costanti in define o con const} \label{par: define e const}
 Dipende da cosa devi farci:
 \begin{itemize}
 	\item verranno usate da più classi e lo includi in un header comune? define
@@ -1336,7 +1336,39 @@ Per dire
 I risultati aritmetici tra variabili di diverso tipo viene sempre reso tramite il "contenitore più grande".
 
 \section{constexpr}
-Il ruolo delle constexpr è di assicurare la valutazione a tempo di compilazione.
+Il ruolo delle constexpr è di assicurare la valutazione a tempo di compilazione. Non può usare valori che non siano conosciuti a tempo di compilazione e non può avere effetti collaterali. Una constexpr deve partire con un int, un float o un enumeratore e possiamo combinarli tramite operatori e constexpr che producono valori.
+
+Alcune ragioni per usare le constexpr:
+\begin{itemize}
+	\item Creazione di costanti per rendere il codice più leggibile e manutenibile
+	\item Una variabile può cambiare
+	\item Il linguaggio richiede constexpr per le dimensioni degli array, i casi di uno switch e i template
+	\item I programmatori per sistemi integrati  preferiscono scrivere valori immutabili nella ROM perchè la ROM è meno costosa rispetto alla memoria dinamica
+	\item Se l'inizializzazione è fatta a tempo di compilazione, non ci possono essere "data races" in un sistema multithreaded
+	\item Certe volte valutare qualcosa una sola volta offre migliori performance che farlo più volte a runtime
+\end{itemize}
+
+Se gli argomenti di una constexpr non possono essere valutati a tempo di compilazione il compilatore restituirà un errore. Ad esempio:
+\lstinputlisting[language=C++]{code/150.cpp}\label{code: 150}
+
+L'operatore ? : è utilizzato per avere alternative di selezione in una constexpr:
+\lstinputlisting[language=C++]{code/151.cpp}\label{code: 151}
+
+\subsection{Costanti simboliche}
+Uno degli usi più classici delle costanti è quello di offrire nomi simolici per i valori. Vedere \pageref{par: define e const}
+
+\subsection{const nelle constexpr}
+const è usato principalmente per esprimere le interfacce o per definire le costanti. All'interno delle constexpr possono essere usati solo valori costanti.
+
+La differenza principale è che const può essere inizializzato anche senza l'uso di constexpr (quindi a tempo di runtime), le constexpr no. Ad esempio:
+\lstinputlisting[language=C++]{code/152.cpp}\label{code: 152}
+
+\subsection{Tipi letterali}
+Una classe con un costruttore constexpr è chiamata "tipo letterale".
+
+\subsection{Indirizzo di una constexpr}
+Attenzione: mentre i dati vengono gestiti dal compilatore, l'indirizzo di una constexpr, per quanto sia anch'esso costante, non è gestito dal compilatore ma dal linker. Per questo motivo viene restituito errore se si prova ad assegnare un puntatore ad una constexpr. Ad esempio:
+\lstinputlisting[language=C++]{code/153.cpp}\label{code: 153}
 
 
 
