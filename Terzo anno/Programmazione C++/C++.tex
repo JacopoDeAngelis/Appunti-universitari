@@ -1370,6 +1370,63 @@ Una classe con un costruttore constexpr è chiamata "tipo letterale".
 Attenzione: mentre i dati vengono gestiti dal compilatore, l'indirizzo di una constexpr, per quanto sia anch'esso costante, non è gestito dal compilatore ma dal linker. Per questo motivo viene restituito errore se si prova ad assegnare un puntatore ad una constexpr. Ad esempio:
 \lstinputlisting[language=C++]{code/153.cpp}\label{code: 153}
 
+\chapter{Operazioni di selezione}
+\section{Operatori vari}
+\begin{itemize}
+	\item operatori logici: \&\&, \mid\mid, !
+	\item operatori bitwise: <<, >>, \&, \mid, \sim, \^
+	\item operazioni condizionali: ?:
+	\item operazioni di incremento e decremento: ++, --
+\end{itemize}
+\subsection{Opertori logici}
+Prendono operazioni aritmetiche e puntatori, li convertono in bool e restituiscono un bool. \&\& e \mid\mid valutano il secondo argomento solo se necessario.
+
+\subsection{Operatori bitwise}
+GLi peratori bitwise sono applicati ad oggetti di tipo intero, ad esempio char, short, int, long, long long e le loro versioni unsigned, bool, wcah\_t, char16\_t, char32\_t. Una plain enum possono essere implicitamente convertite in un tipo intero e usate come operatore per le operazioni bitwise.
+
+La logica dietro alle operazioni bitwise è di implementare un vettore di bit, in questo caso ogni bit di un unsigned int rappresenta un elemento di un set e il numero di bit limita il numero di membri. I due operatori che possiamo notare come diversi dal solito sono \sim (complemento) e \^ (xor, o esclusivo).
+
+\subsection{Operazioni condizionali}
+\lstinputlisting[language=C++]{code/154.cpp}\label{code: 154}
+
+\section{Free store}
+li oggetti creati tramite new e cancellati tramite delete vevono al di fuori del proprio scope. In questo caso viene detto che essei sono nel "free store".
+
+Ad esempio, riprendendo la calcolatrice:
+\lstinputlisting[language=C++]{code/155.cpp}\label{code: 155}
+
+
+Un oggetto nel free store esiste fino a quando non viene esplicitamente cancellato.
+
+\subsection{Gestione della memoria}
+Il free store si porta dietro tre problemi principalmente:
+\begin{enumerate}
+	\item Leaked objects: oggetti mai cancellati
+	\item Premature deletion: oggetti cancellati prima della fine del loro uso
+	\item Doppia cancellazione: oggetti cancellati due volte
+\end{enumerate}
+
+I leaked objects sono un problema perchè si rischia che il programma esaurisca la memoria a sua disposizione.
+
+La cancellazione prematura non solo rischiano di provocare una null pointer exception, ma per di più si rischia di puntare ad un'area di memoria vuota o usata da un altro oggetto in quel momento. Ad esempio:
+\lstinputlisting[language=C++]{code/156.cpp}\label{code: 156}
+
+La doppia cancellazione è un problema perchè il gestore delle risorse tipicamente non può tracciare quale parte di codice possieda una risorsa.
+\lstinputlisting[language=C++]{code/157.cpp}\label{code: 157}
+
+Due regole per aiutare in questi casi:
+\begin{itemize}
+	\item preferire le variabili locali
+	\item quando si deve allocare un oggetto, mettere il puntatore all'interno di un manager object (solitamente chiamato handle) con un distruttore che lo distruggerà. Un esempio sono string, vector e tutti gli altri container di ase, unique\_ptr e shared\_ptr. Ogni volta che è possibile, allocare l'object manager come variabile locale.
+\end{itemize}
+
+\subsection{Array}
+Anche gli array di oggetti possono essere creati tramite new. Ad esempio:
+\lstinputlisting[language=C++]{code/158.cpp}\label{code: 158}
+
+delete è usato per cancellare gli oggetti, delete[] è usato per cancellare gli array. Per deallocare un oggetto delete e delete[] devono poter determinare la grandezza di esso. Questo implica che gli oggetti allocato occuperanno poco più di un oggetto statico. Solitamente vengono allocate due o più word (8 byte) per la gestione dello spazio.
+
+\subsection{Ottenere spazio in memoria}
 
 
 
