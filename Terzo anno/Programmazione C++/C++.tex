@@ -1427,6 +1427,59 @@ Anche gli array di oggetti possono essere creati tramite new. Ad esempio:
 delete è usato per cancellare gli oggetti, delete[] è usato per cancellare gli array. Per deallocare un oggetto delete e delete[] devono poter determinare la grandezza di esso. Questo implica che gli oggetti allocato occuperanno poco più di un oggetto statico. Solitamente vengono allocate due o più word (8 byte) per la gestione dello spazio.
 
 \subsection{Ottenere spazio in memoria}
+\emph{new, delete, new[] e delete[]} sono implementate all'interno dell'header \emph{<new>}.
+
+\lstinputlisting[language=C++]{code/159.cpp}\label{code: 159}
+Cosa accade quando new non trova spazio da allocare? Di default viene restituita l'eccezione bad\_alloc. Ad esempio:
+\lstinputlisting[language=C++]{code/160.cpp}\label{code: 160}
+Attenzione, non verrà restituita sempre questa eccezione quando finirà lo spazio perchè potrebbe iniziare a popolare la memoria fisica e non solo quella virtuale. Possiamo specificare cosa fare in certi casi, come vedremo poi.
+
+L'utente può ridefinire per le classi il comportamento dei vari operatori.
+
+\subsection{Overload di \emph{new}}
+Di base new creat oggetti nel free store. Se li volessimo da altre parti? Possiamo allocarli ovunque offrendo una funzione di allocazione con argomenti extra e poi dandoli a new:
+\lstinputlisting[language=C++]{code/161.cpp}\label{code: 161}
+Notare che l'operatore new prende la dimensione e il suo primo argomento e che la dimensione dell'oggetto allocato è implicitamente passata. Ogni operatore new() ha size\_t come primo argomento:
+\lstinputlisting[language=C++]{code/162.cpp}\label{code: 162}
+
+Piccola premessa: in C++ ci sono le Arene, ovvero  un'ottimizzazione della gestione della memoria.
+
+Il costrutto new può anche essere usato per allocare la memoria di un'arena specifica:
+\lstinputlisting[language=C++]{code/163.cpp}\label{code: 163}
+Ora gli oggetti possono essere allocati in differenti arene:
+\lstinputlisting[language=C++]{code/164.cpp}\label{code: 164}
+Mettere un oggetto in un'area che non è direttamente controllata dal manager standard implica che si debbano tenere a mente certi accorgimenti:
+\lstinputlisting[language=C++]{code/165.cpp}\label{code: 165}
+
+Notare che la chiamata diretta ai distruttori andrebbe evitata se non per le classi di gestione delle risorse.
+
+\subsubsection{\emph{nothrow new}}
+In un programma nel quale si vogliono evitare eccezioni possiamo usare la versione nothrow di new e delete:
+\lstinputlisting[language=C++]{code/166.cpp}\label{code: 166}
+
+nothrow è il nme di un oggetto della libreria standard di tipo nothrow\_t che è usato per disambiguare:
+\lstinputlisting[language=C++]{code/167.cpp}\label{code: 167}
+
+\section{Liste}
+Le liste possono essere usate come espressioni in molti posti. Possono apparire in due forme:
+\begin{itemize}
+	\item Tipizzate, T\{...\}, significanti "crea un oggetto di tipo T inizializzato da T\{...\}
+	\item Liste non qualificate, per le quali il tipo è determinato dal contesto  
+\end{itemize}
+Ad esempio:
+\lstinputlisting[language=C++]{code/168.cpp}\label{code: 168}
+
+\subsection{Modello di implementazione}
+Si divide in tre parti:
+\begin{itemize}
+	\item Se la lista è usata come argomento per un costruttore è esattamente come usare una lista ()
+	\item se viene usato per inizializzare gli elementi di un aggreato (un array o una classe senza costruttore) ogni elemento della lista inizializza un elemento dell'aggregato
+	\item se la lista è usata per costruire una \emph{initializer\_list} ogni elemento della lsita è usato per iniializzare un elemento dell'array della \emph{initializer\_list}. Gli elementi sono tipicamente copiati dalla \emph{initializer\_list a ovunque vengano usati}
+\end{itemize}
+
+Consideriamo
+\lstinputlisting[language=C++]{code/168.cpp}\label{code: 169}
+La classe vector ha un costruttore basato sulle liste.
 
 
 
