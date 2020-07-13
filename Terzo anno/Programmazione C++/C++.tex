@@ -1481,6 +1481,75 @@ Consideriamo
 \lstinputlisting[language=C++]{code/168.cpp}\label{code: 169}
 La classe vector ha un costruttore basato sulle liste.
 
+\subsection{Lista non qualificata}
+Una lista non qualificata è usata quando il tipo atteso è conosciuto. Può essere usato come espressione solo come:
+\begin{itemize}
+	\item argomento di una funzione
+	\item valore di ritorno
+	\item elemento a destra di un operatore di assegnamento
+	\item un sottoscript
+\end{itemize}
+Per esempio
+\lstinputlisting[language=C++]{code/170.cpp}\label{code: 170}
+Importante è che la lista sia omogenea:
+\lstinputlisting[language=C++]{code/171.cpp}\label{code: 171}
+In più il tipo delle liste non può essere dedotto durante il passaggio, quindi non può essere usato con i template:
+\lstinputlisting[language=C++]{code/172.cpp}\label{code: 172}
 
+\section{Lambda expressions}
+Le lambda vengono usate quando si vuole pasare un'operazione ad una funzione come argomento. Una lambda consiste di una sequenza di parti:
+\begin{itemize}
+	\item Una lista possibilmente vuota (capture list) nella quale si specifica il nome che può usare all'interno dell'espressione e se sono copiate o passate per riferimento. La lista è delimitata da []
+	\item Una lista opzionale di parametri, che specifica gli argomenti che la lamda richiede. É delimitata da ()
+	\item Una specificazione \emph{mutable} opzionale, indicante che l'espressione della lambda potrebbe modificare lo stato della lambda
+	\item un opzionale \emph{noexcept}
+	\item un tipo di ritorno opzionale dichiarato come "-> tipo"
+	\item un corpo che specifica il cdice da eseguire delimitato da {}
+\end{itemize}
+
+Confusi? è normale.
+
+\subsection{Modello di implementazione}
+Le lambda possono essere implementate in più modi e ci sono alcuni modi per ottimizzarle. 
+Per capire una lambda prima scriviamola:
+\lstinputlisting[language=C++]{code/173.cpp}\label{code: 173}
+E poi vediamo il suo corrispettivo in forma di funzione di un oggetto:
+\lstinputlisting[language=C++]{code/174.cpp}\label{code: 174}
+
+La capture list, [\&os,m] diventa una variabile con due membri e un costruttore per inizializzarli. La \& prima di os significa che devono essere salvati come reference e la sua assenza prima di m significa che dovremmo salvarne una copia.
+
+Il corpo della lambda dovrebbe semplicemente diventare il corpo dell'operatore () Poichè la lambda non ritorna un valore, l'operatore () è void.
+
+Di default l'operatore () è const, in questo modo la lambda non modifica le variabili catturate. Quello è in generale l'uso più comune. Se si vuole modificare lo stato di una lambda dal suo corpo si può dichiarare mutable. Ciò corrisponde all'operatore () non definito come const.
+
+Un oggetto di una classe generato da una lambda è chiamato \textit{closure}. Ora possiamo scrivere la nostra funione originale come
+\lstinputlisting[language=C++]{code/175.cpp}\label{code: 175}
+
+\subsection{Alternative alle lambda}
+Questa versione di print\_modulo() è interessante e dare un nome alle operazioni non banali è generalmente una buona idea. Una classe separata permette di commentare meglio.
+
+In certi casi alternative come un ciclo for sono più leggibili, ma magari non sono versatili allo stesso modo.
+
+\subsection{Cattura}
+L'uso principale di una lambda è lo scrivere codice che possa essere passato come argomento. Le lambda permettono di essere usate inline senza dover dare un nome ad una funzione e usarla da altre parti. Alcune lambda non richiedono accesso all'ambiente locale. Queste lambda sono definite con un introduttore vuoto []. Ad esempio:
+\lstinputlisting[language=C++]{code/176.cpp}\label{code: 176}
+
+Se volessimo accedere a dei nomi locali dovremmo specificarlo o otterremmo un errore:
+\lstinputlisting[language=C++]{code/177.cpp}\label{code: 177}
+Essendo stato messo l'introducer [] la lambda non ha accesso a variabili dell'ambiente. Può assumere più forme:
+\begin{itemize}
+	\item \textbf{[]}: Implica che non può accedere ai nomi dell'ambiente chiamante. Possono usare dati solo se passati o se nell'ambiente globale
+	\item \textbf{[\&]}: Cattura implicitamente un riferimento. Tutti i nomi locali possono essere usati. Tutte le variabili locali sono accedute tramite riferimento
+	\item \textbf{[=]}: Implicitamente cattura un valore. Tutti i nomi locali possono essere usati. Tutti i nomi si riferiscono a delle copie delle variabili locali prese al momento della chiamata
+	\item \textbf{[capture-list]}: cattura esplicita, è il nome di una lista di variabili locali che vengono catturate per riferimento o per valore. Le variabili con \& sono catturate per riferimento, le altre per valore. Una lista contiene anche this e i nomi seguiti da ... come elementi
+	\item \textbf{[\&, capture-list]}: Implicitamente cattura per riferimento tutte le variabili locali che non sono menzionate nella lista. Tutte le variabili della lista sono catturate per valore
+	\item \textbf{[=, capture-list]}: Implicitamente cattura per valore tutte le variabili locali che non sono menzionate nella lista. Tutte le variabili della lista sono catturate per riferimento 
+\end{itemize}
+Ad esempio:
+\lstinputlisting[language=C++]{code/178.cpp}\label{code: 178}
+Citando sensitive nella lista abbiamo accesso ad essa, in più non specificando altrimenti vi accediamo per valore. Se l'avessimo voluto per riferimento avremmo scritto [\&sensitive]
+
+\subsubsection{Lambda e ciclo di vita}
+Una lambda potrebbe sopravvivere alla funzione chiamante. Queto accade quando passiamo la lambda ad un thread differente. In questo caso è meglio passare tutte le variabili necessarie alla lambda in modo che essa non debba riferirsi alla funzione chiamante.
 
 \end{document}
