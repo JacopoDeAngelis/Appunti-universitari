@@ -1552,4 +1552,14 @@ Citando sensitive nella lista abbiamo accesso ad essa, in più non specificando 
 \subsubsection{Lambda e ciclo di vita}
 Una lambda potrebbe sopravvivere alla funzione chiamante. Queto accade quando passiamo la lambda ad un thread differente. In questo caso è meglio passare tutte le variabili necessarie alla lambda in modo che essa non debba riferirsi alla funzione chiamante.
 
+\subsubsection{Lambda e \textit{this}}
+Includere this permette di includere all'interno di una lambda anche i membri della classe. Ad esempio:
+\lstinputlisting[language=c++]{code/179}\label{code: 179}
+Grazie al this i membri vengono acceduti direttamente e non vengono copiati nella lambda.
+
+\subsubsection{\emph{mutable} lambda}
+
+
+
+
 \end{document}
