@@ -1,0 +1,87 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{Appunti_universitari}
+
+\RequirePackage[margin=2in]{geometry}
+\RequirePackage[italian]{babel}
+\RequirePackage[T1]{fontenc}
+\UseRawInputEncoding
+\RequirePackage{graphicx}
+\RequirePackage{imakeidx}
+\RequirePackage{amsmath}
+\RequirePackage{color}
+\RequirePackage{xcolor} % Necessario per definire i colori
+
+\RequirePackage[hyperfootnotes=false, colorlinks=true, linkcolor=black]{hyperref}
+\RequirePackage[style=numeric-comp,useprefix,hyperref,backend=bibtex]{biblatex}
+\RequirePackage{listings}  % Serve per evidenziare i blocchi di codice
+\RequirePackage{pxfonts} % permette di avere caratteri in lstlisting con formattazione
+
+\setlength{\parskip}{1em} % cambia l'interlinea prima di un nuovo capoverso
+
+\definecolor{pblue}{rgb}{0.13,0.13,1}
+\definecolor{pgreen}{rgb}{0,0.5,0}
+\definecolor{pred}{rgb}{0.9,0,0}
+\definecolor{pgrey}{rgb}{0.46,0.45,0.48}
+\definecolor{maroon}{rgb}{0.5,0,0}
+\definecolor{plightgrey}{rgb}{0.8,0.8,0.8}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=red!70!black,
+  urlcolor=blue!70!black
+} % Setup colore link
+
+\lstset{ % Riduce la larghezza della tabulazione per lstlisting
+  tabsize=2,
+  backgroundcolor=\color{plightgrey},
+  breaklines=true,
+  postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+  columns=fullflexible,
+  frame=single,
+}
+
+\lstdefinelanguage{XML}{
+  morestring=[b]",
+  morestring=[s]{>}{<},
+  morecomment=[s]{<?}{?>},
+  stringstyle=\color{black},
+  identifierstyle=\color{darkblue},
+  keywordstyle=\color{cyan},
+  morekeywords={xmlns,version,type}% list your attributes here
+}
+
+\lstset{
+  language=XML,
+  basicstyle=\ttfamily,
+  morestring=[s]{"}{"},
+  morecomment=[s]{?}{?},
+  morecomment=[s]{!--}{--},
+  commentstyle=\color{white},
+  moredelim=[s][\color{black}]{>}{<},
+  moredelim=[s][\color{red}]{\ }{=},
+  stringstyle=\color{blue},
+  identifierstyle=\color{maroon}
+}
+
+\lstset{language=Java,
+  showspaces=false,
+  showtabs=false,
+  breaklines=true,
+  showstringspaces=false,
+  breakatwhitespace=true,
+  commentstyle=\color{white},
+  keywordstyle=\color{pblue},
+  stringstyle=\color{pred},
+  basicstyle=\ttfamily,
+  moredelim=[is][\textcolor{pgrey}]{\%\%}{\%\%}
+}
+
+\lstset{language=C++,
+                basicstyle=\ttfamily,
+                keywordstyle=\color{blue}\ttfamily,
+                stringstyle=\color{red}\ttfamily,
+                commentstyle=\color{white}\ttfamily,
+                morecomment=[l][\color{magenta}]{\#}
+}
