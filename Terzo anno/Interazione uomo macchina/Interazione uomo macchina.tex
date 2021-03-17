@@ -1,4 +1,4 @@
-\documentclass[11pt,a4paper]{book}
+ \documentclass[11pt,a4paper]{book}
 \usepackage{Appunti_universitari}
 
 \begin{document}
@@ -72,11 +72,11 @@ Ci sono tre ragioni, idealmente:
 
 \section{Temi dell'HCI}
 \begin{itemize}
-	\item Criteri, metodi e strumenti per la \underline{progettazione dell'interazione} fra esseri umani e sistemi interattivi. L'interazione è il contesto nel quale interagiamo;
-	\item Criteri, metodi e strumenti per la \underline{valutazione dell'usabilità} dei sistemi interattivi;
+	\item Criteri, metodi e strumenti per la \textbf{progettazione dell'interazione} fra esseri umani e sistemi interattivi. L'interazione è il contesto nel quale interagiamo;
+	\item Criteri, metodi e strumenti per la \textbf{valutazione dell'usabilità} dei sistemi interattivi;
 	\item Progettazione di nuove \underline{tecniche di interazione} (dall'hololens ai sistemi che sfruttano i sistemi nervosi);
-	\item Valutazione dell'\underline{impatto dell'automazione} nei contesti umani
-	\item \underline{Sistema socio-tecnico}
+	\item Valutazione dell'\textbf{impatto dell'automazione} nei contesti umani
+	\item \textbf{Sistema socio-tecnico}
 \end{itemize}
 Per valutazione dell'\textbf{impatto} ci si riferisce a due tipi di impatto:
 \begin{itemize}
@@ -96,7 +96,7 @@ Ricordiamo che l'usabilità non è solo un concetto di "correttezza funzionale" 
 \noindent\rule{\textwidth}{1pt}
 
 Non si può parlare di impatto se non si parla di su che sistema socio-tecnico dovrà avere un impatto.
-\subsection{Sistema socio-tecnico}
+\section{Sistema socio-tecnico}
 Banalmente possiamo dire che è un contesto di umani che lavorano assieme tramite delle tecnologie. Quindi:
 \begin{itemize}
 	\item è un sistema, "un insieme di elementi interrelati ed eventualmente mutuamente dipendenti che, agli occhi di un osservatore esterno, appaiono come un'entità unitaria ma collettiva, con caratteristiche e comportamento proprio, solitamente autonomo ed intenzionale (cioè volto ad un obiettivo)";
@@ -121,6 +121,56 @@ Sono di due tipi:
 \begin{center}
 	\textit{L'emergenza è quando la somma delle parti vale più (a livello di usabilità) delle parti singole (e.g. una bici e le sue parti)}
 \end{center}
+
+\subsection{Conseguenza inattesa}
+Iniziamo con un esempio, l'effetto Peltzman: l'introduzione obbligatoria del casco per i ciclisti rendeva questi più spericolati e anche i conducenti di macchina vedendone uno col casco. In più nei luoghi dove non c'era una distinzione netta tra marciapiede e carreggiata, gli automobilisti rallentavano automaticamente, riducendo il rischio di incidenti, questo perchè non potevano ideare una "zona sicura" da evitare ma per il resto vivere la strada come loro. Tutto ciò perchè gli umani tendono a bilanciare il rischio.
+
+\noindent\rule{\textwidth}{1pt}
+\begin{center}
+	\textbf{Conseguenza inattesa}
+\end{center}
+
+Una conseguenza inattesa è quella cosa che può anche andare in maniera contro intuitiva rispetto alla progettazione, e.g. un social network fatto per conoscersi che diventa la base per le proteste di Washington.
+
+\noindent\rule{\textwidth}{1pt}
+
+Un tipo di conseguenza inattesa è il overreliance, ovvero il fatto di affidarsi maggiormente allo strumento a causa dei feedback positivi. Ci sono due tipi:
+\begin{itemize}
+	\item \textbf{Overdependence}: mancanza di autonomia, abuso e uso al di là dei bisogni effettivi, mancanza o ignoranza di un piano di contingenza, ovvero come eseguire un compito senza l'uso della tecnologia in esame.
+	\item \textbf{Overconfidence}: pensare che non ci saranno mai problemi, non ci saranno mai danni derivanti dall'uso e non si potrà mai sbagliare.
+\end{itemize}
+
+La \textbf{complacency è la fiducia che il sistema tecnico funzionerà sempre come è stato progettato}, riducendo così l'attenzione durante l'utilizzo (e.g. le macchine a guida autonoma che richiedono l'attenzione del conducente ma questo le ignora perchè sicuro del funzionamento). è legata ai processi di monitoraggio.
+
+L'\textbf{automation bias è l'eccessiva fiducia nella risposta} del supporto alle decisioni e quindi causa di errori di omissione o di azione quando i sistemi sono imperfetti (e.g. la calcolatrice che deve rispondere correttamente, non può essere altrimenti). è legato ai processi decisionali.
+
+Le conseguenze inattese non sono intrinsecamente positive o negative, è solo la registrazione di un effetto non previsto.
+
+
+Progettare sistemi usabili è progettare per l'uso, quindi per qualcosa che il progettista non controlla e che dipende dall'utente e da quello che fa. Per progettare sistemi usabili non esistono metodologie, è meglio:
+\begin{itemize}
+	\item imparare per imitazione e per esperienza, diventando così capaci di basarsi sulla seconda per allontanarsi dalla prima
+	\item essere creativi ma non troppo per non disorientare l'utente che non avrebbe basi conoscitive
+	\item valutare il proprio sistema coinvolgendo utenti veri
+	\item essere progettisti responsabili, ovvero ragionare sulle conseguenze impreviste,Essere progettisti responsabili significa sapere che il proprio sistema sarà il componente di un sistema socio-tecnico che può stravolgere o comunnque modificare.
+	\item aspettarsi che il lavoro possa avere conseguenze inattese e lavorare per minimizzarne l'impatto
+\end{itemize}
+
+\section{Usabilità}
+\subsection{Bassa usabilità = danni e problemi}
+Vari tipi di bassa usabilità:
+\begin{itemize}
+	\item gli utenti non capiscono come svolgere i propri compiti con il sistema
+	\item il sistema presenta un'eccessiva quantità di funzionalità e opzioni (low use)
+	\item gli utenti non capiscono cosa il sistema stia facendo (poca trasparenza)
+\end{itemize}
+
+\subsection{La colpa è dell'utente o del progettista?}
+La prima idea è che se il progettista ha creato il sistema a prova di stupido, ci siano tutte le guardie, gli avvisi e le informazioni necessarie allora la colpa sia dell'utente se qualcosa va storto. Nella storia di Dedalo e Icaro viene automatico pensare che Dedalo (il progettista) ha ragione, ha detto tutto a suo figlio e l'altro comunque è andato contro di ciò.
+
+Certo, la colpa è qualcosa che può essere arginato tramite i termini d'uso, "qualsiasi utilizzo fuori da queste linee guida non è nostro problema", per la legge saremmo a posto ma ciò non cambia un dettaglio: se l'utente ha sbagliato c'è la possibilità che siamo stati noi a progettare male l'esperienza. "Mica gli ho detto io di mettere le dita così vicino alla lama dell'affettatrice" ma hai pensato "se il salume diventasse troppo piccolo le dita si avvicinerebbero troppo alla lama, meglio inserire un sistema comodo per spostarlo"?
+
+Gli oggetti ben progettati sono facili da interpretare e comprendere: contengono indizi visibili (affordances) del loro funzionamento. Vedremo successivamente cosa voglia dire. Un esempio è l'indicatore in tempo reale di robustezza della password.
 
 
 
