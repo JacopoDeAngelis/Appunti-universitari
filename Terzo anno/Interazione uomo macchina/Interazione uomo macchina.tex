@@ -1,4 +1,4 @@
- \documentclass[11pt,a4paper]{book}
+\documentclass[11pt,a4paper]{book}
 \usepackage{Appunti_universitari}
 
 \begin{document}
@@ -172,6 +172,123 @@ Certo, la colpa è qualcosa che può essere arginato tramite i termini d'uso, "q
 
 Gli oggetti ben progettati sono facili da interpretare e comprendere: contengono indizi visibili (affordances) del loro funzionamento. Vedremo successivamente cosa voglia dire. Un esempio è l'indicatore in tempo reale di robustezza della password.
 
+\noindent\rule{\textwidth}{1pt}
+\begin{center}
+	\textbf{Affordance (invito all’uso)}
+\end{center}
+
+La relazione tra le azioni possibili di un agente in un determinato ambiente.
+
+\noindent\rule{\textwidth}{1pt}
+
+Gli oggetti progettati male possono essere difficili e frustranti da usare: non offrono indizi o ne danno di sbaglianti, oppure sono stati progettati curando l'estentica più che la funzionalità.
+
+\subsection{Come capire a livello generico se l'interfaccia è chiara?}
+Uno dei metodi più semplici è tracciare una linea tra le interazioni per vedere quanto rispetti un ordine di lettura. Possiamo anche basarci su quanti ostacoli alla comprensione ci siano, ad esempio pulsanti che non fanno capire cosa facciano, spiegazioni verbose e non basate su simboli, rendendo difficile l'interpretazione per una persona che non sa leggere la lingua. 
+
+\subsection{Concetti estremi di usabilità}
+\subsubsection{Porta di Norman}
+\href{It's not you. Bad doors are everywhere.}{https://www.youtube.com/watch?v=yY96hTb8WgI}
+
+Una porta di Norman è una porta il cui design suggerisce un'azione contraria a quella da fare o che richiede un segnale per spiegare come usarla.
+
+Uno dei principi che possono andare in correzione qua è la "visibilità", ovvero la possibilità di scoprire quali azioni possano essere eseguite. Prendiamo un attimo come esempio i touchpad del computer: guardandoli non permettono di comprendere cosa un singolo, doppio o triplo tocco possano fare, non c'è quindi scopribilità.
+
+L'altro è il "feedback", ovvero un segnale che permetta la comprensione di cosa sia successo.
+
+"La porta ideale è quella per la quale non devo pensare come aprirla"
+
+
+\noindent\rule{\textwidth}{1pt}
+\begin{center}
+	\textbf{Porta di Norman}
+\end{center}
+
+La tendenza del progettista a concepire oggetti o sistemi che non invitano all'uso (e all'uso corretto) sulla base di elementi visuali o indicazioni chiare (affordance), affidandosi quindi solo alla memoria, all'esperienza o all'intuizione e incontrando spesso il disorientamento o il fraintendimento dell'utente.
+
+\begin{center}
+	\textbf{Discoverability (visibilità)}
+\end{center}
+
+Permette all’utente di individuare facilmente qual è la funzione dell’oggetto, e quindi riconoscere se è adatto allo scopo prefissato. È il risultato dell’applicazione di tutti gli altri principi elencati.
+
+\begin{center}
+	\textbf{Feedback (reazione)}
+\end{center}
+
+É l’insieme di risposte che il sistema comunica all’utente, in base alle azioni effettuate fino a quel momento.
+
+\noindent\rule{\textwidth}{1pt}
+
+\subsubsection{Toilette di Floyd}
+É la serie di istruzioni della toilette in Odissea nello Spazio.
+
+Una toilette di floyd è un qualcosa di progettato in maniera così poco intuitiva per il quale devo fornire una serie di istruzioni.
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.08]{img/002.png}
+		\caption{Lista di istruzioni della toilette}
+		\label{fig: 002}
+	\end{center}
+\end{figure}
+
+\noindent\rule{\textwidth}{1pt}
+\begin{center}
+	\textbf{Toilette di Floyd}
+\end{center}
+
+Tendenza del progettista a complicare affari semplici e a pretendere che basti descrivere una procedura per renderla ovvia a qualsiasi utente.
+
+\noindent\rule{\textwidth}{1pt}
+
+\section{Sei concetti centrali}
+\noindent\rule{\textwidth}{1pt}
+\begin{center}
+	\textbf{Visibilità}
+\end{center}
+Permette all’utente di individuare facilmente qual è la funzione dell’oggetto, e quindi riconoscere se è adatto allo scopo prefissato. È il risultato dell’applicazione di tutti gli altri principi elencati.
+
+\begin{center}
+	\textbf{Modello concettuale}
+\end{center}
+É il modello che l’utente ha dell’oggetto in questione; il modello può essere superficiale e riferirsi alla sola conoscenza di relazione tra input e output, ma può anche essere più approfondito, arrivando a conoscere anche tutti i passaggi intermedi a livello macchina. Più il modello concettuale è fedele al funzionamento reale, maggiore è la probabilità di successo nell’interazione tra utente e macchina.
+
+\begin{center}
+	\textbf{Affordance (invito all’uso)}
+\end{center}
+La relazione tra le azioni possibili di un agente in un determinato ambiente (JJ Gibson, 1979);
+
+\begin{center}
+	\textbf{Significanti}
+\end{center}
+Tutto ciò che aggiunge ulteriori indicazioni sull’esecuzione dell’azione, come direzione di movimento, senso di rotazione, ecc.
+
+\begin{center}
+	\textbf{Feedback (reazione)}
+\end{center}
+É l’insieme di risposte che il sistema comunica all’utente, in base alle azioni effettuate fino a quel momento.
+
+\begin{center}
+	\textbf{Mapping}
+\end{center}	
+É il rapporto fra i comandi, il loro azionamento ed i risultati che ne derivano nel mondo esterno; permette all’utente di creare un collegamento diretto fra i comandi di controllo e le parti dell’oggetto di cui modificano rispettivamente lo stato.
+
+\noindent\rule{\textwidth}{1pt}
+
+\subsection{Definizione classica di interazione (ISO 9241)}
+\textbf{Un sistema interattivo} è una combinazione di componenti hardware e software che ricevono input da un utente umano e gli forniscono un output allo scopo di supportare l'effettuazione di un compito.
+
+\textbf{Un'interfaccia} è l'insieme dei componenti di un sistema interattivo (software o hardware) che forniscono all'utente informazioni e comandi per permettergli di effettuare specifici compiti attraverso il sistema.
+
+In comune hanno il concetto di "effettuazione di un compito", da ciò si capisce che il sistema interattivo permette all'utente di conseguire un'obiettivo (compito).
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.6]{img/003.jpg}
+		\caption{Mappa sullo scopo e sul metodo di completamento di una'zione}
+		\label{fig: 003}
+	\end{center}
+\end{figure}
 
 
 \end{document}
