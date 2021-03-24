@@ -242,7 +242,6 @@ Tendenza del progettista a complicare affari semplici e a pretendere che basti d
 \noindent\rule{\textwidth}{1pt}
 
 \section{Sei concetti centrali}
-\noindent\rule{\textwidth}{1pt}
 \begin{center}
 	\textbf{Visibilità}
 \end{center}
@@ -254,9 +253,13 @@ Permette all’utente di individuare facilmente qual è la funzione dell’ogget
 É il modello che l’utente ha dell’oggetto in questione; il modello può essere superficiale e riferirsi alla sola conoscenza di relazione tra input e output, ma può anche essere più approfondito, arrivando a conoscere anche tutti i passaggi intermedi a livello macchina. Più il modello concettuale è fedele al funzionamento reale, maggiore è la probabilità di successo nell’interazione tra utente e macchina.
 
 \begin{center}
-	\textbf{Affordance (invito all’uso)}
+	\textbf{Affordance (invito all’uso)} (vedere pagina \pageref{par: affordance})
 \end{center}
-La relazione tra le azioni possibili di un agente in un determinato ambiente (JJ Gibson, 1979);
+Gibson: è la risorsa o supporto che l'ambiente offre all'utente
+
+Norman: è una qualsiasi proprietà o qualità di un oggetto che definisce i suoi possibili utilizzi o rende chiaro come possa o debba essere usato.
+
+Una affordance è qualsiasi proprietà di un oggetto che invita una persona competente all'azione mediata da tale oggetto.
 
 \begin{center}
 	\textbf{Significanti}
@@ -273,22 +276,99 @@ Tutto ciò che aggiunge ulteriori indicazioni sull’esecuzione dell’azione, c
 \end{center}	
 É il rapporto fra i comandi, il loro azionamento ed i risultati che ne derivano nel mondo esterno; permette all’utente di creare un collegamento diretto fra i comandi di controllo e le parti dell’oggetto di cui modificano rispettivamente lo stato.
 
-\noindent\rule{\textwidth}{1pt}
-
 \subsection{Definizione classica di interazione (ISO 9241)}
 \textbf{Un sistema interattivo} è una combinazione di componenti hardware e software che ricevono input da un utente umano e gli forniscono un output allo scopo di supportare l'effettuazione di un compito.
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.5]{img/003.jpg}
+		\caption{Mappa sullo scopo e sul metodo di completamento di un'azione}
+		\label{fig: 003}
+	\end{center}
+\end{figure}
 
 \textbf{Un'interfaccia} è l'insieme dei componenti di un sistema interattivo (software o hardware) che forniscono all'utente informazioni e comandi per permettergli di effettuare specifici compiti attraverso il sistema.
 
 In comune hanno il concetto di "effettuazione di un compito", da ciò si capisce che il sistema interattivo permette all'utente di conseguire un'obiettivo (compito).
 
+
+\section{Affordance} \label{par: affordance}
+\noindent\rule{\textwidth}{1pt}
+\begin{center}
+	\textbf{Affordance (invito all’uso)}
+\end{center}
+Gibson: è la risorsa o supporto che l'ambiente offre all'utente
+
+Norman: è una qualsiasi proprietà o qualità di un oggetto che definisce i suoi possibili utilizzi o rende chiaro come possa o debba essere usato.
+
+Una affordance è qualsiasi proprietà di un oggetto che invita una persona competente all'azione mediata da tale oggetto.
+
+\noindent\rule{\textwidth}{1pt}
+
+Ci sono vari tipi di affordance:
+\begin{itemize}
+	\item \textbf{Cognitive}: aiuta gli utenti attraverso le loro capacità cognitive (pensare, decidere, imparare, ricordare e conoscere)
+	\item \textbf{Fisiche}: aiuta l'utente attraverso le sue azioni fisiche (cliccare, toccare, puntabile, gesticolare, muovere)
+	\item \textbf{Sensoriali}: aiuta l'utente attraverso le sue azioni sensoriali (vedere, sentire e percepire
+	\item \textbf{Funzionali}: aiuta l'utente a realizzare il suo compito e a comprendere come usare lo strumento
+	\item \textbf{Emotiva}: aiuta l'utente ad esperire certe emozioni
+	\item \textbf{Sociale}: aiuta l'utente ad esperire certe funzioni sociali
+\end{itemize}
+
+Le affordance non sono esclusive, posso copartecipare all'intuizione, il problema è quando sono in contraddizione. Nel caso la progettazione non sia intuitiva gli utenti possono aggiungerle (ad esempio inserendo un cartello).
+
+\subsection{La legge di Fitt}
+\noindent\rule{\textwidth}{1pt}
+\begin{center}
+	\textbf{Legge di Fitts}
+	
+	$MT = a + b\log_{2}(\dfrac{D}{W} + 1)$ \\dove MT è il tempo di movimento, D è la distanza dall'obiettivo e W è la grandezza dell'obiettivo
+\end{center}
 \begin{figure}[h!]
 	\begin{center}
-		\includegraphics[scale=0.6]{img/003.jpg}
-		\caption{Mappa sullo scopo e sul metodo di completamento di una'zione}
-		\label{fig: 003}
+		\includegraphics[scale=0.6]{img/004.jpg}
+		\caption{Legge di Fitt}
+		\label{fig: 004}
 	\end{center}
 \end{figure}
+\noindent\rule{\textwidth}{1pt}
+
+Nella progettazione si può pensare di rendere più efficienti per la legge di Fitt le funzioni più frequenti e rendere meno efficienti quelli per i quali serve una forma di sicurezza.
+
+\section{Scheumorfismo}
+Uno scheumorfismo è un ornamento fisico o grafico apposto su un oggetto allo scopo di richiamare le caratteristiche estetiche di un altro. Un esempio è la calcolatrice digitale che cerca di replicare gli schemi che ritroviamo su quelle fisiche, oppure all'applicazione di un e-reader che simula il girare fisicamente la pagina.
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.6]{img/005.jpg}
+		\caption{Esempio di scheumorfismo}
+		\label{fig: 005}
+	\end{center}	
+\end{figure}
+
+Perchè oggi non viene più usato così pervasivamente? Perchè spesos questo approccio può essere estremamente utile per permettere all'utente un'interazione veloce ma porta con sè eventuali costi di performance. Oggi è stato sostituito da un approccio più flat. 
+
+Lo scheumorfismo può anche portare il problema di essere vincolati troppo dall'oggetto fisico.
+
+\section{Vincoli}
+Un vincolo può essere:
+\begin{itemize}
+	\item \textbf{passivo/concettuale}: ad esempio concepisco un form con tre campi e non quattro, per vincolare l'inserimento di soli tre tipi di dato; non prevedo un campo "note", non prevedo un canale di ritorno (feedback) tra consumatore e azienda
+	\item \textbf{attivo/funzionale}: ad esempio concepisco dei controlli per cui l'utente non può proseguire se non compila tutti i campi, o non li compila "correttamente" sulla base di regex come ad esempio per l'indirizzo mail o il codice fiscale)
+\end{itemize}
+
+I vincoli vanno sempre bene? No, se l'utente si sentisse troppo vincolato potrebbe iniziare a creare dei workaround. Questi vengono chiamati "desire path".
+
+\noindent\rule{\textwidth}{1pt}
+\begin{center}
+	\textbf{Desire Path}
+\end{center}
+
+Qualsiasi azione relativa all'esecuzione di un processo o di un compito (supportati dal sistema informatico) che non è prevista o descritta nei manuali di uso del sistema informatico e/o nei manuali che descrivono tale processo o procedura e che può bypassare l'uso del sistema o piegarlo ai propri fini.
+
+"Percorso del desiderio", sono quei percorsi di interazione che descrivono il percorso ideale da parte dell'utente.
+
+\noindent\rule{\textwidth}{1pt}
 
 
 \end{document}
