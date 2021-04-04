@@ -186,7 +186,7 @@ Gli oggetti progettati male possono essere difficili e frustranti da usare: non 
 \subsection{Come capire a livello generico se l'interfaccia è chiara?}
 Uno dei metodi più semplici è tracciare una linea tra le interazioni per vedere quanto rispetti un ordine di lettura. Possiamo anche basarci su quanti ostacoli alla comprensione ci siano, ad esempio pulsanti che non fanno capire cosa facciano, spiegazioni verbose e non basate su simboli, rendendo difficile l'interpretazione per una persona che non sa leggere la lingua. 
 
-\subsection{Concetti estremi di usabilità}
+\subsection{Concetti estremi di (non) usabilità}
 \subsubsection{Porta di Norman}
 \href{It's not you. Bad doors are everywhere.}{https://www.youtube.com/watch?v=yY96hTb8WgI}
 
@@ -242,41 +242,7 @@ Tendenza del progettista a complicare affari semplici e a pretendere che basti d
 \noindent\rule{\textwidth}{1pt}
 
 \section{Sei concetti centrali}
-\begin{center}
-	\textbf{Visibilità}
-\end{center}
-Permette all’utente di individuare facilmente qual è la funzione dell’oggetto, e quindi riconoscere se è adatto allo scopo prefissato. È il risultato dell’applicazione di tutti gli altri principi elencati.
-
-\begin{center}
-	\textbf{Modello concettuale}
-\end{center}
-É il modello che l’utente ha dell’oggetto in questione; il modello può essere superficiale e riferirsi alla sola conoscenza di relazione tra input e output, ma può anche essere più approfondito, arrivando a conoscere anche tutti i passaggi intermedi a livello macchina. Più il modello concettuale è fedele al funzionamento reale, maggiore è la probabilità di successo nell’interazione tra utente e macchina.
-
-\begin{center}
-	\textbf{Affordance (invito all’uso)} (vedere pagina \pageref{par: affordance})
-\end{center}
-Gibson: è la risorsa o supporto che l'ambiente offre all'utente
-
-Norman: è una qualsiasi proprietà o qualità di un oggetto che definisce i suoi possibili utilizzi o rende chiaro come possa o debba essere usato.
-
-Una affordance è qualsiasi proprietà di un oggetto che invita una persona competente all'azione mediata da tale oggetto.
-
-\begin{center}
-	\textbf{Significanti}
-\end{center}
-Tutto ciò che aggiunge ulteriori indicazioni sull’esecuzione dell’azione, come direzione di movimento, senso di rotazione, ecc.
-
-\begin{center}
-	\textbf{Feedback (reazione)}
-\end{center}
-É l’insieme di risposte che il sistema comunica all’utente, in base alle azioni effettuate fino a quel momento.
-
-\begin{center}
-	\textbf{Mapping} (vedere pagina \pageref{par: mapping})
-\end{center}	
-É il rapporto fra i comandi, il loro azionamento ed i risultati che ne derivano nel mondo esterno; permette all’utente di creare un collegamento diretto fra i comandi di controllo e le parti dell’oggetto di cui modificano rispettivamente lo stato.
-
-\subsection{Definizione classica di interazione (ISO 9241)}
+\paragraph{Definizione classica di interazione (ISO 9241)}
 \textbf{Un sistema interattivo} è una combinazione di componenti hardware e software che ricevono input da un utente umano e gli forniscono un output allo scopo di supportare l'effettuazione di un compito.
 
 \begin{figure}[h!]
@@ -290,6 +256,33 @@ Tutto ciò che aggiunge ulteriori indicazioni sull’esecuzione dell’azione, c
 \textbf{Un'interfaccia} è l'insieme dei componenti di un sistema interattivo (software o hardware) che forniscono all'utente informazioni e comandi per permettergli di effettuare specifici compiti attraverso il sistema.
 
 In comune hanno il concetto di "effettuazione di un compito", da ciò si capisce che il sistema interattivo permette all'utente di conseguire un'obiettivo (compito).
+
+\subsection{Visibilità}
+Permette all’utente di individuare facilmente qual è la funzione dell’oggetto, e quindi riconoscere se è adatto allo scopo prefissato. È il risultato dell’applicazione di tutti gli altri principi elencati.
+
+\subsection{Modello concettuale}
+É il modello che l’utente ha dell’oggetto in questione; il modello può essere superficiale e riferirsi alla sola conoscenza di relazione tra input e output, ma può anche essere più approfondito, arrivando a conoscere anche tutti i passaggi intermedi a livello macchina. Più il modello concettuale è fedele al funzionamento reale, maggiore è la probabilità di successo nell’interazione tra utente e macchina.
+
+\subsection{Affordance (invito all’uso)} 
+Vedere pagina \pageref{par: affordance}.
+
+Gibson: è la risorsa o supporto che l'ambiente offre all'utente
+
+Norman: è una qualsiasi proprietà o qualità di un oggetto che definisce i suoi possibili utilizzi o rende chiaro come possa o debba essere usato.
+
+Una affordance è qualsiasi proprietà di un oggetto che invita una persona competente all'azione mediata da tale oggetto.
+
+\subsection{Significanti}
+Tutto ciò che aggiunge ulteriori indicazioni sull’esecuzione dell’azione, come direzione di movimento, senso di rotazione, ecc.
+
+\subsection{Feedback (reazione)}
+É l’insieme di risposte che il sistema comunica all’utente, in base alle azioni effettuate fino a quel momento.
+
+\subsection{Mapping} 
+Vedere pagina \pageref{par: mapping}.
+	
+É il rapporto fra i comandi, il loro azionamento ed i risultati che ne derivano nel mondo esterno; permette all’utente di creare un collegamento diretto fra i comandi di controllo e le parti dell’oggetto di cui modificano rispettivamente lo stato.
+
 
 
 \section{Affordance} \label{par: affordance}
@@ -386,7 +379,7 @@ Perchè oggi non viene più usato così pervasivamente? Perchè spesos questo ap
 
 Lo scheumorfismo può anche portare il problema di essere vincolati troppo dall'oggetto fisico.
 
-\section{Vincoli}
+\section{Vincoli e workaround}
 Un vincolo può essere:
 \begin{itemize}
 	\item \textbf{passivo/concettuale}: ad esempio concepisco un form con tre campi e non quattro, per vincolare l'inserimento di soli tre tipi di dato; non prevedo un campo "note", non prevedo un canale di ritorno (feedback) tra consumatore e azienda
@@ -405,5 +398,34 @@ Qualsiasi azione relativa all'esecuzione di un processo o di un compito (support
 "Percorso del desiderio", sono quei percorsi di interazione che descrivono il percorso ideale da parte dell'utente.
 
 \noindent\rule{\textwidth}{1pt}
+
+\section{Progettare per affordance}
+\begin{itemize}
+	\item Seguire le maggiori convenzioni già stabilite per immagini e azioni ed adottare un mapping naturale il più spesso possibile
+	\item Se appropriato, usare parole in aggiunta alle icone e alle grafiche
+	\item usare metafore riconoscibili (ad esempio il cestino dei rifiuti per indicare il cancellare un file)
+	\item Essere consistenti e coerenti nell'uso dei modelli concettuali usati durante la fase di design (banalmente l'usare sempre la stessa dicitura per il tasto di conferma)
+\end{itemize}
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.6]{img/008.jpg}
+		\caption{Mappa complessità funzionale e strutturale}
+		\label{fig: 008}
+		\includegraphics[scale=0.6]{img/009.jpg}
+		\caption{Mappa complessità funzionale e d'uso}
+		\label{fig: 009}
+	\end{center}
+\end{figure}
+Il nostro obiettivo è raggiungere alta complessità funzionale con bassa complessità d'uso. Ci sono degli accorgimenti che ci permettono di diminuire la complessità d'uso, ad esempio una progettazione oculata.
+
+\subsection{Perchè è necessario semplificare l'uso?}
+Prima di tutto la pervasività della tecnologia al giorno d'oggi ci richiede ciò, se fosse complicata da usare ci sarebbero più difficoltà nella sua implementazione nella vita di tutti i giorni.
+
+L'accessibilità è un altro capo saldo, renderla usabile e accessibile a tutti, non solo in termine di rimozione di barriere architettoniche ma in generale come possibilità d'accesso, non bloccata da limiti fisici o di disponibilità.
+
+C'è anche la necessità di comprendere ruoli e possibilità della tecnologia per migliorare la qualità della vita.
+
+Le interfacce non sono solo il mezzo interattivo con i sistemi ma sono anche un filtro della complessità d'uso, una buona interfaccia semplifica l'utilizzo e da qua l'integrazione. La capacità di creare un sistema con una minore complessità d'uso ci permette di essere competitivi.
 
 \end{document}
