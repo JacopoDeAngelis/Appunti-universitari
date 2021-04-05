@@ -96,7 +96,7 @@ Ricordiamo che l'usabilità non è solo un concetto di "correttezza funzionale" 
 \noindent\rule{\textwidth}{1pt}
 
 Non si può parlare di impatto se non si parla di su che sistema socio-tecnico dovrà avere un impatto.
-\section{Sistema socio-tecnico}
+\section{Sistema socio-tecnico}\label{par: sistema sociotecnico}
 Banalmente possiamo dire che è un contesto di umani che lavorano assieme tramite delle tecnologie. Quindi:
 \begin{itemize}
 	\item è un sistema, "un insieme di elementi interrelati ed eventualmente mutuamente dipendenti che, agli occhi di un osservatore esterno, appaiono come un'entità unitaria ma collettiva, con caratteristiche e comportamento proprio, solitamente autonomo ed intenzionale (cioè volto ad un obiettivo)";
@@ -142,7 +142,7 @@ Un tipo di conseguenza inattesa è il overreliance, ovvero il fatto di affidarsi
 
 La \textbf{complacency è la fiducia che il sistema tecnico funzionerà sempre come è stato progettato}, riducendo così l'attenzione durante l'utilizzo (e.g. le macchine a guida autonoma che richiedono l'attenzione del conducente ma questo le ignora perchè sicuro del funzionamento). è legata ai processi di monitoraggio.
 
-L'\textbf{automation bias è l'eccessiva fiducia nella risposta} del supporto alle decisioni e quindi causa di errori di omissione o di azione quando i sistemi sono imperfetti (e.g. la calcolatrice che deve rispondere correttamente, non può essere altrimenti). è legato ai processi decisionali.
+L'\textbf{automation bias è l'eccessiva fiducia nella risposta} del supporto alle decisioni e quindi causa di errori di omissione o di azione quando i sistemi sono imperfetti (e.g. la calcolatrice che deve rispondere correttamente, non può essere altrimenti). è legato ai processi decisionali. \label{par: automation bias}
 
 Le conseguenze inattese non sono intrinsecamente positive o negative, è solo la registrazione di un effetto non previsto.
 
@@ -187,7 +187,7 @@ Gli oggetti progettati male possono essere difficili e frustranti da usare: non 
 Uno dei metodi più semplici è tracciare una linea tra le interazioni per vedere quanto rispetti un ordine di lettura. Possiamo anche basarci su quanti ostacoli alla comprensione ci siano, ad esempio pulsanti che non fanno capire cosa facciano, spiegazioni verbose e non basate su simboli, rendendo difficile l'interpretazione per una persona che non sa leggere la lingua. 
 
 \subsection{Concetti estremi di (non) usabilità}
-\subsubsection{Porta di Norman}
+\subsubsection{Porta di Norman} \label{par: porta di norman}
 \href{It's not you. Bad doors are everywhere.}{https://www.youtube.com/watch?v=yY96hTb8WgI}
 
 Una porta di Norman è una porta il cui design suggerisce un'azione contraria a quella da fare o che richiede un segnale per spiegare come usarla.
@@ -220,7 +220,7 @@ Permette all’utente di individuare facilmente qual è la funzione dell’ogget
 
 \noindent\rule{\textwidth}{1pt}
 
-\subsubsection{Toilette di Floyd}
+\subsubsection{Toilette di Floyd}\label{par: toilette di Floyd}
 É la serie di istruzioni della toilette in Odissea nello Spazio.
 
 Una toilette di floyd è un qualcosa di progettato in maniera così poco intuitiva per il quale devo fornire una serie di istruzioni.
@@ -242,7 +242,7 @@ Tendenza del progettista a complicare affari semplici e a pretendere che basti d
 \noindent\rule{\textwidth}{1pt}
 
 \section{Sei concetti centrali}
-\paragraph{Definizione classica di interazione (ISO 9241)}
+\paragraph{Definizione classica di interazione (ISO 9241)} \label{par: ISO 9241}
 \textbf{Un sistema interattivo} è una combinazione di componenti hardware e software che ricevono input da un utente umano e gli forniscono un output allo scopo di supportare l'effettuazione di un compito.
 
 \begin{figure}[h!]
@@ -253,7 +253,7 @@ Tendenza del progettista a complicare affari semplici e a pretendere che basti d
 	\end{center}
 \end{figure}
 
-\textbf{Un'interfaccia} è l'insieme dei componenti di un sistema interattivo (software o hardware) che forniscono all'utente informazioni e comandi per permettergli di effettuare specifici compiti attraverso il sistema.
+\textbf{Un'interfaccia} è l'insieme dei componenti di un sistema interattivo (software o hardware) che forniscono all'utente informazioni e comandi per permettergli di effettuare specifici compiti attraverso il sistema. \label{par: sistema interattivo}
 
 In comune hanno il concetto di "effettuazione di un compito", da ciò si capisce che il sistema interattivo permette all'utente di conseguire un'obiettivo (compito).
 
@@ -399,7 +399,7 @@ Qualsiasi azione relativa all'esecuzione di un processo o di un compito (support
 
 \noindent\rule{\textwidth}{1pt}
 
-\section{Progettare per affordance}
+\section{Progettare per affordance} \label{par: complessità}
 \begin{itemize}
 	\item Seguire le maggiori convenzioni già stabilite per immagini e azioni ed adottare un mapping naturale il più spesso possibile
 	\item Se appropriato, usare parole in aggiunta alle icone e alle grafiche
@@ -417,6 +417,12 @@ Qualsiasi azione relativa all'esecuzione di un processo o di un compito (support
 		\label{fig: 009}
 	\end{center}
 \end{figure}
+\begin{itemize}
+	\item \textbf{Complessità funzionale}: indica quante funzioni possono essere svolte tramite l'interfaccia in analisi (un cacciavite a punta singola ha una bassa complessità funzionale, un coltellino svizzero ha un'alta complessità funzionale in quanto in base a come viene usato può svolgere numerose funzioni in virtù delle sue componenti)
+	\item \textbf{Complessità strutturale}: indica, genericamente, quanto sia complessa la struttura di uno strumento (un cucchiaio ha una complessità strutturale bassa, uno smartphone una complessità strutturale alta)
+	\item \textbf{Complessità d'uso}: indica quando sia semplice utilizzare l'interfaccia, ha un forte elemento basato anche sulle capacità personali (una maniglia ha complessità d'uso bassa, una macchina con cambio manuale ha complessità d'uso alta)
+\end{itemize}
+
 Il nostro obiettivo è raggiungere alta complessità funzionale con bassa complessità d'uso. Ci sono degli accorgimenti che ci permettono di diminuire la complessità d'uso, ad esempio una progettazione oculata.
 
 \subsection{Perchè è necessario semplificare l'uso?}
@@ -427,5 +433,175 @@ L'accessibilità è un altro capo saldo, renderla usabile e accessibile a tutti,
 C'è anche la necessità di comprendere ruoli e possibilità della tecnologia per migliorare la qualità della vita.
 
 Le interfacce non sono solo il mezzo interattivo con i sistemi ma sono anche un filtro della complessità d'uso, una buona interfaccia semplifica l'utilizzo e da qua l'integrazione. La capacità di creare un sistema con una minore complessità d'uso ci permette di essere competitivi.
+
+\chapter{Valutazione di usabilità}
+\section{In cosa consiste il progetto?}
+\textbf{Chi è coinvolto}? Noi e utenti reali
+
+\textbf{Che tipi di analisi ci sono?}
+\begin{itemize}
+	\item Confronto longitudinale: nel tempo
+	\item Confronto trasversale: tra due opzioni
+\end{itemize}
+\textbf{Quali sono gli step?}
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.55]{img/010.jpg}
+		\caption{Gli step per i due confronti}
+		\label{fig: 010}
+	\end{center}
+\end{figure}
+\textbf{Valutazione euristica}: 3 utenti esperti di dominio + 3 utenti esperti di usabilità (cioè noi). Per utenti esperti di dominio si intendono utenti che usano abitualmente il tipo di interfaccia in analisi.
+
+\textbf{User test}: i 12 utenti tra i 24 che saranno coinvolti negli user test devono essere più rappresentativi possibili della popolazione utilizzatrice.
+
+Durante lo user test bisogna registrare l'interazione (c'è un modulo apposito per la privacy).
+
+\section{Valutazione euristica (qualitativa)} \label{par: euristica}
+Si coinvolgono utenti (esperti del task) e/o esperti di usabilità (inclusi noi stessi).
+
+Per valutare sistemi interattivi, a qualsiasi livello di prototipazione e maturità alla luce dei principi di buona progettazione.
+
+Qualitativa non si intende in modo vago ma dove non viene prodotto un numero come output ma invece farsi un'idea sufficientemente completa dei possibili problemi di usabilità.
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.6]{img/012.jpg}
+		\caption{Mappa expertise}
+		\label{fig: 012}
+	\end{center}
+\end{figure}
+Per tutti gli utenti bisogna includere all'interno della relazione una mappa che interpoli expertise di dominio e sulla usabilità e posizioni gli utenti coinvolti su di questa (una mappa come nella figura \ref{fig: 012}.
+
+L'expertise sull'usabilità è quella riguardante cosa si conosce dei buoni principi di progettazione, quella sul dominio è l'expertise nell'applicazione specifica.
+
+La valutazione euristica è la valutazione (di usabilità) svolta alla luce di un determinato insieme di euristiche (ben definite, possibilmente ben note, prese a riferimento) per identificare soluzioni di design che o si conformano o violano una o più euristiche di tale insieme.
+
+\subsection{Quali indicazioni per il design dell'interfaccia utente?}
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.6]{img/013.jpg}
+		\caption{Tipi di principi e linee guida}
+		\label{fig: 013}
+	\end{center}
+\end{figure}
+
+Si chiamano anche principi euristici o semplicemente "euristiche". Una euristica è quindi un insieme di concetti, riferimenti e, soprattutto, strategie che si sono rilevate particolarmente adatte a risolvere un determinato problema, nel nostro caso la progettazione di sistemi interattivi usabili.
+\subsubsection{Principi}
+Indicazioni generali per la progettazione di interfacce utente usabili, basate su evidenza scientifica o sul generale consenso. Derivano dalla conoscenza degli aspetti psicologici, computazionali e sociali e sono indipendenti dalla tecnologia. Sono espressi spesso in forma molto generale.
+
+\subsubsection{Standard}
+Insieme di regole da applicare nel progetto di una classe di sistemi. possono essere vincolanti. Sono di norma emesse da un Ente di standardizzazione (e.g. ISO). La conformità allo standard deve essere valutabile in modo preciso. (Vedere \pageref{par: ISO 9241}
+
+\subsubsection{Linee guida e design patterns}
+Insieme di raccomandazioni per il progetto dell'interfaccia utente per una particolare classe di sistemi, espresse in modo generale ma meno astratte dei principi, con esempi e motivazioni. Non sono mai vincolanti, sta al progettista decidere sulla opportunità per applicarle caso per caso.
+
+Il concetto di "design pattern" nasce in architettura. Si tratta di riutilizzare buone pratiche (appunto raccomandazioni) per non dovere reinventare tutto da capo. Per i programmatori i più famosi sono \href{https://refactoring.guru/design-patterns}{i design pattern pensati dalla GoF}. Diffondono standard testati e facilitano la formazione di un linguaggio comune.
+
+\subsubsection{Regole di progetto}
+Insieme di regole o specifiche da applicare nel progetto di un particolare sistema. Sono vincolanti all'interno del progetto, ad esempio perchè dettate da precisi requisiti del cliente/committente o per motivi di budget e vincoli progettuali.
+
+
+Si usano i principi e non le linee guida perchè non vogliamo essere vincoli eccessivi. 
+\subsection{Livelli di autorevolezza dei principi}
+Ci sono diversi livelli di autorevolezza dei principi (o forza dell'evidenza):
+\begin{enumerate}
+	\item Completamente supportati da risultati di ricerca e dati empirici
+	\item Basati su pratica generalmente accettata (in modo documentato)
+	\item Non ben documentate, ma supportate dall'opinione di professionisti esperti
+	\item Opinione individuale
+\end{enumerate}
+
+Solo i primi due gradi sono recepiti. I principi di Nielsen sono tra B e C, alcune soluzioni specifiche (ispirate a quei principi) anche di livello A.
+
+\chapter{Lessico}
+\paragraph{Ergonomia}
+Disciplina scientifica che si occupa dei problemi relativi al lavoro umano in rapporto alla progettazione delle macchine e agli ambienti di lavoro, al fine di individuare le soluzioni più idonee alle esigenze psicofisiche dei lavoratori e al contempo a quelle della produzione.
+
+\paragraph{Sistema socio tecnico}
+Pagina \pageref{par: sistema sociotecnico}.
+
+\begin{itemize}
+	\item è un sistema, "un insieme di elementi interrelati ed eventualmente mutuamente dipendenti che, agli occhi di un osservatore esterno, appaiono come un'entità unitaria ma collettiva, con caratteristiche e comportamento proprio, solitamente autonomo ed intenzionale (cioè volto ad un obiettivo)";
+	\item Un sistema in cui la componente umana  (sociale) e quella tecnica (tecnologica) sono inestricabilmente legate tra loro e la loro interazione porta a fenomeni emergenti impredicibili. Attenzione che tecnica è un termine generico proprio per intendere tutti gli strumenti, che siano fisici o dell'ingegno. In più si parla di interdipendenza perchè lo strumento è fermo senza qualcuno che lo usa, l'umano è fermo se non ha uno strumento per agire;
+	\item è un concetto di invarianza di scala, ovvero il concetto non cambia in base alla grandezza dell'ambiente sociale
+\end{itemize}
+
+\paragraph{Affordance}
+Pagina \pageref{par: affordance}.
+Gibson: è la risorsa o supporto che l'ambiente offre all'utente
+
+Norman: è una qualsiasi proprietà o qualità di un oggetto che definisce i suoi possibili utilizzi o rende chiaro come possa o debba essere usato.
+
+Una affordance è qualsiasi proprietà di un oggetto che invita una persona competente all'azione mediata da tale oggetto.
+
+\paragraph{Mapping}
+Pagina \pageref{par: mapping}.
+
+É il rapporto fra i comandi, il loro azionamento ed i risultati che ne derivano nel mondo esterno; permette all’utente di creare un collegamento diretto fra i comandi di controllo e le parti dell’oggetto di cui modificano rispettivamente lo stato.
+\paragraph{Porte di Norman}
+Pagina \pageref{par: porta di norman}.
+
+Una porta di Norman è una porta il cui design suggerisce un'azione contraria a quella da fare o che richiede un segnale per spiegare come usarla.
+
+\paragraph{Toilette di Floyd}
+Pagina \pageref{par: toilette di Floyd}.
+
+Una toilette di floyd è un qualcosa di progettato in maniera così poco intuitiva per il quale devo fornire una serie di istruzioni.
+
+\paragraph{Sistema interattivo e interfaccia}
+Pagina \pageref{par: sistema interattivo}.
+
+Per interfaccia d'uso (o interfaccia utente, user interface) intendiamo l'insieme di “tutti i componenti di un sistema interattivo (software o hardware) che forniscono all'utente informazioni e comandi per permettergli di effettuare specifici compiti attraverso il sistema.
+
+\paragraph{Automation bias/overreliance}
+Pagina \pageref{par: automation bias}.
+
+è l'eccessiva fiducia nella risposta del supporto alle decisioni e quindi causa di errori di omissione o di azione quando i sistemi sono imperfetti (e.g. la calcolatrice che deve rispondere correttamente, non può essere altrimenti). è legato ai processi decisionali.
+
+\paragraph{Errori di giustapposizione}
+Quando a causa della posizione specifica di un elemento si preme un pulsante differente rispetto a quello desiderato (e.g. due elementi in un menù a tendina che sono molto vicini tra loro)
+
+\paragraph{Complessità strutturale, funzionale e d'uso}
+Pagina \pageref{par: complessità}.
+
+\begin{itemize}
+	\item \textbf{Complessità funzionale}: indica quante funzioni possono essere svolte tramite l'interfaccia in analisi (un cacciavite a punta singola ha una bassa complessità funzionale, un coltellino svizzero ha un'alta complessità funzionale in quanto in base a come viene usato può svolgere numerose funzioni in virtù delle sue componenti)
+	\item \textbf{Complessità strutturale}: indica, genericamente, quanto sia complessa la struttura di uno strumento (un cucchiaio ha una complessità strutturale bassa, uno smartphone una complessità strutturale alta)
+	\item \textbf{Complessità d'uso}: indica quando sia semplice utilizzare l'interfaccia, ha un forte elemento basato anche sulle capacità personali (una maniglia ha complessità d'uso bassa, una macchina con cambio manuale ha complessità d'uso alta)
+\end{itemize}
+
+\paragraph{Euristica e valutazione euristica}
+Pagina \pageref{par: euristica}.
+
+Una euristica è un insieme di concetti, riferimenti e, soprattutto, strategie che si sono rilevate particolarmente adatte a risolvere un determinato problema, nel nostro caso la progettazione di sistemi interattivi usabili.
+
+La valutazione euristica è la valutazione (di usabilità) svolta alla luce di un determinato insieme di euristiche (ben definite, possibilmente ben note, prese a riferimento) per identificare soluzioni di design che o si conformano o violano una o più euristiche di tale insieme.
+
+\paragraph{Segno, simbolo, indice, icona}
+\paragraph{Significante, significato, oggetto}
+\paragraph{Metacomunicazione}
+\paragraph{Deputy del progettista}
+L'oggetto creato rappresenta l'artista che lo crea.
+\paragraph{Captologia}
+\paragraph{Soggettivismo - oggettivismo}
+\section{"Metodologia"}
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.6]{img/011.png}
+		\caption{PDCA cycle}
+		\label{fig: 011}
+	\end{center}
+\end{figure}
+\begin{itemize}
+	\item Affina sensibilità per il brutto e il cattivo
+	\item Progetta in equilibrio tra familiarità e originalità
+	\item Sappi che parli all'utente anche di te stesso
+	\item Non guardarti l'ombelico ma coinvolgi gli utenti
+	\item Trova i problemi, prioritizzali e risolvili
+	\item Valuta usabilità in termini di efficienza, efficacia e soddisfazione
+	\item Migliora il tuo artefatto
+	\item Torna agli utenti
+\end{itemize}
 
 \end{document}
