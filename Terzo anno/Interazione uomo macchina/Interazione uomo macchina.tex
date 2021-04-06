@@ -551,27 +551,27 @@ Un altro standard è l'ISO 9241-110 che prescrive 7 principi del dialogo uomo ma
 \end{itemize}
 
 \subsubsection{Euristiche di Nielsen}
-L'insieme più importante e a cui viene attribuita una buona autorevolezza sono le \href{https://www.neurowebdesign.it/it/alla-scoperta-delle-10-euristiche-di-nielsen/}{euristiche di Nielsen}. \underline{Possono essere tenute in sede d'esame}
+L'insieme più importante e a cui viene attribuita una buona autorevolezza sono le \href{https://www.neurowebdesign.it/it/alla-scoperta-delle-10-euristiche-di-nielsen/}{euristiche di Nielsen}. \\\underline{Possono essere tenute in sede d'esame}.
 Basati su un'analisi fattoriale di 249 problemi di usabilità con cui si è derivato l'insieme minimo per massimizzare la potenza esplicativa.
 
 In rete ci sono numerosi template per tenere traccia dei problemi.
 
 Una rielaborazione del professor Mussio:
 \begin{itemize}
-	\item[] Percezione
+	\item[] \textbf{Percezione}
 	\begin{itemize}
 		\item fare vedere lo stato del sistema (feedback)
 		\item adeguare il sistema al mondo reale (parlare il linguaggio dell'utente)
 		\item controllo dell'utente e libertà (uscite indicate chiaramente)
 	\end{itemize}
-	\item[] Cognizione
+	\item[] \textbf{Cognizione}
 	\begin{itemize}
 		\item assicurare consistenza (nell'applicazione, sistema, ambiente)
 		\item riconoscimento piuttosto che uso della memoria dell'utente
 		\item assicurare flessibilità ed efficienza d'uso (accelleratori)
 		\item visualizzare tutte e sole le informazioni necessarie (estetica e design minimalista)
 	\end{itemize}
-	\item[] Errori
+	\item[] \textbf{Errori}
 	\begin{itemize}
 		\item prevenire gli errori
 		\item permettere all'utente di correggere gli errori e non solo di rilevarli
@@ -656,6 +656,113 @@ Alcuni indicatori per la valutazione della gravità sono:
 	\item La persistenza: è un problema in cui lo stesso utente può incappare più volte anche essendone consapevole e a conoscenza o è di fatto una singola occorrenza?
 \end{itemize}
 
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.6]{img/016.jpg}
+		\caption{Esempio di riassunto dei riscontri}
+		\label{fig: 016}
+	\end{center}
+\end{figure}
+
+\subsubsection{Perchè fare una valutazione euristica?}
+è una tecnica dell'approccio più generale detto di "discount usability engineering" (veloce, efficiente, efficace). Nielsen ha riscontrato spesso rapporti benefit-cost > 1:50 (ovvero la valutazione costa 10k ma i benefici attesi sono stimati a 500k). Questi benefici derivano dalla non segnalazione di difetti, minore numero di rinunce da parte degli utenti.
+
+\subsection{Valutazione euristica vs. test utente}
+Pro della valutazione euristica: 
+\begin{itemize}
+	\item è più veloce (quindi meno costosa)
+	\item i risultati sono già in forma interpretata
+\end{itemize}
+
+Contro:
+\begin{itemize}
+	\item meno accurata: può non individuare dei problemi o produrre falsi positivi
+	\item non tiene conto degli utenti veri e dei loro compiti situati
+\end{itemize}
+
+\subsection{Valutazione euristica: risorse necessarie}
+\begin{itemize}
+	\item Un sistema funzionante oppure un prototipo o un mock-up.
+	\item n valutatori
+	\item un osservatore se vengono coinvolti utenti esperti
+	\item tempo:
+	\begin{itemize}
+		\item In ambito professionale una sessione individuale di osservazione dura tra i 30 e i 90 minuti ma noi siamo autorizzati a farle durare 5-15
+		\item ogni valutatori dovrebbe riesaminare l'interfaccia più volte
+	\end{itemize}
+\end{itemize}
+
+\subsection{Valutazione euristica: pianificazione}
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.6]{img/017.jpg}
+		\caption{Esempio di pianificazione di Nielsen}
+		\label{fig: 017}
+	\end{center}
+\end{figure}
+
+\subsection{Alcuni errori frequenti}
+\begin{itemize}
+	\item Condurre la valutazione aggregando i problemi e non analizzandoli uno ad uno: \textbf{i problemi di usabilità vanno descritti uno ad uno}
+	\item Nella discussione di un problema proporre soluzioni: \textbf{questo lavoro va fatto nella fase DOPO la valutazione euristica, non ne fa parte}
+	\item Considerare un principio alla votla e indicare i problemi che violano tale principio: \textbf{in realtà ogni problema può violare più principi, si parte dai problemi}
+	\item Mischiare problemi e soluzioni: \textbf{l'output della valutazione è un elenco di problemi prioritizzati}
+\end{itemize}
+
+\subsection{Come si prioritizza?}
+Per ogni problema identificato dal gruppo, far valutare indipendentemente la severità, e coinvolgere anche una decina di colleghi della azienda e una decina di potenziali utenti (che non siano colleghi dell'azienda).
+
+In poche parole, cercare di ottenere 20-30 valutazioni ordinali di severità per ciascun problema
+
+Il fine è identificare i problemi più urgenti da indirizzare con le risorse a disposizione.
+
+A questo punto si estrae dal sistema di rilevazione (il questionario online) la tabella delle valutazioni (i problemi indicati sulle colonne, le valutazioni di severità nelle righe, una per singolo valutatore).
+
+Per ciascuna riga considerate la classifica di severità adottando la strategia di competizione standard (ovvero un pareggio conta a livello di ordine come due livelli separati, non 1223 ma 1224), costruendo una nuova tabella delle posizioni (a partire da quella delle valutazioni): il o i problemi in testa sono quelli che hanno ottenuto il punteggio più alto.
+
+Considerare 2 fasce: quella dei problemi a priorità più alta considera le prime ne posizioni, con n circa 20\% del numero totale dei problemi, t e poi la fascia delle restanti t-n posizioni. Solitamente nella prima fascia si considerano le prime 3 o 5 posizioni, cioè il podio o una specie di podio allargato. è ragionevole pensare che questi problemi siano responsabili di circa l'80\% di tutti i problemi.
+
+A questo punto contare, per ogni problema, il numero di volte che è in prima fascia (p) e in seconda fascia (s) per ogni utente.
+
+Assegnare il problema definitivamente alla fascia p o s in base al confronto della misura precedente: se p > s allora sarà in p, altrimenti in s.
+
+Eseguire un test binomiale per capire se la differenza tra p ed s è dovuta al caso. In base a questo test si stabiliscono tre fasce in base al P value del test:
+\begin{enumerate}
+	\item Fascia alta con priorità significativa
+	\item Fascia intermedia di non significatività
+	\item Fascia bassa con priorità significativa
+\end{enumerate}
+
+Nel caso da questo test non sia possibile mettere nessun problema in fascia alta il gruppo può decidere di staccare manualmente dalla fascia intermedia alcuni problemi considerati come di fascia alta.
+
+Tutti i problemi nella fascia di alta priorità significativa dovranno essere risolti prioritariamente e scegliere poi alcuni problemi dalla fascia di non significatività.
+
+Nella tabella dei problemi aggiungere due colonne: in una indicare la fascia di priorità, nell'altra la mediana/media dell'indice di severità indicando anche la deviazione standard.
+
+Per chiarezza, ordinare i problemi mettendo prima quelli che sono in prima fascia e risultati anche significativamente severi. Riportare come nota il numero delle persone coinvolte nella prioritizzazione.
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.6]{img/018.jpg}
+		\caption{Un esempio}
+		\label{fig: 018}
+	\end{center}
+\end{figure}
+
+\subsection{Cosa contiene alla fine la valutazione euristica?}
+\begin{itemize}
+	\item Descrizione del design sperimentale: cosa avete valutato, perchè, coinvolgendo quante persone, considerando quali task, aerogramma di profilazione, diagramma cartesiano delle expertise...
+	\item Elenco finale dei problemi prioritizzati: tabella dei problemi, screenshot dei problemi più gravi, matrice problemi/valutatori, distribuzione problemi/euristiche
+	\item Considerazioni finali: legate al numero totale stimato di problemi, alla distribuzione dei problemi, alle citazioni notevoli dalle sessioni olistiche ed esperte
+\end{itemize}
+
+L'importante è la prioritizzazione dei problemi di due fasce (priorità più alta, intermedia, più bassa).
+
+Le n schede di analisi da cui è stato redatto l'elenco finale come allegato/appendice.
+
+Meglio uno slideware, non un documento scritto.
+
+Nella cartella di progetto mettere anche le registrazioni e i moduli di consenso.
 
 \chapter{Lessico}
 \paragraph{Ergonomia}
@@ -748,7 +855,7 @@ L'oggetto creato rappresenta l'artista che lo crea.
 \section{"Metodologia"}
 \begin{figure}[h!]
 	\begin{center}
-		\includegraphics[scale=0.6]{img/011.png}
+		\includegraphics[scale=0.4]{img/011.png}
 		\caption{PDCA cycle}
 		\label{fig: 011}
 	\end{center}
