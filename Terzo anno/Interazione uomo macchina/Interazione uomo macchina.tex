@@ -579,6 +579,57 @@ Una rielaborazione del professor Mussio:
 	\end{itemize}
 \end{itemize}
 
+\subsection{Spiegazione euristiche}
+\subsubsection{Fare vedere lo stato del sistema (feedback)}
+\begin{itemize}
+	\item Il sistema deve informare continuamente l'utente di ciò che sta facendo e come sta interpretando gli input dell'utente.
+	\item L'utente deve poter capire l'effetto dell'azione passata sullo stato presente e individuare le possibili nuove azioni.
+	\item Fornire indicazioni sui malfunzionamenti e le ipotesi plausibili delle cause. Non bisogna segnalare solo per errori ma anche se l'applicazione è in uno stato di transizione, ad esempio cambiare il cursore durante un'elaborazione
+	\item Espresso in maniera concreta, non astratta o in termini generali (ad esempio copia file ma quale file da dove a dove)
+	\item Il feedback può avere differenti gradi di persistenza. Esempi:
+	\begin{itemize}
+		\item \textbf{Persistenza breve}: un messaggio che la stampante ha finito la carta
+		\item \textbf{Persistenza media}: sta sullo schermo finchè l'utente esplicitamente non lo riconosce, ad esempio l'avviso di reindirizzamento su di un'altra stampante
+		\item \textbf{Persistenza alta}: rimane una parte permanente dello schermo, ad esempio la batteria
+	\end{itemize}
+	\item è importante nel caso di operazioni che richiedono una lunga elaborazione
+\end{itemize}
+
+\subsubsection{Adeguare il sistema al mondo reale (parlare il linguaggio dell'utente)}
+\begin{itemize}
+	\item Permettere all'utente di sfruttare la sua esperienza nell'interagire con il sistema
+	\item Familiarità: adotta le notazioni di utente, convenzioni sui nomi
+	\item Proiezione mondo reale: metafore familiari
+	\item I dialoghi, se possibile, devono essere nella lingua nativa dell'utente così come le icone devono rispettare la cultura (affordance percepita)
+\end{itemize} 
+
+\subsubsection{Controllo dell'utente e libertà (uscite indicate chiaramente)}
+\begin{itemize}
+	\item Gli utenti non si devono sentire "intrappolati" dai computer, deovno sentire che sono loro che controllano il dialogo: ad esempio usare le finestre modali solo quando servono
+	\item Offrire sempre all'utente un modo semplice per uscire dalla situazione corrente, dare delle chiare vie d'uscita
+	\item Offrire sempre delle possibilità di "Undo", ovvero tornare indietro sui propri passi
+	\item vie d'uscita e undo permettono all'utente di imparare esplorando il sistema (flip undo è il singolo step, multiple undo è quello che permette di navigare in vari step e solitamente è associato ad un redo)
+	\item permettere di interrompere o cancellare operazioni che durano troppo
+\end{itemize}
+
+\subsubsection{Assicurare consistenza (nell'applicazione, sistema, ambiente)}
+Avere la stessa interfaccia nei vari ambiti permette una veloce navigazione dell'applicazione. Avere i pulsanti ok, cancel, help messi sempre in posizione differente possono disorientare.
+
+Nell'ambito del gruppo di sviluppo è importante adottare o definire convenzioni interne di rappresentazione e di interazione con rigore e farle rispettare in modo da avere una consistenza interna.
+
+\subsubsection{Riconoscimento piuttosto che uso della memoria dell'utente}
+
+\subsection{AB testing}
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.6]{img/019.jpg}
+		\caption{Esempio di AB testing}
+		\label{fig: 019}
+	\end{center}
+\end{figure}
+Presentare due alternative di design e fare scegliere agli utenti quale preferiscano permette di capire quale sia l'interazione statisticamente preferita.
+
+AB suggerisce due possibilità ma in realtà possono esserci N combinazioni di elementi sotto esame, ad esempio combinazioni di media, label dei pulsanti, colori ecc. che vengono proposti agli utenti e poi valutati in base ad un feedback misurabile.
 
 \section{Valutazione euristica di usabilità}
 è una tecnica sistematica di ispezione predittiva (non misurazione).
@@ -763,6 +814,8 @@ Le n schede di analisi da cui è stato redatto l'elenco finale come allegato/app
 Meglio uno slideware, non un documento scritto.
 
 Nella cartella di progetto mettere anche le registrazioni e i moduli di consenso.
+
+
 
 \chapter{Lessico}
 \paragraph{Ergonomia}
