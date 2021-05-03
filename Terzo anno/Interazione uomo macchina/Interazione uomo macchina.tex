@@ -618,6 +618,104 @@ Avere la stessa interfaccia nei vari ambiti permette una veloce navigazione dell
 Nell'ambito del gruppo di sviluppo è importante adottare o definire convenzioni interne di rappresentazione e di interazione con rigore e farle rispettare in modo da avere una consistenza interna.
 
 \subsubsection{Riconoscimento piuttosto che uso della memoria dell'utente}
+Un comportamento corretto è quello di rimuovere la necessità per l'utente di ricordare le cose a memoria quando possono essere mostrate direttamente.
+
+Se si richiede all'utente un formato specifico è meglio ricordarglielo e non lasciare che usi un sistema di try and error. Un modo è mostrare il pattern, un altro è riempire il campo con un placeholder. Nel caso ci sia un intervallo legale specificarlo.
+
+\subsubsection{Assicurare flessibilità ed efficienza d'uso (accelleratori)}
+L'utente esperto deve poter svolgere velocemente le operazioni più frequenti, ad esempio l'uso di shortcuts (accelleratori).
+
+Flessibilità nel senso che il sistema deve permettere di fare le stesse cose in maniere diverse (ad esempio per un utente novizio o esperto)
+
+Altri esempi:
+\begin{itemize}
+	\item Segnalibri
+	\item Breadcrumb trail
+	\item Uso della storia dell'interazione (e.g. file aperti di recente)
+	\item Definizione di templates e macro
+	\item Type-ahead (poter inserire il prossimo input prima che il computer sia pronto ad accettarlo)
+	\item Fornire valori di default
+\end{itemize}
+
+\subsubsection{Visualizzare tutte e sole le informazioni necessarie (estetica e design minimalista)}
+L'interfaccia deve essere semplice e gradevole e rispecchiare nella maniera più naturale possibile i compiti dell'utente. Presentare solo l'informazione:
+\begin{itemize}
+	\item che l'utente vuole
+	\item quando l'utente la vuole
+	\item come l'utente la vuole
+	\item dove l'utente la vuole
+\end{itemize}
+e non accompagnata da informazioni non rilevanti o fuorvianti.
+
+Raggruppare poi le informazioni che vengono usate insieme e presentarle in modo da suggerire la sequenza di azioni.
+
+\paragraph{Una credenza errata}
+"Più opzioni offro e più modi di fare le cose metto a disposizione, più utenti soddisfo" (noto come Bells and whistles bias). Ogni volta che si aggiunge un'opzione l'utente ha una cosa in più da ricordare e da usare in maniera scorretta.
+
+Un'alternativa: offrire diversi "modi utente", ad esempio per novizio, esperto, operatore di linea e manutentore...
+
+Il fenomeno del low use riguarda il rapporto tra funzioni usate spesso o a volte e quelle che non sono note o sono note ma inutilizzate. Si può calcolare un "use index" così:
+$$UI=\dfrac{(N_{S}*1) + (N_{A}*0,5) + (N_{M}*0)}{N_{S}+N_{A}+N_{M}}$$
+
+Dove:
+\begin{itemize}
+	\item[] $N_{S}$ sono le funzioni usate spesso
+	\item[] $N_{A}$ sono le funzioni usate a volte
+	\item[] $N_{M}$ sono le funzioni mai usate
+\end{itemize}
+
+\begin{center}
+I low users sono quelli con $$UI \leq 0,5$$
+\end{center}
+
+Può essere usato per capire quali funzioni promuovere e, nel caso, potenziare.
+
+\paragraph{Importanza della grafica, del layout e del colore (estetica)}
+Mettere "prima" le informazioni che devono essere lette prima.
+
+Oggetti lampeggianti o CARATTERI MAIUSCOLI, solo se necessario, anche perchè rallentano del 10\% la velocità di lettura.
+
+In generale si considera una lettura media di 200-300 pam (parole al minuto) per la lettura generica (rounding) ma la velocità dipende dal task (memorizzazione 100, skimming 700), dall'illuminazione, dai font, dal livello di scolarità.
+
+Considerare alcuni problemi aiuta, ad esempio per il daltonismo:
+\begin{itemize}
+	\item Non usare più di 5-7 colori
+	\item Rendere l'interfaccia distinguibile anche senza colori
+	\item Non dedicare troppo spazio al titolo, nome del venditore, numero di versione e informazioni simili.
+\end{itemize}
+
+\subsubsection{Prevenire gli errori}
+\begin{itemize}
+	\item Individuare le situazioni di possibile errore e cercare di aiutare l'utente. Cerare meccanismi di prevenzione, ad esempio selezionare i valori da un menù e non tramite digitazione libera.
+	\item Usare le richieste di conferma.
+	\item Evitare comandi troppo simili con significati diversi.
+	\item Creare meccanismi di comunicazione utente - progettista: errori rilevati dall'utente e inviabili tramite log al progettista.
+\end{itemize}
+
+\paragraph{Tecniche di prevenzione}
+\begin{itemize}
+	\item Diversificare le azioni dell'utente
+	\item Amodalità: si intende fare sì che i comandi non abbiano significato differente in base alla modalità utente
+	\item Funzioni vincolate
+	\item Avvertimenti e richieste di conferma
+	\item Default inoffensivi
+	\item Bypass sicuri (e.g. password dimenticata)
+\end{itemize}
+
+\subsubsection{Permettere all'utente di correggere gli errori e non solo di rilevarli}
+Dare buoni messaggi di errore è essenziale, devono essere chiari, senza codici, dare indicazioni precise, proporre una soluzione e, soprattutto, essere gentili.
+
+La recoverability è la capacità di raggiungere il risultato voluto dopo avere commesso l'errore. Se un'azione non è reversibile sarebbe meglio renderla difficilmente conseguibile (inefficienza programmata).
+
+\paragraph{Granularità dei messaggi d'errore}
+Meglio un messaggio d'errore alla volta quando viene commesso l'errore o tutti insieme alla fine?
+
+\subsubsection{Help contestuale e documentazione}
+Il sistema perfetto è così facile da usare che non ha bisogno di help e manuali ma poichè non esiste è sempre bene prevederli.
+
+Bisogna anche tenere a mente che spesso gli utenti non leggono i manuali, preferiscono usare il sistema senza avere letto alcuna spiegazione, quindi mai dare per presupposto che l'utente abbia letto il manuale e fornire aiuti in linea con documentazione raggiungibile in modo preciso.
+
+L'help deve essere minimale e contestuale (Clippy non era male).
 
 \subsection{AB testing}
 \begin{figure}[h!]
@@ -815,7 +913,25 @@ Meglio uno slideware, non un documento scritto.
 
 Nella cartella di progetto mettere anche le registrazioni e i moduli di consenso.
 
+\section{Statistica  inferenziale (approccio quantitativo)}
+\subsection{Come potremmo definire il successo di un sistema interattivo?}
+\begin{itemize}
+	\item gli utenti scelgono il sistema
+	\item gli utenti sono disposti a pagare bene per il sistema
+	\item la fetta di mercato cresce
+	\item il fatturato/ricavi crescono
+	\item si viene comprati/copiati da facebook
+	\item gli utenti ne parlano bene e lo conosigliano
+	\item gli utenti considerano il sistema parte della loro vita
+	\item gli utenti preferiscono usare il sistema rispetto altri
+\end{itemize}
 
+Ma soprattutto è:
+\begin{itemize}
+	\item \textbf{Utile}: deve fare quello che viene richiesto
+	\item \textbf{Usabile}: deve consentire di fare quello che viene richiesto in modo naturale, senza aumentare i rischi di errore, ecc.
+	\item \textbf{Usato}: deve rendere le persone desiderose di usarlo, quindi essere interessante, divertente, piacevole
+\end{itemize}
 
 \chapter{Lessico}
 \paragraph{Ergonomia}
