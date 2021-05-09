@@ -717,6 +717,7 @@ Bisogna anche tenere a mente che spesso gli utenti non leggono i manuali, prefer
 
 L'help deve essere minimale e contestuale (Clippy non era male).
 
+
 \subsection{AB testing}
 \begin{figure}[h!]
 	\begin{center}
@@ -728,6 +729,9 @@ L'help deve essere minimale e contestuale (Clippy non era male).
 Presentare due alternative di design e fare scegliere agli utenti quale preferiscano permette di capire quale sia l'interazione statisticamente preferita.
 
 AB suggerisce due possibilità ma in realtà possono esserci N combinazioni di elementi sotto esame, ad esempio combinazioni di media, label dei pulsanti, colori ecc. che vengono proposti agli utenti e poi valutati in base ad un feedback misurabile.
+
+\subsection{Manuali d'uso}
+I manuali non vengono mai letti prima ma solo quando si conosce già il sistema e si devono risolvere problemi specifici. Quindi, progettiamo le cose in modo da poterne fare a meno nelle fasi iniziali.
 
 \section{Valutazione euristica di usabilità}
 è una tecnica sistematica di ispezione predittiva (non misurazione).
@@ -933,6 +937,134 @@ Ma soprattutto è:
 	\item \textbf{Usato}: deve rendere le persone desiderose di usarlo, quindi essere interessante, divertente, piacevole
 \end{itemize}
 
+\subsection{Usabilità}
+è il grado con cui un prodotto può essere usato da determinati utenti per raggiungere determinati obiettivi con efficacia, efficienza, soddisfazione in un determinato contesto d'uso.
+
+Un altro modo di definirla è il rapporto tra le risorse usate utili per raggiungere il risultato e quelle effettivamente consumate, ovvero la quantità di "spreco" creato.
+
+Notare che differenza può sussistere tra contesti di primo utilizzo, in emergenza, in condizioni di distrazione/affaticamento.
+
+In ogni caso non ha senso parlare di usabilità di un sistema in sè ma in un determinato contesto d'uso. Ha senso parlare di potenziale usabilità.
+
+Possiamo definire delle metriche per misurare il grado di usabilità. Ma qual è la differenza tra metrica e misura?
+\begin{itemize}
+	\item \textbf{Misura}: risultato della misurazione, assegnazione empirica ed oggettiva di un valore (numerico o simbolo) ad un'entità, per caratterizzarne un attributo specifico
+	\item \textbf{Metrica}: comprende la misurazione quantitativa del grado di possesso di uno specifico attributo da parte di un sistema e definisce anche le procedure, modalità e reogole di misurazione. Una metrica stabilisce:
+	\begin{itemize}
+		\item le entità/attributi da misurare
+		\item l'unità di misura
+		\item una procedura di misura
+	\end{itemize}
+\end{itemize}
+
+Quando l'attributo non è fisico e difficilmente misurabile si parla di indicatore, ovvero di proxy tramite il quale leggere un evento.
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.6]{img/020.jpg}
+		\caption{Usabilità}
+		\label{fig: 020}
+	\end{center}
+\end{figure}
+
+C'è differenza tra usabilità teorica e usabilità effettiva, questa differenza viene definita come praticamente significativa se e solo se fa effettivamente la differenza, viene invece chiamata statisticamente significativa se non è dovuta al caso.
+
+è possibile avere una differenza statisticamente significativa ma non pragmaticamente (dipende dal contesto) e anche il contrario.
+
+\subsubsection{Usabilità - estensioni}
+\begin{itemize}
+	\item \textbf{Robustezza}: il sistema deve indurre un basso tasso di errori (o prevenirne proattivamente alcuni), facili da correggere, e con un basso impatto. 
+	\item \textbf{Apprendibilità}: facilità nell'apprendere il comportamento del sistema (l'utente lo usa subito per attività utili)
+	\item \textbf{Ricordabilità}: facile da ricordare, anche quando un utente riusa il sistema dopo diverso tempo si ricorda come si fa
+\end{itemize}
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.6]{img/021.jpg}
+		\caption{Due andamenti tipici di soddisfazione dell'utente nel tempo}
+		\label{fig: 021}
+	\end{center}
+\end{figure}
+
+Ovviamente un sistema che ha entrambi i profili non può esistere ma bisogna sempre trovare un compromesso tra apprendibilità nel breve e alta usabilità (soddisfazione) nel lungo periodo.
+
+\subsubsection{Trade off tra robustezza e efficienza}
+Ci può essere un tradeoff tra questi: il desiderio di evitare all'utente errori può portare a progettare un numero eccessivo di vincoli come ad esempio i messaggi di conferma. I trade off devono essere risolti definendo quali dimensioni di usabilità sono più importanti per un certo sistema.
+
+\chapter{Valutazione di qualità/usabilità}
+Attività di raccolta dati sull'usabilità di un sistema rispetto a uno specifico gruppo di utenti, nello svolgere una certa attività, in un certo ambiente, o in un certo contesto di lavoro. 
+
+è un'attività:
+\begin{itemize}
+	\item \textbf{Empirica}: che coinvolge utenti veri
+	\item \textbf{Concreta}: eseguita su sistemi reali
+	\item \textbf{Sistematica}: da eseguirsi con metodo
+\end{itemize}
+
+Si identificano gli obiettivi rilevanti che gli utenti possono raggiungere usando il sistema, quindi i relativi casi d'uso e almeno un percorso/scenawrio principale (happy flow).
+
+Questo è il task su cui valutare il sistema con utenti esperti.
+
+Ci sono due valutazioni:
+\begin{itemize}
+	\item \textbf{formativa}: aiuta nello sviluppo
+	\item \textbf{riassuntiva}: giudizio sul prodotto
+	\item[]
+	\item \textbf{Assoluta}: misurazione pura
+	\item \textbf{Comparativa}: misurazione mettendo a confronto dei valori
+	\item[]	
+	\item \textbf{Qualitativa}: basata su impressioni soggettive
+	\item \textbf{Quantitativa}: basata su test utente e volte a misurare degli attributi di qualità, ad esempio tempi di esecuzione, rapporto tra interazioni corrette ed errori e anche l'opinione degli utenti/esperti quantificata su scale psicometriche
+\end{itemize}
+
+Le valutazioni non sono mutualmente escludentisi.
+
+\section{Perchè la valutazione?}
+\begin{itemize}
+	\item \textbf{Per capire il mondo reale}: come lavora l'utente, come si può migliorare il suo lavoro, la sua attività.
+	\item \textbf{Verifica di conformità agli standard}: e.g. la leggibilità dello schermo è accettabile? Gli enti di standardizzazione emettono procedure che permettono di verificare il rispetto degli standard
+	\item \textbf{Confrontare progetti/sistemi}: durante l'attività di progetto confrontando prototipi o dopo la realizzazione per capire se il sistema è migliore di altri. Il confronto può essere trasversale o longitudinale
+\end{itemize}
+
+\section{Come fare la valutazione di usabilità?}
+\begin{itemize}
+	\item metodo scientifico:
+	\begin{figure}[h!]
+		\begin{center}
+			\includegraphics[scale=0.6]{img/022.jpg}
+			\caption{Metodo scientifico}
+			\label{fig: 022}
+		\end{center}
+	\end{figure}
+	\item metodi sociologici-antropologici (etnografici, etnometodologici, qualitativi):
+	\begin{itemize}
+		\item Osservazione e monitoraggio: tecniche che derivano dalla sociologia per capire l'interazione nell'ambiente di lavoro
+		\item raccolta opinioni degli utenti: metodo strutturati e semi-strutturati per chiedere all'utente cosa pensa e registrare le sue risposte
+		\item Interpretativi: dati raccolti con tecniche naturalistiche per non disturbare l'utente e per capire come il sistema si integra con le altre attività.
+	\end{itemize}
+\end{itemize}
+
+\section{Come si confronta?}
+Si raccolgono dati (numerici, ordinali o categorici) da un campione di utenti del sistema.
+\begin{itemize}
+	\item Variaibli scalari (numeriche): sono valori assoluti
+	\item Variabili ordinali: in cui è possibile stabilire un ordine totale sui possibili valori/attributi
+	\item Variabili categoriche o nominali: in cui i valori sono modalità, ovvero parole
+\end{itemize}
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.6]{img/023.jpg}
+		\caption{Tipi di variabile}
+		\label{fig: 023}
+	\end{center}
+	\begin{center}
+		\includegraphics[scale=0.6]{img/024.jpg}
+		\caption{Cosa fare in base al dato}
+		\label{fig: 024}
+	\end{center}	
+\end{figure}
+
+
 \chapter{Lessico}
 \paragraph{Ergonomia}
 Disciplina scientifica che si occupa dei problemi relativi al lavoro umano in rapporto alla progettazione delle macchine e agli ambienti di lavoro, al fine di individuare le soluzioni più idonee alle esigenze psicofisiche dei lavoratori e al contempo a quelle della produzione.
@@ -1040,4 +1172,6 @@ L'oggetto creato rappresenta l'artista che lo crea.
 	\item Torna agli utenti
 \end{itemize}
 
+\paragraph{Usabilità}
+è il grado con cui un prodotto può essere usato da determinati utenti per raggiungere determinati obiettivi con efficacia, efficienza, soddisfazione in un determinato contesto d'uso.
 \end{document}
