@@ -773,7 +773,7 @@ I task devono essere eseguibili:
 	\item task migliore: usa il sito X per trovare un film che ti piacerebbe vedere di domenica pomeriggio
 \end{itemize}
 
-Evitare suggeriemnti e descrizioni dei singoli passi:
+Evitare suggeritmenti e descrizioni dei singoli passi:
 \begin{itemize}
 	\item user goal: consultare i voti online
 	\item task concepito male: vuoi vedere i voti del tuo esame IUM. Vai sul sito del corso, loggati e dimmi dove cliccheresti per vedere il tuo voto
@@ -917,7 +917,7 @@ Meglio uno slideware, non un documento scritto.
 
 Nella cartella di progetto mettere anche le registrazioni e i moduli di consenso.
 
-\section{Statistica  inferenziale (approccio quantitativo)}
+\section{Statistica inferenziale (approccio quantitativo)}
 \subsection{Come potremmo definire il successo di un sistema interattivo?}
 \begin{itemize}
 	\item gli utenti scelgono il sistema
@@ -1064,8 +1064,101 @@ Si raccolgono dati (numerici, ordinali o categorici) da un campione di utenti de
 	\end{center}	
 \end{figure}
 
+\subsection{Procedura}
+\begin{enumerate}
+	\item Si raccolgono dati da un campione di utenti del sistema
+	\item si calcolano le statistiche
+\end{enumerate}
 
-\chapter{Lessico}
+Non potendo conoscere il parametro della popolazione ma solo la statistica di un campione non si può essere precisi, ci sarà sempre un errore standard, ma per si può stimare l'intervallo che è ragionevole pensare contenga il parametro "vero", questo è l'intervallo di confidenza. RIcordare che l'intervallo di confidenza è l'intervallo di valori che si è abbastanza confidenti che contenga il valore vero del parametro. Indica l'incertezza intrinseca della stima.
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.6]{img/025.jpg}
+		\caption{Errore standard}
+		\label{fig: 025}
+	\end{center}
+\end{figure}
+
+Per la media $ES=\dfrac{\sigma}{\sqrt{N}}$, per le proporzioni $ES=\sqrt{\dfrac{(p*(1-p))}{N}}$
+Strumenti utili:
+\begin{itemize}
+	\item \href{http://vassarstats.net/conf_mean.html}{Calcolo confidenza per le medie}
+	\item \href{http://vassarstats.net/prop1.html}{Calcolo confidenza per le proporzioni}
+\end{itemize}
+
+\subsubsection{Approccio di Neyman}
+Si confrontano gli intervalli di confidenza.
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.6]{img/026.jpg}
+		\caption{Differenze di tempo di esecuzione media di un task}
+		\label{fig: 026}
+	\end{center}
+	\begin{center}
+		\includegraphics[scale=0.6]{img/027.jpg}
+		\caption{Intervalli di confidenza dei singoli valori}
+		\label{fig: 027}
+	\end{center}
+\end{figure}
+Tra questi sistemi solo D vs B differiscono per i tempi di esecuzione del task 1 in quanto è l'unico confronto in cui la differenza 0 non è inclusa nell'intervallo di confidenza. Lo si può notare anche dalla visualizzazione degli intervalli di confidenza dei singoli valori e non della loro media. Se i due intervalli di confidenza non si sovrappongono sulle ordinate allora c'è una differenza significativa.
+
+\subsubsection{Approccio di Fisher}
+Si formulano test di ipotesi e si verificano con essi le ipotesi null ($H_0$).
+
+L'ipotesi nulla è assunta vera e prevede che non ci sia differenza tra:
+\begin{itemize}
+	\item i sistemi $s_1$ e $s_2$ (per la medesima caratteristica), o
+	\item per il sistema s tra la versione a tempo $t_0$ e quella a $t_1$, o
+	\item tra strati (gruppi) di utenti (ad esempio, maschi vs femmine, giovani vs senior, esperti vs non esperti)
+\end{itemize}
+
+Se non si riesce a rigettare l'ipotesi nulla non significa che questa sia vera.
+
+\subsubsection{The null ritual (O null hypothesis testing)}
+Un incrocio tra l'approccio di Neyman e di Fisher.
+\begin{enumerate}
+	\item Si sceglie il test giusto per l'ipotesi e il tipo di dato che si raccoglie (vedere l'immmagine a pagina \pageref{fig: 024})
+	\item si esegue il test e si calcola il corrispondente "livello di significatività osservato" dei dati (p value)
+	\item si riportano i risultati in uno stile chiaro e "confrontabile" (e.g. standard APA)
+\end{enumerate}
+
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.6]{img/028.jpg}
+		\caption{Lista dei passi}
+		\label{fig: 028}
+	\end{center}
+\end{figure}
+\paragraph{Passo 3}
+Il livello di significatività del test (o alpha) solitamente è posto al 5\% all'1\%. Alpha è la probabilità associata al rischio che siamo disposti a correre di rigettare l'ipotesi nulla quando questa è vera (cioè di prendere un falso positivo, o errore del I tipo). Gli errori più gravi sono quelli di II tipo.
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.6]{img/029.jpg}
+		\caption{Errori di I e II tipo}
+		\label{fig: 029}
+	\end{center}
+\end{figure}
+
+Un test è più potente in base a quanto è abile di rilevare il caso nel quale si rigetta l'ipotesi nulla. Solitamente, in ambito accademico, si usa l'euristica di Cohen: Alpha 4 volte più piccolo di Beta (e.g. $\alpha=.05, \beta=.20$). In ambito industriale si usa una Beta più piccola. La specificità è $1-\alpha$, la sensitività è $1-\beta$. La specificità è la capacità del test di evitare i falsi positivi, la sensitività è la capacità di evitare falsi negativi.
+
+\paragraph{Passo 4}
+Due code per predire differenza in un verso o nell'altro (A è meglio o peggio di B), una coda per differenza in un verso preciso (A è meglio di B, non peggio).
+
+\paragraph{Passi 7 e 8}
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.1]{img/030.png}
+		\caption{Testare le ipotesi riguardo la media}
+		\label{fig: 030}
+	\end{center}
+\end{figure}
+
+Ricordiamo: il p-value è la probabilità di raccogliere dati come quelli raccolti (o ancora più estremi) assumendo l'ipotesi nulla $H_0$ come vera,
+
+
+
+\chapter{Lessico} 
 \paragraph{Ergonomia}
 Disciplina scientifica che si occupa dei problemi relativi al lavoro umano in rapporto alla progettazione delle macchine e agli ambienti di lavoro, al fine di individuare le soluzioni più idonee alle esigenze psicofisiche dei lavoratori e al contempo a quelle della produzione.
 
@@ -1174,4 +1267,7 @@ L'oggetto creato rappresenta l'artista che lo crea.
 
 \paragraph{Usabilità}
 è il grado con cui un prodotto può essere usato da determinati utenti per raggiungere determinati obiettivi con efficacia, efficienza, soddisfazione in un determinato contesto d'uso.
+
+\paragraph{P-value}
+La probabilità di raccogliere dati come quelli raccolti (o ancora più estremi) assumendo l'ipotesi nulla $H_0$ come vera,
 \end{document}
