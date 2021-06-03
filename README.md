@@ -2,6 +2,8 @@
 
 I seguenti appunti sono riferiti al corso di [Informatica triennale](https://www.disco.unimib.it/it/didattica/offerta-formativa/corso-laurea-informatica) dell'Università degli studi di Milano-Bicocca.
 
+Sono stati aggiunti anche appunti della triennale di Economia dell'Università degli studi di Milano-Bicocca. Nel caso venissero usati bisogna prestare attenzione all'anno di pubblicazione.
+
 Gli appunti sono scritti usando Microsoft Word e Texmaker.
 
 Viene fornito anche il package contentente il preambolo personalizzato utilizzato all'interno dei miei appunti. Per includerlo copiare il file Appunti_universitari.sty e inserire all'interno del preambolo:
